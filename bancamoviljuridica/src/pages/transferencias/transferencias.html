@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar no-padding color = "toolbar_color" hideBackButton="true">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col no-padding>
+                <button ion-button menuToggle>
+                    <ion-icon name="menu"></ion-icon>
+                  </button>
+            </ion-col>
+            <ion-col>
+              <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
+            </ion-col>
+            <ion-col no-padding>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-navbar>
+</ion-header>
+<ion-content id="page2">
+  <img src="assets/img/eRCrBxnzTxKSg5OyrCv4_transferenciasHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <ion-grid style="width:100%;height:100%;grid-auto-rows: 1fr;" id="transferencias-list6">
+    <ion-row align-items-left>
+      <ion-col padding color="none" on-click="goToTransferenciasMismoTitularBFC()" id="transferencias-list-item32" align-items-center>
+              <ion-avatar padding-top>
+                <img padding-top src="assets/img/892c8DGqSWZfE6KxFkpu_iconMismoTitularBFC.PNG" style="width:30%;height:30%;"/>
+              </ion-avatar>
+              <h5>
+                Mismo Titular en BFC
+              </h5>
+      </ion-col>
+      <ion-col padding color="none" on-click="goToTransferenciaMismoTitularOtrosBancos()" id="transferencias-list-item33">
+              <ion-avatar padding-top>
+                <img padding-top src="assets/img/dfOZ65BfRTqRu2W6qOUs_iconMismoTitularOtrosBancos.PNG" style="width:30%;height:30%;" />
+              </ion-avatar>
+              <h5>
+                Mismo Titular Otros Bancos
+              </h5>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-left>
+        <ion-col padding color="none" on-click="goToTransferenciasMismoTitularBFC()" id="transferencias-list-item32" align-items-center>
+                <ion-avatar padding-top>
+                    <img padding-top src="assets/img/KDszpBQvR1CI3GiGyLYO_iconTercerosBFC.PNG" style="width:30%;height:30%;" />
+                  </ion-avatar>
+                  <h5>
+                    Terceros en BFC
+                </h5>
+        </ion-col>
+        <ion-col padding color="none" on-click="goToTransferenciaMismoTitularOtrosBancos()" id="transferencias-list-item33">
+                <ion-avatar padding-top>
+                    <img padding-top src="assets/img/qfodk2obQjKeahAUpONs_iconTercerosOtrosBancos.PNG" style="width:30%;height:30%;" />
+                  </ion-avatar>
+                  <h5>
+                    Terceros Otros Bancos 
+                </h5>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>
