@@ -22,6 +22,7 @@ import { TransferenciaTercerosOtrosBancosReciboPage } from '../pages/transferenc
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { LoginProvider } from '../providers/login/login';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { WelcomePage } from '../pages/welcome/welcome';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LoginProvider
   ]
 })
 export class AppModule {}
