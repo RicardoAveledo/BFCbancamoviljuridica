@@ -11,6 +11,9 @@ import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/tran
 import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-transferencias-mismo-titular-bfc',
@@ -18,51 +21,99 @@ import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-ter
 })
 export class TransferenciasMismoTitularBFCPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, 
+  private toastCtrl: ToastController, private alertCtrl: AlertController) {
   }
+
+  showAlert() {
+    const alert = this.alertCtrl.create({
+      title: 'New Friend!',
+      subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  
   
   goBack(params){
     if (!params) params = {};
     this.navCtrl.pop();
   }
+
+
+  cuentadebitoForm = this.formBuilder.group({
+    cuentadebito: ['',Validators.required]
+  });
+
+  cuentacreditoForm = this.formBuilder.group({
+    cuentacredito: ['',Validators.required]
+  });
+
+  montoForm = this.formBuilder.group({
+    monto: ['',Validators.required]
+  });
   
   goToTransferenciasMismoTitularBFC(params){
+    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
+  {
     if (!params) params = {};
     this.navCtrl.push(TransferenciasMismoTitularBFCPage);
+  } else{
+    this.showAlert();
+  }
   }
 
   goToConfirmaciNTransferenciaMismoTitularBFC(params){
-    if (!params) params = {};
-    this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage);
-  }goToTransferenciaMismoTitularBFCRecibo(params){
+    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
+    {
+      if (!params) params = {};
+      this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage);
+  } else{
+    this.showAlert();
+  }
+  }
+
+
+  goToTransferenciaMismoTitularBFCRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
-  }goToPosiciNConsolidada(params){
+  }
+  goToPosiciNConsolidada(params){
     if (!params) params = {};
     this.navCtrl.push(PosiciNConsolidadaPage);
-  }goToDetalleDeLaCuenta(params){
+  }
+  goToDetalleDeLaCuenta(params){
     if (!params) params = {};
     this.navCtrl.push(DetalleDeLaCuentaPage);
-  }goToDetalleDeTarjeta(params){
+  }
+  goToDetalleDeTarjeta(params){
     if (!params) params = {};
     this.navCtrl.push(DetalleDeTarjetaPage);
-  }goToTransferencias(params){
+  }
+  goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciasPage);
-  }goToTransferenciaMismoTitularOtrosBancos(params){
+  }
+  goToTransferenciaMismoTitularOtrosBancos(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaMismoTitularOtrosBancosPage);
-  }goToTransferenciaTercerosBFC(params){
+  }
+  goToTransferenciaTercerosBFC(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosBFCPage);
-  }goToTransferenciasTercerosDetalle(params){
+  }
+  goToTransferenciasTercerosDetalle(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciasTercerosDetallePage);
-  }goToTransferenciaTercerosOtrosBancos(params){
+  }
+  goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
-  }goToTransferenciaTercerosOtrosBancosRecibo(params){
+  }
+  goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
   }
 }
+
+
