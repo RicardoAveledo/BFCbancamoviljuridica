@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar no-padding color = "toolbar_color" hideBackButton="true">
+      <ion-grid no-padding>
+        <ion-row no-padding>
+          <ion-col no-padding>
+            <button ion-button class="btn" outline id="back-button" color="light" default on-click="goBack()">
+              Regresar
+            </button>
+          </ion-col>
+          <ion-col>
+            <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col no-padding>
+            <button ion-button outline class="btn" float-right id="next-button" color="light" default on-click="goToConfirmaciNTransferenciaMismoTitularBFC()">
+              Continuar
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+</ion-header>
+<ion-content id="page9">
+<img src="assets/img/MMuVYuktTlSbdEHAYi9A_transferenciasMismoTitularBFCHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+<div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer3"></div>
+<div id="transferenciasMismoTitularBFC-markdown18" class="show-list-numbers-and-dots">
+  <p style="color:#000000;">
+    <strong>
+      Cuenta Débito
+    </strong>
+  </p>
+</div>
+<form [formGroup]="cuentadebitoForm" novalidate>
+  <ion-item id="transferenciasMismoTitularBFC-select5">
+    <ion-label>
+      Seleccione
+    </ion-label>
+    <ion-select name="" formControlName= "cuentadebito" [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
+      <ion-option value ="1234************3210">
+          1234************3210
+      </ion-option>
+      <ion-option value ="1234************3211">
+        1234************3211
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
+    Saldo disponible BsS: 125.250.142,00
+  </ion-item-divider>
+<div id="transferenciasMismoTitularBFC-markdown19" class="show-list-numbers-and-dots">
+  <p style="color:#000000;">
+    <strong>
+      Cuenta Crédito
+    </strong>
+  </p>
+</div>
+</form>
+<form [formGroup]="cuentacreditoForm" novalidate>
+  <ion-item id="transferenciasMismoTitularBFC-select7">
+    <ion-label>
+      Seleccione
+    </ion-label>
+    <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
+      <ion-option value ="1234************3210">
+        1234************3210
+      </ion-option>
+      <ion-option value ="1234************3211">
+        1234************3211
+      </ion-option>
+    </ion-select>
+  </ion-item>
+</form>
+<form [formGroup]="montoForm" novalidate>
+  <div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer5"></div>
+  <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      <strong>
+        Monto Bs.
+      </strong>
+    </p>
+  </div>
+  <ion-item id="transferenciasMismoTitularBFC-input3">
+    <ion-label></ion-label>
+    <ion-input type="text" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
+  </ion-item>
+</form>
+</ion-content>
