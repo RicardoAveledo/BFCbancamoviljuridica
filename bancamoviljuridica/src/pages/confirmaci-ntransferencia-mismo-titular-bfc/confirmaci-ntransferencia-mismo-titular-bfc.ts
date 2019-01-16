@@ -11,6 +11,7 @@ import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/tran
 import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-confirmaci-ntransferencia-mismo-titular-bfc',
@@ -21,10 +22,34 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
   cuentaCredito:string;
   montoValue:number;
 
-  constructor(public navCtrl: NavController, private viewCtrl: ViewController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController,
+     public navParams: NavParams, private alertCtrl: AlertController) {
     this.cuentaDebito = navParams.get('cuentaDebito');
     this.cuentaCredito = navParams.get('cuentaCredito');
     this.montoValue = navParams.get('montoValue');
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: 'Confirmar',
+      buttons: [
+        {
+          text: 'Confirmar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Comfirmar clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewWillEnter() {
@@ -32,6 +57,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
   }
 
   goToTransferenciaMismoTitularBFCRecibo(params){
+    this.presentConfirm();
     if (!params) params = {};
     this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
   }
