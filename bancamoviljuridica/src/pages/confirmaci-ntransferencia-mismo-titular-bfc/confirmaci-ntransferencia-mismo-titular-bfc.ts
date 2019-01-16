@@ -67,25 +67,11 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
 
   changeValueCredit(value: any)
   {
-    let toast = this.toastCtrl.create({
-      message: value,
-      duration: 3000,
-      position: 'botton'});
-    toast.onDidDismiss(() => {
-    console.log('Dismissed toast');});
-    toast.present();
     this.cuentaCredito=value
   }
 
   changeValueDebit(value: any)
   {
-    let toast = this.toastCtrl.create({
-      message: value,
-      duration: 3000,
-      position: 'botton'});
-    toast.onDidDismiss(() => {
-    console.log('Dismissed toast');});
-    toast.present();
     this.cuentaDebito=value
   }
 

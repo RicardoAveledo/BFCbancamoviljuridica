@@ -29,25 +29,12 @@ export class TransferenciasMismoTitularBFCPage {
 
   changeValueCredit(value: any)
   {
-    let toast = this.toastCtrl.create({
-      message: value,
-      duration: 3000,
-      position: 'botton'});
-    toast.onDidDismiss(() => {
-    console.log('Dismissed toast');});
-    toast.present();
     this.cuentaCredito=value
   }
 
   changeValueDebit(value: any)
   {
-    let toast = this.toastCtrl.create({
-      message: value,
-      duration: 3000,
-      position: 'botton'});
-    toast.onDidDismiss(() => {
-    console.log('Dismissed toast');});
-    toast.present();
+
     this.cuentaDebito=value
   }
 
@@ -107,13 +94,6 @@ export class TransferenciasMismoTitularBFCPage {
         "cuentaCredito":this.cuentaCredito,
         "montoValue":this.montoValue
       });
-      let toast = this.toastCtrl.create({
-        message: this.montoValue.toString(),
-        duration: 3000,
-        position: 'botton'});
-      toast.onDidDismiss(() => {
-      console.log('Dismissed toast');});
-      toast.present();
   } else{
 
     if (this.cuentadebitoForm.invalid)
