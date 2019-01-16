@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
 import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
@@ -18,8 +18,14 @@ import { WelcomePage } from '../welcome/welcome';
   templateUrl: 'transferencia-mismo-titular-bfcrecibo.html'
 })
 export class TransferenciaMismoTitularBFCReciboPage {
+cuentaDebito:string;
+cuentaCredito:string;
+montoValue:number;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.cuentaDebito = navParams.get('cuentaDebito');
+    this.cuentaCredito = navParams.get('cuentaCredito');
+    this.montoValue = navParams.get('montoValue');
   }
   goToTransferencias(params){
     if (!params) params = {};
