@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
@@ -17,8 +17,14 @@ import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-ter
   templateUrl: 'confirmaci-ntransferencia-mismo-titular-bfc.html'
 })
 export class ConfirmaciNTransferenciaMismoTitularBFCPage {
+  cuentaDebito:string;
+  cuentaCredito:string;
+  montoValue:number;
 
-  constructor(public navCtrl: NavController, private viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController, public navParams: NavParams) {
+    this.cuentaDebito = navParams.get('cuentaDebito');
+    this.cuentaCredito = navParams.get('cuentaCredito');
+    this.montoValue = navParams.get('montoValue');
   }
 
   ionViewWillEnter() {
