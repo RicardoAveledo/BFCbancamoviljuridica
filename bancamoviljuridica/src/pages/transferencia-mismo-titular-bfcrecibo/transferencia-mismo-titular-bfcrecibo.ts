@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
 import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
@@ -19,7 +19,7 @@ import { WelcomePage } from '../welcome/welcome';
 })
 export class TransferenciaMismoTitularBFCReciboPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
   }
   goToTransferencias(params){
     if (!params) params = {};
@@ -62,5 +62,14 @@ export class TransferenciaMismoTitularBFCReciboPage {
   }goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+  }
+
+  tryAlertDialog(){
+    let alert = this.alertCtrl.create({
+      title: 'Píllate que si sirve',
+      subTitle: 'Probando',
+      buttons: ['Dismiss']
+    });
+    alert.present();
   }
 }
