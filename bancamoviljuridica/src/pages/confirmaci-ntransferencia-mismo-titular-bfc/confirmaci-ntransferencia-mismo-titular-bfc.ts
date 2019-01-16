@@ -12,6 +12,7 @@ import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-de
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-confirmaci-ntransferencia-mismo-titular-bfc',
@@ -22,8 +23,12 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
   cuentaCredito:string;
   montoValue:number;
 
+  confirmacion:boolean;
+
+
+
   constructor(public navCtrl: NavController, private viewCtrl: ViewController,
-     public navParams: NavParams, private alertCtrl: AlertController) {
+     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController) {
     this.cuentaDebito = navParams.get('cuentaDebito');
     this.cuentaCredito = navParams.get('cuentaCredito');
     this.montoValue = navParams.get('montoValue');
@@ -31,19 +36,27 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Confirm',
-      message: 'Confirmar',
+      title: 'Confirmar',
+      message: '',
       buttons: [
         {
-          text: 'Confirmar',
+          text: 'Cancelar',
           role: 'cancel',
           handler: () => {
+            this.confirmacion = false;
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Confirmar',
           handler: () => {
+            this.confirmacion = true;
+            
+            this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+              "cuentaDebito":this.cuentaDebito,
+              "cuentaCredito":this.cuentaCredito,
+              "montoValue":this.montoValue
+            });
             console.log('Comfirmar clicked');
           }
         }
@@ -52,14 +65,45 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
     alert.present();
   }
 
+  changeValueCredit(value: any)
+  {
+    let toast = this.toastCtrl.create({
+      message: value,
+      duration: 3000,
+      position: 'botton'});
+    toast.onDidDismiss(() => {
+    console.log('Dismissed toast');});
+    toast.present();
+    this.cuentaCredito=value
+  }
+
+  changeValueDebit(value: any)
+  {
+    let toast = this.toastCtrl.create({
+      message: value,
+      duration: 3000,
+      position: 'botton'});
+    toast.onDidDismiss(() => {
+    console.log('Dismissed toast');});
+    toast.present();
+    this.cuentaDebito=value
+  }
+
+
+
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
 
   goToTransferenciaMismoTitularBFCRecibo(params){
+
     this.presentConfirm();
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
+    if (this.confirmacion==true)
+    {
+      if (!params) params = {};
+      this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
+    }
+
   }
   goBack(params){
     if (!params) params = {};

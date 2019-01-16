@@ -29,32 +29,31 @@
       </strong>
     </p>
   </div>
-  <form id="confirmaciNTransferenciaMismoTitularBFC-form8">
+
     <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input4">
       <ion-label>
         Cuenta Origen
       </ion-label>
-      <ion-input type="text" placeholder="{{cuentaDebito}}"></ion-input>
+      <ion-input text-right type="text" placeholder="{{cuentaDebito}}" [(ngModel)]="debit" (ionChange)="changeValueDebit($event)"></ion-input>
     </ion-item>
     <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input5">
       <ion-label>
         Cuenta Destino
       </ion-label>
-      <ion-input type="text" placeholder="{{cuentaCredito}}"></ion-input>
+      <ion-input text-right type="text" placeholder="{{cuentaCredito}}"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)"></ion-input>
     </ion-item>
     <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input6">
       <ion-label>
         Monto
       </ion-label>
-      <ion-input type="text" placeholder="{{montoValue}}"></ion-input>
+      <ion-input text-right type="text" placeholder="{{montoValue}}" [(ngModel)]="montoValue" ></ion-input>
     </ion-item>
     <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input7">
       <ion-label>
         Fecha
       </ion-label>
-      <ion-input type="text" placeholder="                             02/01/18"></ion-input>
+      <ion-input text-right type="text" placeholder="02/01/18"></ion-input>
     </ion-item>
-  </form>
   <div class="spacer" style="width:320px;height:74px;" id="confirmaciNTransferenciaMismoTitularBFC-spacer7"></div>
 
 </ion-content>
