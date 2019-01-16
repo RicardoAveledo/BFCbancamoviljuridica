@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Toast } from 'ionic-angular';
 import { ConfirmaciNTransferenciaMismoTitularBFCPage } from '../confirmaci-ntransferencia-mismo-titular-bfc/confirmaci-ntransferencia-mismo-titular-bfc';
 import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
@@ -20,15 +20,42 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'transferencias-mismo-titular-bfc.html'
 })
 export class TransferenciasMismoTitularBFCPage {
-
+  cuentaDebito:string;
+  cuentaCredito:string;
+  montoValue:number;
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController) {
   }
 
-  showAlert() {
+  changeValueCredit(value: any)
+  {
+    let toast = this.toastCtrl.create({
+      message: value,
+      duration: 3000,
+      position: 'botton'});
+    toast.onDidDismiss(() => {
+    console.log('Dismissed toast');});
+    toast.present();
+    this.cuentaCredito=value
+  }
+
+  changeValueDebit(value: any)
+  {
+    let toast = this.toastCtrl.create({
+      message: value,
+      duration: 3000,
+      position: 'botton'});
+    toast.onDidDismiss(() => {
+    console.log('Dismissed toast');});
+    toast.present();
+    this.cuentaDebito=value
+  }
+
+
+  showAlert(mensaje: string) {
     const alert = this.alertCtrl.create({
-      title: 'New Friend!',
-      subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+      title: 'BFC',
+      subTitle: mensaje ,
       buttons: ['OK']
     });
     alert.present();
@@ -53,24 +80,64 @@ export class TransferenciasMismoTitularBFCPage {
     monto: ['',Validators.required]
   });
   
+
   goToTransferenciasMismoTitularBFC(params){
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
   {
     if (!params) params = {};
     this.navCtrl.push(TransferenciasMismoTitularBFCPage);
+
+
   } else{
-    this.showAlert();
-  }
   }
 
+  if(this.cuentacreditoForm.valid)
+{
+
+}
+  }
+
+  //Método que utiliza el boton de Continuar
   goToConfirmaciNTransferenciaMismoTitularBFC(params){
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
     {
       if (!params) params = {};
-      this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage);
+      this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
+        "cuentaDebito":this.cuentaDebito,
+        "cuentaCredito":this.cuentaCredito,
+        "montoValue":this.montoValue
+      });
+      let toast = this.toastCtrl.create({
+        message: this.montoValue.toString(),
+        duration: 3000,
+        position: 'botton'});
+      toast.onDidDismiss(() => {
+      console.log('Dismissed toast');});
+      toast.present();
   } else{
-    this.showAlert();
+
+    if (this.cuentadebitoForm.invalid)
+    {
+      this.showAlert('Debe seleccionar la cuenta origen');
+    }
+
+    else {
+      if (this.cuentacreditoForm.invalid)
+      {
+        this.showAlert('Debe seleccionar la cuenta destino');
+      }
+
+      else {
+        if (this.montoForm.invalid)
+        {
+          this.showAlert('Debe colocar un monto');
+        }
+      }
+
+    }
   }
+
+
   }
 
 

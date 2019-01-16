@@ -34,12 +34,11 @@
     <ion-label>
       Seleccione
     </ion-label>
-    <ion-select name="" formControlName= "cuentadebito">
-      <ion-option></ion-option>
-      <ion-option>
-        1234************3210
+    <ion-select name="" formControlName= "cuentadebito" [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
+      <ion-option value ="1234************3210">
+          1234************3210
       </ion-option>
-      <ion-option>
+      <ion-option value ="1234************3211">
         1234************3211
       </ion-option>
     </ion-select>
@@ -60,12 +59,11 @@
     <ion-label>
       Seleccione
     </ion-label>
-    <ion-select name="" formControlName= "cuentacredito">
-      <ion-option></ion-option>
-      <ion-option>
+    <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
+      <ion-option value ="1234************3210">
         1234************3210
       </ion-option>
-      <ion-option>
+      <ion-option value ="1234************3211">
         1234************3211
       </ion-option>
     </ion-select>
@@ -82,7 +80,7 @@
   </div>
   <ion-item id="transferenciasMismoTitularBFC-input3">
     <ion-label></ion-label>
-    <ion-input type="text" placeholder="0.00" formControlName= "monto"></ion-input>
+    <ion-input type="text" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
   </ion-item>
 </form>
 </ion-content>

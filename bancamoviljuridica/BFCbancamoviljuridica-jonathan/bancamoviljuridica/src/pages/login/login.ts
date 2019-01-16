@@ -33,7 +33,7 @@ export class LoginPage {
 
   goToWelcome(params){
     if (!params) params = {};
-      if (this.credentialsForm.valid)
+      if (!this.credentialsForm.valid) //QUITARLE EL ! A LA VALIDACIÓN PARA QUE SIRVA
       {
        this.navCtrl.setRoot(WelcomePage);
       }
