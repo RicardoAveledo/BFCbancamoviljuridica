@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Toast } from 'ionic-angular';
 import { ConfirmaciNTransferenciaMismoTitularBFCPage } from '../confirmaci-ntransferencia-mismo-titular-bfc/confirmaci-ntransferencia-mismo-titular-bfc';
 import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
@@ -11,58 +11,176 @@ import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/tran
 import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-transferencias-mismo-titular-bfc',
   templateUrl: 'transferencias-mismo-titular-bfc.html'
 })
 export class TransferenciasMismoTitularBFCPage {
-
-  constructor(public navCtrl: NavController) {
+  cuentaDebito:string;
+  cuentaCredito:string;
+  montoValue:number;
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, 
+  private toastCtrl: ToastController, private alertCtrl: AlertController) {
   }
+
+  changeValueCredit(value: any)
+  {
+    let toast = this.toastCtrl.create({
+      message: value,
+      duration: 3000,
+      position: 'botton'});
+    toast.onDidDismiss(() => {
+    console.log('Dismissed toast');});
+    toast.present();
+    this.cuentaCredito=value
+  }
+
+  changeValueDebit(value: any)
+  {
+    let toast = this.toastCtrl.create({
+      message: value,
+      duration: 3000,
+      position: 'botton'});
+    toast.onDidDismiss(() => {
+    console.log('Dismissed toast');});
+    toast.present();
+    this.cuentaDebito=value
+  }
+
+
+  showAlert(mensaje: string) {
+    const alert = this.alertCtrl.create({
+      title: 'BFC',
+      subTitle: mensaje ,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  
   
   goBack(params){
     if (!params) params = {};
     this.navCtrl.pop();
   }
+
+
+  cuentadebitoForm = this.formBuilder.group({
+    cuentadebito: ['',Validators.required]
+  });
+
+  cuentacreditoForm = this.formBuilder.group({
+    cuentacredito: ['',Validators.required]
+  });
+
+  montoForm = this.formBuilder.group({
+    monto: ['',Validators.required]
+  });
   
+
   goToTransferenciasMismoTitularBFC(params){
+    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
+  {
     if (!params) params = {};
     this.navCtrl.push(TransferenciasMismoTitularBFCPage);
+
+
+  } else{
   }
 
+  if(this.cuentacreditoForm.valid)
+{
+
+}
+  }
+
+  //Método que utiliza el boton de Continuar
   goToConfirmaciNTransferenciaMismoTitularBFC(params){
-    if (!params) params = {};
-    this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage);
-  }goToTransferenciaMismoTitularBFCRecibo(params){
+    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
+    {
+      if (!params) params = {};
+      this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
+        "cuentaDebito":this.cuentaDebito,
+        "cuentaCredito":this.cuentaCredito,
+        "montoValue":this.montoValue
+      });
+      let toast = this.toastCtrl.create({
+        message: this.montoValue.toString(),
+        duration: 3000,
+        position: 'botton'});
+      toast.onDidDismiss(() => {
+      console.log('Dismissed toast');});
+      toast.present();
+  } else{
+
+    if (this.cuentadebitoForm.invalid)
+    {
+      this.showAlert('Debe seleccionar la cuenta origen');
+    }
+
+    else {
+      if (this.cuentacreditoForm.invalid)
+      {
+        this.showAlert('Debe seleccionar la cuenta destino');
+      }
+
+      else {
+        if (this.montoForm.invalid)
+        {
+          this.showAlert('Debe colocar un monto');
+        }
+      }
+
+    }
+  }
+
+
+  }
+
+
+  goToTransferenciaMismoTitularBFCRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
-  }goToPosiciNConsolidada(params){
+  }
+  goToPosiciNConsolidada(params){
     if (!params) params = {};
     this.navCtrl.push(PosiciNConsolidadaPage);
-  }goToDetalleDeLaCuenta(params){
+  }
+  goToDetalleDeLaCuenta(params){
     if (!params) params = {};
     this.navCtrl.push(DetalleDeLaCuentaPage);
-  }goToDetalleDeTarjeta(params){
+  }
+  goToDetalleDeTarjeta(params){
     if (!params) params = {};
     this.navCtrl.push(DetalleDeTarjetaPage);
-  }goToTransferencias(params){
+  }
+  goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciasPage);
-  }goToTransferenciaMismoTitularOtrosBancos(params){
+  }
+  goToTransferenciaMismoTitularOtrosBancos(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaMismoTitularOtrosBancosPage);
-  }goToTransferenciaTercerosBFC(params){
+  }
+  goToTransferenciaTercerosBFC(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosBFCPage);
-  }goToTransferenciasTercerosDetalle(params){
+  }
+  goToTransferenciasTercerosDetalle(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciasTercerosDetallePage);
-  }goToTransferenciaTercerosOtrosBancos(params){
+  }
+  goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
-  }goToTransferenciaTercerosOtrosBancosRecibo(params){
+  }
+  goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
   }
 }
+
+

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
@@ -11,14 +11,46 @@ import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/tran
 import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-confirmaci-ntransferencia-mismo-titular-bfc',
   templateUrl: 'confirmaci-ntransferencia-mismo-titular-bfc.html'
 })
 export class ConfirmaciNTransferenciaMismoTitularBFCPage {
+  cuentaDebito:string;
+  cuentaCredito:string;
+  montoValue:number;
 
-  constructor(public navCtrl: NavController, private viewCtrl: ViewController) {
+
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController,
+     public navParams: NavParams, private alertCtrl: AlertController) {
+    this.cuentaDebito = navParams.get('cuentaDebito');
+    this.cuentaCredito = navParams.get('cuentaCredito');
+    this.montoValue = navParams.get('montoValue');
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: 'Confirmar',
+      buttons: [
+        {
+          text: 'Confirmar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Comfirmar clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewWillEnter() {
@@ -26,6 +58,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
   }
 
   goToTransferenciaMismoTitularBFCRecibo(params){
+    this.presentConfirm();
     if (!params) params = {};
     this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
   }
