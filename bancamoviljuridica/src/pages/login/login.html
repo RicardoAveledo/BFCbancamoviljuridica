@@ -13,11 +13,11 @@
             <form [formGroup]="credentialsForm" novalidate >
             <ion-item class="inputitem" id="login-input1">
               <ion-label></ion-label>
-              <ion-input class="inputcenter" type="text" placeholder="Usuario"  formControlName= "name" ></ion-input>
+              <ion-input class="inputcenter" type="text" placeholder="Usuario" [(ngModel)]="nombre" formControlName= "nameUser" ></ion-input>
             </ion-item>
             <ion-item class="inputitem" id="login-input2">
               <ion-label></ion-label>
-              <ion-input class="inputcenter" type="password" placeholder="Contraseña" formControlName= "password"></ion-input>
+              <ion-input class="inputcenter" type="password" placeholder="Contraseña" [(ngModel)]="contra" formControlName= "password"></ion-input>
             </ion-item>
           </form>
 
@@ -46,6 +46,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
+        
         
         
         

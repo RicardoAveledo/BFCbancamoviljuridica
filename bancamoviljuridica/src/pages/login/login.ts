@@ -25,23 +25,22 @@ export class LoginPage {
 
   public xmlItems : any;
   user:string;
+  nombre:string;
+  contra:string;
 
   constructor(public navCtrl: NavController,  private formBuilder: FormBuilder, 
     private toastCtrl: ToastController, public LoginProvider: LoginProvider,public httpClient: HttpClient ) {
-
-      this.sendPostRequest();
+      
   }
 
 
 
-  sendPostRequest() {
+ /* sendPostRequest() {
     var headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/xml');
-    headers.append('Accept', 'application/xml');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const httpOptions = {
       headers: new HttpHeaders({
-      'Content-Type':  'application/xml',
-      //'Authorization': 'my-auth-token'
+        'Content-Type':  'text/xml'
      })
   };
     //var requestOptions = new RequestOptions({headers:headers});
@@ -53,14 +52,17 @@ export class LoginPage {
     }
 
     
-
+    //[EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
     this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosGetByNombre",postData,httpOptions )
     .subscribe(data => {
       console.log(data['_body']);
      }, error => {
       console.log(error);
     });
-  }
+  }*/
+
+
+  
 
 
 //Mensaje al usuario al no introducir su nombre o contraseña
@@ -81,8 +83,8 @@ export class LoginPage {
     if (!params) params = {};
       if (this.credentialsForm.valid) //QUITARLE EL ! A LA VALIDACIÓN PARA QUE SIRVA
       {
-
-       this.navCtrl.setRoot(WelcomePage);
+        this.sendPostRequest();
+        this.navCtrl.setRoot(WelcomePage);
       }
       else{
      this.presentToast();
@@ -92,11 +94,63 @@ export class LoginPage {
 
 //Forma donde se valida el nombre y la contraseña del usuario
   credentialsForm = this.formBuilder.group({
-      name: new FormControl('',Validators.compose([
+      nameUser: new FormControl('',Validators.compose([
         //UsernameValidator.validUsername,
         Validators.required
       ])),
       password: new FormControl('',Validators.required)
     })
   
+    sendPostRequest() {
+      var headers = new HttpHeaders();
+      headers.append('Content-Type', 'text/xml');
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'text/xml'
+       })
+    };
+      //var requestOptions = new RequestOptions({headers:headers});
+  
+      let postData = `<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+      <soap12:Body>
+        <AfiliadosLogin xmlns="http://tempuri.org/">
+          <sAF_NombreUsuarioIn>`+this.nombre+`</sAF_NombreUsuarioIn>
+          <sAF_PasswordIn>`+this.contra+`</sAF_PasswordIn>
+          <FI_IP>10.60.102.100</FI_IP>
+        </AfiliadosLogin>
+      </soap12:Body>
+    </soap12:Envelope>`
+  
+      
+      //[EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
+      this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosGetByNombre",postData,httpOptions )
+      .subscribe(data => {
+        console.log(data['_body']);
+       }, error => {
+        console.log(error);
+      });
+    }
+
 }
+
+
+
+
+
+
+/*
+
+POST /WsAfiliados.asmx HTTP/1.1
+Host: localhost
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://tempuri.org/AfiliadosGetByNombre"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <AfiliadosGetByNombre xmlns="http://tempuri.org/">
+      <sAF_NombreUsuario>string</sAF_NombreUsuario>
+    </AfiliadosGetByNombre>
+  </soap:Body>
+</soap:Envelope>*/
