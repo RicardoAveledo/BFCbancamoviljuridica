@@ -17,12 +17,13 @@ import { TransferenciaTercerosBFCPage } from '../pages/transferencia-terceros-bf
 import { TransferenciasTercerosDetallePage } from '../pages/transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosPage } from '../pages/transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../pages/transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginProvider } from '../providers/login/login';
+import { UserSessionProvider } from '../providers/user-session/user-session';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LoginProvider } from '../providers/login/login';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Regresar',
       iconMode: 'ios',
@@ -54,6 +56,7 @@ import { LoginProvider } from '../providers/login/login';
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition'
+
     }
   )],
   bootstrap: [IonicApp],
@@ -80,7 +83,9 @@ import { LoginProvider } from '../providers/login/login';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoginProvider
+    LoginProvider,
+    HttpClientModule,
+    UserSessionProvider
   ]
 })
 export class AppModule {}

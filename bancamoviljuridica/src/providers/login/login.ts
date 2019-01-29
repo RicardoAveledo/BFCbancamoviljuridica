@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 
 /*
@@ -11,7 +12,11 @@ import { Injectable } from '@angular/core';
 export class LoginProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello LoginProvider Provider');
+    
   }
 
+  getUser(){
+
+    return this.http.get('http://localhost:2898/WsAfiliados.asmx?op=AfiliadosLogin'); 
+  }
 }
