@@ -9,9 +9,9 @@ import { UserSessionProvider } from '../../providers/user-session/user-session';
   templateUrl: 'posici-nconsolidada.html'
 })
 export class PosiciNConsolidadaPage {
-  CO_NombresADM:string;
+  CO_NOMBRES:string;
   constructor(public userSession:UserSessionProvider, public navCtrl: NavController) {
-    this.CO_NombresADM = userSession.CO_NombresADM;
+    this.CO_NOMBRES = userSession.CO_NOMBRES;
   }
   goToDetalleDeLaCuenta(params){
     if (!params) params = {};

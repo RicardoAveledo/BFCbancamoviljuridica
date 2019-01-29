@@ -6,18 +6,18 @@
       </div>
     </ion-row>
     <ion-row padding no-margin style="display:block;width:100%;height:80%;">
-        <form id="login-form1" style="margin-top:50px">
-            <h3 ion-text color="light" style="text-align:center" padding>
+        <form id="login-form1" style="margin-top:50px;" >
+            <h3 ion-text color="light" style="text-align:center;background-color: transparent !important;" padding>
                 Bienvenido
             </h3>
             <form [formGroup]="credentialsForm" novalidate >
             <ion-item class="inputitem" id="login-input1">
               <ion-label></ion-label>
-              <ion-input class="inputcenter" type="text" placeholder="Usuario" [(ngModel)]="nombre" formControlName= "nameUser" ></ion-input>
+              <ion-input class="inputitem" type="text" placeholder="Usuario" [(ngModel)]="nombre" formControlName= "nameUser" ></ion-input>
             </ion-item>
             <ion-item class="inputitem" id="login-input2">
               <ion-label></ion-label>
-              <ion-input class="inputcenter" type="password" placeholder="Contraseña" [(ngModel)]="contra" formControlName= "password"></ion-input>
+              <ion-input class="inputitem" type="password" placeholder="Contraseña" [(ngModel)]="contra" formControlName= "password"></ion-input>
             </ion-item>
           </form>
 

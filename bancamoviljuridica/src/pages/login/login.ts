@@ -16,8 +16,6 @@ import {Md5} from 'ts-md5/dist/md5';
 import xml2js from 'xml2js';
 import { UserSessionProvider } from '../../providers/user-session/user-session';
 
-
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -72,7 +70,7 @@ export class LoginPage {
       position: 'botton'
   });
   toast.onDidDismiss(() => {
-    console.log(this.user);
+
   });
   toast.present();
 }
@@ -109,60 +107,108 @@ export class LoginPage {
     };
       //var requestOptions = new RequestOptions({headers:headers});
   
+      //ACÁ SE ESTABLECE LA ESTRUCTURA DE SOLICITUD SOAP VIA HTTP
+      // Esto se obtiene abriendo la vista de los web services. Para todos empleamos SOAP 1.2
       let postData = `<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-      <soap12:Body>
-        <AfiliadosLogin xmlns="http://tempuri.org/">
-          <sAF_NombreUsuarioIn>`+this.nombre+`</sAF_NombreUsuarioIn>
-          <sAF_PasswordIn>`+this.contra1+`</sAF_PasswordIn>
-          <FI_IP>10.60.102.100</FI_IP>
-        </AfiliadosLogin>
-      </soap12:Body>
-    </soap12:Envelope>`
-  
+                      <soap12:Body>
+                        <AfiliadosLogin xmlns="http://tempuri.org/">
+                          <sAF_NombreUsuarioIn>`+this.nombre+`</sAF_NombreUsuarioIn>
+                          <sAF_PasswordIn>`+this.contra1+`</sAF_PasswordIn>
+                          <FI_IP>10.60.102.100</FI_IP>
+                        </AfiliadosLogin>
+                      </soap12:Body>
+                    </soap12:Envelope>`
+  //TODO: Obtener la IP del dispositivo.
       
+  //ACÁ COMIENZA EL TRY-CATCH DEL LOGIN.
     try{
-      this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosGetByNombre",postData,httpOptions )
+      //ESTA ES LA LLAMADA AL REQUEST HTTP POST: Se debe asignar la ruta definitiva. Se debe resolver el issue del CORS
+      this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosLogin",postData,httpOptions )
       .subscribe(data => {
         console.log('Data: '+data['_body']);
        }, error => {
          try{
+           //IONIC no funciona con contextos globales, como acá estamos trabajando dentro de un 
+           //método aparte, se sale del contexto del TRY-CATCH anterior, por lo que se debe colocar
+           //otro try-catch dentro de este nuevo contexto
+
+           //Estas líneas parsean la respuesta JSON que devuelve el request.
               console.log('Error: '+JSON.stringify(error));
               var str = JSON.stringify(error);
               console.log("stingified: ", str);
 
+            //Se aloja en la variable str, el texto completo de la respuesta
               var search_array = JSON.parse(str);
-              //var result = search_array[1].error;
+              //Se convierte la respuesta string a JSON, y se aloja en search_array
               console.log("result: ", search_array.error.text);
+              //La respuesta XML del web service está en el campo text, del campo error, del json search_array
               
+              //Este search_array se convierte en un documento XML para que pueda procesarse,
+              //se convierte de string a XML DOC
               var parser = new DOMParser();
               var doc = parser.parseFromString(search_array.error.text, "application/xml");
               console.log(doc);
               
+              //DOC aloja un documento XML, el cual será envuelto en un wrap html, para poder procesarlo
+              //con el Parser de la librería xml2js de Typings
               var el = doc.createElement("p");
               el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
               
+              //el, es una variable que aloja el wrap HTML que contiene el DOC en XML
               var tmp = doc.createElement("div");
               tmp.appendChild(el);
               console.log(tmp.innerHTML);
 
+              //Se define el parser de xml2js
               var parseString = xml2js.parseString;
+
+              //xml será una variable que contendrá el documento HTML interno que contiene el DOC XML
               var xml = tmp.innerHTML;
               var texto:string = "";
               var self = this;
+              
+              //Se utiliza el Parser de xml2js, el cual es una funcion que recibe el doc XML, y una funcion que definirá
+              //el procesamiento de ese json, alojado ahora en el JSONObject result.
+              //Como IONIC no trabaja con contextos globales, para poder acceder a los métodos de navegación y las variables
+              //globales, de manera que se puedan almacenar los datos de la ráfaga, se agrega el campo "self" al constructor, 
+              //en el cual se está pasando el contexto this.
               parseString(xml, self, function (err, result) {
                   try{
+                    //Acá se abrió otro contexto, por lo que se crea otro bloque Try-catch
                     console.dir(result);
+                    //En estas tres lineas se sigue el mismo procedimiento anterior, en el que se parsea el result
+                    //en json, en la variable search_array
                     var str = JSON.stringify(result);
                     console.log("stringified: ", result);
-            
                     var search_array = JSON.parse(str);
-                    //var result = search_array[1].error;
-                    //console.log("result: ", search_array.p.Envelope);
+
+                    //Acá se hace el parse como tal: Para acceder a las rutas del json,
+                    //se toma la respuesta del json que se obtiene cuando se hace debug en Chrome,
+                    //accedes al campo que necesitas, click derecho y entras a la ruta del json,
+                    //puedes acceder ahora a los valores colocando la ruta seguida del search_array.
                     console.log("result: ", search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']);
-                    self.userSession.CO_NombresADM = search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NombresADM']['0'];
-                    console.log("Guardado: ", self.userSession.CO_NombresADM);
-                    self.navCtrl.setRoot(WelcomePage);
+                   
+                    //Acá se guarda el nombre del usuario autorizado en el provider de variables globales userSession
+                    self.userSession.CO_NOMBRES= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NOMBRES']['0'];
+                    console.log("Guardado: ", self.userSession.CO_NOMBRES);
+                    try {
+                      //Esta es la validación para saber si es usuario admin:
+                      //Se consulta el campo CO_NombreADM, que sólo viene en la ráfaga de respuesta cuando 
+                      //el usuario que hizo login es un usuario Administrador.
+                      var admin:string = search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NombresADM']['0'];
+                      
+                      //Si el código no explota en la línea anterior, significa que trajo el campo, por lo que se presenta
+                      //el mensaje de "El usuario no es Autorizado"
+                      self.rafaga ="El usuario no es Autorizado"
+                      self.presentToast();
+                      //Se cierra el try, nunca llega al catch, por lo tanto, no hace login.
+                    } catch (error) {
+                      //ACÁ YA SE VALIDÓ EL USER, SE CONFIRMÓ QUE ES AUTORIZADO JURÍDICO Y SE PROCEDE A NAVEGAR
+                      self.navCtrl.setRoot(WelcomePage);
+                    }
                   }catch(Error){
+                    //Acá se pondrán los mensajes correspondientes a cada bloque de try-catch.
+                    //Se podrán colocar más validaciones para los diferentes mensajes.
                     this.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                     this.presentToast();
                   }
@@ -175,6 +221,8 @@ export class LoginPage {
     }
     catch(Error)
     {
+      //Acá termina el try-catch del login, Sólo muestra esto cuando
+      //el server no responde (Solo explota si falla la solicitud HTTP)
       this.rafaga ="Error iniciando sesión, intente nuevamente"
       this.presentToast();
     } 
@@ -213,9 +261,6 @@ export class LoginPage {
            });
         }*/
 }
-
-
-
 
 /*
 
