@@ -9,6 +9,11 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class UserSessionProvider {
+  public validar:boolean = false;
+  public validarPC:boolean = false;
+  public validarTR:boolean = false;
+  public validarTDC:boolean = false;
+  public validarAPR:boolean = false;
   public AF_CLAsig:string = "";
   public AF_Cedula:string = "";
   public AF_Clave:string = "";

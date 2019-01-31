@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, Toast, GESTURE_REFRESHER } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { ToastController, Events } from 'ionic-angular';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
 import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
@@ -28,8 +28,8 @@ export class LoginPage {
   contra:string;
   contra1:string|Int32Array;
   rafaga:string='Ingrese nombre de usuario y contraseña'; 
-  constructor(public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
-    private toastCtrl: ToastController, public LoginProvider: LoginProvider,public httpClient: HttpClient ) {
+  constructor(public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
+    private toastCtrl: ToastController, public LoginProvider: LoginProvider,public httpClient: HttpClient) {
     
   }
 
@@ -100,7 +100,7 @@ export class LoginPage {
       console.log(this.contra1);
       var headers = new HttpHeaders();
       headers.append('Content-Type', 'text/xml');
-      const httpOptions = {
+      var httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'text/xml'
        })
@@ -190,6 +190,7 @@ export class LoginPage {
                    
                     //Acá se guarda el nombre del usuario autorizado en el provider de variables globales userSession
                     self.userSession.CO_NOMBRES= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NOMBRES']['0'];
+                    self.userSession.AF_Id= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Id']['0'];
                     console.log("Guardado: ", self.userSession.CO_NOMBRES);
                     try {
                       //Esta es la validación para saber si es usuario admin:
@@ -204,7 +205,91 @@ export class LoginPage {
                       //Se cierra el try, nunca llega al catch, por lo tanto, no hace login.
                     } catch (error) {
                       //ACÁ YA SE VALIDÓ EL USER, SE CONFIRMÓ QUE ES AUTORIZADO JURÍDICO Y SE PROCEDE A NAVEGAR
-                      self.navCtrl.setRoot(WelcomePage);
+                      
+                      //Ahora se procede a traer el menú dinámico:
+                      headers = new HttpHeaders();
+                      headers.append('Content-Type', 'text/xml');
+                      httpOptions = {
+                          headers: new HttpHeaders({
+                            'Content-Type':  'text/xml'
+                        })
+                      };
+
+                      //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+                      //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+                      postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                      <soap:Body>
+                        <MenuDinamicoJuridico xmlns="http://tempuri.org/">
+                          <IsAdmin>false</IsAdmin>
+                          <AF_Id>`+self.userSession.AF_Id+`</AF_Id>
+                          <Grupo></Grupo>
+                        </MenuDinamicoJuridico>
+                      </soap:Body>
+                    </soap:Envelope>`
+                    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+                      self.httpClient.post("http://localhost:2898/WsMenuDinamico.asmx?op=MenuDinamicoJuridico",postData,httpOptions )
+                      .subscribe(data => {
+                        console.log('Data: '+data['_body']); 
+                       }, error => {
+                              //Hacemos el parse tal cual como antes:
+                              console.log('Error: '+JSON.stringify(error));
+                              var str = JSON.stringify(error);
+                              console.log("stingified: ", str);
+                              var search_array = JSON.parse(str);
+                              console.log("result: ", search_array.error.text);
+                              var parser = new DOMParser();
+                              var doc = parser.parseFromString(search_array.error.text, "application/xml");
+                              console.log(doc);
+                              var el = doc.createElement("p");
+                              el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+                              var tmp = doc.createElement("div");
+                              tmp.appendChild(el);
+                              console.log(tmp.innerHTML);
+                              var parseString = xml2js.parseString;
+                              var xml = tmp.innerHTML;
+                              var texto:string = "";
+                              var self2 = self;
+                              parseString(xml, self2, function (err, result) {
+                                  try{
+                                        console.dir(result);
+                                        var str = JSON.stringify(result);
+                                        console.log("stringified: ", result);
+                                        var search_array = JSON.parse(str);
+                                        console.log("result: ", search_array);
+                                        console.log("resulta: ", search_array['p']['soap:Envelope']['0']['soap:Body']['0'].MenuDinamicoJuridicoResponse['0'].MenuDinamicoJuridicoResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table);
+                                        try{
+                                          //Acá proceso la ráfaga que me trae las opciones del menú dinámico:
+                                          search_array['p']['soap:Envelope']['0']['soap:Body']['0'].MenuDinamicoJuridicoResponse['0'].MenuDinamicoJuridicoResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table
+                                          .forEach(element => {
+                                            //Dentro de este foreach me paro en cada elemento que trae
+                                            //los elementos del menú, si check es igual a las opciones del menú app.html
+                                              var check:string = element.MD_Nombre['0'];
+                                              if(check=="Posición Consolidada"){
+                                                //De ser true, guardo la variable validarPC en true en userSession
+                                                self2.userSession.validarPC=true;
+                                              } else if(check=="Transferencias"){
+                                                self2.userSession.validarTR=true;
+                                              } else if(check=="Tarjetas de Crédito"){
+                                                self2.userSession.validarTDC=true;
+                                              } else if(check=="Autorización de Transacciones / Lotes"){
+                                                self2.userSession.validarAPR=true;
+                                              }
+                                        });
+                                        }catch(Error){}
+                                        //Si en este punto no han ocurrido errores, procedemos a actualizar
+                                        //las variables del menú haciendo un llamado Events (Ver documentación Menú Dinámico)
+                                        self2.events.publish('session:created', true);
+
+                                        //Navegamos
+                                        self2.navCtrl.setRoot(WelcomePage);
+                                    }catch(Error){
+                                      self2.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                                      self2.presentToast();
+                                    }
+                                  });
+                       });
+
+
                     }
                   }catch(Error){
                     //Acá se pondrán los mensajes correspondientes a cada bloque de try-catch.
@@ -214,7 +299,7 @@ export class LoginPage {
                   }
               });  
             }catch(Error){ 
-              this.rafaga ="Usuario o Contraseña incorrecta, intente nuevamente"
+              this.rafaga ="Usuario o Contraseña incorrecta, intente nuevamentebbb"
               this.presentToast();
             }
       });

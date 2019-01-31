@@ -21,6 +21,11 @@ import { AprobaciNRechazoPage } from '../pages/aprobaci-nrechazo/aprobaci-nrecha
 
 import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { UserSessionProvider } from '../providers/user-session/user-session';
+
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
+import { Events } from 'ionic-angular';
 
 
 
@@ -31,7 +36,20 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
     rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  public validarPC:boolean=true;
+  public validarTR:boolean=true;
+  public validarTDC:boolean=true;
+  public validarAPR:boolean=true;
+
+  constructor(public userSession:UserSessionProvider, public events:Events, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    events.subscribe('session:created', (validador) => {
+      this.validarPC = this.userSession.validarPC;
+      this.validarTR = this.userSession.validarTR;
+      this.validarTDC = this.userSession.validarTDC;
+      this.validarAPR = this.userSession.validarAPR;
+    });
+    events.publish('session:created', true);
+    //this.userSession.validar = this.validar;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
