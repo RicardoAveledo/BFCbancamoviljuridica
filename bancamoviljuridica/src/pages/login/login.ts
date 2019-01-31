@@ -299,7 +299,7 @@ export class LoginPage {
                   }
               });  
             }catch(Error){ 
-              this.rafaga ="Usuario o Contraseña incorrecta, intente nuevamentebbb"
+              this.rafaga ="Usuario o Contraseña incorrecta, intente nuevamente"
               this.presentToast();
             }
       });
