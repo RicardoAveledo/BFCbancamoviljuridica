@@ -68,12 +68,12 @@ export class LoginPage {
       message:this.rafaga,
       duration: 3000,
       position: 'botton'
-  });
-  toast.onDidDismiss(() => {
+    });
+    toast.onDidDismiss(() => {
 
-  });
-  toast.present();
-}
+    });
+    toast.present();
+  }
 
   goToWelcome(params){
     if (!params) params = {};

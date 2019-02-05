@@ -30,6 +30,36 @@
           Aprobación/Rechazo de Operaciones
         </ion-item>
       </div>
+      
+
+      
+      <div *ngIf=!validarPC>
+          <ion-item color="none" menuClose="" on-click="opcionBloqueada()" id="menu-list-item17">
+            <ion-icon name="paper"  item-left></ion-icon>
+            Posición Consolidada
+          </ion-item> 
+        </div>
+  
+        <div *ngIf=!validarTR>
+          <ion-item color="none" menuClose="" on-click="opcionBloqueada()" id="menu-list-item18">
+            <ion-icon name="send" item-left></ion-icon>
+            Transferencias
+          </ion-item>
+        </div>
+  
+        <div *ngIf=!validarTDC>
+          <ion-item color="none" menuClose="" on-click="opcionBloqueada()" id="menu-list-item19">
+            <ion-icon name="card" item-left></ion-icon>
+            Operaciones de TDC
+          </ion-item>
+        </div>
+  
+        <div *ngIf=!validarAPR>
+          <ion-item color="none" menuClose="" on-click="opcionBloqueada()" id="menu-list-item20">
+            <ion-icon name="checkmark-circle" item-left></ion-icon>
+            Aprobación/Rechazo de Operaciones
+          </ion-item>
+        </div>
 
       <ion-item color="none" menuClose="" on-click="goToSalir()" id="menu-list-item21">
         <ion-icon name="exit" item-left></ion-icon>

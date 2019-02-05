@@ -24,6 +24,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginProvider } from '../providers/login/login';
 import { UserSessionProvider } from '../providers/user-session/user-session';
+import { AprobacionRechazoPrincipalPage } from '../pages/aprobacion-rechazo-principal/aprobacion-rechazo-principal';
+import { TdcMismoTitularBfcPage } from '../pages/tdc-mismo-titular-bfc/tdc-mismo-titular-bfc';
+import { TdcMismoTitularOtrosBancosPage } from '../pages/tdc-mismo-titular-otros-bancos/tdc-mismo-titular-otros-bancos';
+import { TdcTercerosBfcPageModule } from '../pages/tdc-terceros-bfc/tdc-terceros-bfc.module';
+import { TdcTercerosBfcPage } from '../pages/tdc-terceros-bfc/tdc-terceros-bfc';
+import { TdcTercerosOtrosBancosPage } from '../pages/tdc-terceros-otros-bancos/tdc-terceros-otros-bancos';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,11 @@ import { UserSessionProvider } from '../providers/user-session/user-session';
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
     TransferenciaTercerosOtrosBancosReciboPage,
+    AprobacionRechazoPrincipalPage,
+    TdcMismoTitularBfcPage,
+    TdcMismoTitularOtrosBancosPage,
+    TdcTercerosBfcPage,
+    TdcTercerosOtrosBancosPage,
     WelcomePage
   ],
   imports: [
@@ -77,6 +88,11 @@ import { UserSessionProvider } from '../providers/user-session/user-session';
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
     TransferenciaTercerosOtrosBancosReciboPage,
+    AprobacionRechazoPrincipalPage,
+    TdcMismoTitularBfcPage,
+    TdcMismoTitularOtrosBancosPage,
+    TdcTercerosBfcPage,
+    TdcTercerosOtrosBancosPage,
     WelcomePage
   ],
   providers: [

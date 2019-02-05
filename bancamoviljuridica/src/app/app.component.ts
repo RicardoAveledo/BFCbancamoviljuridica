@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -26,6 +26,7 @@ import { UserSessionProvider } from '../providers/user-session/user-session';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { Events } from 'ionic-angular';
+import { AprobacionRechazoPrincipalPage } from '../pages/aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
 
 
@@ -41,7 +42,8 @@ export class MyApp {
   public validarTDC:boolean=true;
   public validarAPR:boolean=true;
 
-  constructor(public userSession:UserSessionProvider, public events:Events, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public userSession:UserSessionProvider, public events:Events, platform: Platform, 
+    statusBar: StatusBar, splashScreen: SplashScreen, private toastCtrl: ToastController) {
     events.subscribe('session:created', (validador) => {
       this.validarPC = this.userSession.validarPC;
       this.validarTR = this.userSession.validarTR;
@@ -56,6 +58,23 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      //message: 'Por favor, introduzca su nombre de usuario y clave para continuar',
+      message:'No posee privilegios creados para esta transacción, Contacte al Usuario Administrador',
+      duration: 3000,
+      position: 'botton'
+    });
+    toast.onDidDismiss(() => {
+
+    });
+    toast.present();
+  }
+
+  opcionBloqueada(){
+    this.presentToast();
   }
   goToPosiciNConsolidada(params){
     if (!params) params = {};
@@ -98,8 +117,13 @@ export class MyApp {
     this.navCtrl.setRoot(OperacionesDeTDCPage);
   }goToAprobaciNRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobaciNRechazoPage);
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
   }goToSalir(params){
+    this.userSession.validarAPR=false;
+    this.userSession.validarPC=false;
+    this.userSession.validarTDC=false;
+    this.userSession.validarTR=false;
+    this.events.publish('session:created', true);
     if (!params) params = {};
     this.navCtrl.setRoot(LoginPage);
   }goToWelcome(params){
