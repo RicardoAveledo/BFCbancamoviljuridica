@@ -22,7 +22,7 @@
   <form id="detalleDeLaCuenta-form2">
     <ion-item id="detalleDeLaCuenta-select1">
       <ion-label></ion-label>
-      <ion-select name="Cuenta Corriente ...3210">
+      <ion-select name="Cuenta Corriente ...3210"> 
         <ion-option>
           Cuenta Corriente ...3210
         </ion-option>
@@ -108,37 +108,26 @@
         </ion-option>
       </ion-select>
     </ion-item>
-    <ion-item color="none" id="detalleDeLaCuenta-list-item22">
-      <ion-avatar item-left>
-        <img src="assets/img/kLOhOKoRXisEOjdzXoxp_redArrow.PNG" />
-      </ion-avatar>
-      <h2>
-        Retiro por Cajero +50.000
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="detalleDeLaCuenta-list-item24">
-      <ion-avatar item-left>
-        <img src="assets/img/0XwJNcKWSyqYlLDAJcmW_greenArrow.PNG" />
-      </ion-avatar>
-      <h2>
-        Abono en cuenta 35.000
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="detalleDeLaCuenta-list-item23">
-      <ion-avatar item-left>
-        <img src="assets/img/0XwJNcKWSyqYlLDAJcmW_greenArrow.PNG" />
-      </ion-avatar>
-      <h2>
-        Abono en cuenta 80.000
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="detalleDeLaCuenta-list-item26">
-      <ion-avatar item-left>
-        <img src="assets/img/kLOhOKoRXisEOjdzXoxp_redArrow.PNG" />
-      </ion-avatar>
-      <h2>
-        Retiro por Cajero +27.000
-      </h2>
-    </ion-item>
+    
+    <div *ngFor="let item of listvalores"> 
+        <ion-item color="none" id="detalleDeLaCuenta-list-item22">
+            <div *ngIf=!item[2]>
+                <ion-avatar item-left>
+                  <img src="assets/img/kLOhOKoRXisEOjdzXoxp_redArrow.PNG" />
+                </ion-avatar>
+                {{item[0]}}, {{item[1]}}
+            </div>
+            <div *ngIf=item[2]>
+                <ion-avatar item-left>
+                  <img src="assets/img/0XwJNcKWSyqYlLDAJcmW_greenArrow.PNG" />
+                </ion-avatar>
+                {{item[0]}}, {{item[1]}}
+            </div>
+          </ion-item>
+    </div>
+    
+
+
+
   </form>
 </ion-content>

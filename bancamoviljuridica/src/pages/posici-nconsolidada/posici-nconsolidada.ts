@@ -15,7 +15,8 @@ export class PosiciNConsolidadaPage {
   constructor(public userSession:UserSessionProvider, public navCtrl: NavController, public httpClient: HttpClient) {
     this.CO_NOMBRES = userSession.CO_NOMBRES;
 
-     //Ahora se procede a traer el menú dinámico:
+    try {
+      //Ahora se procede a traer el menú dinámico:
      var headers = new HttpHeaders();
      headers.append('Content-Type', 'text/xml');
      var httpOptions = {
@@ -97,6 +98,11 @@ export class PosiciNConsolidadaPage {
                    }
                  });
       });
+      
+    } catch (error) {
+      
+    }
+     
 
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Toast, GESTURE_REFRESHER } from 'ionic-angular';
+import { NavController, Toast, GESTURE_REFRESHER, MenuController } from 'ionic-angular';
 import { ToastController, Events } from 'ionic-angular';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
@@ -28,9 +28,9 @@ export class LoginPage {
   contra:string;
   contra1:string|Int32Array;
   rafaga:string='Ingrese nombre de usuario y contraseña'; 
-  constructor(public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
+  constructor(public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
     private toastCtrl: ToastController, public LoginProvider: LoginProvider,public httpClient: HttpClient) {
-    
+    this.menu.enable(false,'menu');
   }
 
 /* sendPostRequest() {
@@ -42,13 +42,11 @@ export class LoginPage {
      })
   };
     //var requestOptions = new RequestOptions({headers:headers});
-
     let postData = {
       sAF_NombreUsuarioIn: "kilate",
       //sAF_PasswordIn: "e10adc3949ba59abbe56e057f20f883e",
       //FI_IP: "10.60.102.133"
     }
-
     
     //[EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
     this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosGetByNombre",postData,httpOptions )
@@ -189,9 +187,23 @@ export class LoginPage {
                     console.log("result: ", search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']);
                    
                     //Acá se guarda el nombre del usuario autorizado en el provider de variables globales userSession
+                    console.log("1");
                     self.userSession.CO_NOMBRES= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NOMBRES']['0'];
+                    console.log("2");
+                    self.userSession.AF_Rif= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Rif']['0'];
+                    console.log("3");
+                    self.userSession.AF_Codcliente= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Codcliente']['0'];
+                    console.log("4");
                     self.userSession.AF_Id= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Id']['0'];
+                    console.log("5");
+                    self.userSession.AF_IdPrincipal= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_IdPrincipal']['0'];
+                    console.log("6");
+
                     console.log("Guardado: ", self.userSession.CO_NOMBRES);
+                    console.log("Guardado: ", self.userSession.AF_Rif);
+                    console.log("Guardado: ", self.userSession.AF_Codcliente);
+                    console.log("Guardado: ", self.userSession.AF_Id);
+                    console.log("Guardado: ", self.userSession.AF_IdPrincipal);
                     try {
                       //Esta es la validación para saber si es usuario admin:
                       //Se consulta el campo CO_NombreADM, que sólo viene en la ráfaga de respuesta cuando 
@@ -348,13 +360,11 @@ export class LoginPage {
 }
 
 /*
-
 POST /WsAfiliados.asmx HTTP/1.1
 Host: localhost
 Content-Type: text/xml; charset=utf-8
 Content-Length: length
 SOAPAction: "http://tempuri.org/AfiliadosGetByNombre"
-
 <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>

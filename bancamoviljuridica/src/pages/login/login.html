@@ -1,54 +1,50 @@
-<ion-content no-padding no-margin	id="page4" style="background-color:rgb(249, 159, 13);">
-  <ion-grid no-padding no-margin >
-    <ion-row style="width:100%;height:30%;max-height: 150px;background-image: url('assets/img/headerLogin.jpg');background-repeat: no-repeat;background-position: center;object-fit: scale-down">
-      <div class="imagelogin">
-        <img src="assets/img/j86NsTfVSFusulJJIdun_BFCMvilpginas-08.png" class="headerlogo" />
-      </div>
-    </ion-row>
-    <ion-row padding no-margin style="display:block;width:100%;height:80%;">
-        <form id="login-form1" style="margin-top:50px;" >
-            <h3 ion-text color="light" style="text-align:center;background-color: transparent !important;" padding>
-                Bienvenido
-            </h3>
-            <form [formGroup]="credentialsForm" novalidate >
-            <ion-item class="inputitem" id="login-input1">
-              <ion-label></ion-label>
-              <ion-input class="inputitem" type="text" placeholder="Usuario" [(ngModel)]="nombre" formControlName= "nameUser" ></ion-input>
-            </ion-item>
-            <ion-item class="inputitem" id="login-input2">
-              <ion-label></ion-label>
-              <ion-input class="inputitem" type="password" placeholder="Contraseña" [(ngModel)]="contra" formControlName= "password"></ion-input>
-            </ion-item>
-          </form>
+<ion-content padding id="page4">
+    <img padding-top src="assets/img/j86NsTfVSFusulJJIdun_BFCMvilpginas-08.png" max-width="280px" style="display:block;width:65%;height:auto;margin-left:auto;margin-right:auto;" />
+    <form id="login-form1">
+        <form [formGroup]="credentialsForm" novalidate >
+          
+    <h5 ion-text color="toolbar_color">
+        Usuario BFC en Línea:
+    </h5>
+      <ion-item id="login-input1"> 
+        <ion-input class="inputitem" type="text"  [(ngModel)]="nombre" formControlName= "nameUser"></ion-input>
+      </ion-item>
+    <h5 ion-text color="toolbar_color">
+        Contraseña BFC en Línea:
+    </h5>
+      <ion-item id="login-input2"> 
+        <ion-input class="inputitem" style="max-width:280px" type="password"  [(ngModel)]="contra" formControlName= "password"></ion-input>
+      </ion-item>
+    </form>
+    </form>
+    <div class="spacer" style="width:300px;height:12px;" id="login-spacer1"></div>
+    <button class="inputlogin" id="login-button1" ion-button color="buttons" block style="border-radius:10px 10px 10px 10px;max-width: 100px;margin-left: auto;margin-right: auto;" on-click="goToWelcome()">
+        Entrar
+    </button>
+  </ion-content>
 
-          </form>
-          <div class="spacer" style="width:300px;height:12px;" id="login-spacer1"></div>
-          <button class="inputlogin" id="login-button1" ion-button color="toolbar_color" block style="border-radius:10px 10px 10px 10px;max-width: 100px;margin-left: auto;margin-right: auto;" on-click="goToWelcome()">
-            Entrar
-          </button>
-    </ion-row>
-  </ion-grid>
-</ion-content>
-<ion-footer>
-      <div style="background-color:rgb(7, 50, 144);">
-        <ion-grid>
-          <ion-row>
-            <ion-col align-self-center style="text-align: center">
-               <font size="1" ion-text color="light">BFC Banco Fondo Común C.A Banco Universal RIF J000723060</font>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col align-self-right col-8 style="text-align: center">
-                <font size="1" ion-text color="light" >Todos los derechos reservados 2019</font>
-            </ion-col>
-            <ion-col align-self-right>
-                <font size="1" ion-text color="light" style="text-align: left">Ver. 1.0000</font>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
-        
-        
-      </div>
-</ion-footer>
+
+  
+  <ion-footer>
+        <div style="background-color:rgb(7, 50, 144);">
+          <ion-grid>
+            <ion-row>
+              <ion-col align-self-center style="text-align: center">
+                 <font size="1" ion-text color="light">BFC Banco Fondo Común C.A Banco Universal RIF J000723060</font>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col align-self-right col-8 style="text-align: center">
+                  <font size="1" ion-text color="light" >Todos los derechos reservados 2019</font>
+              </ion-col>
+              <ion-col align-self-right>
+                  <font size="1" ion-text color="light" style="text-align: left">Ver. 1.0000</font>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+          
+          
+          
+        </div>
+  </ion-footer>
