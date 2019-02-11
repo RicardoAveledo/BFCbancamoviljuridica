@@ -33,22 +33,16 @@
     </p>
   </div>
   <ion-list id="posiciNConsolidada-list3">
-    <ion-item color="none" on-click="goToDetalleDeLaCuenta()" id="posiciNConsolidada-list-item13">
-      <ion-avatar item-left>
-        <img src="assets/img/S7XSL7lR7GT4h6M56uYZ_moneyIcon.PNG" />
-      </ion-avatar>
-      <h2>
-        Cuenta Corriente ...3210
-      </h2>
-    </ion-item>
-    <ion-item color="none" on-click="goToDetalleDeLaCuenta()" id="posiciNConsolidada-list-item14">
-      <ion-avatar item-left>
-        <img src="assets/img/S7XSL7lR7GT4h6M56uYZ_moneyIcon.PNG" />
-      </ion-avatar>
-      <h2>
-        Cuenta de Ahorros...3211
-      </h2>
-    </ion-item>
+
+      <div *ngFor="let item of cuentas"> 
+          <ion-item color="none" id="detalleDeLaCuenta-list-item22" on-click="goToDetalleDeLaCuenta(item)">
+                  <ion-avatar item-left>
+                      <img src="assets/img/S7XSL7lR7GT4h6M56uYZ_moneyIcon.PNG" />
+                  </ion-avatar>
+                  {{item[0]}}
+            </ion-item>
+      </div>
+
   </ion-list>
   <div class="spacer" style="width:300px;height:23px;" id="posiciNConsolidada-spacer2"></div>
   <div id="posiciNConsolidada-markdown3" class="show-list-numbers-and-dots">

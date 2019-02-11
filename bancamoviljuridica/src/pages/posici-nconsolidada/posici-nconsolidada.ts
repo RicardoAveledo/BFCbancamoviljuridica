@@ -12,9 +12,10 @@ import xml2js from 'xml2js';
 })
 export class PosiciNConsolidadaPage {
   CO_NOMBRES:string;
+  public cuentas:any[]=[];
+
   constructor(public userSession:UserSessionProvider, public navCtrl: NavController, public httpClient: HttpClient) {
     this.CO_NOMBRES = userSession.CO_NOMBRES;
-
     try {
       //Ahora se procede a traer el menú dinámico:
      var headers = new HttpHeaders();
@@ -28,14 +29,17 @@ export class PosiciNConsolidadaPage {
      //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
      //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
      var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-       <soap:Body>
-         <CuentasAsociadasGetByAF_Id xmlns="http://tempuri.org/">
-           <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
-         </CuentasAsociadasGetByAF_Id>
-       </soap:Body>
-     </soap:Envelope>`
+     <soap:Body>
+       <AfiliadosCuentas xmlns="http://tempuri.org/">
+         <AF_CodCliente>`+this.userSession.AF_Codcliente+`</AF_CodCliente>
+         <AF_Rif>`+this.userSession.AF_Rif+`</AF_Rif>
+       </AfiliadosCuentas>
+     </soap:Body>
+   </soap:Envelope>`
+
+   console.log("No sirve"+this.userSession.AF_Codcliente+"-"+this.userSession.AF_Id);
    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-      this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=CuentasAsociadasGetByAF_Id",postData,httpOptions )
+      this.httpClient.post("http://localhost:2898/WsIbsMovil.asmx?op=AfiliadosCuentas",postData,httpOptions )
      .subscribe(data => {
        console.log('Data: '+data['_body']); 
       }, error => {
@@ -55,7 +59,7 @@ export class PosiciNConsolidadaPage {
              console.log(tmp.innerHTML);
              var parseString = xml2js.parseString;
              var xml = tmp.innerHTML;
-             var texto:string = "";
+            // var texto:string = "";
              var self = this;
              parseString(xml, self, function (err, result) {
                  try{
@@ -63,6 +67,20 @@ export class PosiciNConsolidadaPage {
                        var str = JSON.stringify(result);
                        console.log("stringified: ", result);
                        var search_array = JSON.parse(str);
+                      search_array.p['soap:Envelope']['0']['soap:Body']['0'].AfiliadosCuentasResponse['0'].AfiliadosCuentasResult['0'].sdjvCuentas['0'].sdsjvDetalle['0'].SumdsjvDet
+                       .forEach(element => {
+                        //Dentro de este foreach me paro en cada elemento que trae 
+                          var SBloqueado:string = element.SBloqueado['0']
+                          var SContable:string = element.SContable['0']
+                          var SDiferido:string = element.SDiferido['0']
+                          var SDisponible:string = element.SDisponible['0']
+                          var SNroCuenta:string = element.SNroCuenta['0']
+                          var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible];
+                          //procesar cuentas para enmascararlas
+                          self.cuentas.push(itemLista);
+                        });
+                       self.userSession.cuentas = self.cuentas;
+
                        /*console.log("result: ", search_array);
                        console.log("resulta: ", search_array['p']['soap:Envelope']['0']['soap:Body']['0'].MenuDinamicoJuridicoResponse['0'].MenuDinamicoJuridicoResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table);
                        try{
@@ -93,6 +111,7 @@ export class PosiciNConsolidadaPage {
                        //Navegamos
                        //self.navCtrl.setRoot(WelcomePage);
                    }catch(Error){
+                    console.log("Error try 1")
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                     //self.presentToast();
                    }
@@ -100,16 +119,17 @@ export class PosiciNConsolidadaPage {
       });
       
     } catch (error) {
-      
+      console.log("Error try 2")
     }
      
 
   }
 
 
-  goToDetalleDeLaCuenta(params){
-    if (!params) params = {};
-    this.navCtrl.push(DetalleDeLaCuentaPage);
+  goToDetalleDeLaCuenta(cuenta:string){
+    this.navCtrl.push(DetalleDeLaCuentaPage,{
+      "cuentaselected":cuenta
+    });
   }goToDetalleDeTarjeta(params){
     if (!params) params = {};
     this.navCtrl.push(DetalleDeTarjetaPage);

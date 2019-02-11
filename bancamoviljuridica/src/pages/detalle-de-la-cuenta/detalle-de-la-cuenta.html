@@ -22,14 +22,13 @@
   <form id="detalleDeLaCuenta-form2">
     <ion-item id="detalleDeLaCuenta-select1">
       <ion-label></ion-label>
-      <ion-select name="Cuenta Corriente ...3210"> 
-        <ion-option>
-          Cuenta Corriente ...3210
-        </ion-option>
-        <ion-option>
-          Cuenta de Ahorros...3211
-        </ion-option>
+
+      <ion-select name="accounts" >
+                <ion-option (ionSelect)="reloadAccountData(item)" *ngFor="let item of cuentas">
+                  {{item[0]}}
+                </ion-option>
       </ion-select>
+
     </ion-item>
   </form>
   <div id="detalleDeLaCuenta-markdown5" class="show-list-numbers-and-dots">
@@ -39,7 +38,7 @@
       </strong>
     </p>
     <p style="color:#000000;font-size:12px;">
-      124.121.255 BsS
+      {{SDisponible}} BsS
     </p>
   </div>
   <div id="detalleDeLaCuenta-markdown6" class="show-list-numbers-and-dots"></div>
@@ -50,7 +49,7 @@
       </strong>
     </p>
     <p style="color:#000000;font-size:12px;">
-      233,56 BsS
+        {{SBloqueado}} BsS
     </p>
   </div>
   <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
@@ -60,7 +59,17 @@
       </strong>
     </p>
     <p style="color:#000000;font-size:12px;">
-      330,07 BsS
+        {{SDiferido}} BsS
+    </p>
+  </div>
+  <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+    <p style="color:#000000;font-size:12px;">
+      <strong>
+        Saldo Contable
+      </strong>
+    </p>
+    <p style="color:#000000;font-size:12px;">
+        {{SContable}} BsS
     </p>
   </div>
   <div id="detalleDeLaCuenta-markdown10" class="show-list-numbers-and-dots"></div>

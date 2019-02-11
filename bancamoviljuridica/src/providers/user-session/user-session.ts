@@ -14,6 +14,7 @@ export class UserSessionProvider {
   public validarTR:boolean = false;
   public validarTDC:boolean = false;
   public validarAPR:boolean = false;
+  public cuentas:any[] = [];
   public AF_CLAsig:string = "";
   public AF_Cedula:string = "";
   public AF_Clave:string = "";
