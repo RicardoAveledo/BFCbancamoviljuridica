@@ -148,7 +148,6 @@ export class DetalleDeLaCuentaPage {
       }
       var monthsToShow:any[] = []
       for (let print of months){
-        if(print[0])
         console.log(print);
       }
       
@@ -209,7 +208,7 @@ export class DetalleDeLaCuentaPage {
                           var sign:string= element.SIndDebCre['0'];
                           console.log("c");
                           var amount:string= element.SMonto['0'];
-                          var amount:string= element.SFechaEfect['0'];
+                          var fechatransaccion:string= element.SFechaEfect['0'];
                           console.log("d");
                           var color:boolean=true;
                           console.log("e");
@@ -352,7 +351,7 @@ export class DetalleDeLaCuentaPage {
                           var sign:string= element.SIndDebCre['0'];
                           console.log("c");
                           var amount:string= element.SMonto['0'];
-                          var amount:string= element.SFechaEfect['0'];
+                          var fechatransaccion:string= element.SFechaEfect['0'];
                           console.log("d");
                           var color:boolean=true;
                           console.log("e");
@@ -438,7 +437,7 @@ export class DetalleDeLaCuentaPage {
     this.SDisponible=itemselected[4];
     console.log(itemselected[0]);
     this.listvalores=[];
-    try {
+
         //Ahora se procede a traer el menú dinámico:
       var headers = new HttpHeaders();
       headers.append('Content-Type', 'text/xml');
@@ -451,106 +450,7 @@ export class DetalleDeLaCuentaPage {
       //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
       //Traeremos el id, de la ráfaga anterior (La respuesta, del login) 
   
-      var myDated:string = new Date().toISOString();
-      var one:number=1;
-      var myDateh:string = new Date().toISOString();
-      var month:number = new Date().getMonth();
-      console.log(month)
-      var year:number = new Date().getFullYear();
-      var yearprint:string = year.toString().substr(-2);
-      var checkyear:boolean;
-      if (((year%4==0) && (year%100!=0))||(year % 400 == 0)){
-        checkyear = true;
-      }else{
-        checkyear = false;
-      }   
-      var monthaux:number = month;
-      var yearaux:number = year;
-      var cont:number[] =[0,1,2,3,4,5,6,7,8,9,10,11]
-      var months:any[]=[];
-      months.push(["Últimos 20 movimientos", 0,0,0])
-      for (let posicion of cont) {
-        var diaInicio:number= 1;
-        var diaFin:number;
-        var monthName:String;
-        if (monthaux+1==1){
-          diaFin=31;
-          monthName="Enero "+ yearaux.toString();
-        }else 
-        if(monthaux+1==2){
-          if (checkyear){
-            diaFin=29;
-          } else {
-            diaFin =28
-          }
-          monthName="Febrero "+ yearaux.toString();
-        }else
-        if (monthaux+1==3){
-          diaFin=31;
-          monthName="Marzo "+ yearaux.toString();
-        }else 
-        if (monthaux+1==4){
-          diaFin=30;
-          monthName="Abril "+ yearaux.toString();
-        }else 
-        if (monthaux+1==5){
-          diaFin=31;
-          monthName="Mayo "+ yearaux.toString();
-        }else 
-        if (monthaux+1==6){
-          diaFin=30;
-          monthName="Junio "+ yearaux.toString();
-        }else 
-        if (monthaux+1==7){
-          diaFin=31;
-          monthName="Julio "+ yearaux.toString();
-        }else 
-        if (monthaux+1==8){
-          diaFin=31;
-          monthName="Agosto "+ yearaux.toString();
-        }else 
-        if (monthaux+1==9){
-          diaFin=30;
-          monthName="Septiembre "+ yearaux.toString();
-        }else 
-        if (monthaux+1==10){
-          diaFin=31;
-          monthName="Octubre "+ yearaux.toString();
-        }else 
-        if (monthaux+1==11){
-          diaFin=30;
-          monthName="Noviembre "+ yearaux.toString();
-        }else 
-        if (monthaux+1==12){
-          diaFin=31;
-          monthName="Diciembre "+ yearaux.toString();
-        }
-        //var mes:string ="";
-        //if (monthaux<9) {
-        //  mes = "0"+((monthaux+1).toString());
-        //}else{
-        //  mes = (monthaux+1).toString();
-        //}
-        months.push([monthName,diaFin,monthaux+1,yearaux]);
-        monthaux = monthaux - 1;
-        if(monthaux<0){
-          monthaux = 11;
-          yearaux = yearaux -1;
-        }
-      }
-
-
-      var monthsToShow:any[] = []
-      for (let print of months){
-        if(print[0])
-        console.log(print);
-      }
       
-      console.log(months);
-      this.listmeses = months;
-    } catch (error) {
-          
-    }
       if (this.sortingListDates[1]==0){
         console.log("Items"+this.cuentaselected+" "+dateselected);
         console.log("Cuenta:"+itemselected[0]);
@@ -564,7 +464,7 @@ export class DetalleDeLaCuentaPage {
               mesPass=dateselected[2].toString();
             }
             console.log("Mes previo", dateselected +" "+mesPass)
-            console.log(year)
+            
             var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
             <soap:Body>
               <AfiliadoMovimientos xmlns="http://tempuri.org/">
@@ -618,7 +518,7 @@ export class DetalleDeLaCuentaPage {
                                 var sign:string= element.SIndDebCre['0'];
                                 console.log("c");
                                 var amount:string= element.SMonto['0'];
-                                var amount:string= element.SFechaEfect['0'];
+                                var fechatransaccion:string= element.SFechaEfect['0'];
                                 console.log("d");
                                 var color:boolean=true;
                                 console.log("e");
