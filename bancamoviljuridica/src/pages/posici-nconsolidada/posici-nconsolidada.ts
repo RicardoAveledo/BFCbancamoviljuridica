@@ -67,6 +67,7 @@ export class PosiciNConsolidadaPage {
                        var str = JSON.stringify(result);
                        console.log("stringified: ", result);
                        var search_array = JSON.parse(str);
+                       var cont:number = 0;
                       search_array.p['soap:Envelope']['0']['soap:Body']['0'].AfiliadosCuentasResponse['0'].AfiliadosCuentasResult['0'].sdjvCuentas['0'].sdsjvDetalle['0'].SumdsjvDet
                        .forEach(element => {
                         //Dentro de este foreach me paro en cada elemento que trae 
@@ -75,7 +76,9 @@ export class PosiciNConsolidadaPage {
                           var SDiferido:string = element.SDiferido['0']
                           var SDisponible:string = element.SDisponible['0']
                           var SNroCuenta:string = element.SNroCuenta['0']
-                          var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible];
+                          var itemPosicion = cont;
+                          var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion];
+                          cont = cont + 1;
                           //procesar cuentas para enmascararlas
                           self.cuentas.push(itemLista);
                         });
@@ -126,9 +129,10 @@ export class PosiciNConsolidadaPage {
   }
 
 
-  goToDetalleDeLaCuenta(cuenta:string){
+  goToDetalleDeLaCuenta(item:any[]){
     this.navCtrl.push(DetalleDeLaCuentaPage,{
-      "cuentaselected":cuenta
+      "cuentaselected":item,
+      "posicion":item[5],
     });
   }goToDetalleDeTarjeta(params){
     if (!params) params = {};
