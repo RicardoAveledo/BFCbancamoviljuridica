@@ -20,12 +20,14 @@ import { WelcomePage } from '../welcome/welcome';
 export class TransferenciaMismoTitularBFCReciboPage {
 cuentaDebito:string;
 cuentaCredito:string;
+fecha:string;
 montoValue:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.cuentaDebito = navParams.get('cuentaDebito');
     this.cuentaCredito = navParams.get('cuentaCredito');
     this.montoValue = navParams.get('montoValue');
+    this.fecha = navParams.get('fecha');
   }
   goToTransferencias(params){
     if (!params) params = {};

@@ -115,12 +115,17 @@ export class TransferenciasMismoTitularBFCPage {
                           var SDiferido:string = element.SDiferido['0']
                           var SDisponible:string = element.SDisponible['0']
                           var SNroCuenta:string = element.SNroCuenta['0']
+                          var NroCuentaMasked2:string = SNroCuenta.substr(-4);
+                          var NroCuentaMasked1:string = SNroCuenta.substr(0,4);
+                          var NroCuentaMasked:string = NroCuentaMasked1+"********"+NroCuentaMasked2;
                           var itemPosicion = cont;
-                          var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion];
+                          var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
                           cont = cont + 1;
                           //procesar cuentas para enmascararlas
-                          var SNroCuenta:string = element.SNroCuenta['0']
-                          self.cuentas.push(itemLista);
+                          var tipoCuenta:string = element.STipocuenta['0']
+                          if(tipoCuenta=="NOW"){
+                            self.cuentas.push(itemLista);
+                          }
                         });
                        self.userSession.cuentas = self.cuentas;
 

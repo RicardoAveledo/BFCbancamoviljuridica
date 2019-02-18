@@ -18,4 +18,7 @@ export class TransferenciasTercerosDetallePage {
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
   }
+  goBack(){
+    this.navCtrl.pop();
+  }
 }

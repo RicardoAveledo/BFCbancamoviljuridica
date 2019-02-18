@@ -58,7 +58,8 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
             this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
               "cuentaDebito":this.cuentaDebito,
               "cuentaCredito":this.cuentaCredito,
-              "montoValue":this.montoValue
+              "montoValue":this.montoValue,
+              "fecha":this.fecha
             });
             console.log('Comfirmar clicked');
           }
