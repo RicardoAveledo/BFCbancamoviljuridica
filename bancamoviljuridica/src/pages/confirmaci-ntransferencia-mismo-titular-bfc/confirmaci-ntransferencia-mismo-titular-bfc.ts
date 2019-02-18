@@ -22,16 +22,19 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
   cuentaDebito:string;
   cuentaCredito:string;
   montoValue:number;
-
+  public fecha:string;
   confirmacion:boolean;
-
-
 
   constructor(public navCtrl: NavController, private viewCtrl: ViewController,
      public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController) {
     this.cuentaDebito = navParams.get('cuentaDebito');
     this.cuentaCredito = navParams.get('cuentaCredito');
     this.montoValue = navParams.get('montoValue');
+    var day:number = new Date().getDay();
+    var month:number = new Date().getMonth()+1; 
+    var year:number = new Date().getFullYear();
+    var yearprint:string = year.toString().substr(-2);
+    this.fecha = day.toString()+"/"+month.toString()+"/"+yearprint;
   }
 
   presentConfirm() {

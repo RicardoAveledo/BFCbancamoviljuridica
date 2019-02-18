@@ -29,22 +29,22 @@
     </strong>
   </p>
 </div>
-<form [formGroup]="cuentadebitoForm" novalidate>
-  <ion-item id="transferenciasMismoTitularBFC-select5">
-    <ion-label>
-      Seleccione
-    </ion-label>
-    <ion-select name="" formControlName= "cuentadebito" [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
-      <ion-option value ="1234************3210">
-          1234************3210
-      </ion-option>
-      <ion-option value ="1234************3211">
-        1234************3211
-      </ion-option>
-    </ion-select>
-  </ion-item>
+
+  <form [formGroup]="cuentadebitoForm" novalidate>
+      <ion-item id="transferenciasMismoTitularBFC-select5">
+        <ion-label>Cuenta: </ion-label> 
+            <ion-select name="" formControlName= "cuentadebito"  [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
+              <div *ngFor="let item of cuentas">
+                    <ion-option [selected]=false (ionSelect)="loadSaldo(item[4])">
+                      {{item[0]}}
+                    </ion-option>
+              </div>
+            </ion-select>
+      </ion-item>
+  </form>
+
   <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
-    Saldo disponible BsS: 125.250.142,00
+    Saldo disponible BsS: {{sdisponible}}
   </ion-item-divider>
 <div id="transferenciasMismoTitularBFC-markdown19" class="show-list-numbers-and-dots">
   <p style="color:#000000;">
@@ -53,22 +53,21 @@
     </strong>
   </p>
 </div>
-</form>
+
 <form [formGroup]="cuentacreditoForm" novalidate>
-  <ion-item id="transferenciasMismoTitularBFC-select7">
-    <ion-label>
-      Seleccione
-    </ion-label>
-    <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
-      <ion-option value ="1234************3210">
-        1234************3210
-      </ion-option>
-      <ion-option value ="1234************3211">
-        1234************3211
-      </ion-option>
-    </ion-select>
-  </ion-item>
+    <ion-item id="transferenciasMismoTitularBFC-select7">
+      <ion-label>Cuenta: </ion-label> 
+          <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
+            <div *ngFor="let item of cuentas">
+                  <ion-option [selected]=false>
+                    {{item[0]}}
+                  </ion-option>
+            </div>
+          </ion-select>
+    </ion-item>
 </form>
+
+
 <form [formGroup]="montoForm" novalidate>
   <div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer5"></div>
   <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
