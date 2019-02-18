@@ -44,7 +44,7 @@
   </form>
 
   <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
-    Saldo disponible BsS: {{sdisponible}}
+    Saldo disponible BsS: {{sdisponible}} 
   </ion-item-divider>
 <div id="transferenciasMismoTitularBFC-markdown19" class="show-list-numbers-and-dots">
   <p style="color:#000000;">
@@ -73,13 +73,14 @@
   <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
       <strong>
-        Monto Bs.
+        Monto Bs.  
       </strong>
     </p>
   </div>
   <ion-item id="transferenciasMismoTitularBFC-input3">
     <ion-label></ion-label>
-    <ion-input text-right type="text" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
+    <ion-input text-right type="text" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue" (ionChange)='onChangeAmmount()'></ion-input>
   </ion-item>
 </form>
+
 </ion-content>

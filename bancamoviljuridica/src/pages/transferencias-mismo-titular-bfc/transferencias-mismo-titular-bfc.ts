@@ -38,7 +38,7 @@ export class TransferenciasMismoTitularBFCPage {
   public posicionSelected:number;
   cuentaDebito:string;
   cuentaCredito:string;
-  montoValue:number;
+  public montoValue:number;
   public sdisponible:string;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
@@ -117,7 +117,7 @@ export class TransferenciasMismoTitularBFCPage {
                           var SNroCuenta:string = element.SNroCuenta['0']
                           var NroCuentaMasked2:string = SNroCuenta.substr(-4);
                           var NroCuentaMasked1:string = SNroCuenta.substr(0,4);
-                          var NroCuentaMasked:string = NroCuentaMasked1+"********"+NroCuentaMasked2;
+                          var NroCuentaMasked:string = NroCuentaMasked1+"************"+NroCuentaMasked2;
                           var itemPosicion = cont;
                           var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
                           cont = cont + 1;
@@ -170,6 +170,11 @@ export class TransferenciasMismoTitularBFCPage {
       console.log("Error try 2")
     }
   }
+
+  public auxAmmount:number;
+  onChangeAmmount(){
+    this.montoValue = this.montoValue;
+  } 
 
   changeValueCredit(value: any)
   {
