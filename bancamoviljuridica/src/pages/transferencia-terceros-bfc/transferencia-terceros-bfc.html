@@ -19,6 +19,8 @@
 </ion-header>
 <ion-content id="page13">
   <img src="assets/img/oUV3nePlSYKmvIBgaCpw_TransferenciaTercerosBFCheader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+
+<div *ngIf="cont>0">
   <form id="transferenciaTercerosBFC-form10">
     <ion-searchbar placeholder="Escriba Nombre o Apellido" name="" id="transferenciaTercerosBFC-search1"></ion-searchbar>
   </form>
@@ -31,16 +33,17 @@
   </div>
   <div class="spacer" style="width:320px;height:11px;" id="transferenciaTercerosBFC-spacer12"></div>
   <ion-list id="transferenciaTercerosBFC-list9">
-    <ion-item color="none" on-click="goToTransferenciasTercerosDetalle()" id="transferenciaTercerosBFC-list-item46">
-      ADOLFO LA ROCHE
-      <ion-note item-right></ion-note>
-    </ion-item>
-    <ion-item color="none" on-click="goToTransferenciasTercerosDetalle()" id="transferenciaTercerosBFC-list-item47">
-      ZORAIDA MENDOZA
-      <ion-note item-right></ion-note>
-    </ion-item>
+    <div *ngFor="let item of listFavoritos">
+        <ion-item color="none" on-click="goToTransferenciasTercerosDetalle(item)" id="transferenciaTercerosBFC-list-item46">
+            {{item[2]}}
+        </ion-item>
+    </div>
     <ion-item-divider color="light" id="transferenciaTercerosBFC-list-item-divider3">
-      Registrados: 2
+      Registrados: {{cont}}
     </ion-item-divider>
   </ion-list>
+</div>
+<div *ngIf="cont==0">
+  <h2>No posee favoritos registrados</h2>
+</div>
 </ion-content>
