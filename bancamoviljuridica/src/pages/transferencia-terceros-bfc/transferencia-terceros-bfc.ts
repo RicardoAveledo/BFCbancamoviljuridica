@@ -62,7 +62,7 @@ export class TransferenciaTercerosBFCPage {
      <soap:Body>
        <AfiliadoFavoritosGrupoGetByAfiliado xmlns="http://tempuri.org/">
          <nAF_Id>`+this.userSession.AF_IdPrincipal+`</nAF_Id>
-         <tipoFavoritoId>110</tipoFavoritoId>
+         <tipoFavoritoId>100</tipoFavoritoId>
        </AfiliadoFavoritosGrupoGetByAfiliado>
      </soap:Body>
    </soap:Envelope>`

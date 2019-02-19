@@ -17,12 +17,33 @@
         </ion-grid>
     </ion-navbar>
 </ion-header>
-<ion-content id="page12">
+<ion-content id="page13">
   <img src="assets/img/OE8a26NjRzGraI8nMScf_transferenciaOtrosBFCHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-  <div class="spacer" style="width:320px;height:179px;" id="transferenciaMismoTitularOtrosBancos-spacer10"></div>
-  <div id="transferenciaMismoTitularOtrosBancos-markdown23" style="text-align:center;" class="show-list-numbers-and-dots">
-    <p style="color:#2747B1;">
-      Aquí verás tus registrados
+
+<div *ngIf="cont>0">
+  <form id="transferenciaTercerosBFC-form10">
+    <ion-searchbar placeholder="Escriba Nombre o Apellido" name="" id="transferenciaTercerosBFC-search1"></ion-searchbar>
+  </form>
+  <div id="transferenciaTercerosBFC-markdown24" style="text-align:center;" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      <strong>
+        Registrados
+      </strong>
     </p>
   </div>
+  <div class="spacer" style="width:320px;height:11px;" id="transferenciaTercerosBFC-spacer12"></div>
+  <ion-list id="transferenciaTercerosBFC-list9">
+    <div *ngFor="let item of listFavoritos">
+        <ion-item color="none" on-click="goToTransferenciasTercerosDetalle(item)" id="transferenciaTercerosBFC-list-item46">
+            {{item[2]}}
+        </ion-item>
+    </div>
+    <ion-item-divider color="light" id="transferenciaTercerosBFC-list-item-divider3">
+      Registrados: {{cont}}
+    </ion-item-divider>
+  </ion-list>
+</div>
+<div *ngIf="cont==0">
+  <h4>No posee favoritos registrados</h4>
+</div>
 </ion-content>
