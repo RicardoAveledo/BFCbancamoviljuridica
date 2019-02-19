@@ -168,9 +168,6 @@ export class TransferenciaMismoTitularOtrosBancosPage {
   goToTransferenciasTercerosDetalle(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciasTercerosDetallePage);
-  }goToTransferenciaTercerosOtrosBancos(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
   }goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
