@@ -34,7 +34,7 @@
       <ion-item id="transferenciasMismoTitularBFC-select5">
         <ion-label>Cuenta: </ion-label> 
             <ion-select name="" formControlName= "cuentadebito"  [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
-              <div *ngFor="let item of cuentas">
+              <div *ngFor="let item of userSession.cuentas">
                     <ion-option [selected]=false (ionSelect)="loadSaldo(item[4])">
                       {{item[6]}}
                     </ion-option>
@@ -46,6 +46,7 @@
   <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
     Saldo disponible BsS: {{sdisponible}} 
   </ion-item-divider>
+  
 <div id="transferenciasMismoTitularBFC-markdown19" class="show-list-numbers-and-dots">
   <p style="color:#000000;">
     <strong>
@@ -58,7 +59,7 @@
     <ion-item id="transferenciasMismoTitularBFC-select7">
       <ion-label>Cuenta: </ion-label> 
           <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
-            <div *ngFor="let item of cuentas">
+            <div *ngFor="let item of userSession.cuentas">
                   <ion-option [selected]=false>
                     {{item[6]}}
                   </ion-option>

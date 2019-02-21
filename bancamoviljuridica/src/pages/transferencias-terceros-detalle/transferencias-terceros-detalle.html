@@ -29,25 +29,22 @@
       </strong>
     </p>
   </div>
-  <form id="transferenciasTercerosDetalle-form13">
-    <ion-item id="transferenciasTercerosDetalle-select10">
-      <ion-label>
-        Seleccione
-      </ion-label>
-      <ion-select name="">
-        <ion-option></ion-option>
-        <ion-option>
-          1234************3210
-        </ion-option>
-        <ion-option>
-          1234************3211
-        </ion-option>
-      </ion-select>
+  
+    <ion-item id="transferenciasMismoTitularBFC-select5">
+      <ion-label>Cuenta: </ion-label> 
+          <ion-select name=""  [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
+            <div *ngFor="let item of cuentas">
+                  <ion-option [selected]=false (ionSelect)="loadSaldo(item[4])">
+                    {{item[6]}}
+                  </ion-option>
+            </div>
+          </ion-select>
     </ion-item>
-    <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider5">
-      Saldo Disponible: 0.00
-    </ion-item-divider>
-  </form>
+
+  <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
+    Saldo disponible BsS: {{sdisponible}} 
+  </ion-item-divider>
+  
   <div id="transferenciasTercerosDetalle-markdown32" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
       <strong>
@@ -57,7 +54,7 @@
   </div>
   <ion-list id="transferenciasTercerosDetalle-list11">
     <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider7">
-      0105256669895524
+      {{cuentaCredito}}
     </ion-item-divider>
   </ion-list>
   <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer16"></div>
@@ -71,7 +68,7 @@
   </div>
   <ion-list id="transferenciasTercerosDetalle-list12">
     <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider8">
-      ADOLFO LA ROCHE
+      {{nombre}}
     </ion-item-divider>
   </ion-list>
   <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer17"></div>
@@ -85,9 +82,9 @@
   <form id="transferenciasTercerosDetalle-form14">
     <ion-item id="transferenciasTercerosDetalle-input13">
       <ion-label>
-        V:
+        {{ciType}}:
       </ion-label>
-      <ion-input type="text" placeholder="cédula"></ion-input>
+      <ion-input type="text" value="{{ciNo}}"></ion-input>
     </ion-item>
   </form>
   <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer18"></div>
@@ -100,7 +97,7 @@
   </div>
   <ion-list id="transferenciasTercerosDetalle-list13">
     <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-      adolfolaroche@gmail.com
+      {{email}}
     </ion-item-divider>
   </ion-list>
   <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer20"></div>
@@ -114,7 +111,7 @@
   <form id="transferenciasTercerosDetalle-form15">
     <ion-item id="transferenciasTercerosDetalle-input14">
       <ion-label>
-        Input
+        BsS:
       </ion-label>
       <ion-input type="text" placeholder=""></ion-input>
     </ion-item>
@@ -130,9 +127,8 @@
       <ion-label>
         Seleccione
       </ion-label>
-      <ion-select name="">
-        <ion-option></ion-option>
-        <ion-option>
+      <ion-select name="" > 
+        <ion-option >
           Pago de Préstamo
         </ion-option>
         <ion-option>
@@ -148,7 +144,7 @@
   <div id="transferenciasTercerosDetalle-markdown39" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
       <strong>
-        Concepto
+        Concepto 
       </strong>
     </p>
   </div>

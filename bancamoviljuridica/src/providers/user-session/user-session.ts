@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import xml2js from 'xml2js';
 /*
   Generated class for the UserSessionProvider provider.
 
@@ -15,6 +15,7 @@ export class UserSessionProvider {
   public validarTDC:boolean = false;
   public validarAPR:boolean = false;
   public cuentas:any[] = [];
+  public tdc:any[] = [];
   public AF_CLAsig:string = "";
   public AF_Cedula:string = "";
   public AF_Clave:string = "";
@@ -63,8 +64,121 @@ export class UserSessionProvider {
   public TI_Codigo:string = "";
   public TI_Id:string = "";        
 
-  constructor(public http: HttpClient) {
+
+  constructor(public httpClient: HttpClient) {
+    this.httpClient = httpClient;
     console.log('Hello UserSessionProvider Provider');
+  }
+
+  public reloadAccountData(){    
+    console.log("Esto esta en usersession.cuentos",this.cuentas);
+    var listvalores:any[]=[];
+    try {
+      //Ahora se procede a traer el menú dinámico:
+     var headers = new HttpHeaders();
+     headers.append('Content-Type', 'text/xml');
+     var httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type':  'text/xml'
+       })
+     };
+
+     //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+     //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+     var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Body>
+       <CuentasAsociadasGet xmlns="http://tempuri.org/">
+         <AF_CodCliente>`+this.AF_Codcliente+`</AF_CodCliente>
+         <AF_Rif>`+this.AF_Rif+`</AF_Rif>
+         <AF_Id>`+this.AF_Id+`</AF_Id>
+       </CuentasAsociadasGet>
+     </soap:Body>
+   </soap:Envelope>`
+
+   console.log("No sirve"+this.AF_Codcliente+"-"+this.AF_Id);
+   console.log(postData);
+   //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+      this.httpClient.post("http://localhost:57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
+     .subscribe(data => {
+      // console.log('Data: '+data['_body']); 
+      }, error => {
+             //Hacemos el parse tal cual como antes:
+             console.log('Error: '+JSON.stringify(error));
+             var str = JSON.stringify(error);
+             console.log("stingified: ", str);
+             var search_array = JSON.parse(str);
+             console.log("result: ", search_array.error.text);
+             var parser = new DOMParser();
+             var doc = parser.parseFromString(search_array.error.text, "application/xml");
+             console.log(doc);
+             var el = doc.createElement("p");
+             el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+             var tmp = doc.createElement("div");
+             tmp.appendChild(el);
+             console.log(tmp.innerHTML);
+             var parseString = xml2js.parseString;
+             var xml = tmp.innerHTML;
+            // var texto:string = "";
+             var self = this;
+             parseString(xml, self, function (err, result) {
+                 try{
+                       console.dir(result);
+                       var str = JSON.stringify(result);
+                       console.log("stringified: ", result);
+                       var search_array = JSON.parse(str);
+                       var contcuentas:number = 0;
+                       var conttdc:number = 0;
+                       self.cuentas=[];
+                       self.tdc=[];
+                      search_array.p['soap:Envelope']['0']['soap:Body']['0'].CuentasAsociadasGetResponse['0'].CuentasAsociadasGetResult['0'].SumdsjvDet
+                      .forEach(element => {
+                        //Dentro de este foreach me paro en cada elemento que trae 
+                          var SBloqueado:string = element.SBloqueado['0']
+                          var SContable:string = element.SContable['0']
+                          var SDiferido:string = element.SDiferido['0']
+                          var SDisponible:string = element.SDisponible['0']
+                          var SNroCuenta:string = element.SNroCuenta['0']
+                          var NroCuentaMasked2:string = SNroCuenta.substr(-4);
+                          var NroCuentaMasked1:string = SNroCuenta.substr(0,4);
+                          var NroCuentaMasked:string = NroCuentaMasked1+"************"+NroCuentaMasked2;
+                          var tipoCuenta:string = element.STipocuenta['0']
+                          if(tipoCuenta=="TDC"){
+                            console.log("Tipo TDC",conttdc);
+                            var itemPosicion = conttdc;
+                            conttdc = conttdc + 1;
+                            var SFechaPagoAntes:string = element.SFechaPagoAntes['0']
+                            var day:string = SFechaPagoAntes.substr(0,2);
+                            var month:string = SFechaPagoAntes.substr(2,2);
+                            var year:string = SFechaPagoAntes.substr(-4);
+                            var fechapago:string= day+"-"+month+"-"+year;
+                            var SPagoMinimo:string = element.SPagoMinimo['0']
+                            var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,fechapago,SPagoMinimo];
+                          }else{
+                            console.log("Tipo cuentas",contcuentas);
+                            var itemPosicion = contcuentas;
+                            contcuentas = contcuentas + 1;
+                            var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
+                            }                   
+                          //procesar cuentas para enmascararlas
+                          if(tipoCuenta=="TDC"){
+                            self.tdc.push(itemLista);
+                          }else{
+                            self.cuentas.push(itemLista);
+                          } 
+                          console.dir("K");
+                        });
+                       self.cuentas = self.cuentas;
+                       self.tdc = self.tdc;
+                   }catch(Error){
+                    console.log("Error try 1")
+                    //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                    //self.presentToast();
+                   }
+                 });
+      });
+    } catch (error) {
+      console.log("Error try 2")
+    }
   }
 
 }

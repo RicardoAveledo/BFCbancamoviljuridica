@@ -34,7 +34,7 @@
   </div>
   <ion-list id="posiciNConsolidada-list3">
 
-      <div *ngFor="let item of cuentas"> 
+      <div *ngFor="let item of userSession.cuentas"> 
           <ion-item color="none" id="detalleDeLaCuenta-list-item22" on-click="goToDetalleDeLaCuenta(item)">
                   <ion-avatar item-left>
                       <img src="assets/img/S7XSL7lR7GT4h6M56uYZ_moneyIcon.PNG" />
@@ -53,13 +53,13 @@
     </p>
   </div>
   <ion-list id="posiciNConsolidada-list4">
-    <ion-item color="none" on-click="goToDetalleDeTarjeta()" id="posiciNConsolidada-list-item15">
-      <ion-avatar item-left>
-        <img src="assets/img/jOQsQ00FS26CD8W2pfjj_cardIcon.PNG" />
-      </ion-avatar>
-      <h2>
-        Mastercard ...3456
-      </h2>
-    </ion-item>
+      <div *ngFor="let item of userSession.tdc"> 
+          <ion-item color="none" on-click="goToDetalleDeTarjeta(item)" id="posiciNConsolidada-list-item15">
+              <ion-avatar item-left>
+                  <img src="assets/img/jOQsQ00FS26CD8W2pfjj_cardIcon.PNG" />
+                </ion-avatar>
+                  {{item[0]}}
+            </ion-item>
+      </div> 
   </ion-list>
 </ion-content>

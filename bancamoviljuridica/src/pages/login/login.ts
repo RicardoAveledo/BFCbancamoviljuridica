@@ -268,13 +268,18 @@ export class LoginPage {
                                          //Esta es la validación para saber si es usuario admin:
                                          //Se consulta el campo CO_NombreADM, que sólo viene en la ráfaga de respuesta cuando 
                                          //el usuario que hizo login es un usuario Administrador.
-                                         var admin:string = search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NombresADM']['0'];
-                                         
-                                         //Si el código no explota en la línea anterior, significa que trajo el campo, por lo que se presenta
-                                         //el mensaje de "El usuario no es Autorizado"
-                                         self2.rafaga ="El usuario no es Autorizado"
-                                         self2.presentToast();
-                                         //Se cierra el try, nunca llega al catch, por lo tanto, no hace login.
+                                         var admin:string = search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Tipo']['0'];
+                                         console.log(admin);
+                                         if (admin=="1"){
+                                          //Si el código no explota en la línea anterior, significa que trajo el campo, por lo que se presenta
+                                          //el mensaje de "El usuario no es Autorizado"
+                                          self2.rafaga ="El usuario no es Autorizado"
+                                          self2.presentToast();
+                                          
+                                          //Se cierra el try, nunca llega al catch, por lo tanto, no hace login.
+                                         }else {
+                                           throw error;
+                                         }
                                        } catch (error) {
                                          //ACÁ YA SE VALIDÓ EL USER, SE CONFIRMÓ QUE ES AUTORIZADO JURÍDICO Y SE PROCEDE A NAVEGAR
                                          
@@ -294,7 +299,7 @@ export class LoginPage {
                                            <MenuDinamicoJuridico xmlns="http://tempuri.org/">
                                              <IsAdmin>false</IsAdmin>
                                              <AF_Id>`+self2.userSession.AF_Id+`</AF_Id>
-                                             <Grupo></Grupo>
+                                             <Grupo>N</Grupo>
                                            </MenuDinamicoJuridico>
                                          </soap:Body>
                                        </soap:Envelope>`
