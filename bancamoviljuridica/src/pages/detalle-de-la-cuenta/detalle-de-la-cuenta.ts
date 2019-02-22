@@ -34,7 +34,7 @@ export class DetalleDeLaCuentaPage {
     this.cuentaselected = navParams.get('cuentaselected');
     this.posicionSelected = navParams.get('posicion');
     this.cuentas = userSession.cuentas;
-    this.reloadAccountData();
+    this.reloadAccountData(true);
   }
   
   goBack(params){
@@ -42,15 +42,17 @@ export class DetalleDeLaCuentaPage {
     this.navCtrl.pop();
   }
 
-  reloadAccountData(){ 
-    var itemselected:any[] = this.cuentas[this.posicionSelected]
+  reloadAccountData(check:boolean){
+    if (check){
+      this.cuentaselected = this.cuentas[this.posicionSelected]
+    } 
     console.log("Esto esta en usersession.cuentos",this.cuentas);
     //Estandar: [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible];
-    this.SBloqueado=itemselected[1];
-    this.SContable=itemselected[2];
-    this.SDiferido=itemselected[3];
-    this.SDisponible=itemselected[4];
-    console.log(itemselected[0]);
+    this.SBloqueado=this.cuentaselected[1];
+    this.SContable=this.cuentaselected[2];
+    this.SDiferido=this.cuentaselected[3];
+    this.SDisponible=this.cuentaselected[4];
+    console.log(this.cuentaselected[0]);
     this.listvalores=[];
     try {
         //Ahora se procede a traer el menú dinámico:
@@ -421,6 +423,7 @@ export class DetalleDeLaCuentaPage {
     console.log(item)
     this.updateAccountMovements();
   }
+
   middlewareMethodAccounts(item:any[]){
     this.checkFirstTime=false;
     this.cuentaselected = item;
@@ -428,14 +431,13 @@ export class DetalleDeLaCuentaPage {
     this.updateAccountMovements();
   }
 
-  updateAccountMovements(){
-    var itemselected=this.cuentaselected;
+  updateAccountMovements(){ 
     var dateselected=this.sortingListDates;
-    this.SBloqueado=itemselected[1];
-    this.SContable=itemselected[2];
-    this.SDiferido=itemselected[3];
-    this.SDisponible=itemselected[4];
-    console.log(itemselected[0]);
+    this.SBloqueado=this.cuentaselected[1];
+    this.SContable=this.cuentaselected[2];
+    this.SDiferido=this.cuentaselected[3];
+    this.SDisponible=this.cuentaselected[4];
+    console.log(this.cuentaselected[0]);
     this.listvalores=[];
 
         //Ahora se procede a traer el menú dinámico:
@@ -453,8 +455,8 @@ export class DetalleDeLaCuentaPage {
       
       if (this.sortingListDates[1]==0){
         console.log("Items"+this.cuentaselected+" "+dateselected);
-        console.log("Cuenta:"+itemselected[0]);
-        this.reloadAccountData();
+        console.log("Cuenta:"+this.cuentaselected[0]);
+        this.reloadAccountData(false);
       }else {
           try{
             var mesPass:string=""

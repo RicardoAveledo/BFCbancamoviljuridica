@@ -19,6 +19,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
+import { IfObservable } from 'rxjs/observable/IfObservable';
 
 @Component({
   selector: 'page-transferencias-mismo-titular-bfc',
@@ -42,7 +43,7 @@ export class TransferenciasMismoTitularBFCPage {
   public cuentaDebitoFull:string;
   public cuentaCreditoFull:string;
   public montoValue:number;
-  public sdisponible:string;
+  public sdisponible:number;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController, public navParams: NavParams,
@@ -56,9 +57,6 @@ export class TransferenciasMismoTitularBFCPage {
 
 
   public auxAmmount:number;
-  onChangeAmmount(){
-    this.montoValue = this.montoValue;
-  } 
 
   changeValueCredit(value: any)
   {
@@ -129,13 +127,23 @@ export class TransferenciasMismoTitularBFCPage {
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
     {
       if (!params) params = {};
-      this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
-        "cuentaDebito":this.cuentaDebito,
-        "cuentaCredito":this.cuentaCredito,
-        "cuentaDebitoFull":this.cuentaDebitoFull,
-        "cuentaCreditoFull":this.cuentaCreditoFull,
-        "montoValue":this.montoValue
-      });
+      if (+this.sdisponible<+this.montoValue){
+        this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
+        console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
+      }else{
+        if(this.cuentaCreditoFull==this.cuentaDebitoFull){
+          this.showAlert('No puede transferir a la misma cuenta');
+        } else {
+          console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
+          this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
+            "cuentaDebito":this.cuentaDebito,
+            "cuentaCredito":this.cuentaCredito,
+            "cuentaDebitoFull":this.cuentaDebitoFull,
+            "cuentaCreditoFull":this.cuentaCreditoFull,
+            "montoValue":this.montoValue
+          });
+        }
+      }
   } else{
 
     if (this.cuentadebitoForm.invalid)
