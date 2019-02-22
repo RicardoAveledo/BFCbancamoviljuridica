@@ -247,23 +247,59 @@ export class LoginPage {
                                        console.log("result: ", search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']);
                                       
                                        //Acá se guarda el nombre del usuario autorizado en el provider de variables globales userSession
-                                       console.log("1");
                                        self2.userSession.CO_NOMBRES= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_NOMBRES']['0'];
-                                       console.log("2");
                                        self2.userSession.AF_Rif= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Rif']['0'];
-                                       console.log("3");
                                        self2.userSession.AF_Codcliente= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Codcliente']['0'];
-                                       console.log("4");
                                        self2.userSession.AF_Id= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Id']['0'];
-                                       console.log("5");
                                        self2.userSession.AF_IdPrincipal= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_IdPrincipal']['0'];
-                                       console.log("6");
+                                       self2.userSession.AF_CLAsig= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_CLAsig']['0'];
+                                       self2.userSession.AF_Cedula= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Cedula']['0'];
+                                       self2.userSession.AF_Clave= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Clave']['0'];
+                                       self2.userSession.AF_CodCliente1= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_CodCliente1']['0'];
+                                       self2.userSession.AF_CodPrincipal= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_CodPrincipal']['0'];
+                                       self2.userSession.AF_DiasPassword= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_DiasPassword']['0'];
+                                       self2.userSession.AF_Especial= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Especial']['0'];
+                                       self2.userSession.AF_FecConst= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_FecConst']['0'];
+                                       self2.userSession.AF_FechaPassword= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_FechaPassword']['0'];
+ 
+                                    /* public AF_Id:string = "";
+                                       public AF_IdPrincipal:string = "";
+                                       public AF_NombrePrincipal:string = "";
+                                       public AF_NombreUsuario:string = "";
+                                       public AF_PassWordTransacciones:string = "";
+                                       public AF_Password:string = ""; 
+                                       public AF_PreguntaDesafio:string = "";
+                                       public AF_RespuestaPD:string = "";
+                                       public AF_Rif:string = "";
+                                       public AF_TK_FechaCreacion:string = "";
+                                       public AF_TK_FechaUltModificacion:string = "";
+                                       public AF_TK_NombreUsuarioCreacion:string = "";
+                                       public AF_TK_NombreUsuarioUltModificacion:string = "";
+                                       public AF_TK_Status:string = "";  
+                                       public AF_Tarjeta:string = "";
+                                       public AF_Tipo:string = "";
+                                       public CO_Celular:string = "";
+                                       public CO_CodClienteADM:string = "";
+                                       public CO_DocId:string = "";
+                                       public CO_Email:string = "";  
+                                       public CO_EmailRegistroIB:string = "";
+                                       public CO_Id:string = "";  
+                                       public CO_IdentADM:string = "";
+                                       public CO_NOMBRES:string = "";
+                                       public CO_NombresADM:string = "";
+                                       public CO_TelefonoRegistroIB:string = "";
+                                       public ES_Descripcion:string = "";
+                                       public ES_Id:string = "";
+                                       public FI_Descripcion:string = "";  
+                                       public FI_Id:string = "";
+                                       public PE_id:string = "";  
+                                       public ST_Codigo:string = "";
+                                       public ST_Descripcion:string = "";
+                                       public ST_Id:string = "";
+                                       public TI_Descripcion:string = "";
+                                       public TI_Codigo:string = "";
+                                       public TI_Id:string = "";    */  
                    
-                                       console.log("Guardado: ", self2.userSession.CO_NOMBRES);
-                                       console.log("Guardado: ", self2.userSession.AF_Rif);
-                                       console.log("Guardado: ", self2.userSession.AF_Codcliente);
-                                       console.log("Guardado: ", self2.userSession.AF_Id);
-                                       console.log("Guardado: ", self2.userSession.AF_IdPrincipal);
                                        try {
                                          //Esta es la validación para saber si es usuario admin:
                                          //Se consulta el campo CO_NombreADM, que sólo viene en la ráfaga de respuesta cuando 

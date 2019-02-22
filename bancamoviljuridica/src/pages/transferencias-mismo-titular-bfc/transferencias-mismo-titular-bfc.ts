@@ -37,8 +37,10 @@ export class TransferenciasMismoTitularBFCPage {
   public AF_Rif:string;
   public SNroCuenta:string;
   public posicionSelected:number;
-  cuentaDebito:string;
-  cuentaCredito:string;
+  public cuentaDebito:string;
+  public cuentaCredito:string;
+  public cuentaDebitoFull:string;
+  public cuentaCreditoFull:string;
   public montoValue:number;
   public sdisponible:string;
 
@@ -65,12 +67,16 @@ export class TransferenciasMismoTitularBFCPage {
 
   changeValueDebit(value: any)
   {
-
     this.cuentaDebito=value
   }
 
-  loadSaldo(saldo:string){
-    this.sdisponible=saldo;
+  loadSaldoCred(item:any[]){
+    this.cuentaCreditoFull = item[0];
+  }
+
+  loadSaldoDebt(item:any[]){
+    this.sdisponible=item[4];
+    this.cuentaDebitoFull = item[0];
   }
 
   showAlert(mensaje: string) {
@@ -126,6 +132,8 @@ export class TransferenciasMismoTitularBFCPage {
       this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
         "cuentaDebito":this.cuentaDebito,
         "cuentaCredito":this.cuentaCredito,
+        "cuentaDebitoFull":this.cuentaDebitoFull,
+        "cuentaCreditoFull":this.cuentaCreditoFull,
         "montoValue":this.montoValue
       });
   } else{

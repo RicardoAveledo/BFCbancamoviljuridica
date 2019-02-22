@@ -35,7 +35,7 @@
         <ion-label>Cuenta: </ion-label> 
             <ion-select name="" formControlName= "cuentadebito"  [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
               <div *ngFor="let item of userSession.cuentas">
-                    <ion-option [selected]=false (ionSelect)="loadSaldo(item[4])">
+                    <ion-option [selected]=false (ionSelect)="loadSaldoDebt(item)">
                       {{item[6]}}
                     </ion-option>
               </div>
@@ -60,7 +60,7 @@
       <ion-label>Cuenta: </ion-label> 
           <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
             <div *ngFor="let item of userSession.cuentas">
-                  <ion-option [selected]=false>
+                  <ion-option [selected]=false (ionSelect)="loadSaldoCred(item)">
                     {{item[6]}}
                   </ion-option>
             </div>
