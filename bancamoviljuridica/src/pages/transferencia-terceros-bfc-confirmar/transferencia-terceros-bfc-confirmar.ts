@@ -8,6 +8,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
+import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
+import { TransferenciasTercerosBfcReciboPage } from '../transferencias-terceros-bfc-recibo/transferencias-terceros-bfc-recibo';
 /**
  * Generated class for the TransferenciaTercerosBfcConfirmarPage page.
  *
@@ -34,6 +36,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
   public conceptoValue:string;
   public montoValue:string;
   public motivo:string;
+  public confirmacion:boolean;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider,
      public formBuilder: FormBuilder, private toastCtrl: ToastController, 
@@ -66,8 +69,52 @@ export class TransferenciaTercerosBfcConfirmarPage {
 
   }
 
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            this.confirmacion = false;
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.confirmacion = true;
+            this.makeTheTransfer();
+
+            console.log('Comfirmar clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciaTercerosBfcConfirmarPage');
+  }
+
+  makeTheTransfer(){
+    this.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+      "cuentaDebito":this.cuentaDebito,
+      "cuentaCredito":this.cuentaCredito,
+      "cuentaDebitoFull":this.cuentaDebitoFull,
+      "cuentaCreditoFull":this.cuentaCreditoFull,
+      "nombre":this.nombre,
+      "ciNo":this.ciNo,
+      "ciType":this.ciType,
+      "montoValue":this.montoValue,
+      "motivo":this.motivo,
+      "conceptoValue":this.conceptoValue,
+      "email":this.email,
+      "sdisponible":this.sdisponible,
+    });
   }
 
   goBack(){

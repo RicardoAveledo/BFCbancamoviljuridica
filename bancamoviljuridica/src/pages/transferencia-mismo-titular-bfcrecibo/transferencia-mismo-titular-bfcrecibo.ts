@@ -32,7 +32,8 @@ montoValue:number;
   goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciasPage);
-  }goToWelcome(params){
+  }
+  goToWelcome(params){
     if (!params) params = {};
     this.navCtrl.setRoot(WelcomePage);
   }

@@ -31,6 +31,7 @@ import { TdcTercerosBfcPageModule } from '../pages/tdc-terceros-bfc/tdc-terceros
 import { TdcTercerosBfcPage } from '../pages/tdc-terceros-bfc/tdc-terceros-bfc';
 import { TdcTercerosOtrosBancosPage } from '../pages/tdc-terceros-otros-bancos/tdc-terceros-otros-bancos';
 import { TransferenciaTercerosBfcConfirmarPage } from '../pages/transferencia-terceros-bfc-confirmar/transferencia-terceros-bfc-confirmar';
+import { TransferenciasTercerosBfcReciboPage } from '../pages/transferencias-terceros-bfc-recibo/transferencias-terceros-bfc-recibo';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { TransferenciaTercerosBfcConfirmarPage } from '../pages/transferencia-te
     TransferenciaMismoTitularBFCReciboPage,
     TransferenciaMismoTitularOtrosBancosPage,
     TransferenciaTercerosBfcConfirmarPage,
+    TransferenciasTercerosBfcReciboPage,
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
     TransferenciaTercerosOtrosBancosReciboPage,
@@ -87,6 +89,7 @@ import { TransferenciaTercerosBfcConfirmarPage } from '../pages/transferencia-te
     TransferenciaMismoTitularBFCReciboPage,
     TransferenciaMismoTitularOtrosBancosPage,
     TransferenciaTercerosBfcConfirmarPage,
+    TransferenciasTercerosBfcReciboPage,
     TransferenciaTercerosBFCPage,
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
