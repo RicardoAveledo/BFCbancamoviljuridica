@@ -42,6 +42,7 @@ export class TransferenciasTercerosDetallePage {
   public sdisponible:string;
   public favoritoSelected:any[]=[];
   public motivo:string;
+  public fecha:string;
   public conceptoValue:string;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
@@ -112,20 +113,45 @@ export class TransferenciasTercerosDetallePage {
     +"-"+this.email
     +"-"+this.sdisponible
     );
-    this.navCtrl.push(TransferenciaTercerosBfcConfirmarPage,{
-      "cuentaDebito":this.cuentaDebito,
-      "cuentaCredito":this.cuentaCredito,
-      "cuentaDebitoFull":this.cuentaDebitoFull,
-      "cuentaCreditoFull":this.cuentaCreditoFull,
-      "nombre":this.nombre,
-      "ciNo":this.ciNo,
-      "ciType":this.ciType,
-      "montoValue":this.montoValue,
-      "motivo":this.motivo,
-      "conceptoValue":this.conceptoValue,
-      "email":this.email,
-      "sdisponible":this.sdisponible,
+    /*if (+this.sdisponible<+this.montoValue){
+        this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
+        console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
+      } else if (this.cuentaDebito==undefined){
+        this.showAlert('Seleccione la cuenta a Debitar');
+      } else if (this.cuentaCredito==undefined){
+        this.showAlert('Seleccione la cuenta a Acreditar');
+      } else if (this.nombre==""){
+        this.showAlert('No se encuentra el nombre del beneficiario');
+      } else if (this.ciNo==""){
+        this.showAlert('Escriba el número de cédula o Rif');
+      } else if (this.montoValue==0){
+        this.showAlert('Escriba un monto superior a 0');
+      } else {*/
+        this.navCtrl.push(TransferenciaTercerosBfcConfirmarPage,{
+          "cuentaDebito":this.cuentaDebito,
+          "cuentaCredito":this.cuentaCredito,
+          "cuentaDebitoFull":this.cuentaDebitoFull,
+          "cuentaCreditoFull":this.cuentaCreditoFull,
+          "nombre":this.nombre,
+          "ciNo":this.ciNo,
+          "ciType":this.ciType,
+          "montoValue":this.montoValue,
+          "motivo":this.motivo,
+          "conceptoValue":this.conceptoValue,
+          "email":this.email,
+          "sdisponible":this.sdisponible
+        });
+      //}
+    
+  }
+
+  showAlert(mensaje: string) {
+    const alert = this.alertCtrl.create({
+      title: 'BFC',
+      subTitle: mensaje ,
+      buttons: ['OK']
     });
+    alert.present();
   }
  /*   Cuenta Debito:
       Cuenta Crédito:

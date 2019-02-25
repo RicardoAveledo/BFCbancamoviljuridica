@@ -58,6 +58,7 @@ export class TransferenciaTercerosBFCPage {
 
      //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
      //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+
      var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
      <soap:Body>
        <AfiliadoFavoritosGrupoGetByAfiliado xmlns="http://tempuri.org/">
@@ -66,6 +67,7 @@ export class TransferenciaTercerosBFCPage {
        </AfiliadoFavoritosGrupoGetByAfiliado>
      </soap:Body>
    </soap:Envelope>`
+
 
    console.log("No sirve"+this.userSession.AF_Codcliente+"-"+this.userSession.AF_Id);
    console.log(postData);
