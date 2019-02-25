@@ -166,13 +166,17 @@ export class TransferenciaTercerosBFCPage {
     if (!params) params = {};
     this.navCtrl.pop();
   }
-  goToTransferenciasTercerosDetalle(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciasTercerosDetallePage);
-  }goToTransferenciaTercerosOtrosBancos(params){
+  goToTransferenciasTercerosDetalle(favoritoSelected:any[]){
+    console.log("GoToTransferenciasTerceroDetalle",favoritoSelected);
+    this.navCtrl.push(TransferenciasTercerosDetallePage,{
+      "favoritoSelected":favoritoSelected,
+    });
+  }
+  goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
-  }goToTransferenciaTercerosOtrosBancosRecibo(params){
+  }
+  goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
     this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
   }
