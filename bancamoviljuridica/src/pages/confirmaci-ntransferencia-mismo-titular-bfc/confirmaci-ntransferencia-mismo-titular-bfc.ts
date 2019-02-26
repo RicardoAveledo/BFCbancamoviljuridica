@@ -41,6 +41,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
   public monthStr:string;
   public yearStr:string;
   public yearprint:string;
+  public referencia:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
      public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -200,13 +201,16 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
                       var str = JSON.stringify(result);
                       console.log("stringified: ", result);
                       var search_array = JSON.parse(str);
-                      console.log(search_array);
+                      console.log("TRANSFERENCIA HECHA: ",search_array);
+                      self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCMismoTitularResponse['0'].TransferenciaBFCMismoTitularResult['0'].intrfdsjv['0'].SReferencia['0']
+                      console.log("REF: ",self.referencia);
                       //search_array.
                       self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
                         "cuentaDebito":self.cuentaDebito,
                         "cuentaCredito":self.cuentaCredito,
                         "montoValue":self.montoValue,
-                        "fecha":self.fecha
+                        "fecha":self.fecha,
+                        "referencia":self.referencia,
                       });
 
                   }catch(Error){

@@ -50,6 +50,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
   public yearprint:string;
   public fecha:string;
   public fechaToSend:string;
+  public referencia:string;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider,
      public formBuilder: FormBuilder, private toastCtrl: ToastController, 
@@ -207,7 +208,25 @@ export class TransferenciaTercerosBfcConfirmarPage {
                          var str = JSON.stringify(result);
                          console.log("stringified: ", result);
                          var search_array = JSON.parse(str);
-                         
+                         console.log("Transferencia hecha: ",search_array);
+                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCTercerosResponse['0'].TransferenciaBFCTercerosResult['0'].intrfdsjv['0'].SReferencia['0'];
+                         console.log("REF: ",self.referencia);
+                         self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                          "cuentaDebito":self.cuentaDebito,
+                          "cuentaCredito":self.cuentaCredito,
+                          "cuentaDebitoFull":self.cuentaDebitoFull,
+                          "cuentaCreditoFull":self.cuentaCreditoFull,
+                          "nombre":self.nombre,
+                          "ciNo":self.ciNo,
+                          "ciType":self.ciType,
+                          "montoValue":self.montoValue,
+                          "motivo":self.motivo,
+                          "conceptoValue":self.conceptoValue,
+                          "email":self.email,
+                          "sdisponible":self.sdisponible,
+                          "fechaToSend":self.fechaToSend,
+                          "referencia":self.referencia,
+                        });
                      }catch(Error){
                       console.log("Error try 1")
                       //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
@@ -220,20 +239,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
       }
 
 
-    this.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
-      "cuentaDebito":this.cuentaDebito,
-      "cuentaCredito":this.cuentaCredito,
-      "cuentaDebitoFull":this.cuentaDebitoFull,
-      "cuentaCreditoFull":this.cuentaCreditoFull,
-      "nombre":this.nombre,
-      "ciNo":this.ciNo,
-      "ciType":this.ciType,
-      "montoValue":this.montoValue,
-      "motivo":this.motivo,
-      "conceptoValue":this.conceptoValue,
-      "email":this.email,
-      "sdisponible":this.sdisponible,
-    });
+
   }
 
   goBack(){

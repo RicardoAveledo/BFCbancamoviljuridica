@@ -18,16 +18,18 @@ import { WelcomePage } from '../welcome/welcome';
   templateUrl: 'transferencia-mismo-titular-bfcrecibo.html'
 })
 export class TransferenciaMismoTitularBFCReciboPage {
-cuentaDebito:string;
-cuentaCredito:string;
-fecha:string;
-montoValue:number;
+public cuentaDebito:string;
+public cuentaCredito:string;
+public fecha:string;
+public referencia:string;
+public montoValue:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.cuentaDebito = navParams.get('cuentaDebito');
     this.cuentaCredito = navParams.get('cuentaCredito');
     this.montoValue = navParams.get('montoValue');
     this.fecha = navParams.get('fecha');
+    this.referencia = navParams.get('referencia');
   }
   goToTransferencias(params){
     if (!params) params = {};

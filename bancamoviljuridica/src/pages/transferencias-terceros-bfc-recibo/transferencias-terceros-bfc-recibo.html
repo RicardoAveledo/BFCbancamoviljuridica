@@ -29,10 +29,16 @@
   <form id="transferenciaMismoTitularBFCRecibo-form9">
     <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
       <ion-label>
+        Número de referencia
+      </ion-label>
+      <ion-input text-right type="text" value="{{referencia}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+      <ion-label>
         Cuenta Origen
       </ion-label>
       <ion-input text-right type="text" value="{{cuentaDebito}}"></ion-input>
-    </ion-item>
+    </ion-item> 
     <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
       <ion-label>
         Cuenta Destino
@@ -80,7 +86,7 @@
       <ion-label>
         Fecha
       </ion-label>
-      <ion-input text-right type="text" placeholder="{{fecha}}"></ion-input>
+      <ion-input text-right type="text" placeholder="{{fechaToSend}}"></ion-input>
     </ion-item>
   </form>
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
