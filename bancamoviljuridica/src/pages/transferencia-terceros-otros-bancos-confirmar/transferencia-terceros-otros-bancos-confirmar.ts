@@ -8,10 +8,10 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
-import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../transferencia-mismo-titular-otros-bancos-recibo/transferencia-mismo-titular-otros-bancos-recibo';
+import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
 
 /**
- * Generated class for the TransferenciaMismoTitularOtrosBancosConfirmarPage page.
+ * Generated class for the TransferenciaTercerosOtrosBancosConfirmarPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -19,12 +19,11 @@ import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../transferencia
 
 @IonicPage()
 @Component({
-  selector: 'page-transferencia-mismo-titular-otros-bancos-confirmar',
-  templateUrl: 'transferencia-mismo-titular-otros-bancos-confirmar.html',
+  selector: 'page-transferencia-terceros-otros-bancos-confirmar',
+  templateUrl: 'transferencia-terceros-otros-bancos-confirmar.html',
 })
-export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
+export class TransferenciaTercerosOtrosBancosConfirmarPage {
 
- 
   public cuentaDebito:string;
   public cuentaCredito:string;
   public cuentaDebitoFull:string;
@@ -118,9 +117,6 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
     alert.present();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TransferenciaTercerosBfcConfirmarPage');
-  }
 
   makeTheTransfer(){
       var listvalores:any[]=[];
@@ -169,29 +165,37 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
        //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
        //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
        var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+            <soap:Body>
+              <TransferenciaOtrosBancosTerceros xmlns="http://tempuri.org/">
+                  <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+                  <Rif>`+this.userSession.AF_Rif+`</Rif>
+                  <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
+                  <montoIbs>`+this.montoValue+`</montoIbs>
+                  <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
+                  <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
+                  <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
+                  <Beneficiario>`+this.nombre+`</Beneficiario>
+                  <Rif2>`+this.userSession.AF_Rif+`</Rif2>
+                  <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
+                  <codigo220>220</codigo220>
+                  <SCodBco>`+this.bankCod+`</SCodBco>
+                  <Ip>10.60.102.133</Ip>
+                  <Motivo>`+this.motivo+`</Motivo>
+              </TransferenciaOtrosBancosTerceros>
+            </soap:Body>
+          </soap:Envelope>
+
+       <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
        <soap:Body>
-         <TransferenciaOtrosBancosMismoTitular xmlns="http://tempuri.org/">
-           <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
-           <Rif>`+this.userSession.AF_Rif+`</Rif>
-           <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
-           <montoIbs>`+this.montoValue+`</montoIbs>
-           <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
-           <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
-           <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
-           <Beneficiario>`+this.nombre+`</Beneficiario>
-           <Rif2>`+this.userSession.AF_Rif+`</Rif2>
-           <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
-           <codigo220>220</codigo220>
-           <SCodBco>`+this.bankCod+`</SCodBco>
-           <Ip>10.60.102.133</Ip>
-           <Motivo>`+this.motivo+`</Motivo>
-         </TransferenciaOtrosBancosMismoTitular>
+         <TransferenciaOtrosBancosTerceros xmlns="http://tempuri.org/">
+           
+           </TransferenciaOtrosBancosTerceros>
        </soap:Body>
      </soap:Envelope>`
 
-     console.log("TRANSFERENCIAS MISMO TITULAR OTROS BANCOS SENDING THIS: ",postData);
+     console.log("TRANSFERENCIAS TERCEROS OTROS BANCOS SENDING THIS: ",postData);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-    this.httpClient.post("http://localhost:57306/WsTransferenciasMovil.asmx?op=TransferenciaOtrosBancosMismoTitular",postData,httpOptions )
+    this.httpClient.post("http://localhost:57306/WsTransferenciasMovil.asmx?op=TransferenciaOtrosBancosTerceros",postData,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {
@@ -220,9 +224,9 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
                          console.log("stringified: ", result);
                          var search_array = JSON.parse(str);
                          console.log("Transferencia hecha: ",search_array);
-                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaOtrosBancosMismoTitularResponse['0'].TransferenciaOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0'];
+                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaOtrosBancosTercerosResponse['0'].TransferenciaOtrosBancosTercerosResult['0'].inextdsjv['0'].SReferencia['0']
                          console.log("REF: ",self.referencia);
-                         self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                         self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebitoFull,
@@ -258,5 +262,8 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
     this.navCtrl.pop();
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad TransferenciaTercerosOtrosBancosConfirmarPage');
+  }
 
 }

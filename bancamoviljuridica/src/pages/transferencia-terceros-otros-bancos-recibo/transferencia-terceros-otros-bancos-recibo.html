@@ -9,59 +9,98 @@
               <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
             </ion-col>
             <ion-col no-padding>
-              <button ion-button outline class="btn" float-right id="next-button" color="light" default on-click="goToWelcome()">
-                Finalizar
-              </button>
+                <button ion-button class="btn" float-right outline id="home-button" color="light" default on-click="goToWelcome()">
+                    Finalizar
+                  </button>
             </ion-col>
           </ion-row>
         </ion-grid>
     </ion-navbar>
 </ion-header>
-<ion-content id="page17">
-  <img src="assets/img/OFcdFMX9QWa3NiWdVGMP_TransferenciaDetalleHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-  <div class="spacer" style="width:320px;height:16px;" id="transferenciaTercerosOtrosBancosRecibo-spacer25"></div>
-  <ion-list id="transferenciaTercerosOtrosBancosRecibo-list15">
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item67">
+<ion-content id="page11">
+  <img src="assets/img/transferenciatercerosotrosbancosheader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
+  <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+    <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
       <ion-icon name="checkmark" item-left></ion-icon>
       Operación Realizada
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item60">
-      Cuenta Origen
-      <ion-note item-right></ion-note>
+  </ion-list>
+  <form id="transferenciaMismoTitularBFCRecibo-form9">
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+      <ion-label>
+        Número de referencia
+      </ion-label>
+      <ion-input text-right type="text" value="{{referencia}}"></ion-input>
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item61">
-      Cuenta Destino
-      <ion-note item-right></ion-note>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+      <ion-label>
+        Cuenta Origen
+      </ion-label>
+      <ion-input text-right type="text" value="{{cuentaDebito}}"></ion-input>
+    </ion-item> 
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+      <ion-label>
+        Cuenta Destino
+      </ion-label>
+      <ion-input text-right type="text" value="{{cuentaCredito}}" ></ion-input>
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item62">
-      Beneficiario
-      <ion-note item-right></ion-note>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+        <ion-label>
+          Banco
+        </ion-label>
+        <ion-input text-right type="text" value="{{bankName}}" ></ion-input>
+      </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Beneficiario
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{nombre}}"></ion-input>
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item63">
-      C.I
-      <ion-note item-right></ion-note>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Cédula
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{ciType}}{{ciNo}}"></ion-input>
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item64">
-      Correo
-      <ion-note item-right></ion-note>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Correo
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{email}}"></ion-input>
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item65">
-      Motivo
-      <ion-note item-right></ion-note>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Motivo
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{motivo}}"></ion-input>
     </ion-item>
-    <ion-item color="none" id="transferenciaTercerosOtrosBancosRecibo-list-item68">
-      Fecha
-      <ion-note item-right></ion-note>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Concepto
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{conceptoValue}}"></ion-input>
     </ion-item>
-    <ion-item id="transferenciaTercerosOtrosBancosRecibo-list-item-container4"></ion-item>
-  </ion-list>  
-    <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;">
-      <ion-icon name="share-alt"></ion-icon>
-      Compartir
-    </button>
-    <button id="transferenciaMismoTitularBFCRecibo-button7" ion-button clear color="positive" block small style="font-weight:600;" on-click="goToTransferencias()">
-      <ion-icon name="git-compare"></ion-icon>
-      Realizar otra operación
-    </button>
-  <div class="spacer" style="width:320px;height:38px;" id="transferenciaTercerosOtrosBancosRecibo-spacer26"></div>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+      <ion-label>
+        Monto
+      </ion-label>
+      <ion-input  text-right type="text" placeholder="{{montoValue|number:'1.2-2'}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+      <ion-label>
+        Fecha
+      </ion-label>
+      <ion-input text-right type="text" placeholder="{{fechaToSend}}"></ion-input>
+    </ion-item>
+  </form>
+  <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
+  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;">
+    <ion-icon name="share-alt"></ion-icon>
+    Compartir
+  </button>
+  <button id="transferenciaMismoTitularBFCRecibo-button7" ion-button clear color="positive" block small style="font-weight:600;" on-click="goToTransferencias()">
+    <ion-icon name="git-compare"></ion-icon>
+    Realizar otra operación
+  </button>
 </ion-content>

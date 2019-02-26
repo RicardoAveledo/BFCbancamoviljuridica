@@ -126,6 +126,7 @@ export class UserSessionProvider {
                        var str = JSON.stringify(result);
                        console.log("stringified: ", result);
                        var search_array = JSON.parse(str);
+                       console.log("CUENTAS DEBUG: ", search_array);
                        var contcuentas:number = 0;
                        var conttdc:number = 0;
                        self.cuentas=[];
@@ -141,28 +142,34 @@ export class UserSessionProvider {
                           var NroCuentaMasked2:string = SNroCuenta.substr(-4);
                           var NroCuentaMasked1:string = SNroCuenta.substr(0,4);
                           var NroCuentaMasked:string = NroCuentaMasked1+"************"+NroCuentaMasked2;
-                          var tipoCuenta:string = element.STipocuenta['0']
-                          if(tipoCuenta=="TDC"){
-                            console.log("Tipo TDC",conttdc);
-                            var itemPosicion = conttdc;
-                            conttdc = conttdc + 1;
-                            var SFechaPagoAntes:string = element.SFechaPagoAntes['0']
-                            var day:string = SFechaPagoAntes.substr(0,2);
-                            var month:string = SFechaPagoAntes.substr(2,2);
-                            var year:string = SFechaPagoAntes.substr(-4);
-                            var fechapago:string= day+"-"+month+"-"+year;
-                            var SPagoMinimo:string = element.SPagoMinimo['0']
-                            var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,fechapago,SPagoMinimo];
-                          }else{
+                          var tipoCuenta:string = element.STipocuenta['0'];
+                          var SCodMoneda:string = element.SCodMoneda['0']; 
+                          console.log("SCodMoneda: ", SCodMoneda);
+                          if(tipoCuenta=="TDC" && SCodMoneda=="VES"){
+                            //if(SCodMoneda=="VES"){
+                              console.log("Tipo TDC",conttdc);
+                              var itemPosicion = conttdc;
+                              conttdc = conttdc + 1;
+                              var SFechaPagoAntes:string = element.SFechaPagoAntes['0']
+                              var day:string = SFechaPagoAntes.substr(0,2);
+                              var month:string = SFechaPagoAntes.substr(2,2);
+                              var year:string = SFechaPagoAntes.substr(-4);
+                              var fechapago:string= day+"-"+month+"-"+year;
+                              var SPagoMinimo:string = element.SPagoMinimo['0']
+                              var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,fechapago,SPagoMinimo];  
+                            //}
+                            }else if(SCodMoneda=="VES") {
+                           //   if(SCodMoneda=="VES"){
                             console.log("Tipo cuentas",contcuentas);
                             var itemPosicion = contcuentas;
                             contcuentas = contcuentas + 1;
                             var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
-                            }                   
+                            //  }  
+                          }                   
                           //procesar cuentas para enmascararlas
-                          if(tipoCuenta=="TDC"){
+                          if(tipoCuenta=="TDC" && SCodMoneda=="VES"){
                             self.tdc.push(itemLista);
-                          }else{
+                          }else if (SCodMoneda=="VES"){
                             self.cuentas.push(itemLista);
                           } 
                           console.dir("K");

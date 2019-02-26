@@ -35,6 +35,8 @@ import { TransferenciasTercerosBfcReciboPage } from '../pages/transferencias-ter
 import { TransferenciaMismoTitularOtrosBancosDetallePage } from '../pages/transferencia-mismo-titular-otros-bancos-detalle/transferencia-mismo-titular-otros-bancos-detalle';
 import { TransferenciaMismoTitularOtrosBancosConfirmarPage } from '../pages/transferencia-mismo-titular-otros-bancos-confirmar/transferencia-mismo-titular-otros-bancos-confirmar';
 import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../pages/transferencia-mismo-titular-otros-bancos-recibo/transferencia-mismo-titular-otros-bancos-recibo';
+import { TransferenciaTercerosOtrosBancosDetallePage } from '../pages/transferencia-terceros-otros-bancos-detalle/transferencia-terceros-otros-bancos-detalle';
+import { TransferenciaTercerosOtrosBancosConfirmarPage } from '../pages/transferencia-terceros-otros-bancos-confirmar/transferencia-terceros-otros-bancos-confirmar';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../pages/transfe
     TransferenciasTercerosBfcReciboPage,
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
+    TransferenciaTercerosOtrosBancosDetallePage,
+    TransferenciaTercerosOtrosBancosConfirmarPage,
     TransferenciaTercerosOtrosBancosReciboPage,
     TransferenciaTercerosBFCPage,
     AprobacionRechazoPrincipalPage,
@@ -102,6 +106,8 @@ import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../pages/transfe
     TransferenciaTercerosBFCPage,
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
+    TransferenciaTercerosOtrosBancosDetallePage,
+    TransferenciaTercerosOtrosBancosConfirmarPage,
     TransferenciaTercerosOtrosBancosReciboPage,
     AprobacionRechazoPrincipalPage,
     TdcMismoTitularBfcPage,
