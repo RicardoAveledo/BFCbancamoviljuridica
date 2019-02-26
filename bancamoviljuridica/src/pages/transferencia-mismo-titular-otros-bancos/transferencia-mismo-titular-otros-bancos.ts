@@ -10,6 +10,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
+import { TransferenciaMismoTitularOtrosBancosDetallePage } from '../transferencia-mismo-titular-otros-bancos-detalle/transferencia-mismo-titular-otros-bancos-detalle';
 
 @Component({
   selector: 'page-transferencia-mismo-titular-otros-bancos',
@@ -25,6 +26,7 @@ export class TransferenciaMismoTitularOtrosBancosPage {
   public cuentas:any[]=[];
   public AF_CodCliente:string;
   public AF_Rif:string;
+  public bankCod:string;
   public SNroCuenta:string;
   public posicionSelected:number;
   cuentaDebito:string;
@@ -33,6 +35,7 @@ export class TransferenciaMismoTitularOtrosBancosPage {
   public cont:number=0;
   public sdisponible:string;
   public listFavoritos:any[]=[];
+
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController, public navParams: NavParams,
   public httpClient: HttpClient) {
@@ -97,7 +100,7 @@ export class TransferenciaMismoTitularOtrosBancosPage {
                        var str = JSON.stringify(result);
                        console.log("stringified: ", result);
                        var search_array = JSON.parse(str);
-                       console.log(search_array)
+                       console.log("Trajo esto:",search_array)
                        var counter:number=0
                        search_array.p['soap:Envelope']['0']['soap:Body']['0'].AfiliadoFavoritosGrupoGetByAfiliadoResponse['0'].AfiliadoFavoritosGrupoGetByAfiliadoResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table
                        .forEach(element => {
@@ -165,9 +168,78 @@ export class TransferenciaMismoTitularOtrosBancosPage {
     if (!params) params = {};
     this.navCtrl.pop();
   }
-  goToTransferenciasTercerosDetalle(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciasTercerosDetallePage);
+  goToTransferenciasTercerosDetalle(item:any[]){
+    console.log("Esto esta en usersession.cuentos",this.cuentas);
+    var listvalores:any[]=[];
+    try {
+      //Ahora se procede a traer el menú dinámico:
+     var headers = new HttpHeaders();
+     headers.append('Content-Type', 'text/xml');
+     var httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type':  'text/xml'
+       })
+     };
+
+     //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+     //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+     var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Body>
+       <BankNameGet xmlns="http://tempuri.org/">
+         <id>`+item[1]+`</id>
+       </BankNameGet>
+     </soap:Body>
+   </soap:Envelope>`
+   this.bankCod= item[1];
+   console.log(postData);
+   //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+      this.httpClient.post("http://localhost:57306/WsTransferenciasMovil.asmx?op=BankNameGet",postData,httpOptions )
+     .subscribe(data => {
+      // console.log('Data: '+data['_body']); 
+      }, error => {
+             //Hacemos el parse tal cual como antes:
+             console.log('Error: '+JSON.stringify(error));
+             var str = JSON.stringify(error);
+             console.log("stingified: ", str);
+             var search_array = JSON.parse(str);
+             console.log("result: ", search_array.error.text);
+             var parser = new DOMParser();
+             var doc = parser.parseFromString(search_array.error.text, "application/xml");
+             console.log(doc);
+             var el = doc.createElement("p");
+             el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+             var tmp = doc.createElement("div");
+             tmp.appendChild(el);
+             console.log(tmp.innerHTML);
+             var parseString = xml2js.parseString;
+             var xml = tmp.innerHTML;
+            // var texto:string = "";
+             var self = this;
+             parseString(xml, self, function (err, result) {
+                 try{
+                       console.dir(result);
+                       var str = JSON.stringify(result);
+                       console.log("stringified: ", result);
+                       var search_array = JSON.parse(str);
+                       var bankName:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].BankNameGetResponse['0'].BankNameGetResult['0']
+                       console.log("Código de banco: ", search_array);
+                       self.navCtrl.push(TransferenciaMismoTitularOtrosBancosDetallePage,{
+                        "favoritoSelected":item,
+                        "bankName":bankName,
+                        "bankCod":self.bankCod,
+                      });
+                   }catch(Error){
+                    console.log("Error try 1")
+                    //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                    //self.presentToast();
+                   }
+                 });
+      });
+    } catch (error) {
+      console.log("Error try 2")
+    }
+
+
   }
   goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};

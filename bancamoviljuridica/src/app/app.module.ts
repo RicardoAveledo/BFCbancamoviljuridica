@@ -32,6 +32,9 @@ import { TdcTercerosBfcPage } from '../pages/tdc-terceros-bfc/tdc-terceros-bfc';
 import { TdcTercerosOtrosBancosPage } from '../pages/tdc-terceros-otros-bancos/tdc-terceros-otros-bancos';
 import { TransferenciaTercerosBfcConfirmarPage } from '../pages/transferencia-terceros-bfc-confirmar/transferencia-terceros-bfc-confirmar';
 import { TransferenciasTercerosBfcReciboPage } from '../pages/transferencias-terceros-bfc-recibo/transferencias-terceros-bfc-recibo';
+import { TransferenciaMismoTitularOtrosBancosDetallePage } from '../pages/transferencia-mismo-titular-otros-bancos-detalle/transferencia-mismo-titular-otros-bancos-detalle';
+import { TransferenciaMismoTitularOtrosBancosConfirmarPage } from '../pages/transferencia-mismo-titular-otros-bancos-confirmar/transferencia-mismo-titular-otros-bancos-confirmar';
+import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../pages/transferencia-mismo-titular-otros-bancos-recibo/transferencia-mismo-titular-otros-bancos-recibo';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { TransferenciasTercerosBfcReciboPage } from '../pages/transferencias-ter
     ConfirmaciNTransferenciaMismoTitularBFCPage,
     TransferenciaMismoTitularBFCReciboPage,
     TransferenciaMismoTitularOtrosBancosPage,
+    TransferenciaMismoTitularOtrosBancosDetallePage,
+    TransferenciaMismoTitularOtrosBancosConfirmarPage,
+    TransferenciaMismoTitularOtrosBancosReciboPage,
     TransferenciaTercerosBfcConfirmarPage,
     TransferenciasTercerosBfcReciboPage,
     TransferenciasTercerosDetallePage,
@@ -88,6 +94,9 @@ import { TransferenciasTercerosBfcReciboPage } from '../pages/transferencias-ter
     ConfirmaciNTransferenciaMismoTitularBFCPage,
     TransferenciaMismoTitularBFCReciboPage,
     TransferenciaMismoTitularOtrosBancosPage,
+    TransferenciaMismoTitularOtrosBancosDetallePage,
+    TransferenciaMismoTitularOtrosBancosConfirmarPage,
+    TransferenciaMismoTitularOtrosBancosReciboPage,
     TransferenciaTercerosBfcConfirmarPage,
     TransferenciasTercerosBfcReciboPage,
     TransferenciaTercerosBFCPage,

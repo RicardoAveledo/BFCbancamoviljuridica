@@ -1,0 +1,170 @@
+<ion-header>
+    <ion-navbar no-padding color = "toolbar_color" hideBackButton="true">
+      <ion-grid no-padding>
+        <ion-row no-padding>
+          <ion-col no-padding>
+            <button ion-button class="btn" outline id="back-button" color="light" default on-click="goBack()">
+              Regresar
+            </button>
+          </ion-col>
+          <ion-col>
+            <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col no-padding>
+            <button ion-button outline class="btn" float-right id="next-button" color="light" default on-click="goToTransferenciaTercerosBFCConfirmar()">
+              Continuar
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+  </ion-header>
+  <ion-content id="page14">
+    <img src="assets/img/OE8a26NjRzGraI8nMScf_transferenciaOtrosBFCHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer15"></div>
+    <div id="transferenciasTercerosDetalle-markdown31" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Cuenta Débito
+        </strong>
+      </p>
+    </div>
+    
+      <ion-item id="transferenciasMismoTitularBFC-select5">
+        <ion-label>Cuenta: </ion-label> 
+            <ion-select name=""  [(ngModel)]="debit" [ngModelOptions]="{standalone:true}" (ionChange)="changeValueDebit($event)">
+              <div *ngFor="let item of userSession.cuentas">
+                    <ion-option [selected]=false (ionSelect)="loadSaldo(item)">
+                      {{item[6]}}
+                    </ion-option>
+              </div>
+            </ion-select>
+      </ion-item>
+  
+    <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
+      Saldo disponible BsS: {{sdisponible}} 
+    </ion-item-divider>
+    
+    <div id="transferenciasTercerosDetalle-markdown32" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Cuenta Crédito
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list11">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider7">
+        {{cuentaCredito}}
+      </ion-item-divider>
+    </ion-list>
+
+    <div id="transferenciasTercerosDetalle-markdown32" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+        <strong>
+          Banco:
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list11">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider7">
+        {{bankName}}
+      </ion-item-divider>
+    </ion-list>
+    <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer16"></div>
+    <div id="transferenciasTercerosDetalle-markdown33" class="show-list-numbers-and-dots"></div>
+    <div id="transferenciasTercerosDetalle-markdown34" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Beneficiario
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list12">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider8">
+        {{nombre}}
+      </ion-item-divider>
+    </ion-list>
+    <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer17"></div>
+    <div id="transferenciasTercerosDetalle-markdown35" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          C.I / RIF
+        </strong>
+      </p>
+    </div>
+    <form id="transferenciasTercerosDetalle-form14">
+      <ion-item id="transferenciasTercerosDetalle-input13">
+        <ion-label>
+          {{ciType}}:
+        </ion-label>
+        <ion-input type="text" value="{{ciNo}}"></ion-input>
+      </ion-item>
+    </form>
+    <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer18"></div>
+    <div id="transferenciasTercerosDetalle-markdown36" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Correo Electrónico
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list13">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+        {{email}}
+      </ion-item-divider>
+    </ion-list>
+    <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer20"></div>
+    <div id="transferenciasTercerosDetalle-markdown37" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Monto
+        </strong>
+      </p>
+    </div>
+    <form id="transferenciasTercerosDetalle-form15">
+      <ion-item id="transferenciasTercerosDetalle-input14">
+        <ion-label>
+          BsS:
+        </ion-label>
+        <ion-input type="number" placeholder="" [(ngModel)]="montoValue" [ngModelOptions]="{standalone:true}"></ion-input>
+      </ion-item>
+      <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer21"></div>
+      <div id="transferenciasTercerosDetalle-markdown38" class="show-list-numbers-and-dots">
+        <p style="color:#000000;">
+          <strong>
+            Motivo
+          </strong>
+        </p>
+      </div>
+      <ion-item id="transferenciasTercerosDetalle-select11">
+        <ion-label>
+          Seleccione
+        </ion-label>
+        <ion-select name="" > 
+          <ion-option (ionSelect)="loadMotivo1()">
+            Pago de Préstamo
+          </ion-option>
+          <ion-option (ionSelect)="loadMotivo2()">
+            Ahorro
+          </ion-option>
+          <ion-option (ionSelect)="loadMotivo3()">
+            Otros
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </form>
+    <div class="spacer" style="width:320px;height:17px;" id="transferenciasTercerosDetalle-spacer22"></div>
+    <div id="transferenciasTercerosDetalle-markdown39" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Concepto 
+        </strong>
+      </p>
+    </div>
+    <form id="transferenciasTercerosDetalle-form16">
+      <ion-item id="transferenciasTercerosDetalle-input15">
+        <ion-label></ion-label>
+        <ion-input type="text" placeholder="" [(ngModel)]="conceptoValue" [ngModelOptions]="{standalone:true}"></ion-input>
+      </ion-item>
+    </form>
+  </ion-content>
