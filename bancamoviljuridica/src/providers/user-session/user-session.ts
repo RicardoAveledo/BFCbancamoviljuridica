@@ -189,7 +189,7 @@ export class UserSessionProvider {
   }
 
   basicHttpConnectionMethod(){
-      console.log("Esto esta en usersession.cuentos",this.cuentas);
+      console.log("Esto esta en usersession.cuentas",this.cuentas);
       var listvalores:any[]=[];
       try {
         //Ahora se procede a traer el menú dinámico:
