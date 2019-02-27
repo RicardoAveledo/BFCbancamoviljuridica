@@ -115,38 +115,123 @@ export class TransferenciaTercerosOtrosBancosDetallePage {
     +"-"+this.bankName
     +"-"+this.bankCod
     );
-    /*if (+this.sdisponible<+this.montoValue){
-        this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
-        console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
-      } else if (this.cuentaDebito==undefined){
-        this.showAlert('Seleccione la cuenta a Debitar');
-      } else if (this.cuentaCredito==undefined){
-        this.showAlert('Seleccione la cuenta a Acreditar');
-      } else if (this.nombre==""){
-        this.showAlert('No se encuentra el nombre del beneficiario');
-      } else if (this.ciNo==""){
-        this.showAlert('Escriba el número de cédula o Rif');
-      } else if (this.montoValue==0){
-        this.showAlert('Escriba un monto superior a 0');
-      } else {*/
-        this.navCtrl.push(TransferenciaTercerosOtrosBancosConfirmarPage,{
-          "cuentaDebito":this.cuentaDebito,
-          "cuentaCredito":this.cuentaCredito,
-          "cuentaDebitoFull":this.cuentaDebitoFull,
-          "cuentaCreditoFull":this.cuentaCreditoFull,
-          "nombre":this.nombre,
-          "ciNo":this.ciNo,
-          "ciType":this.ciType,
-          "montoValue":this.montoValue,
-          "motivo":this.motivo,
-          "conceptoValue":this.conceptoValue,
-          "email":this.email,
-          "sdisponible":this.sdisponible,
-          "bankName":this.bankName,
-          "bankCod":this.bankCod,
-        });
-      //}
     
+    if (+this.sdisponible<+this.montoValue){
+      this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
+      console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
+    }else 
+    if(this.montoValue==null){
+      this.showAlert('El monto no puede ser cero');
+    } else {
+      if(this.cuentaCreditoFull==this.cuentaDebitoFull){
+        this.showAlert('No puede transferir a la misma cuenta');
+      } else {
+        var listvalores:any[]=[];
+        try {
+          //Ahora se procede a traer el menú dinámico:
+         var headers = new HttpHeaders();
+         headers.append('Content-Type', 'text/xml');
+         var httpOptions = {
+             headers: new HttpHeaders({
+               'Content-Type':  'text/xml'
+           })
+         };
+    
+         //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+         //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+         var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+         <soap:Body>
+           <ModelosGet xmlns="http://tempuri.org/">
+             <AF_Id>`+this.userSession.AF_IdPrincipal+`</AF_Id>
+             <Cod>20</Cod>
+             <CTA_ID>`+this.cuentaDebitoFull+`</CTA_ID>
+           </ModelosGet>
+         </soap:Body>
+       </soap:Envelope>`
+    
+       console.log(postData);
+       //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+          this.httpClient.post("http://localhost:2898/WsModelos.asmx?op=ModelosGet",postData,httpOptions )
+         .subscribe(data => {
+          // console.log('Data: '+data['_body']); 
+          }, error => {
+                 //Hacemos el parse tal cual como antes:
+                 console.log('Error: '+JSON.stringify(error));
+                 var str = JSON.stringify(error);
+                 console.log("stingified: ", str);
+                 var search_array = JSON.parse(str);
+                 console.log("result: ", search_array.error.text);
+                 var parser = new DOMParser();
+                 var doc = parser.parseFromString(search_array.error.text, "application/xml");
+                 console.log(doc);
+                 var el = doc.createElement("p");
+                 el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+                 var tmp = doc.createElement("div");
+                 tmp.appendChild(el);
+                 console.log(tmp.innerHTML);
+                 var parseString = xml2js.parseString;
+                 var xml = tmp.innerHTML;
+                // var texto:string = "";
+                 var self = this;
+                 parseString(xml, self, function (err, result) {
+                     try{
+                              console.dir(result);
+                              var str = JSON.stringify(result);
+                              console.log("stringified: ", result);
+                              var search_array = JSON.parse(str);
+                              console.log("MODELO: ", search_array);
+                              var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
+                              if(+montoMax >= +self.montoValue){
+                                console.log("ESTO SE MANDA: ", self.cuentaDebito+
+                                self.cuentaCredito+
+                                self.cuentaDebitoFull+
+                                self.cuentaCreditoFull+
+                                self.nombre+
+                                self.ciNo+
+                                self.ciType+
+                                self.montoValue+
+                                self.motivo+
+                                self.conceptoValue+
+                                self.email+
+                                self.sdisponible+
+                                self.bankName+
+                                self.bankCod);
+                                self.navCtrl.push(TransferenciaTercerosOtrosBancosConfirmarPage,{
+                                  "cuentaDebito":self.cuentaDebito,
+                                  "cuentaCredito":self.cuentaCredito,
+                                  "cuentaDebitoFull":self.cuentaDebitoFull,
+                                  "cuentaCreditoFull":self.cuentaCreditoFull,
+                                  "nombre":self.nombre,
+                                  "ciNo":self.ciNo,
+                                  "ciType":self.ciType,
+                                  "montoValue":self.montoValue,
+                                  "motivo":self.motivo,
+                                  "conceptoValue":self.conceptoValue,
+                                  "email":self.email,
+                                  "sdisponible":self.sdisponible,
+                                  "bankName":self.bankName,
+                                  "bankCod":self.bankCod,
+                                });
+                              }else{
+                                self.showAlert('El modelo no permite un monto tan alto.');
+                              }
+                              console.log(self.sdisponible+" < "+self.montoValue+ " - " + (+self.sdisponible<+self.montoValue))
+                              
+                       }catch(Error){
+                        console.log("Error try 1")
+                        self.showAlert('Transacción no cumple con los criterios del modelo definido');
+                        //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                        //self.presentToast();
+                       }
+                     });
+          });
+        } catch (error) {
+          console.log("Error try 2")
+        }
+
+        
+      }
+    }    
   }
 
   showAlert(mensaje: string) {

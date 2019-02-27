@@ -50,7 +50,23 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
     this.motivo = navParams.get("motivo"); 
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.bankName = navParams.get("bankName"); 
-    this.referencia = navParams.get("referencia"); 
+    this.referencia = navParams.get("referencia");
+    console.log("Trajo esto: ", this.cuentaDebito+ " - "+
+    this.cuentaCredito + " - "+
+    this.cuentaDebitoFull + " - "+
+    this.cuentaCreditoFull + " - "+
+    this.nombre + " - "+
+    this.ciNo + " - "+
+    this.ciType + " - "+
+    this.email + " - "+
+    this.sdisponible + " - "+
+    this.conceptoValue + " - "+
+    this.montoValue + " - "+
+    this.motivo + " - "+
+    this.fechaToSend + " - "+
+    this.bankName + " - "+
+    this.referencia
+    );
   }
 
   ionViewDidLoad() {
