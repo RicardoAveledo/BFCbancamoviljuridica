@@ -133,7 +133,7 @@ export class TransferenciasMismoTitularBFCPage {
       }else 
       if(this.montoValue==null){
         this.showAlert('El monto no puede ser cero');
-      } else {{
+      } else {
         if(this.cuentaCreditoFull==this.cuentaDebitoFull){
           this.showAlert('No puede transferir a la misma cuenta');
         } else {
