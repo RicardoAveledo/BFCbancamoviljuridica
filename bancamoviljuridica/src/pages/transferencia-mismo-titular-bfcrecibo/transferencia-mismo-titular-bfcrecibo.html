@@ -20,19 +20,38 @@
 <ion-content id="page11">
   <img src="assets/img/ycPIPvhKRman8tpi6Ol4_transferenciasMismoTitularBFCConfirmarHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
+  
+  <div *ngIf="checkFirmas=='true'">
   <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
     <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
       <ion-icon name="checkmark" item-left></ion-icon>
       Operación Realizada
     </ion-item>
   </ion-list>
-  <form id="transferenciaMismoTitularBFCRecibo-form9">
-      <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
-          <ion-label>
-            Número de Referencia
-          </ion-label>
-          <ion-input text-right type="text"   placeholder="{{referencia}}" ></ion-input>
+  </div>
+
+  <div *ngIf="checkFirmas!='true'">
+      <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+        <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+          Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
         </ion-item>
+      </ion-list>
+  </div>
+
+
+  <form id="transferenciaMismoTitularBFCRecibo-form9">
+     
+    <div *ngIf="checkFirmas=='true'">
+        <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+            <ion-label>
+              Número de Referencia
+            </ion-label>
+            <ion-input text-right type="text"   placeholder="{{referencia}}" ></ion-input>
+        </ion-item>
+    </div>
+
+
+
     <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
       <ion-label>
         Cuenta Origen

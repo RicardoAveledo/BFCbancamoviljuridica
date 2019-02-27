@@ -23,6 +23,7 @@ public cuentaCredito:string;
 public fecha:string;
 public referencia:string;
 public montoValue:number;
+public checkFirmas:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.cuentaDebito = navParams.get('cuentaDebito');
@@ -30,6 +31,7 @@ public montoValue:number;
     this.montoValue = navParams.get('montoValue');
     this.fecha = navParams.get('fecha');
     this.referencia = navParams.get('referencia');
+    this.checkFirmas = navParams.get('checkFirmas');
   }
   goToTransferencias(params){
     if (!params) params = {};
