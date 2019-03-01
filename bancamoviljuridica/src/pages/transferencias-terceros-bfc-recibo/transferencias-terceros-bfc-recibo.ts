@@ -38,6 +38,7 @@ export class TransferenciasTercerosBfcReciboPage {
   public confirmacion:boolean;
   public fechaToSend:string;
   public referencia:string;
+  public checkFirmas:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -56,6 +57,7 @@ export class TransferenciasTercerosBfcReciboPage {
     this.motivo = navParams.get("motivo"); 
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.referencia = navParams.get("referencia"); 
+    this.checkFirmas = navParams.get("checkFirmas"); 
   }
 
   ionViewDidLoad() {

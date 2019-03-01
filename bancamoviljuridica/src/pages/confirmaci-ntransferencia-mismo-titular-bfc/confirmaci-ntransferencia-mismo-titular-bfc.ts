@@ -186,6 +186,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
      .subscribe(data => {
       // console.log('Data: '+data['_body']); 
       }, error => {
+        try{
              //Hacemos el parse tal cual como antes:
              console.log('Error: '+JSON.stringify(error));
              var str = JSON.stringify(error);
@@ -239,6 +240,11 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
                     //self.presentToast();
                    }
                  });
+                 
+                 
+        }catch(Error){
+          this.showAlert("No posee la cantidad de firmas requeridas para este modelo");
+        }
       });
     } catch (error) {
       console.log("Error try 2")
@@ -332,6 +338,16 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
     } catch (error) {
       console.log("Error try 2")
     }
+  }
+
+  
+  showAlert(mensaje: string) {
+    const alert = this.alertCtrl.create({
+      title: 'BFC',
+      subTitle: mensaje ,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   goBack(params){

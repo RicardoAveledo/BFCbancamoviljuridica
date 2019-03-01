@@ -32,6 +32,7 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
   public fechaToSend:string;
   public referencia:string;
   public bankName:string;
+  public checkFirmas:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -51,6 +52,7 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.bankName = navParams.get("bankName"); 
     this.referencia = navParams.get("referencia");
+    this.checkFirmas = navParams.get("checkFirmas");
     console.log("Trajo esto: ", this.cuentaDebito+ " - "+
     this.cuentaCredito + " - "+
     this.cuentaDebitoFull + " - "+

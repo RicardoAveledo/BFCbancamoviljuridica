@@ -51,6 +51,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
   public fecha:string;
   public fechaToSend:string;
   public referencia:string;
+  public checkFirmas:string;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider,
      public formBuilder: FormBuilder, private toastCtrl: ToastController, 
@@ -102,7 +103,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
           text: 'Confirmar',
           handler: () => {
             this.confirmacion = true;
-            this.makeTheTransfer();
+            this.validarModel();
 
             console.log('Comfirmar clicked');
           }
@@ -114,6 +115,121 @@ export class TransferenciaTercerosBfcConfirmarPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciaTercerosBfcConfirmarPage');
+  }
+
+
+  validarModel(){
+    var listvalores:any[]=[];
+    try {
+      //Ahora se procede a traer el menú dinámico:
+     var headers = new HttpHeaders();
+     headers.append('Content-Type', 'text/xml');
+     var httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type':  'text/xml'
+       })
+     };
+
+     //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+     //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+     var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Body>
+       <ValidarModel xmlns="http://tempuri.org/">
+         <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+         <AF_RIF>`+this.userSession.AF_Rif+`</AF_RIF>
+         <AF_CTA>`+this.cuentaDebitoFull+`</AF_CTA>
+         <sCod>19</sCod>
+         <sMonto>`+this.montoValue+`</sMonto>
+         <bancoid></bancoid>
+         <banco></banco>
+         <OP_Destino>`+this.cuentaCreditoFull+`</OP_Destino>
+         <OP_Mail>`+this.email+`</OP_Mail>
+         <OP_Beneficiario>`+this.nombre+`</OP_Beneficiario>
+         <OP_IdBeneficiario>`+this.userSession.AF_Rif+`</OP_IdBeneficiario>
+         <OP_Concepto>`+this.conceptoValue+`</OP_Concepto>
+         <OP_CodeTran>0</OP_CodeTran>
+         <OP_IdServicio>0</OP_IdServicio>
+         <OP_OlbId>0</OP_OlbId>
+         <OP_DATA></OP_DATA>
+         <AF_NroGrupo></AF_NroGrupo>
+         <codCliente>`+this.userSession.AF_Codcliente+`</codCliente>
+         <rifGrupo>`+this.userSession.AF_Rif+`</rifGrupo>
+       </ValidarModel>
+     </soap:Body>
+   </soap:Envelope>`
+
+   console.log(postData);
+   //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+      this.httpClient.post("http://localhost:57306/WsTransferenciasMovil.asmx?op=ValidarModel",postData,httpOptions )
+     .subscribe(data => {
+      // console.log('Data: '+data['_body']); 
+      }, error => {
+        try{
+                  //Hacemos el parse tal cual como antes:
+                  console.log('Error: '+JSON.stringify(error));
+                  var str = JSON.stringify(error);
+                  console.log("stingified: ", str);
+                  var search_array = JSON.parse(str);
+                  console.log("result: ", search_array.error.text);
+                  var parser = new DOMParser();
+                  var doc = parser.parseFromString(search_array.error.text, "application/xml");
+                  console.log(doc);
+                  var el = doc.createElement("p");
+                  el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+                  var tmp = doc.createElement("div");
+                  tmp.appendChild(el);
+                  console.log(tmp.innerHTML);
+                  var parseString = xml2js.parseString;
+                  var xml = tmp.innerHTML;
+                  // var texto:string = "";
+                  var self = this;
+                  parseString(xml, self, function (err, result) {
+                      try{
+                            console.dir(result);
+                            var str = JSON.stringify(result);
+                            console.log("stringified: ", result);
+                            var search_array = JSON.parse(str);
+                            console.log("VALIDAR MODELO: ", search_array);
+                            self.checkFirmas = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ValidarModelResponse['0'].ValidarModelResult['0']
+                            console.log("CHECKFIRMA: ",self.checkFirmas);
+
+                            //Si no devuelve 'false' con firmas, si no que explota con sql, entonces
+                            //pongo lo que está dentro del else en el catch 
+                            if(self.checkFirmas=='true'){
+                              self.makeTheTransfer();
+                            } else {
+                              self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                                "cuentaDebito":self.cuentaDebito,
+                                "cuentaCredito":self.cuentaCredito,
+                                "cuentaDebitoFull":self.cuentaDebitoFull,
+                                "cuentaCreditoFull":self.cuentaCreditoFull,
+                                "nombre":self.nombre,
+                                "ciNo":self.ciNo,
+                                "ciType":self.ciType,
+                                "montoValue":self.montoValue,
+                                "motivo":self.motivo,
+                                "conceptoValue":self.conceptoValue,
+                                "email":self.email,
+                                "sdisponible":self.sdisponible,
+                                "fechaToSend":self.fechaToSend,
+                                "referencia":self.referencia,
+                                "checkFirmas":self.checkFirmas, 
+                              });
+                            } 
+                        }catch(Error){
+                        console.log("Error try 1")
+                        //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                        //self.presentToast();
+                        }
+                      });
+        }catch(Error){
+          this.showAlert("No posee la cantidad de firmas requeridas para este modelo");
+        }
+             
+      });
+    } catch (error) {
+      console.log("Error try 2")
+    }
   }
 
   makeTheTransfer(){
@@ -226,6 +342,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
                           "sdisponible":self.sdisponible,
                           "fechaToSend":self.fechaToSend,
                           "referencia":self.referencia,
+                          "checkFirmas":self.checkFirmas, 
                         });
                      }catch(Error){
                       console.log("Error try 1")
@@ -237,9 +354,15 @@ export class TransferenciaTercerosBfcConfirmarPage {
       } catch (error) {
         console.log("Error try 2")
       }
+  }
 
-
-
+  showAlert(mensaje: string) {
+    const alert = this.alertCtrl.create({
+      title: 'BFC',
+      subTitle: mensaje ,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   goBack(){

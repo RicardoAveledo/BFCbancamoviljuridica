@@ -37,6 +37,7 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
   public fechaToSend:string;
   public referencia:string;
   public bankName:string;
+  public checkFirmas:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -56,6 +57,7 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.bankName = navParams.get("bankName"); 
     this.referencia = navParams.get("referencia"); 
+    this.checkFirmas = navParams.get("checkFirmas"); 
   }
 
   ionViewDidLoad() {
