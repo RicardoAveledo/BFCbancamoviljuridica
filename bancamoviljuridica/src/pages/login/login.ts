@@ -50,7 +50,7 @@ export class LoginPage {
     }
     
     //[EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
-    this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosGetByNombre",postData,httpOptions )
+    this.httpClient.post("http://"+this.userSession.serverIP+":2898/WsAfiliados.asmx?op=AfiliadosGetByNombre",postData,httpOptions )
     .subscribe(data => {
       console.log(data['_body']);
      }, error => {
@@ -117,7 +117,7 @@ export class LoginPage {
   
      console.log(postData1);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-        this.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosLongitudClave",postData1,httpOptions )
+        this.httpClient.post("http://"+this.userSession.serverIP+":2898/WsAfiliados.asmx?op=AfiliadosLongitudClave",postData1,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {
@@ -181,7 +181,7 @@ export class LoginPage {
                      //ACÁ COMIENZA EL TRY-CATCH DEL LOGIN.
                        try{
                          //ESTA ES LA LLAMADA AL REQUEST HTTP POST: Se debe asignar la ruta definitiva. Se debe resolver el issue del CORS
-                         self.httpClient.post("http://localhost:2898/WsAfiliados.asmx?op=AfiliadosLogin",postData,httpOptions )
+                         self.httpClient.post("http://"+self.userSession.serverIP+":2898/WsAfiliados.asmx?op=AfiliadosLogin",postData,httpOptions )
                          .subscribe(data => {
                            console.log('Data: '+data['_body']);
                           }, error => {
@@ -340,7 +340,7 @@ export class LoginPage {
                                          </soap:Body>
                                        </soap:Envelope>`
                                        //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-                                         self.httpClient.post("http://localhost:2898/WsMenuDinamico.asmx?op=MenuDinamicoJuridico",postData,httpOptions )
+                                         self.httpClient.post("http://"+self.userSession.serverIP+":2898/WsMenuDinamico.asmx?op=MenuDinamicoJuridico",postData,httpOptions )
                                          .subscribe(data => {
                                            console.log('Data: '+data['_body']); 
                                           }, error => {
@@ -473,7 +473,7 @@ export class LoginPage {
 
 /*
 POST /WsAfiliados.asmx HTTP/1.1
-Host: localhost
+Host: "+this.userSession.serverIP+"
 Content-Type: text/xml; charset=utf-8
 Content-Length: length
 SOAPAction: "http://tempuri.org/AfiliadosGetByNombre"
