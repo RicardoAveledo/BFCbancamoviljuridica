@@ -22,7 +22,7 @@
 
 <div *ngIf="cont>0">
   <form id="transferenciaTercerosBFC-form10">
-    <ion-searchbar placeholder="Escriba Nombre o Apellido" name="" id="transferenciaTercerosBFC-search1"></ion-searchbar>
+    <ion-searchbar placeholder="Escriba Nombre o Apellido"  [(ngModel)]="searchTerm" (ionInput)="searchFavoritos()" [ngModelOptions]="{standalone: true}"></ion-searchbar>
   </form>
   <div id="transferenciaTercerosBFC-markdown24" style="text-align:center;" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
@@ -33,7 +33,7 @@
   </div>
   <div class="spacer" style="width:320px;height:11px;" id="transferenciaTercerosBFC-spacer12"></div>
   <ion-list id="transferenciaTercerosBFC-list9">
-    <div *ngFor="let item of listFavoritos">
+    <div *ngFor="let item of listFavoritosAux">
         <ion-item color="none" on-click="goToTransferenciasTercerosDetalle(item)" id="transferenciaTercerosBFC-list-item46">
             {{item[2]}}
         </ion-item>

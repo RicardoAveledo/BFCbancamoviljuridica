@@ -34,7 +34,10 @@ export class TransferenciaMismoTitularOtrosBancosPage {
   public montoValue:number;
   public cont:number=0;
   public sdisponible:string;
+  public filtered:string;
+  public searchTerm:string;
   public listFavoritos:any[]=[];
+  public listFavoritosAux:any[]=[];
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController, public navParams: NavParams,
@@ -43,6 +46,21 @@ export class TransferenciaMismoTitularOtrosBancosPage {
     this.AF_Rif = userSession.AF_Rif; 
     this.cuentas = userSession.cuentas;
     this.reloadAccountData();
+  }
+
+  searchFavoritos(){ 
+    console.log("Filtro: ",this.searchTerm);
+    this.filtered = this.searchTerm;
+    this.listFavoritosAux = this.transform(this.listFavoritos, this.searchTerm);
+  }
+
+  transform(items: any[], terms: string): any[] {
+    if(!items) return [];
+    if(!terms) return items;
+    terms = terms.toLowerCase();
+    return items.filter( it => {
+      return it[2].toLowerCase().includes(terms); // only filter country name
+    });
   }
 
   reloadAccountData(){    
@@ -118,6 +136,7 @@ export class TransferenciaMismoTitularOtrosBancosPage {
                           var itemsToAdd:any[]=[AF_ID,BANK_ID,Beneficiario,CedulaRif,Descripcion,Email,NumeroInstrumento,
                             TipoDescripcion,TipoFavoritoID,TipoTarjetaCredito,dCompDate];
                           self.listFavoritos.push(itemsToAdd);
+                          self.listFavoritosAux.push(itemsToAdd);
                           counter=counter+1;
                         });
                         self.cont = counter;

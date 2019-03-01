@@ -28,12 +28,15 @@ export class TransferenciaTercerosOtrosBancosPage {
   public AF_Rif:string;
   public SNroCuenta:string;
   public posicionSelected:number;
-  cuentaDebito:string;
-  cuentaCredito:string;
+  public cuentaDebito:string;
+  public cuentaCredito:string;
+  public searchTerm:string;
+  public filtered:string;
   public montoValue:number;
   public cont:number=0;
   public sdisponible:string;
   public listFavoritos:any[]=[];
+  public listFavoritosAux:any[]=[];
   public bankName:string;
   public bankCod:string;
 
@@ -119,6 +122,7 @@ export class TransferenciaTercerosOtrosBancosPage {
                           var itemsToAdd:any[]=[AF_ID,BANK_ID,Beneficiario,CedulaRif,Descripcion,Email,NumeroInstrumento,
                             TipoDescripcion,TipoFavoritoID,TipoTarjetaCredito,dCompDate];
                           self.listFavoritos.push(itemsToAdd);
+                          self.listFavoritosAux.push(itemsToAdd);
                           counter=counter+1;
                         });
                         self.cont = counter;
@@ -245,4 +249,22 @@ export class TransferenciaTercerosOtrosBancosPage {
 
 
   }
+
+  
+  searchFavoritos(){ 
+    console.log("Filtro: ",this.searchTerm);
+    this.filtered = this.searchTerm;
+    this.listFavoritosAux = this.transform(this.listFavoritos, this.searchTerm);
+  }
+
+  transform(items: any[], terms: string): any[] {
+    if(!items) return [];
+    if(!terms) return items;
+    terms = terms.toLowerCase();
+    return items.filter( it => {
+      return it[2].toLowerCase().includes(terms); // only filter country name
+    });
+  }
+
+
 }
