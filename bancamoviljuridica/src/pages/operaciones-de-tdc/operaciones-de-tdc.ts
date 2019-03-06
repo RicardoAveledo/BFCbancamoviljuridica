@@ -6,6 +6,7 @@ import { TdcMismoTitularOtrosBancosPage } from '../tdc-mismo-titular-otros-banco
 import { TdcTercerosOtrosBancosPage } from '../tdc-terceros-otros-bancos/tdc-terceros-otros-bancos';
 import { PagoTdcMismoTitularBfcPage } from '../pago-tdc-mismo-titular-bfc/pago-tdc-mismo-titular-bfc';
 import { PagoTdcTercerosBfcPage } from '../pago-tdc-terceros-bfc/pago-tdc-terceros-bfc';
+import { PagoTdcMismoTitularOtrosBancosPage } from '../pago-tdc-mismo-titular-otros-bancos/pago-tdc-mismo-titular-otros-bancos';
 
 @Component({
   selector: 'page-operaciones-de-tdc',
@@ -26,7 +27,7 @@ export class OperacionesDeTDCPage {
   }
   goToTDCMismoTitularOtrosBancos(params){ 
     if (!params) params = {};
-    this.navCtrl.push(TdcMismoTitularOtrosBancosPage);
+    this.navCtrl.push(PagoTdcMismoTitularOtrosBancosPage);
   }
   goToTDCTercerosOtrosBancos(params){ 
     if (!params) params = {};

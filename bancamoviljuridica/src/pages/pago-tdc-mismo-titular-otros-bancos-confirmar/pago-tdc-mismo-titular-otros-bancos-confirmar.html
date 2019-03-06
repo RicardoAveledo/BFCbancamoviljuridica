@@ -1,0 +1,149 @@
+<ion-header>
+    <ion-navbar no-padding color = "toolbar_color" hideBackButton="true">
+      <ion-grid no-padding>
+        <ion-row no-padding>
+          <ion-col no-padding>
+            <button ion-button class="btn" outline id="back-button" color="light" default on-click="goBack()">
+              Regresar
+            </button>
+          </ion-col>
+          <ion-col>
+            <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col no-padding>
+            <button ion-button outline class="btn" float-right id="next-button" color="light" default on-click="presentConfirm()">
+              Confirmar
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+  </ion-navbar>
+  </ion-header>
+  <ion-content id="page14">
+    <img src="assets/img/HeaderTDCmismotitularOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <div id="transferenciasTercerosDetalle-markdown31" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Cuenta Débito
+        </strong>
+      </p>
+    </div>
+    
+    <ion-list id="transferenciasTercerosDetalle-list13">
+        <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+            {{cuentaDebito}}
+        </ion-item-divider>
+      </ion-list> 
+  
+    <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
+      Saldo disponible BsS: {{sdisponible}} 
+    </ion-item-divider>
+    
+    <div id="transferenciasTercerosDetalle-markdown32" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Cuenta Crédito
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list11">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider7">
+        {{cuentaCredito}}
+      </ion-item-divider>
+    </ion-list>
+
+    <div id="transferenciasTercerosDetalle-markdown32" class="show-list-numbers-and-dots">
+        <p style="color:#000000;">
+          <strong>
+            Banco:
+          </strong>
+        </p>
+      </div>
+      <ion-list id="transferenciasTercerosDetalle-list11">
+        <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider7">
+          {{bankName}}
+        </ion-item-divider>
+      </ion-list>
+
+    <div id="transferenciasTercerosDetalle-markdown33" class="show-list-numbers-and-dots"></div>
+    <div id="transferenciasTercerosDetalle-markdown34" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Beneficiario
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list12">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider8">
+        {{nombre}}
+      </ion-item-divider>
+    </ion-list>
+    <div id="transferenciasTercerosDetalle-markdown35" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          C.I / RIF
+        </strong>
+      </p>
+    </div>
+    <form id="transferenciasTercerosDetalle-form14">
+      <ion-list id="transferenciasTercerosDetalle-list13">
+          <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+              {{ciType}} {{ciNo}}
+          </ion-item-divider>
+        </ion-list> 
+    </form>
+    <div id="transferenciasTercerosDetalle-markdown36" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Correo Electrónico
+        </strong>
+      </p>
+    </div>
+    <ion-list id="transferenciasTercerosDetalle-list13">
+      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+        {{email}}
+      </ion-item-divider>
+    </ion-list>
+    <div id="transferenciasTercerosDetalle-markdown37" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Monto
+        </strong>
+      </p>
+    </div>
+    <form id="transferenciasTercerosDetalle-form15">
+        <ion-list id="transferenciasTercerosDetalle-list13">
+            <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+                BsS: {{montoValue}}
+            </ion-item-divider>
+          </ion-list> 
+  
+      <div id="transferenciasTercerosDetalle-markdown38" class="show-list-numbers-and-dots">
+        <p style="color:#000000;">
+          <strong>
+            Motivo
+          </strong>
+        </p>
+      </div>
+      <ion-list id="transferenciasTercerosDetalle-list13">
+          <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+              {{motivo}}
+          </ion-item-divider>
+        </ion-list> 
+    </form>
+    <div id="transferenciasTercerosDetalle-markdown39" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        <strong>
+          Concepto 
+        </strong>
+      </p>
+    </div>
+    <form id="transferenciasTercerosDetalle-form16">
+        <ion-list id="transferenciasTercerosDetalle-list13">
+            <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
+              {{conceptoValue}}
+            </ion-item-divider>
+          </ion-list>
+    </form>
+  </ion-content>

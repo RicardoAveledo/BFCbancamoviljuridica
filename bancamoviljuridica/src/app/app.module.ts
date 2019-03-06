@@ -44,6 +44,10 @@ import { PagoTdcTercerosBfcConfirmarPage } from '../pages/pago-tdc-terceros-bfc-
 import { PagoTdcTercerosBfcDetallePage } from '../pages/pago-tdc-terceros-bfc-detalle/pago-tdc-terceros-bfc-detalle';
 import { PagoTdcTercerosBfcReciboPage } from '../pages/pago-tdc-terceros-bfc-recibo/pago-tdc-terceros-bfc-recibo';
 import { PagoTdcTercerosBfcPage } from '../pages/pago-tdc-terceros-bfc/pago-tdc-terceros-bfc';
+import { PagoTdcMismoTitularOtrosBancosDetallePage } from '../pages/pago-tdc-mismo-titular-otros-bancos-detalle/pago-tdc-mismo-titular-otros-bancos-detalle';
+import { PagoTdcMismoTitularOtrosBancosPage } from '../pages/pago-tdc-mismo-titular-otros-bancos/pago-tdc-mismo-titular-otros-bancos';
+import { PagoTdcMismoTitularOtrosBancosConfirmarPage } from '../pages/pago-tdc-mismo-titular-otros-bancos-confirmar/pago-tdc-mismo-titular-otros-bancos-confirmar';
+import { PagoTdcMismoTitularOtrosBancosReciboPage } from '../pages/pago-tdc-mismo-titular-otros-bancos-recibo/pago-tdc-mismo-titular-otros-bancos-recibo';
 
 @NgModule({
   declarations: [
@@ -82,6 +86,10 @@ import { PagoTdcTercerosBfcPage } from '../pages/pago-tdc-terceros-bfc/pago-tdc-
     PagoTdcTercerosBfcDetallePage,
     PagoTdcTercerosBfcReciboPage,
     PagoTdcTercerosBfcPage,
+    PagoTdcMismoTitularOtrosBancosDetallePage,
+    PagoTdcMismoTitularOtrosBancosPage,
+    PagoTdcMismoTitularOtrosBancosConfirmarPage,
+    PagoTdcMismoTitularOtrosBancosReciboPage,
     WelcomePage
   ],
   imports: [
@@ -135,6 +143,10 @@ import { PagoTdcTercerosBfcPage } from '../pages/pago-tdc-terceros-bfc/pago-tdc-
     PagoTdcTercerosBfcDetallePage,
     PagoTdcTercerosBfcReciboPage,
     PagoTdcTercerosBfcPage,
+    PagoTdcMismoTitularOtrosBancosDetallePage,
+    PagoTdcMismoTitularOtrosBancosPage,
+    PagoTdcMismoTitularOtrosBancosConfirmarPage,
+    PagoTdcMismoTitularOtrosBancosReciboPage,
     WelcomePage
   ],
   providers: [

@@ -8,24 +8,24 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
-import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
-import { TransferenciasTercerosBfcReciboPage } from '../transferencias-terceros-bfc-recibo/transferencias-terceros-bfc-recibo';
-import { PagoTdcTercerosBfcReciboPage } from '../pago-tdc-terceros-bfc-recibo/pago-tdc-terceros-bfc-recibo';
+import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../transferencia-mismo-titular-otros-bancos-recibo/transferencia-mismo-titular-otros-bancos-recibo';
+import { PagoTdcMismoTitularOtrosBancosReciboPage } from '../pago-tdc-mismo-titular-otros-bancos-recibo/pago-tdc-mismo-titular-otros-bancos-recibo';
 
 /**
- * Generated class for the PagoTdcTercerosBfcConfirmarPage page.
+ * Generated class for the PagoTdcMismoTitularOtrosBancosConfirmarPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
-  selector: 'page-pago-tdc-terceros-bfc-confirmar',
-  templateUrl: 'pago-tdc-terceros-bfc-confirmar.html',
+  selector: 'page-pago-tdc-mismo-titular-otros-bancos-confirmar',
+  templateUrl: 'pago-tdc-mismo-titular-otros-bancos-confirmar.html',
 })
-export class PagoTdcTercerosBfcConfirmarPage {
+export class PagoTdcMismoTitularOtrosBancosConfirmarPage {
 
-  
+ 
   public cuentaDebito:string;
   public cuentaCredito:string;
   public cuentaDebitoFull:string;
@@ -53,6 +53,8 @@ export class PagoTdcTercerosBfcConfirmarPage {
   public fecha:string;
   public fechaToSend:string;
   public referencia:string;
+  public bankName:string;
+  public bankCod:string;
   public checkFirmas:string;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider,
@@ -63,6 +65,8 @@ export class PagoTdcTercerosBfcConfirmarPage {
        this.cuentaCredito = navParams.get("cuentaCredito");
        this.cuentaDebitoFull = navParams.get("cuentaDebitoFull");
        this.cuentaCreditoFull = navParams.get("cuentaCreditoFull");
+       this.bankName = navParams.get("bankName");
+       this.bankCod = navParams.get("bankCod");
        this.nombre = navParams.get("nombre");
        this.ciNo = navParams.get("ciNo");
        this.ciType = navParams.get("ciType");
@@ -84,6 +88,7 @@ export class PagoTdcTercerosBfcConfirmarPage {
                     +"-"+this.email
                     +"-"+this.sdisponible
                     +"-"+this.fecha
+                    +"-"+this.bankName
        );
 
   }
@@ -140,10 +145,10 @@ export class PagoTdcTercerosBfcConfirmarPage {
          <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
          <AF_RIF>`+this.userSession.AF_Rif+`</AF_RIF>
          <AF_CTA>`+this.cuentaDebitoFull+`</AF_CTA>
-         <sCod>25</sCod>
+         <sCod>27</sCod>
          <sMonto>`+this.montoValue+`</sMonto>
-         <bancoid></bancoid>
-         <banco></banco>
+         <bancoid>`+this.bankCod+`</bancoid>
+         <banco>`+this.bankName+`</banco>
          <OP_Destino>`+this.cuentaCreditoFull+`</OP_Destino>
          <OP_Mail>`+this.email+`</OP_Mail>
          <OP_Beneficiario>`+this.nombre+`</OP_Beneficiario>
@@ -167,67 +172,73 @@ export class PagoTdcTercerosBfcConfirmarPage {
       // console.log('Data: '+data['_body']); 
       }, error => {
         try{
-                  //Hacemos el parse tal cual como antes:
-                  console.log('Error: '+JSON.stringify(error));
-                  var str = JSON.stringify(error);
-                  console.log("stingified: ", str);
-                  var search_array = JSON.parse(str);
-                  console.log("result: ", search_array.error.text);
-                  var parser = new DOMParser();
-                  var doc = parser.parseFromString(search_array.error.text, "application/xml");
-                  console.log(doc);
-                  var el = doc.createElement("p");
-                  el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
-                  var tmp = doc.createElement("div");
-                  tmp.appendChild(el);
-                  console.log(tmp.innerHTML);
-                  var parseString = xml2js.parseString;
-                  var xml = tmp.innerHTML;
-                  // var texto:string = "";
-                  var self = this;
-                  parseString(xml, self, function (err, result) {
-                      try{
-                            console.dir(result);
-                            var str = JSON.stringify(result);
-                            console.log("stringified: ", result);
-                            var search_array = JSON.parse(str);
-                            console.log("VALIDAR MODELO: ", search_array);
-                            self.checkFirmas = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ValidarModelResponse['0'].ValidarModelResult['0']
-                            console.log("CHECKFIRMA: ",self.checkFirmas);
+             //Hacemos el parse tal cual como antes:
+             console.log('Error: '+JSON.stringify(error));
+             var str = JSON.stringify(error);
+             console.log("stingified: ", str);
+             var search_array = JSON.parse(str);
+             console.log("result: ", search_array.error.text);
+             var parser = new DOMParser();
+             var doc = parser.parseFromString(search_array.error.text, "application/xml");
+             console.log(doc);
+             var el = doc.createElement("p");
+             el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+             var tmp = doc.createElement("div");
+             tmp.appendChild(el);
+             console.log(tmp.innerHTML);
+             var parseString = xml2js.parseString;
+             var xml = tmp.innerHTML;
+            // var texto:string = "";
+             var self = this;
+             parseString(xml, self, function (err, result) {
+                 try{
+                       console.dir(result);
+                       var str = JSON.stringify(result);
+                       console.log("stringified: ", result);
+                       var search_array = JSON.parse(str);
+                       console.log("VALIDAR MODELO: ", search_array);
+                       self.checkFirmas = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ValidarModelResponse['0'].ValidarModelResult['0']
+                       console.log("CHECKFIRMA: ",self.checkFirmas);
 
-                            //Si no devuelve 'false' con firmas, si no que explota con sql, entonces
-                            //pongo lo que está dentro del else en el catch 
-                            if(self.checkFirmas=='true'){
-                              self.makeTheTransfer();
-                            } else {
-                              self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
-                                "cuentaDebito":self.cuentaDebito,
-                                "cuentaCredito":self.cuentaCredito,
-                                "cuentaDebitoFull":self.cuentaDebitoFull,
-                                "cuentaCreditoFull":self.cuentaCreditoFull,
-                                "nombre":self.nombre,
-                                "ciNo":self.ciNo,
-                                "ciType":self.ciType,
-                                "montoValue":self.montoValue,
-                                "motivo":self.motivo,
-                                "conceptoValue":self.conceptoValue,
-                                "email":self.email,
-                                "sdisponible":self.sdisponible,
-                                "fechaToSend":self.fechaToSend,
-                                "referencia":self.referencia,
-                                "checkFirmas":self.checkFirmas, 
-                              });
-                            } 
-                        }catch(Error){
-                        console.log("Error try 1")
-                        //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
-                        //self.presentToast();
-                        }
-                      });
+                       //Si no devuelve 'false' con firmas, si no que explota con sql, entonces
+                       //pongo lo que está dentro del else en el catch 
+                       if(self.checkFirmas=='true'){
+                          self.makeTheTransfer();
+                       } else {
+                        self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                          "cuentaDebito":self.cuentaDebito,
+                          "cuentaCredito":self.cuentaCredito,
+                          "cuentaDebitoFull":self.cuentaDebitoFull,
+                          "cuentaCreditoFull":self.cuentaCreditoFull,
+                          "nombre":self.nombre,
+                          "ciNo":self.ciNo,
+                          "ciType":self.ciType,
+                          "montoValue":self.montoValue,
+                          "motivo":self.motivo,
+                          "conceptoValue":self.conceptoValue,
+                          "email":self.email,
+                          "sdisponible":self.sdisponible,
+                          "bankName":self.bankName,
+                          "fechaToSend":self.fechaToSend,
+                          "referencia":self.referencia,
+                          "checkFirmas":self.checkFirmas,
+                        });
+                       }
+
+
+
+
+                       
+                   }catch(Error){
+                    console.log("Error try 1")
+                    //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                    //self.presentToast();
+                   }
+                 });
+                 
         }catch(Error){
           this.showAlert("No posee la cantidad de firmas requeridas para este modelo");
         }
-             
       });
     } catch (error) {
       console.log("Error try 2")
@@ -282,22 +293,26 @@ export class PagoTdcTercerosBfcConfirmarPage {
        //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
        var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
        <soap:Body>
-         <PagoTarjetaCreditoTercerosBFC xmlns="http://tempuri.org/">
+         <PagoTarjetaCreditoOtrosBancosMismoTitular xmlns="http://tempuri.org/">
            <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
            <Rif>`+this.userSession.AF_Rif+`</Rif>
-           <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
-           <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
-           <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
            <Monto>`+this.montoValue+`</Monto>
-           <Instrumento>`+this.cuentaCreditoFull+`</Instrumento>
+           <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
+           <CO_Nombres>`+this.userSession.CO_NOMBRES+`</CO_Nombres>
+           <codtarjetaAcreditar>`+this.cuentaCreditoFull+`</codtarjetaAcreditar>
+           <Beneficiario>`+this.nombre+`</Beneficiario>
+           <Rif2>`+this.userSession.AF_Rif+`</Rif2>
+           <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
+           <SCodBco>`+this.bankCod+`</SCodBco>
            <Ip>10.60.102.133</Ip>
            <Motivo>`+this.motivo+`</Motivo>
-         </PagoTarjetaCreditoTercerosBFC>
+         </PagoTarjetaCreditoOtrosBancosMismoTitular>
        </soap:Body>
      </soap:Envelope>`
-     console.log(postData);
+
+     console.log("TRANSFERENCIAS MISMO TITULAR OTROS BANCOS SENDING THIS: ",postData);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-        this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoTercerosBFC",postData,httpOptions )
+    this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoOtrosBancosMismoTitular",postData,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {
@@ -325,10 +340,10 @@ export class PagoTdcTercerosBfcConfirmarPage {
                          var str = JSON.stringify(result);
                          console.log("stringified: ", result);
                          var search_array = JSON.parse(str);
-                         console.log("Pago TDC hecho: ",search_array);
-                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0']
+                         console.log("TDC hecha: ",search_array);
+                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResponse['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0']
                          console.log("REF: ",self.referencia);
-                         self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                         self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebitoFull,
@@ -341,9 +356,10 @@ export class PagoTdcTercerosBfcConfirmarPage {
                           "conceptoValue":self.conceptoValue,
                           "email":self.email,
                           "sdisponible":self.sdisponible,
+                          "bankName":self.bankName,
                           "fechaToSend":self.fechaToSend,
                           "referencia":self.referencia,
-                          "checkFirmas":self.checkFirmas, 
+                          "checkFirmas":self.checkFirmas,
                         });
                      }catch(Error){
                       console.log("Error try 1")
@@ -357,6 +373,7 @@ export class PagoTdcTercerosBfcConfirmarPage {
       }
   }
 
+  
   showAlert(mensaje: string) {
     const alert = this.alertCtrl.create({
       title: 'BFC',
@@ -365,9 +382,9 @@ export class PagoTdcTercerosBfcConfirmarPage {
     });
     alert.present();
   }
-
   goBack(){
     this.navCtrl.pop();
   }
+
 
 }
