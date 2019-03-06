@@ -10,23 +10,21 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
-import { TransferenciaMismoTitularOtrosBancosDetallePage } from '../transferencia-mismo-titular-otros-bancos-detalle/transferencia-mismo-titular-otros-bancos-detalle';
-import { PagoTdcMismoTitularOtrosBancosDetallePage } from '../pago-tdc-mismo-titular-otros-bancos-detalle/pago-tdc-mismo-titular-otros-bancos-detalle';
+import { TransferenciaTercerosOtrosBancosDetallePage } from '../transferencia-terceros-otros-bancos-detalle/transferencia-terceros-otros-bancos-detalle';
+import { PagoTdcTercerosOtrosBancosDetallePage } from '../pago-tdc-terceros-otros-bancos-detalle/pago-tdc-terceros-otros-bancos-detalle';
 
 /**
- * Generated class for the PagoTdcMismoTitularOtrosBancosPage page.
+ * Generated class for the PagoTdcTercerosOtrosBancosPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-
+ 
 @Component({
-  selector: 'page-pago-tdc-mismo-titular-otros-bancos',
-  templateUrl: 'pago-tdc-mismo-titular-otros-bancos.html',
+  selector: 'page-pago-tdc-terceros-otros-bancos',
+  templateUrl: 'pago-tdc-terceros-otros-bancos.html',
 })
-export class PagoTdcMismoTitularOtrosBancosPage {
-
+export class PagoTdcTercerosOtrosBancosPage {
   public checkFirstTime:boolean=true;
   public listvalores:any[]=[]; 
   public sortingListAccount:any[]=[]; 
@@ -35,18 +33,19 @@ export class PagoTdcMismoTitularOtrosBancosPage {
   public cuentas:any[]=[];
   public AF_CodCliente:string;
   public AF_Rif:string;
-  public bankCod:string;
   public SNroCuenta:string;
   public posicionSelected:number;
-  cuentaDebito:string;
-  cuentaCredito:string;
+  public cuentaDebito:string;
+  public cuentaCredito:string;
+  public searchTerm:string;
+  public filtered:string;
   public montoValue:number;
   public cont:number=0;
   public sdisponible:string;
-  public filtered:string;
-  public searchTerm:string;
   public listFavoritos:any[]=[];
   public listFavoritosAux:any[]=[];
+  public bankName:string;
+  public bankCod:string;
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController, public navParams: NavParams,
@@ -57,23 +56,8 @@ export class PagoTdcMismoTitularOtrosBancosPage {
     this.reloadAccountData();
   }
 
-  searchFavoritos(){ 
-    console.log("Filtro: ",this.searchTerm);
-    this.filtered = this.searchTerm;
-    this.listFavoritosAux = this.transform(this.listFavoritos, this.searchTerm);
-  }
-
-  transform(items: any[], terms: string): any[] {
-    if(!items) return [];
-    if(!terms) return items;
-    terms = terms.toLowerCase();
-    return items.filter( it => {
-      return it[2].toLowerCase().includes(terms); // only filter country name
-    });
-  }
-
   reloadAccountData(){    
-    console.log("Esto esta en usersession.cuentas",this.cuentas);
+    console.log("Esto esta en usersession.cuentos",this.cuentas);
     this.listvalores=[];
     try {
       //Ahora se procede a traer el menú dinámico:
@@ -91,7 +75,7 @@ export class PagoTdcMismoTitularOtrosBancosPage {
      <soap:Body>
        <AfiliadoFavoritosGrupoGetByAfiliado xmlns="http://tempuri.org/">
          <nAF_Id>`+this.userSession.AF_IdPrincipal+`</nAF_Id>
-         <tipoFavoritoId>130</tipoFavoritoId>
+         <tipoFavoritoId>140</tipoFavoritoId>
        </AfiliadoFavoritosGrupoGetByAfiliado>
      </soap:Body>
    </soap:Envelope>`
@@ -127,7 +111,7 @@ export class PagoTdcMismoTitularOtrosBancosPage {
                        var str = JSON.stringify(result);
                        console.log("stringified: ", result);
                        var search_array = JSON.parse(str);
-                       console.log("Trajo esto:",search_array)
+                       console.log(search_array)
                        var counter:number=0
                        search_array.p['soap:Envelope']['0']['soap:Body']['0'].AfiliadoFavoritosGrupoGetByAfiliadoResponse['0'].AfiliadoFavoritosGrupoGetByAfiliadoResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table
                        .forEach(element => {
@@ -196,7 +180,9 @@ export class PagoTdcMismoTitularOtrosBancosPage {
     if (!params) params = {};
     this.navCtrl.pop();
   }
-  goToTransferenciasTercerosDetalle(item:any[]){
+
+  goToTDCTercerosOtrosBancosDetalle(itemselected:any[]){
+    console.log(itemselected[6]);
     console.log("Esto esta en usersession.cuentos",this.cuentas);
     var listvalores:any[]=[];
     try {
@@ -214,11 +200,11 @@ export class PagoTdcMismoTitularOtrosBancosPage {
      var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
      <soap:Body>
        <BankNameGet xmlns="http://tempuri.org/">
-         <id>`+item[1]+`</id>
+         <id>`+itemselected[1]+`</id>
        </BankNameGet>
      </soap:Body>
    </soap:Envelope>`
-   this.bankCod= item[1];
+   this.bankCod = itemselected[1];
    console.log(postData);
    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
       this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsTransferenciasMovil.asmx?op=BankNameGet",postData,httpOptions )
@@ -251,8 +237,8 @@ export class PagoTdcMismoTitularOtrosBancosPage {
                        var search_array = JSON.parse(str);
                        var bankName:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].BankNameGetResponse['0'].BankNameGetResult['0']
                        console.log("Código de banco: ", search_array);
-                       self.navCtrl.push(PagoTdcMismoTitularOtrosBancosDetallePage,{
-                        "favoritoSelected":item,
+                       self.navCtrl.push(PagoTdcTercerosOtrosBancosDetallePage,{
+                        "favoritoSelected":itemselected,
                         "bankName":bankName,
                         "bankCod":self.bankCod,
                       });
@@ -268,9 +254,24 @@ export class PagoTdcMismoTitularOtrosBancosPage {
     }
 
 
+
   }
-  goToTransferenciaTercerosOtrosBancosRecibo(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+
+  
+  searchFavoritos(){ 
+    console.log("Filtro: ",this.searchTerm);
+    this.filtered = this.searchTerm;
+    this.listFavoritosAux = this.transform(this.listFavoritos, this.searchTerm);
   }
+
+  transform(items: any[], terms: string): any[] {
+    if(!items) return [];
+    if(!terms) return items;
+    terms = terms.toLowerCase();
+    return items.filter( it => {
+      return it[2].toLowerCase().includes(terms); // only filter country name
+    });
+  }
+
+
 }

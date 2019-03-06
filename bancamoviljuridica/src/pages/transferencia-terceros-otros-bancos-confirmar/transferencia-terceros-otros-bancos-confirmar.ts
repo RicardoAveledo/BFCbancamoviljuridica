@@ -351,6 +351,7 @@ export class TransferenciaTercerosOtrosBancosConfirmarPage {
                           "bankName":self.bankName,
                           "fechaToSend":self.fechaToSend,
                           "referencia":self.referencia,
+                          "checkFirmas":self.checkFirmas,
                         });
                      }catch(Error){
                       console.log("Error try 1")

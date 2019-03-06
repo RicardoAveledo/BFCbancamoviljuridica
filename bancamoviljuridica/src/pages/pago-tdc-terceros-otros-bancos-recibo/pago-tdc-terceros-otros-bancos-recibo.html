@@ -18,7 +18,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content id="page11">
-  <img src="assets/img/HeaderTDCmismotitularOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <img src="assets/img/HeaderTDCTercerosOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
   
   <div *ngIf="checkFirmas=='true'">
@@ -40,32 +40,32 @@
 
   <form id="transferenciaMismoTitularBFCRecibo-form9">
 
-    <div *ngIf="checkFirmas=='true'">
-        <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
-            <ion-label>
-              Número de Referencia
-            </ion-label>
-            <ion-input text-right type="text"   placeholder="{{referencia}}" ></ion-input>
-        </ion-item>
-    </div>
+      <div *ngIf="checkFirmas=='true'">
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Número de Referencia
+              </ion-label>
+              <ion-input text-right type="text"   placeholder="{{referencia}}" ></ion-input>
+          </ion-item>
+      </div>
 
     <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
       <ion-label>
         Cuenta Origen
       </ion-label>
-      <ion-input text-right type="text" value="{{cuentaDebito}}"></ion-input>
+      <ion-input text-right type="text" placeholder="{{cuentaDebito}}"></ion-input>
     </ion-item> 
     <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
       <ion-label>
-          Número de Tarjeta:
+        Cuenta Destino
       </ion-label>
-      <ion-input text-right type="text" value="{{cuentaCredito}}" ></ion-input>
+      <ion-input text-right type="text" placeholder="{{cuentaCredito}}" ></ion-input>
     </ion-item>
     <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
         <ion-label>
           Banco
         </ion-label>
-        <ion-input text-right type="text" value="{{bankName}}" ></ion-input>
+        <ion-input text-right type="text" placeholder="{{bankName}}" ></ion-input>
       </ion-item>
     <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
         <ion-label>

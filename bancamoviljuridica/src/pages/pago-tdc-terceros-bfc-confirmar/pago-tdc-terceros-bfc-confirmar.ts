@@ -326,7 +326,7 @@ export class PagoTdcTercerosBfcConfirmarPage {
                          console.log("stringified: ", result);
                          var search_array = JSON.parse(str);
                          console.log("Pago TDC hecho: ",search_array);
-                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0']
+                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoTercerosBFCResult['0'].inextdsjv['0'].SReferencia['0']
                          console.log("REF: ",self.referencia);
                          self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
                           "cuentaDebito":self.cuentaDebito,
