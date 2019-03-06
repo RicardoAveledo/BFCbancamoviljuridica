@@ -102,7 +102,7 @@ export class UserSessionProvider {
    console.log("No sirve"+this.AF_Codcliente+"-"+this.AF_Id);
    console.log(postData);
    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-      this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
+      this.httpClient.post("http://"+this.serverIP+":57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
      .subscribe(data => {
       // console.log('Data: '+data['_body']); 
       }, error => {
@@ -219,7 +219,7 @@ export class UserSessionProvider {
   
      console.log(postData);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-        this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
+        this.httpClient.post("http://"+this.serverIP+":57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {

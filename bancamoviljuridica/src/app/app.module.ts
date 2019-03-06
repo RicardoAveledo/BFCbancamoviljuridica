@@ -37,6 +37,13 @@ import { TransferenciaMismoTitularOtrosBancosConfirmarPage } from '../pages/tran
 import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../pages/transferencia-mismo-titular-otros-bancos-recibo/transferencia-mismo-titular-otros-bancos-recibo';
 import { TransferenciaTercerosOtrosBancosDetallePage } from '../pages/transferencia-terceros-otros-bancos-detalle/transferencia-terceros-otros-bancos-detalle';
 import { TransferenciaTercerosOtrosBancosConfirmarPage } from '../pages/transferencia-terceros-otros-bancos-confirmar/transferencia-terceros-otros-bancos-confirmar';
+import { PagoTdcMismoTitularBfcPage } from '../pages/pago-tdc-mismo-titular-bfc/pago-tdc-mismo-titular-bfc';
+import { PagoTdcMismoTitularBfcConfirmarPage } from '../pages/pago-tdc-mismo-titular-bfc-confirmar/pago-tdc-mismo-titular-bfc-confirmar';
+import { PagoTdcMismoTitularBfcReciboPage } from '../pages/pago-tdc-mismo-titular-bfc-recibo/pago-tdc-mismo-titular-bfc-recibo';
+import { PagoTdcTercerosBfcConfirmarPage } from '../pages/pago-tdc-terceros-bfc-confirmar/pago-tdc-terceros-bfc-confirmar';
+import { PagoTdcTercerosBfcDetallePage } from '../pages/pago-tdc-terceros-bfc-detalle/pago-tdc-terceros-bfc-detalle';
+import { PagoTdcTercerosBfcReciboPage } from '../pages/pago-tdc-terceros-bfc-recibo/pago-tdc-terceros-bfc-recibo';
+import { PagoTdcTercerosBfcPage } from '../pages/pago-tdc-terceros-bfc/pago-tdc-terceros-bfc';
 
 @NgModule({
   declarations: [
@@ -68,6 +75,13 @@ import { TransferenciaTercerosOtrosBancosConfirmarPage } from '../pages/transfer
     TdcMismoTitularOtrosBancosPage,
     TdcTercerosBfcPage,
     TdcTercerosOtrosBancosPage,
+    PagoTdcMismoTitularBfcPage,
+    PagoTdcMismoTitularBfcConfirmarPage,
+    PagoTdcMismoTitularBfcReciboPage,
+    PagoTdcTercerosBfcConfirmarPage,
+    PagoTdcTercerosBfcDetallePage,
+    PagoTdcTercerosBfcReciboPage,
+    PagoTdcTercerosBfcPage,
     WelcomePage
   ],
   imports: [
@@ -114,6 +128,13 @@ import { TransferenciaTercerosOtrosBancosConfirmarPage } from '../pages/transfer
     TdcMismoTitularOtrosBancosPage,
     TdcTercerosBfcPage,
     TdcTercerosOtrosBancosPage,
+    PagoTdcMismoTitularBfcPage,
+    PagoTdcMismoTitularBfcConfirmarPage,
+    PagoTdcMismoTitularBfcReciboPage,
+    PagoTdcTercerosBfcConfirmarPage,
+    PagoTdcTercerosBfcDetallePage,
+    PagoTdcTercerosBfcReciboPage,
+    PagoTdcTercerosBfcPage,
     WelcomePage
   ],
   providers: [
