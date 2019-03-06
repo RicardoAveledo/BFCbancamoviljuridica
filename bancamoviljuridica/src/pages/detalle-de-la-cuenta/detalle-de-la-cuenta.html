@@ -104,24 +104,24 @@
           <div *ngIf="checkFirstTime">
             <div *ngIf="item[1] == 0">
               <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=true>
-                {{item[0]}}
+                  <h5>{{item[0]}}</h5>
               </ion-option>  
             </div>
             <div *ngIf="item[1] != 0">
                 <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=false>
-                  {{item[0]}}
+                  <h5>{{item[0]}}</h5>
                 </ion-option>  
               </div>
           </div>  
           <div *ngIf="!checkFirstTime">
             <div *ngIf="sortingListDates[0] == item[0]">
                 <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=true>
-                  {{item[0]}}
+                    <h5>{{item[0]}}</h5>
                 </ion-option> 
             </div>
             <div *ngIf="sortingListDates[0] != item[0]">
                 <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=false>
-                  {{item[0]}}
+                    <h5>{{item[0]}}</h5>
                 </ion-option> 
             </div>
           </div>  
@@ -140,10 +140,10 @@
                       </ion-avatar>
                   </ion-col>
                   <ion-col>
-                    {{item[0]}}
+                      <h5>{{item[0]}}</h5>
                   </ion-col>
                   <ion-col>
-                    {{item[1]}}
+                      <h5>{{item[1]}}</h5>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -157,10 +157,10 @@
                           </ion-avatar>
                       </ion-col>
                       <ion-col>
-                        {{item[0]}}
+                          <h5>{{item[0]}}</h5>
                       </ion-col>
                       <ion-col>
-                        {{item[1]}}
+                          <h5>{{item[1]}}</h5>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
