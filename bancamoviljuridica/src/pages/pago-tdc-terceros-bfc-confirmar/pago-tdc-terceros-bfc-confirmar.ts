@@ -277,7 +277,13 @@ export class PagoTdcTercerosBfcConfirmarPage {
              'Content-Type':  'text/xml'
          })
        };
-  
+       var noCuenta:string="";
+       console.log("CUENTA: ",this.cuentaCreditoFull.substr(0,1));
+       if (this.cuentaCreditoFull.substr(0,1)=="4"){
+        noCuenta = "4630000019";
+       }else if (this.cuentaCreditoFull.substr(0,1)=="5"){
+        noCuenta = "4630000175";
+       }
        //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
        //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
        var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -286,8 +292,8 @@ export class PagoTdcTercerosBfcConfirmarPage {
            <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
            <Rif>`+this.userSession.AF_Rif+`</Rif>
            <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
-           <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
-           <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
+           <CedulaBeneficiario>`+this.ciType+this.ciNo+`</CedulaBeneficiario>
+           <CtaAcreditar>`+noCuenta+`</CtaAcreditar>
            <Monto>`+this.montoValue+`</Monto>
            <Instrumento>`+this.cuentaCreditoFull+`</Instrumento>
            <Ip>10.60.102.133</Ip>
@@ -326,7 +332,7 @@ export class PagoTdcTercerosBfcConfirmarPage {
                          console.log("stringified: ", result);
                          var search_array = JSON.parse(str);
                          console.log("Pago TDC hecho: ",search_array);
-                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoTercerosBFCResult['0'].inextdsjv['0'].SReferencia['0']
+                         self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoTercerosBFCResult['0'].intrfdsjv['0'].SReferencia['0'];
                          console.log("REF: ",self.referencia);
                          self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
                           "cuentaDebito":self.cuentaDebito,

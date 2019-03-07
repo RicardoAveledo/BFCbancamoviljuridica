@@ -32,7 +32,7 @@
   
     <form [formGroup]="cuentadebitoForm" novalidate>
         <ion-item id="transferenciasMismoTitularBFC-select5">
-          <ion-label>Cuenta: </ion-label> 
+          <ion-label> </ion-label> 
               <ion-select name="" formControlName= "cuentadebito"  [(ngModel)]="debit" (ionChange)="changeValueDebit($event)">
                 <div *ngFor="let item of userSession.cuentas">
                       <ion-option [selected]=false (ionSelect)="loadSaldoDebt(item)">
@@ -50,14 +50,14 @@
   <div id="transferenciasMismoTitularBFC-markdown19" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
       <strong>
-        Cuenta Crédito
+        Tarjeta a Pagar:
       </strong>
     </p>
   </div>
   
   <form [formGroup]="cuentacreditoForm" novalidate>
       <ion-item id="transferenciasMismoTitularBFC-select7">
-        <ion-label>Cuenta: </ion-label> 
+        <ion-label></ion-label> 
             <ion-select name="" formControlName= "cuentacredito"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)">
               <div *ngFor="let item of userSession.cuentas">
                     <ion-option [selected]=false (ionSelect)="loadSaldoCred(item)">
