@@ -68,20 +68,48 @@
       </ion-item>
   </form>
   
-  
-  <form [formGroup]="montoForm" novalidate>
+ 
     <div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer5"></div>
     <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
       <p style="color:#000000;">
         <strong>
-          Monto Bs.  
+          Fecha de Pago
         </strong>
       </p>
     </div>
     <ion-item id="transferenciasMismoTitularBFC-input3">
       <ion-label></ion-label>
-      <ion-input text-right type="number" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
-    </ion-item>
-  </form>
+      <ion-input text-right type="text" placeholder="" [(ngModel)]="fechaPago"></ion-input>
+    </ion-item> 
   
+  <ion-list radio-group [(ngModel)]="relationship">
+      <ion-item>
+        <ion-label>Saldo Actual {{saldoActual}}</ion-label>
+        <ion-radio value="saldo"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pago Mínimo {{pagoMinimo}}</ion-label>
+        <ion-radio value="pago"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Otro Monto</ion-label>
+        <ion-radio value="otro" (ionChange)="enableMonto()"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <form [formGroup]="montoForm" novalidate>
+        <div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer5"></div>
+        <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
+          <p style="color:#000000;">
+            <strong>
+              Monto Bs.  
+            </strong>
+          </p>
+        </div>
+        <ion-item id="transferenciasMismoTitularBFC-input3">
+          <ion-label></ion-label>
+          <ion-input text-right type="number" placeholder="0.00" [disabled]="montoEnable" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
+        </ion-item>
+      </form>
+
   </ion-content>

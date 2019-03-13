@@ -26,7 +26,7 @@ export class PosiciNConsolidadaPage {
 
   goToDetalleDeLaCuenta(item:any[]){
     this.navCtrl.push(DetalleDeLaCuentaPage,{
-      "cuentaselected":item,
+      "cuentaselected":item, 
       "posicion":item[5],
     });
   }

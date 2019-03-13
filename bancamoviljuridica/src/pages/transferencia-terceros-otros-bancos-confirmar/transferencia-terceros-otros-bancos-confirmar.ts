@@ -139,7 +139,7 @@ export class TransferenciaTercerosOtrosBancosConfirmarPage {
          <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
          <AF_RIF>`+this.userSession.AF_Rif+`</AF_RIF>
          <AF_CTA>`+this.cuentaDebitoFull+`</AF_CTA>
-         <sCod>19</sCod>
+         <sCod>20</sCod>
          <sMonto>`+this.montoValue+`</sMonto>
          <bancoid>`+this.bankCod+`</bancoid>
          <banco>`+this.bankName+`</banco>

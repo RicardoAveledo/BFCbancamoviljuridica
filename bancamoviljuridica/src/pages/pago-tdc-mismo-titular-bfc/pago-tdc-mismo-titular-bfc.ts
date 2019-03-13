@@ -53,6 +53,9 @@ export class PagoTdcMismoTitularBfcPage {
   public cuentaCreditoFull:string;
   public montoValue:number;
   public sdisponible:number;
+  public saldoActual:number=0.0;
+  public pagoMinimo:number=0.0;
+  public montoEnable:boolean=false; 
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController, public navParams: NavParams,
@@ -64,7 +67,9 @@ export class PagoTdcMismoTitularBfcPage {
     this.tdc = userSession.tdc;
   }
 
-
+  enableMonto(){
+    this.montoEnable =  !this.montoEnable;
+  }
   public auxAmmount:number;
 
   changeValueCredit(value: any)
@@ -254,6 +259,8 @@ export class PagoTdcMismoTitularBfcPage {
 
 
   }
+
+ 
 
 
   goToTransferenciaMismoTitularBFCRecibo(params){

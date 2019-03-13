@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AprobacionRechazoConsultaPage } from '../aprobacion-rechazo-consulta/aprobacion-rechazo-consulta';
 
 /**
  * Generated class for the AprobacionRechazoPrincipalPage page.
@@ -25,7 +26,7 @@ export class AprobacionRechazoPrincipalPage {
 
   }
   goToConsulta(params){
-
+    this.navCtrl.push(AprobacionRechazoConsultaPage);
   }
 
 }
