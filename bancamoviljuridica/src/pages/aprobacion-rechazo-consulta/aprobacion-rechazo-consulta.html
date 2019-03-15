@@ -19,6 +19,7 @@
 </ion-header>
 
 <ion-content id="page13">
+
 <img src="assets/img/HeaderAprobacionRechazoConsulta.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
  
 <form id="transferenciaTercerosBFC-form10">
@@ -66,9 +67,10 @@
             </ion-col>
         </ion-row>
       </ion-grid>
+
       <div *ngFor="let item of transferencias">
       <ion-grid>
-          <ion-row>
+          <ion-row (click)="loadDetalle(item)">
               <ion-col>
                   {{item.Nombre}}
               </ion-col>
@@ -97,7 +99,7 @@
     </ion-grid>
     <div *ngFor="let item of pagosTDC">
     <ion-grid>
-        <ion-row (ionSelect)="loadTDCDetalle(item)">
+        <ion-row (click)="loadDetalle(item)">
             <ion-col>
                 {{item.Nombre}}
             </ion-col>
