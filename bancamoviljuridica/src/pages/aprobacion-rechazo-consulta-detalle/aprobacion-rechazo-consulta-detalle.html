@@ -19,26 +19,175 @@
 </ion-header>
 
 <ion-content id="page11">
-    <div>
+
+    <!-- 16 Mismo Titular BFC -->
+    <div *ngIf="Cod == 16">
+        <img src="assets/img/ARTransferenciaMismoTitularBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 17 Terceros BFC -->
+    <div *ngIf="Cod == 17">
+        <img src="assets/img/ARTransferenciaTercerosBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 19 Mismo Titular Otros Bancos -->
+    <div *ngIf="Cod == 19">
+        <img src="assets/img/ARTransferenciaMismoTitularOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 20 Terceros Otros Bancos -->
+    <div *ngIf="Cod == 20">
+        <img src="assets/img/ARTransferenciaTercerosOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+    <div *ngIf="Cod == 24">
+        <img src="assets/img/ARTDCMismoTitularBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+    <div *ngIf="Cod == 25">
+        <img src="assets/img/ARTDCTercerosBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+    <div *ngIf="Cod == 27">
+          <img src="assets/img/ARTDCMismoTitularOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+    <div *ngIf="Cod == 28">
+          <img src="assets/img/ARTDCTercerosOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+
+    <h4><strong>Autorizaciones Pendientes:</strong></h4>
+    <div style="display: table; margin: 0 auto;">
+        <div *ngIf="estado=='3/0'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/3.PNG"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='3/1'">
         <!-- Hacer la logica para que se vean las bolitas -->
-          <img src="assets/img/GreenBall.PNG" style="width:30px;height:auto;" />
-          <img src="assets/img/GreenLine.PNG" style="width:30px;height:auto;" />
-          <img src="assets/img/GrayBall.PNG"  style="width:30px;height:auto;" />
-          <img src="assets/img/GrayLine.PNG"  style="width:30px;height:auto;" />
-          <img src="assets/img/GrayBall.PNG"  style="width:30px;height:auto;" />
-        {{firmasFaltantes}} / {{cantidadFirmas}}
-      </div>
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/3.PNG"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='3/2'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/3.PNG"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='3/3'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG"  style="width:20px;height:auto;" />
+            <img src="assets/img/3.PNG"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='2/0'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='2/1'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" />  
+        </div>
+        <div *ngIf="estado=='2/2'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/space.PNG" style="width:20px;height:auto;" />
+            <img src="assets/img/2.PNG"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='1/0'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='1/1'">
+          <!-- Hacer la logica para que se vean las bolitas -->
+            <img src="assets/img/1.PNG" style="width:20px;height:auto;" />  
+        </div>
+        <strong></strong>
+              <div *ngIf="estado=='3/0'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                  <img src="assets/img/GrayBall.PNG" style="width:20px;height:auto;" />
+                  <img src="assets/img/GrayLine.PNG" style="width:20px;height:auto;" />
+                  <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" />
+                  <img src="assets/img/GrayLine.PNG"  style="width:20px;height:auto;" />
+                  <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/1'">
+              <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GreenBall.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" />
+                <img src="assets/img/GrayLine.PNG"  style="width:20px;height:auto;" />
+                <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/2'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GreenBall.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenBall.PNG"  style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG"  style="width:20px;height:auto;" />
+                <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/3'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GreenBall.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenBall.PNG"  style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG"  style="width:20px;height:auto;" />
+                <img src="assets/img/GreenBall.PNG"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/0'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                  <img src="assets/img/GrayBall.PNG" style="width:20px;height:auto;" />
+                  <img src="assets/img/GrayLine.PNG" style="width:20px;height:auto;" />
+                  <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" />  
+              </div>
+              <div *ngIf="estado=='2/1'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GreenBall.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GrayBall.PNG"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/2'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GreenBall.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenLine.PNG" style="width:20px;height:auto;" />
+                <img src="assets/img/GreenBall.PNG"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='1/0'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GrayBall.PNG" style="width:20px;height:auto;" />  
+              </div>
+              <div *ngIf="estado=='1/1'">
+                <!-- Hacer la logica para que se vean las bolitas -->
+                <img src="assets/img/GreenBall.PNG" style="width:20px;height:auto;" />  
+              </div>
+</div>
+
+
+<div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
+
 <!-- Esta vista sera la unica empleada para todas las consulta detalle de Aprobacion rechazo -->
 <!-- Los NGIF Habilitan cada consulta segun el parametro pasado desde la pantalla principal  -->
 <!-- Mismo Titular BFC 24 -->
 <!-- Terceros BFC 25 -->
 <!-- Mismo Titular Otro Banco 27 -->
-<!-- Terceros Otros Bancos 28 -->
-
+<!-- Terceros Otros Bancos 28 --> 
 <!-- 16 Mismo Titular BFC -->
 <div *ngIf="Cod == 16">
-    <img src="assets/img/ARTransferenciaMismoTitularBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-    <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
     <form id="transferenciaMismoTitularBFCRecibo-form9">  
       <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
         <ion-label>
@@ -63,8 +212,6 @@
 
 <!-- 17 Terceros BFC -->
   <div *ngIf="Cod == 17">
-      <img src="assets/img/ARTransferenciaTercerosBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-      <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
       <form id="transferenciaMismoTitularBFCRecibo-form9">  
           <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
               <ion-label>
@@ -113,8 +260,6 @@
 
 <!-- 19 Mismo Titular Otros Bancos -->
     <div *ngIf="Cod == 19">
-        <img src="assets/img/ARTransferenciaMismoTitularOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-        <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
         <form id="transferenciaMismoTitularBFCRecibo-form9">  
             <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
                 <ion-label>
@@ -169,8 +314,6 @@
 
 <!-- 20 Terceros Otros Bancos -->
       <div *ngIf="Cod == 20">
-          <img src="assets/img/ARTransferenciaTercerosOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-          <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
           <form id="transferenciaMismoTitularBFCRecibo-form9">  
               <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
                   <ion-label>
@@ -224,8 +367,6 @@
         </div>
 
 <div *ngIf="Cod == 24">
-    <img src="assets/img/ARTDCMismoTitularBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-    <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
     <form id="transferenciaMismoTitularBFCRecibo-form9">  
       <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
         <ion-label>
@@ -249,8 +390,6 @@
   </div>
 
   <div *ngIf="Cod == 25">
-      <img src="assets/img/ARTDCTercerosBFC.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-      <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
       <form id="transferenciaMismoTitularBFCRecibo-form9"> 
           <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
               <ion-label>
@@ -298,8 +437,6 @@
     </div>
 
     <div *ngIf="Cod == 27">
-        <img src="assets/img/ARTDCMismoTitularOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-        <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
         <form id="transferenciaMismoTitularBFCRecibo-form9"> 
           <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
             <ion-label>
@@ -353,8 +490,6 @@
       </div>
 
       <div *ngIf="Cod == 28">
-          <img src="assets/img/ARTDCTercerosOtrosBancos.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-          <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
           <form id="transferenciaMismoTitularBFCRecibo-form9"> 
               <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
                   <ion-label>

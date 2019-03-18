@@ -42,12 +42,37 @@ export class AprobacionRechazoConsultaDetallePage {
   public OP_RifGrupo:string;        
   public firmasFaltantes:string;        
   public cantidadFirmas:string;        
+  public estado:string;        
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
       this.item = navParams.get('itemPassed');
       this.firmasFaltantes = navParams.get('firmasFaltantes');
       this.cantidadFirmas = navParams.get('cantidadFirmas');
-      
+      if(this.cantidadFirmas == "3"){
+        if(this.firmasFaltantes=="0"){
+            this.estado = "3/3"
+        } else if(this.firmasFaltantes=="1"){
+          this.estado = "3/2"
+        } else if(this.firmasFaltantes=="2"){
+          this.estado = "3/1"
+        } else if(this.firmasFaltantes=="3"){
+          this.estado = "3/0"
+        } 
+      } else if(this.cantidadFirmas == "2"){
+        if(this.firmasFaltantes=="0"){
+            this.estado = "2/2"
+        } else if(this.firmasFaltantes=="1"){
+          this.estado = "2/1"
+        } else if(this.firmasFaltantes=="2"){
+          this.estado = "2/0"
+        }
+      } else if(this.cantidadFirmas == "1"){
+        if(this.firmasFaltantes=="0"){
+            this.estado = "1/1"
+        } else if(this.firmasFaltantes=="1"){
+          this.estado = "1/0"
+        }
+      } 
       console.log("Trae esto: ", this.item);
       this.cuentaCredito      = this.item.OP_Destino         ;
       this.cuentaDebito       = this.item.OP_Origen          ;
