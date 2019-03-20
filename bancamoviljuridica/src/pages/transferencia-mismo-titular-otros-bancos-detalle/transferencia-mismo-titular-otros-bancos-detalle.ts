@@ -153,7 +153,7 @@ export class TransferenciaMismoTitularOtrosBancosDetallePage {
         
            console.log(postData);
            //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-              this.httpClient.post("http://"+this.userSession.serverIP+":2898/WsModelos.asmx?op=ModelosGet",postData,httpOptions )
+              this.httpClient.post("http://"+this.userSession.serverIPWS+"/WsModelos.asmx?op=ModelosGet",postData,httpOptions )
              .subscribe(data => {
               // console.log('Data: '+data['_body']); 
               }, error => {

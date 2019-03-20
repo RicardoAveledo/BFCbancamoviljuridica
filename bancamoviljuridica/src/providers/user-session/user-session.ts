@@ -66,8 +66,10 @@ export class UserSessionProvider {
 
 
 
-  public serverIP:string = "localhost";        
-
+  public serverIPApp:string = "10.60.102.178/IBBFCEMovil/app";      //57306 
+  public serverIPWS:string = "10.60.102.178/IBBFCEMovil/ws";        //2898
+//public serverIPApp:string = "localhost:57306";
+//public serverIPWS:string = "localhost:2898";  
 
   constructor(public httpClient: HttpClient) {
     this.httpClient = httpClient;
@@ -102,7 +104,7 @@ export class UserSessionProvider {
    console.log("No sirve"+this.AF_Codcliente+"-"+this.AF_Id);
    console.log(postData);
    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-      this.httpClient.post("http://"+this.serverIP+":57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
+      this.httpClient.post("http://"+this.serverIPApp+"/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
      .subscribe(data => {
       // console.log('Data: '+data['_body']); 
       }, error => {
@@ -219,7 +221,7 @@ export class UserSessionProvider {
   
      console.log(postData);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-        this.httpClient.post("http://"+this.serverIP+":57306/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
+        this.httpClient.post("http://"+this.serverIPApp+"/WsMovil.asmx?op=CuentasAsociadasGet",postData,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {

@@ -174,7 +174,7 @@
       </soap:Envelope>`
         console.log('mando esto: '+ this.userSession.AF_Codcliente +' '+this.userSession.AF_Rif +' '+ postData )
       //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-          this.httpClient.post("http://"+this.userSession.serverIP+":2898/WsIbsMovil.asmx?op=Afiliado20Movimientos",postData,httpOptions )
+          this.httpClient.post("http://"+this.userSession.serverIPWS+"/WsIbsMovil.asmx?op=Afiliado20Movimientos",postData,httpOptions )
         .subscribe(data => {
           console.log('Data: '+data['_body']); 
           }, error => {
@@ -317,7 +317,7 @@
      </soap:Envelope>`
        console.log('mando esto: '+ this.userSession.AF_Codcliente +' '+this.userSession.AF_Rif +' '+ postData )
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-        this.httpClient.post("http://"+this.userSession.serverIP+":2898/WsIbsMovil.asmx?op=Afiliado20Movimientos",postData,httpOptions )
+        this.httpClient.post("http://"+this.userSession.serverIPWS+"/WsIbsMovil.asmx?op=Afiliado20Movimientos",postData,httpOptions )
        .subscribe(data => {
          console.log('Data: '+data['_body']); 
         }, error => {
@@ -484,7 +484,7 @@
                 </soap:Envelope>`
               console.log('mando esto: '+ this.userSession.AF_Codcliente +' '+this.userSession.AF_Rif +' '+ postData )
             //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-                this.httpClient.post("http://"+this.userSession.serverIP+":2898/WsIbsMovil.asmx?op=AfiliadoMovimientos",postData,httpOptions )
+                this.httpClient.post("http://"+this.userSession.serverIPWS+"/WsIbsMovil.asmx?op=AfiliadoMovimientos",postData,httpOptions )
               .subscribe(data => {
                 console.log('Data: '+data['_body']); 
                 }, error => {

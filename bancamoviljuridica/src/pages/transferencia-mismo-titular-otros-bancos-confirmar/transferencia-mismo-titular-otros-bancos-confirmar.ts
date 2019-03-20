@@ -166,7 +166,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
 
    console.log(postData);
    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-      this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsTransferenciasMovil.asmx?op=ValidarModel",postData,httpOptions )
+      this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMovil.asmx?op=ValidarModel",postData,httpOptions )
      .subscribe(data => {
       // console.log('Data: '+data['_body']); 
       }, error => {
@@ -313,7 +313,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
 
      console.log("TRANSFERENCIAS MISMO TITULAR OTROS BANCOS SENDING THIS: ",postData);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-    this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsTransferenciasMovil.asmx?op=TransferenciaOtrosBancosMismoTitular",postData,httpOptions )
+    this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMovil.asmx?op=TransferenciaOtrosBancosMismoTitular",postData,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {

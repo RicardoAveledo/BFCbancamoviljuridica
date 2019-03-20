@@ -162,7 +162,7 @@ export class PagoTdcTercerosBfcConfirmarPage {
 
    console.log(postData);
    //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-      this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsTransferenciasMovil.asmx?op=ValidarModel",postData,httpOptions )
+      this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMovil.asmx?op=ValidarModel",postData,httpOptions )
      .subscribe(data => {
       // console.log('Data: '+data['_body']); 
       }, error => {
@@ -303,7 +303,7 @@ export class PagoTdcTercerosBfcConfirmarPage {
      </soap:Envelope>`
      console.log(postData);
      //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
-        this.httpClient.post("http://"+this.userSession.serverIP+":57306/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoTercerosBFC",postData,httpOptions )
+        this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoTercerosBFC",postData,httpOptions )
        .subscribe(data => {
         // console.log('Data: '+data['_body']); 
         }, error => {
