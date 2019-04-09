@@ -36,7 +36,10 @@ import { AprobacionRechazoPrincipalPage } from '../pages/aprobacion-rechazo-prin
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
     rootPage:any = LoginPage;
-
+  public posicionConsolidada:boolean = true;
+  public transferencias:boolean = true;
+  public tdc:boolean = true;
+  public ar:boolean = true;
   public validarPC:boolean=true;
   public validarTR:boolean=true;
   public validarTDC:boolean=true;
@@ -76,19 +79,50 @@ export class MyApp {
   opcionBloqueada(){
     this.presentToast();
   }
+
   goToPosiciNConsolidada(params){
     if (!params) params = {};
     this.navCtrl.setRoot(PosiciNConsolidadaPage);
-  }goToDetalleDeLaCuenta(params){
+    this.posicionConsolidada = !this.posicionConsolidada;
+    this.transferencias = true;
+    this.ar = true;
+    this.tdc = true;
+  }
+  goToTransferencias(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(TransferenciasPage);
+    this.transferencias = !this.transferencias;
+    this.posicionConsolidada = true;
+    this.tdc = true;
+    this.ar = true;
+  }
+
+  goToOperacionesDeTDC(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(OperacionesDeTDCPage);
+    this.tdc = !this.tdc;
+    this.ar = true;
+    this.transferencias = true;
+    this.posicionConsolidada = true;
+  }
+
+  goToAprobaciNRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.ar = !this.ar;
+    this.tdc = true;
+    this.transferencias = true;
+    this.posicionConsolidada = true;
+  }
+
+  goToDetalleDeLaCuenta(params){
     if (!params) params = {};
     this.navCtrl.setRoot(DetalleDeLaCuentaPage);
   }goToDetalleDeTarjeta(params){
     if (!params) params = {};
     this.navCtrl.setRoot(DetalleDeTarjetaPage);
-  }goToTransferencias(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(TransferenciasPage);
-  }goToTransferenciasMismoTitularBFC(params){
+  }
+  goToTransferenciasMismoTitularBFC(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciasMismoTitularBFCPage);
   }goToConfirmaciNTransferenciaMismoTitularBFC(params){
@@ -112,12 +146,6 @@ export class MyApp {
   }goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciaTercerosOtrosBancosReciboPage);
-  }goToOperacionesDeTDC(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(OperacionesDeTDCPage);
-  }goToAprobaciNRechazo(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
   }goToSalir(params){
     this.userSession.validarAPR=false;
     this.userSession.validarPC=false;

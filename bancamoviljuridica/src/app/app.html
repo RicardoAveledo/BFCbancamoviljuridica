@@ -4,48 +4,92 @@
     <ion-list id="menu-list1">
 
         <div *ngIf=validarPC>
-            <ion-item color="none" menuClose="" on-click="goToPosiciNConsolidada()" id="menu-list-item17">
-                <table style="width:100%">
-                    <tr>
-                       <td><img src="assets/img/menuposicionconsolidada.png" style="display:block;width:30px;height:auto;"/>
-                       <td><h2>Posición Consolidada</h2></td> 
-                    </tr>
-                </table>
-            </ion-item> 
+          <div *ngIf=posicionConsolidada>
+              <ion-item color="none" menuClose="" on-click="goToPosiciNConsolidada()" id="menu-list-item17">
+                  <table style="width:100%">
+                      <tr>
+                         <td><img src="assets/img/menuposicionconsolidada.png" style="display:block;width:30px;height:auto;"/>
+                         <td><h2>Posición Consolidada</h2></td> 
+                      </tr>
+                  </table>
+              </ion-item> 
           </div>
+          <div *ngIf=!posicionConsolidada>
+              <ion-item color="none" menuClose="" on-click="goToPosiciNConsolidada()" id="menu-list-item17">
+                  <table style="width:100%">
+                      <tr>
+                         <td><img src="assets/img/detallePCHeader.png" style="display:block;width:auto;height:auto;"/>
+                      </tr>
+                  </table>
+              </ion-item> 
+          </div>
+        </div>
   
     
           <div *ngIf=validarTR>
-            <ion-item color="none" menuClose="" on-click="goToTransferencias()" id="menu-list-item18">
-                <table style="width:100%">
-                    <tr>
-                       <td><img src="assets/img/menutransferencias.png" style="display:block;width:30px;height:auto;"/>
-                       <td><h2>Transferencias</h2></td> 
-                    </tr>
-                </table>            
-            </ion-item>
+              <div *ngIf=transferencias>
+                <ion-item color="none" menuClose="" on-click="goToTransferencias()" id="menu-list-item18">
+                    <table style="width:100%">
+                        <tr>
+                          <td><img src="assets/img/menutransferencias.png" style="display:block;width:30px;height:auto;"/>
+                          <td><h2>Transferencias</h2></td> 
+                        </tr>
+                    </table>            
+                </ion-item>
+              </div>
+              <div *ngIf=!transferencias>
+                  <ion-item color="none" menuClose="" on-click="goToTransferencias()" id="menu-list-item17">
+                      <table style="width:100%">
+                          <tr>
+                             <td><img src="assets/img/detalleTransferenciasHeader.png" style="display:block;width:auto;height:auto;"/>
+                          </tr>
+                      </table>
+                  </ion-item> 
+              </div>
           </div>
     
           <div *ngIf=validarTDC>
-            <ion-item color="none" menuClose="" on-click="goToOperacionesDeTDC()" id="menu-list-item19">
-                <table style="width:100%">
-                    <tr>
-                       <td><img src="assets/img/menutdc.png" style="display:block;width:30px;height:auto;"/>
-                       <td><h2>Operaciones de TDC</h2></td> 
-                    </tr>
-                </table> 
-            </ion-item>
+              <div *ngIf=tdc>
+                <ion-item color="none" menuClose="" on-click="goToOperacionesDeTDC()" id="menu-list-item19">
+                    <table style="width:100%">
+                        <tr>
+                          <td><img src="assets/img/menutdc.png" style="display:block;width:30px;height:auto;"/>
+                          <td><h2>Operaciones de TDC</h2></td> 
+                        </tr>
+                    </table> 
+                </ion-item>
+              </div>
+              <div *ngIf=!tdc>
+                  <ion-item color="none" menuClose="" on-click="goToOperacionesDeTDC()" id="menu-list-item17">
+                      <table style="width:100%">
+                          <tr>
+                             <td><img src="assets/img/detalleTDCHeader.png" style="display:block;width:auto;height:auto;"/>
+                          </tr>
+                      </table>
+                  </ion-item> 
+              </div>
           </div>
     
           <div *ngIf=validarAPR>
-            <ion-item color="none" menuClose="" on-click="goToAprobaciNRechazo()" id="menu-list-item20">
-                <table style="width:100%">
-                    <tr>
-                       <td><img src="assets/img/menuaprobacion.png" style="display:block;width:30px;height:auto;"/>
-                       <td><h2>Autorización/Rechazo</h2></td> 
-                    </tr>
-                </table> 
-            </ion-item>
+              <div *ngIf=ar>
+                <ion-item color="none" menuClose="" on-click="goToAprobaciNRechazo()" id="menu-list-item20">
+                    <table style="width:100%">
+                        <tr>
+                          <td><img src="assets/img/menuaprobacion.png" style="display:block;width:30px;height:auto;"/>
+                          <td><h2>Autorización/Rechazo</h2></td> 
+                        </tr>
+                    </table> 
+                </ion-item>
+              </div>
+              <div *ngIf=!ar>
+                  <ion-item color="none" menuClose="" on-click="goToAprobaciNRechazo()" id="menu-list-item17">
+                      <table style="width:100%">
+                          <tr>
+                             <td><img src="assets/img/detalleARHeader.png" style="display:block;width:auto;height:auto;"/>
+                          </tr>
+                      </table>
+                  </ion-item> 
+              </div> 
           </div>
 
     
