@@ -83,7 +83,9 @@ export class MyApp {
   goToPosiciNConsolidada(params){
     if (!params) params = {};
     this.navCtrl.setRoot(PosiciNConsolidadaPage);
-    this.posicionConsolidada = !this.posicionConsolidada;
+    if (this.posicionConsolidada){
+      this.posicionConsolidada = !this.posicionConsolidada;
+    }
     this.transferencias = true;
     this.ar = true;
     this.tdc = true;
@@ -91,7 +93,9 @@ export class MyApp {
   goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciasPage);
-    this.transferencias = !this.transferencias;
+    if (this.transferencias){
+      this.transferencias = !this.transferencias;
+    }
     this.posicionConsolidada = true;
     this.tdc = true;
     this.ar = true;
@@ -100,7 +104,9 @@ export class MyApp {
   goToOperacionesDeTDC(params){
     if (!params) params = {};
     this.navCtrl.setRoot(OperacionesDeTDCPage);
-    this.tdc = !this.tdc;
+    if(this.tdc){
+      this.tdc = !this.tdc;
+    }
     this.ar = true;
     this.transferencias = true;
     this.posicionConsolidada = true;
@@ -109,7 +115,9 @@ export class MyApp {
   goToAprobaciNRechazo(params){
     if (!params) params = {};
     this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
-    this.ar = !this.ar;
+    if(this.ar){
+      this.ar = !this.ar;
+    }
     this.tdc = true;
     this.transferencias = true;
     this.posicionConsolidada = true;
