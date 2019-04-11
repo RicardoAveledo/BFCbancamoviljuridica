@@ -146,6 +146,7 @@ export class LoginPage {
                          console.log("stringified: ", result);
                          var search_array = JSON.parse(str);
                          console.log(search_array);
+                         self.contra = self.contra.toUpperCase();
                          var lenghtContra:number = search_array.p['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLongitudClaveResponse['0'].AfiliadosLongitudClaveResult['0'];
                          console.log(lenghtContra);
                          if(lenghtContra>32){
