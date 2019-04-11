@@ -1,33 +1,43 @@
 <ion-content padding id="page4">
   <div id="mainContainer">
-    <img padding-top src="assets/img/j86NsTfVSFusulJJIdun_BFCMvilpginas-08.png" max-width="280px" style="display:block;width:65%;height:auto;margin-left:auto;margin-right:auto;" />
-    <form id="login-form1">
+      <div class="spacer" style="width:300px;height:20px;" id="login-spacer1"></div>
+    <img padding-top src="assets/img/j86NsTfVSFusulJJIdun_BFCMvilpginas-08.png" max-width="180px" style="display:block;width:auto;height:200px;margin-left:auto;margin-right:auto;" />
+    <form id="login-form1" padding>
         <form [formGroup]="credentialsForm" novalidate >
           
     <h5 ion-text color="toolbar_color">
-        Usuario BFC en Línea:
+        Usuario:
     </h5>
-      <ion-item id="login-input1"> 
-        <ion-input class="inputitem" type="text"  [(ngModel)]="nombre" formControlName= "nameUser"></ion-input>
-      </ion-item>
+        <ion-input class="inputitem" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="text" [(ngModel)]="nombre" formControlName= "nameUser"></ion-input>
     <h5 ion-text color="toolbar_color">
-        Contraseña BFC en Línea:
+        Contraseña:
     </h5>
-      <ion-item id="login-input2"> 
-        <ion-input class="inputitem" style="max-width:280px" type="password"  [(ngModel)]="contra" formControlName= "password"></ion-input>
-      </ion-item>
+        <ion-input class="inputitem" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="password"  [(ngModel)]="contra" formControlName= "password"></ion-input>
     </form>
     </form>
-    <div class="spacer" style="width:300px;height:12px;" id="login-spacer1"></div>
-    <button class="inputlogin" id="login-button1" ion-button color="buttons" block style="border-radius:10px 10px 10px 10px;max-width: 100px;margin-left: auto;margin-right: auto;" on-click="goToWelcome()">
-        Entrar
-    </button>
+    <div *ngIf="contra!=null">
+        <button class="inputlogin" id="login-button1" ion-button color="buttons" block style="border-radius:10px 10px 10px 10px;max-width: 100px;margin-left: auto;margin-right: auto;" on-click="goToWelcome()">
+            Entrar
+        </button>
+    </div>
+
+  
   </div>
   </ion-content>
 
 
   
-  <ion-footer>
+  <ion-footer no-border>
+      <ion-grid>
+          <ion-row>
+          <ion-col>
+                <img src="assets/img/informacion.PNG" style="margin-left:auto;margin-right:auto;width:auto;height:90px" outline class="btn" id="next-button" default  />
+          </ion-col>
+          <ion-col>
+              <img src="assets/img/escribenos.PNG" style="margin-left:auto;margin-right:auto;width:auto;height:90px" outline class="btn" id="next-button" default  />
+          </ion-col>
+        </ion-row>
+        </ion-grid>
         <div style="background-color:rgb(7, 50, 144);">
           <ion-grid>
             <ion-row>
