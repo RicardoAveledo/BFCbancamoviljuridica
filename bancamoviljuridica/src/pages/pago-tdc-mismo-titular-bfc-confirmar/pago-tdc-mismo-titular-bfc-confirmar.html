@@ -1,20 +1,57 @@
-<!--
-  Generated template for the PagoTdcMismoTitularBfcConfirmarPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>PagoTDCMismoTitularBFCConfirmar</ion-title>
-  </ion-navbar>
-
-</ion-header>
+    <ion-navbar no-padding hideBackButton="true">
+        <ion-grid no-padding no-border style="width:auto;height:70px;">
+          <ion-row no-padding >
+            <ion-col class="topleft">
+              <img src="assets/img/regresar.PNG" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+            </ion-col>
+            <ion-col class="topleft">
+              <img src="assets/img/headerLogo1.PNG" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            </ion-col>
+            <ion-col class="topright">
+              <img src="assets/img/headerLogo2.PNG" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            </ion-col>
+            <ion-col class="topright">
+              <img src="assets/img/confirmar.PNG" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-right id="next-button" default on-click="goToTDCMismoTitularBFCRecibo()"/>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-navbar>
+  </ion-header>
 
 
 <ion-content padding>
 
-    <div id="mainContainer">
-      </div>
-</ion-content>
+    <p style="color:#000000;">
+        <strong>
+          Revisa y autoriza
+        </strong>
+    </p> 
+  
+      <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input4">
+        <ion-label>
+          Cuenta Origen
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{cuentaDebito}}" [(ngModel)]="debit" (ionChange)="changeValueDebit($event)"></ion-input>
+      </ion-item>
+      <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input5">
+        <ion-label>
+          Cuenta Destino
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{cuentaCredito}}"  [(ngModel)]="credit" (ionChange)="changeValueCredit($event)"></ion-input>
+      </ion-item>
+      <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input6">
+        <ion-label>
+          Monto
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{montoValue|number:'1.2-2'}}" ></ion-input>
+      </ion-item>
+      <ion-item id="confirmaciNTransferenciaMismoTitularBFC-input7">
+        <ion-label>
+          Fecha
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{fecha}}"></ion-input>
+      </ion-item>
+    <div class="spacer" style="width:320px;height:74px;" id="confirmaciNTransferenciaMismoTitularBFC-spacer7"></div>
+
+  </ion-content>

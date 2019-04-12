@@ -50,6 +50,7 @@ export class PagoTdcMismoTitularBfcPage {
   public cuentaDebito:string;
   public cuentaCredito:string;
   public cuentaDebitoFull:string;
+  public fechaPago:string;
   public cuentaCreditoFull:string;
   public montoValue:number;
   public sdisponible:number;
@@ -84,6 +85,9 @@ export class PagoTdcMismoTitularBfcPage {
 
   loadSaldoCred(item:any[]){
     this.cuentaCreditoFull = item[0];
+    this.fechaPago = item[7];
+    this.pagoMinimo = item[8];
+    this.saldoActual = item[4];
   }
 
   loadSaldoDebt(item:any[]){

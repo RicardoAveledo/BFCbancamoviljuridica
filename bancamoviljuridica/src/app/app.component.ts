@@ -156,9 +156,13 @@ export class MyApp {
     this.navCtrl.setRoot(TransferenciaTercerosOtrosBancosReciboPage);
   }goToSalir(params){
     this.userSession.validarAPR=false;
-    this.userSession.validarPC=false;
+    this.userSession.validarPC =false;
     this.userSession.validarTDC=false;
-    this.userSession.validarTR=false;
+    this.userSession.validarTR =false;
+    this.validarPC  = true;
+    this.validarTR  = true;
+    this.validarTDC = true;
+    this.validarAPR = true;
     this.events.publish('session:created', true);
     if (!params) params = {};
     this.navCtrl.setRoot(LoginPage);

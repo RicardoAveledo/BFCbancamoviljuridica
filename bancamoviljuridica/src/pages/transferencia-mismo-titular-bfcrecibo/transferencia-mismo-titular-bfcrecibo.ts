@@ -33,6 +33,7 @@ public checkFirmas:string;
     this.referencia = navParams.get('referencia');
     this.checkFirmas = navParams.get('checkFirmas');
   }
+  
   goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciasPage);
@@ -40,6 +41,7 @@ public checkFirmas:string;
   goToWelcome(params){
     if (!params) params = {};
     this.navCtrl.setRoot(WelcomePage);
+
   }
 
   goToPosiciNConsolidada(params){
