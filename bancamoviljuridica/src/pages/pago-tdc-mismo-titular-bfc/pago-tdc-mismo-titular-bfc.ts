@@ -87,7 +87,8 @@ export class PagoTdcMismoTitularBfcPage {
     this.cuentaCreditoFull = item[0];
     this.fechaPago = item[7];
     this.pagoMinimo = item[8];
-    this.saldoActual = item[4];
+    this.saldoActual = item[2];
+    console.log("CREDITOS TRAE",item);
   }
 
   loadSaldoDebt(item:any[]){
