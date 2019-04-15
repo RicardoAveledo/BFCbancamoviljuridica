@@ -1,48 +1,50 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
-import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
-import { UserSessionProvider } from '../../providers/user-session/user-session';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserSessionProvider } from '../../providers/user-session/user-session'; 
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { DetallePrestamoPage } from '../detalle-prestamo/detalle-prestamo';
 
+/**
+ * Generated class for the DetallePrestamoPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
+@IonicPage()
 @Component({
-  selector: 'page-posici-nconsolidada',
-  templateUrl: 'posici-nconsolidada.html'
+  selector: 'page-detalle-prestamo',
+  templateUrl: 'detalle-prestamo.html',
 })
-export class PosiciNConsolidadaPage {
-  CO_NOMBRES:string;
-  public cuentas:any[]=[];
-  public tdc:any[]=[];
+export class DetallePrestamoPage {
+  public cuentaselected:string ;
+  public saldoTotal:string;
+  public montoCuota:string;
+  public fechaVencimiento:string;
+  public montoOriginal:string;
+  public fechaProximo:string;
+  public tasa:string;
+  public posicion:string;
   public prestamos:any[]=[];
 
-  constructor(public userSession:UserSessionProvider, public navCtrl: NavController, public httpClient: HttpClient) {
-    this.CO_NOMBRES = userSession.CO_NOMBRES;
-    this.userSession.reloadAccountData();
-    this.cuentas = userSession.cuentas;
-    this.tdc = userSession.tdc;
+  constructor(public navParams:NavParams,public userSession:UserSessionProvider, public navCtrl: NavController, public httpClient: HttpClient) {
+    this.cuentaselected = navParams.get('cuentaselected');
+    this.saldoTotal = navParams.get('saldoTotal');
+    this.montoCuota = navParams.get('montoCuota');
+    this.fechaVencimiento = navParams.get('fechaVencimiento');
+    this.montoOriginal = navParams.get('montoOriginal');
+    this.fechaProximo = navParams.get('fechaProximo');
+    this.tasa = navParams.get('tasa');
+    this.posicion = navParams.get('posicion'); 
     this.prestamos = userSession.prestamos;
   }
 
-
-  goToDetalleDeLaCuenta(item:any[]){
-    this.navCtrl.push(DetalleDeLaCuentaPage,{
-      "cuentaselected":item, 
-      "posicion":item[5],
-    });
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad DetallePrestamoPage');
   }
 
-  goToDetalleDeTarjeta(item:any[]){
-    this.navCtrl.push(DetalleDeTarjetaPage,{
-      "cuentaselected":item,
-      "posicion":item[5],
-    });
-  }  
-  goToPrestamos(item:any[]){
+  reloadPrestamo(cuenta:string){
 
-    console.log("Esto esta en usersession.cuentas",this.cuentas);
     var listvalores:any[]=[];
     try {
       //Ahora se procede a traer el menú dinámico:
@@ -61,7 +63,7 @@ export class PosiciNConsolidadaPage {
        <ConsultaPrestamos xmlns="http://tempuri.org/">
          <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
          <Rif>`+this.userSession.AF_Rif+`</Rif>
-         <Cuenta>`+item[0]+`</Cuenta>
+         <Cuenta>`+cuenta+`</Cuenta>
        </ConsultaPrestamos>
      </soap12:Body>
    </soap12:Envelope>`
@@ -97,22 +99,12 @@ export class PosiciNConsolidadaPage {
                        console.log("stringified: ", result);
                        var search_array = JSON.parse(str);
                        console.log("DETALLE PRESTAMO",search_array);
-                       var saldoTotal:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SSaldoActual['0'];
-                       var montoCuota:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SMtoCuota['0'];
-                       var fechaVencimiento:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SFechaVctoCredito['0'];
-                       var montoOriginal:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SMtoOriginal['0'];
-                       var fechaProximo:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SFechaProxPago['0'];
-                       var tasa:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].STasa['0'];
-                       self.navCtrl.push(DetallePrestamoPage,{
-                        "cuentaselected":item,
-                        "saldoTotal":saldoTotal,
-                        "montoCuota":montoCuota,
-                        "fechaVencimiento":fechaVencimiento,
-                        "montoOriginal":montoOriginal,
-                        "fechaProximo":fechaProximo,
-                        "tasa":tasa,
-                        "posicion":item,
-                      });
+                       self.saldoTotal = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SSaldoActual['0'];
+                       self.montoCuota = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SMtoCuota['0'];
+                       self.fechaVencimiento = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SFechaVctoCredito['0'];
+                       self.montoOriginal = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SMtoOriginal['0'];
+                       self.fechaProximo = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SFechaProxPago['0'];
+                       self.tasa = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].STasa['0'];
                     }catch(Error){
                     console.log("Error try 1")
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
@@ -123,5 +115,10 @@ export class PosiciNConsolidadaPage {
     } catch (error) {
       console.log("Error try 2")
     }
+  }
+
+  goBack(params){
+    if (!params) params = {};
+    this.navCtrl.pop();
   }
 }

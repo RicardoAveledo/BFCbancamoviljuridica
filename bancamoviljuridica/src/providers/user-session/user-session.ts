@@ -16,6 +16,7 @@ export class UserSessionProvider {
   public validarAPR:boolean = false;
   public cuentas:any[] = [];
   public tdc:any[] = [];
+  public prestamos:any[] = [];
   public AF_CLAsig:string = "";
   public AF_Cedula:string = "";
   public AF_Clave:string = "";
@@ -135,8 +136,10 @@ export class UserSessionProvider {
                        console.log("CUENTAS DEBUG: ", search_array);
                        var contcuentas:number = 0;
                        var conttdc:number = 0;
+                       var contprestamos:number = 0;
                        self.cuentas=[];
                        self.tdc=[];
+                       self.prestamos=[];
                       search_array.p['soap:Envelope']['0']['soap:Body']['0'].CuentasAsociadasGetResponse['0'].CuentasAsociadasGetResult['0'].SumdsjvDet
                       .forEach(element => {
                         //Dentro de este foreach me paro en cada elemento que trae 
@@ -164,19 +167,28 @@ export class UserSessionProvider {
                               var SPagoMinimo:string = element.SPagoMinimo['0']
                               var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,fechapago,SPagoMinimo];  
                             //}
-                            }else if(SCodMoneda=="VES") {
+                            }else if(SCodMoneda=="VES" && (tipoCuenta=="NOW" || tipoCuenta=="DDA")) {
                            //   if(SCodMoneda=="VES"){
                             console.log("Tipo cuentas",contcuentas);
                             var itemPosicion = contcuentas;
                             contcuentas = contcuentas + 1;
                             var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
                             //  }  
-                          }                   
+                          }  else if(SCodMoneda=="VES" && tipoCuenta=="LNS") {
+                            //   if(SCodMoneda=="VES"){
+                             console.log("Tipo prestamo",contprestamos);
+                             var itemPosicion = contprestamos;
+                             contprestamos = contprestamos + 1;
+                             var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
+                             //  }  
+                           }                   
                           //procesar cuentas para enmascararlas
                           if(tipoCuenta=="TDC" && SCodMoneda=="VES"){
                             self.tdc.push(itemLista);
-                          }else if (SCodMoneda=="VES"){
+                          }else if (SCodMoneda=="VES" && (tipoCuenta=="NOW" || tipoCuenta=="DDA")){
                             self.cuentas.push(itemLista);
+                          } else if (SCodMoneda=="VES" && tipoCuenta=="LNS"){
+                            self.prestamos.push(itemLista);
                           } 
                           console.dir("K");
                         });

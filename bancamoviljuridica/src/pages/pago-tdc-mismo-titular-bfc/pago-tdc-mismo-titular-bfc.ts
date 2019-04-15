@@ -53,6 +53,7 @@ export class PagoTdcMismoTitularBfcPage {
   public fechaPago:string;
   public cuentaCreditoFull:string;
   public montoValue:number;
+  public montoValueCargar:number;
   public sdisponible:number;
   public saldoActual:number=0.0;
   public pagoMinimo:number=0.0;
@@ -68,10 +69,24 @@ export class PagoTdcMismoTitularBfcPage {
     this.tdc = userSession.tdc;
   }
 
+  loadMonto(){
+    this.montoValue = this.montoValueCargar;
+  }
+
   enableMonto(){
     this.montoEnable =  !this.montoEnable;
   }
   public auxAmmount:number;
+
+  cargarSaldoActual(){
+    this.montoValue = this.saldoActual;
+    console.log("Saldo Actual Cargado");
+  }
+
+  cargarPagoMinimo(){
+    this.montoValue = this.pagoMinimo;
+    console.log("Pago Mínimo Cargado");
+  }
 
   changeValueCredit(value: any)
   {
