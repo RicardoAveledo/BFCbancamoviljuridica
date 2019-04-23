@@ -1,16 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, Toast, NavParams } from 'ionic-angular';
-import { ConfirmaciNTransferenciaMismoTitularBFCPage } from '../confirmaci-ntransferencia-mismo-titular-bfc/confirmaci-ntransferencia-mismo-titular-bfc';
-import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
-import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
-import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
-import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
-import { TransferenciasPage } from '../transferencias/transferencias';
-import { TransferenciaMismoTitularOtrosBancosPage } from '../transferencia-mismo-titular-otros-bancos/transferencia-mismo-titular-otros-bancos';
-import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/transferencia-terceros-bfc';
-import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
-import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
-import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
@@ -20,7 +9,7 @@ import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
 import { IfObservable } from 'rxjs/observable/IfObservable';
-import { TransferenciasMismoTitularBFCPage } from '../transferencias-mismo-titular-bfc/transferencias-mismo-titular-bfc';
+import { PagoTdcMismoTitularBfcConfirmarPage } from '../pago-tdc-mismo-titular-bfc-confirmar/pago-tdc-mismo-titular-bfc-confirmar';
 
 /**
  * Generated class for the PagoTdcMismoTitularBfcPage page.
@@ -71,6 +60,7 @@ export class PagoTdcMismoTitularBfcPage {
 
   loadMonto(){
     this.montoValue = this.montoValueCargar;
+    console.log("Monto: ", this.montoValue)
   }
 
   enableMonto(){
@@ -103,6 +93,75 @@ export class PagoTdcMismoTitularBfcPage {
     this.fechaPago = item[7];
     this.pagoMinimo = item[8];
     this.saldoActual = item[2];
+
+    var listvalores:any[]=[];
+    try {
+      //Ahora se procede a traer el menú dinámico:
+     var headers = new HttpHeaders();
+     headers.append('Content-Type', 'text/xml');
+     var httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type':  'text/xml'
+       })
+     };
+
+     //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+     //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+     var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Body>
+       <consultaTDC xmlns="http://tempuri.org/">
+         <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+         <rif>`+this.userSession.AF_Rif+`</rif>
+         <Cuenta>`+this.cuentaCreditoFull+`</Cuenta>
+       </consultaTDC>
+     </soap:Body>
+   </soap:Envelope>`
+
+   console.log(postData);
+   //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+      this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asmx?op=consultaTDC",postData,httpOptions )
+     .subscribe(data => {
+      // console.log('Data: '+data['_body']); 
+      }, error => {
+             //Hacemos el parse tal cual como antes:
+             console.log('Error: '+JSON.stringify(error));
+             var str = JSON.stringify(error);
+             console.log("stingified: ", str);
+             var search_array = JSON.parse(str);
+             console.log("result: ", search_array.error.text);
+             var parser = new DOMParser();
+             var doc = parser.parseFromString(search_array.error.text, "application/xml");
+             console.log(doc);
+             var el = doc.createElement("p");
+             el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+             var tmp = doc.createElement("div");
+             tmp.appendChild(el);
+             console.log(tmp.innerHTML);
+             var parseString = xml2js.parseString;
+             var xml = tmp.innerHTML;
+            // var texto:string = "";
+             var self = this;
+             parseString(xml, self, function (err, result) {
+                 try{
+                       console.dir(result);
+                       var str = JSON.stringify(result);
+                       console.log("stringified: ", result);
+                       var search_array = JSON.parse(str);
+                       console.log("Respuesta consulta TDC: ", search_array); 
+                       self.fechaPago = search_array.p['soap:Envelope']['0']['soap:Body']['0'].consultaTDCResponse['0'].consultaTDCResult['0'].contdcdsjv['0'].SFechaProxPgo['0'];
+                       self.pagoMinimo = search_array.p['soap:Envelope']['0']['soap:Body']['0'].consultaTDCResponse['0'].consultaTDCResult['0'].contdcdsjv['0'].SCuotaMes['0'];
+                       self.saldoActual = search_array.p['soap:Envelope']['0']['soap:Body']['0'].consultaTDCResponse['0'].consultaTDCResult['0'].contdcdsjv['0'].SSaldoActual['0'];
+                       console.log("Saldos y fecha: ",self.fechaPago +" "+self.pagoMinimo+" "+self.saldoActual)
+                   }catch(Error){
+                    console.log("Error try 1")
+                    //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                    //self.presentToast();
+                   }
+                 });
+      });
+    } catch (error) {
+      console.log("Error try 2")
+    }
     console.log("CREDITOS TRAE",item);
   }
 
@@ -140,21 +199,6 @@ export class PagoTdcMismoTitularBfcPage {
   });
   
 
-  goToTransferenciasMismoTitularBFC(params){
-    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
-  {
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciasMismoTitularBFCPage);
-
-
-  } else{
-  }
-
-  if(this.cuentacreditoForm.valid)
-{
-
-}
-  }
 
   //Método que utiliza el boton de Continuar
   goToTDCMismoTitularBFCConfirmar(params){
@@ -188,7 +232,7 @@ export class PagoTdcMismoTitularBfcPage {
            <soap:Body>
              <ModelosGet xmlns="http://tempuri.org/">
                <AF_Id>`+this.userSession.AF_IdPrincipal+`</AF_Id>
-               <Cod>16</Cod>
+               <Cod>24</Cod>
                <CTA_ID>`+this.cuentaDebitoFull+`</CTA_ID>
              </ModelosGet>
            </soap:Body>
@@ -227,7 +271,7 @@ export class PagoTdcMismoTitularBfcPage {
                                 console.log("MODELO: ", search_array);
                                 var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
                                 if(+montoMax >= self.montoValue){
-                                  self.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
+                                  self.navCtrl.push(PagoTdcMismoTitularBfcConfirmarPage,{
                                     "cuentaDebito":self.cuentaDebito,
                                     "cuentaCredito":self.cuentaCredito,
                                     "cuentaDebitoFull":self.cuentaDebitoFull,
@@ -281,46 +325,4 @@ export class PagoTdcMismoTitularBfcPage {
   }
 
  
-
-
-  goToTransferenciaMismoTitularBFCRecibo(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
-  }
-  goToPosiciNConsolidada(params){
-    if (!params) params = {};
-    this.navCtrl.push(PosiciNConsolidadaPage);
-  }
-  goToDetalleDeLaCuenta(params){
-    if (!params) params = {};
-    this.navCtrl.push(DetalleDeLaCuentaPage);
-  }
-  goToDetalleDeTarjeta(params){
-    if (!params) params = {};
-    this.navCtrl.push(DetalleDeTarjetaPage);
-  }
-  goToTransferencias(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciasPage);
-  }
-  goToTransferenciaMismoTitularOtrosBancos(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaMismoTitularOtrosBancosPage);
-  }
-  goToTransferenciaTercerosBFC(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosBFCPage);
-  }
-  goToTransferenciasTercerosDetalle(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciasTercerosDetallePage);
-  }
-  goToTransferenciaTercerosOtrosBancos(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
-  }
-  goToTransferenciaTercerosOtrosBancosRecibo(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
-  }
 }

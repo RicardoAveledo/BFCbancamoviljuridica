@@ -378,6 +378,7 @@ export class AprobacionRechazoConsultaPage {
   loadPorAprobarNomina(){
     this.nominas = this.nominasPorAprobar;
     this.EstadoLote = "Por Aprobar";
+    console.log("Por Aprobar", this.nominas)
   }
 
   loadProcesadosNomina(){
@@ -554,7 +555,7 @@ export class AprobacionRechazoConsultaPage {
                                           var search_array = JSON.parse(str);
                                           console.log("Firmas Restantes: ",search_array)
                                           self2.firmasFaltantes = search_array.p['soap:Envelope']['0']['soap:Body']['0'].FirmasVerResponse['0'].FirmasVerResult['0'];
-                                          if(item.Cod=="64"){
+                                          if(item.Cod=="64" || item.Cod=="32"){
                                             var listvalores:any[]=[];
                                             try {
                                               //Ahora se procede a traer el menú dinámico:

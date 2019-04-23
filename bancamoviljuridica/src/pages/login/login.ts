@@ -262,6 +262,7 @@ export class LoginPage {
                                        self2.userSession.AF_Especial= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_Especial']['0'];
                                        self2.userSession.AF_FecConst= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_FecConst']['0'];
                                        self2.userSession.AF_FechaPassword= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_FechaPassword']['0'];
+                                       self2.userSession.CO_Email= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_Email']['0'];
  
                                     /* public AF_Id:string = "";
                                        public AF_IdPrincipal:string = "";
