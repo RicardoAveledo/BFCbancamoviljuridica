@@ -1,5 +1,6 @@
 import { Component, ɵConsole } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserSessionProvider } from '../../providers/user-session/user-session';
 
 /**
  * Generated class for the AprobacionRechazoConsultaDetallePage page.
@@ -42,9 +43,22 @@ export class AprobacionRechazoConsultaDetallePage {
   public OP_RifGrupo:string;        
   public firmasFaltantes:string;        
   public cantidadFirmas:string;        
-  public estado:string;        
+  public estado:string;     
+  public fechaEfectiva:string;
+  public horaEfectiva:string;   
+  public FechaValor: string;  
+  public HoraValor: string;  
+  public NombreArchivo: string;  
+  public EstadoLote: string;  
+  public TotalRegistros: string;  
+  public Monto: string;  
+  public TipoCarga: string;  
+  public MotivoPago: string;  
+  public CuentaDebitar: string;  
+  public correoUsuario:string;
+  public usuarioProceso:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
       this.item = navParams.get('itemPassed');
       this.firmasFaltantes = navParams.get('firmasFaltantes');
       this.cantidadFirmas = navParams.get('cantidadFirmas');
@@ -84,8 +98,7 @@ export class AprobacionRechazoConsultaDetallePage {
       this.Es_Descripcion     = this.item.Es_Descripcion     ;
       this.Nombre             = this.item.Nombre             ;
       this.OP_Beneficiario    = this.item.OP_Beneficiario    ;
-      this.OP_CodClienteGrupo = this.item.OP_CodClienteGrupo ;
-      this.OP_CodeTran        = this.item.OP_CodeTran        ;
+      this.OP_CodClienteGrupo = this.item.OP_CodClienteGrupo ; 
       this.OP_Concepto        = this.item.OP_Concepto        ;
       this.OP_DATA            = this.item.OP_DATA            ;
       this.OP_DATE            = this.item.OP_DATE            ;    
@@ -98,8 +111,22 @@ export class AprobacionRechazoConsultaDetallePage {
       this.OP_Monto           = this.item.OP_Monto           ;                    
       this.OP_OlbId           = this.item.OP_OlbId           ;                      
       this.OP_Origen          = this.item.OP_Origen          ;                      
-      this.OP_RifGrupo        = this.item.OP_RifGrupo        ;      
-      console.log("Monto:",this.montoValue)                  ;         
+      this.OP_RifGrupo        = this.item.OP_RifGrupo        ;  
+      this.OP_CodeTran        = navParams.get('OP_CodeTran');              
+      this.fechaEfectiva      = navParams.get('FechaValor');             
+      this.horaEfectiva       = navParams.get('HoraValor');            
+      this.NombreArchivo      = navParams.get('NombreArchivo');                
+      this.EstadoLote         = navParams.get('EstadoLote');             
+      this.TotalRegistros     = navParams.get('TotalRegistros');                 
+      this.Monto              = navParams.get('Monto');        
+      this.TipoCarga          = navParams.get('TipoCarga');            
+      this.MotivoPago         = navParams.get('MotivoPago');      
+      this.CuentaDebitar      = navParams.get('CuentaDebitar');  
+      this.usuarioProceso = this.userSession.CO_NOMBRES;
+      this.correoUsuario = this.userSession.CO_Email;
+      console.log("Recibo esto en Detalle: ", this.OP_CodeTran    +" " + this.FechaValor     +" " + this.HoraValor      +" " + this.NombreArchivo  +" " + this.EstadoLote     +" " + this.TotalRegistros +" " + this.Monto          +" " + this.TipoCarga      +" " + this.MotivoPago     +" " + this.CuentaDebitar  )
+
+      console.log("Monto:",this.montoValue);         
   }
 
   goBack(){

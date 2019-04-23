@@ -1,5 +1,13 @@
 {
   "name": "bancamoviljuridica",
   "integrations": {},
-  "type": "ionic-angular"
+  "type": "angular",
+  "v2": true,
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://10.60.102.91/WSFCIBJuridicoIBS/WsAfiliados.asmx?op=AfiliadosLogin"
+    }
+  ]
 }

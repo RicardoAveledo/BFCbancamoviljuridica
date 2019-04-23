@@ -67,10 +67,12 @@ export class UserSessionProvider {
 
 
 
-  public serverIPApp:string = "10.60.102.178/IBBFCEMovil/app";      //57306 
-  public serverIPWS:string = "10.60.102.178/IBBFCEMovil/ws";        //2898
-//public serverIPApp:string = "localhost:57306";
-//public serverIPWS:string = "localhost:2898";  
+//public serverIPApp:string = "10.60.102.178/IBBFCEMovil/app";      //57306 
+//public serverIPWS:string = "10.60.102.178/IBBFCEMovils/ws";        //2898
+public serverIPApp:string = "localhost:57306";
+public serverIPWS:string = "localhost:2898";  
+//public serverIPApp:string = "10.60.102.91/IBBFCE";
+//public serverIPWS:string = "10.60.102.91/WSFCIBJuridicoIBS";  
 
   constructor(public httpClient: HttpClient) {
     this.httpClient = httpClient;
@@ -207,7 +209,6 @@ export class UserSessionProvider {
   }
 
   basicHttpConnectionMethod(){
-      console.log("Esto esta en usersession.cuentas",this.cuentas);
       var listvalores:any[]=[];
       try {
         //Ahora se procede a traer el menú dinámico:

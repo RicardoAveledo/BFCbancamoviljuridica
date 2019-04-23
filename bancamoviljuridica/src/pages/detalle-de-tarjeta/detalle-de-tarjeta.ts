@@ -437,9 +437,8 @@
       var itemselected=this.cuentaselected;
       var dateselected=this.sortingListDates;
       this.SBloqueado=itemselected[1];
-      this.SContable=itemselected[2];
       this.SDiferido=itemselected[3];
-      this.SDisponible=itemselected[4];
+      this.SDisponible=itemselected[2];
       console.log(itemselected[0]);
       this.listvalores=[];
   

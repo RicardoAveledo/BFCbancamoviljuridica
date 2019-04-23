@@ -54,12 +54,22 @@ export class AprobacionRechazoConsultaPage {
   public bankCod:string;
   public transferencias:any[]=[];
   public pagosTDC:any[]=[];
+  public nominas:any[]=[];
+  public nominasPorAprobar:any[]=[];
+  public nominasRechazado:any[]=[];
+  public nominasProcesado:any[]=[];
+  public proveedores:any[]=[];
+  public proveedoresPorAprobar:any[]=[];
+  public proveedoresRechazado:any[]=[];
+  public proveedoresProcesado:any[]=[];
   public transferenciasSelected:boolean =false;
   public pagoTDCSelected:boolean =false;
   public nominaSelected:boolean =false;
   public proveedoresSelected:boolean =false;
   public cantidadFirmas:string;
   public firmasFaltantes:string;
+  public EstadoLote:string;
+  
   
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
@@ -167,7 +177,7 @@ export class AprobacionRechazoConsultaPage {
                               'OP_Origen':OP_Origen,
                               'OP_RifGrupo':OP_RifGrupo,
                             });
-                        }
+                          }
                         
                         if(Cod=="24"||Cod=="25"||Cod=="27"||Cod=="28"){
                           self.pagosTDC.push({
@@ -193,7 +203,164 @@ export class AprobacionRechazoConsultaPage {
                             'OP_Origen':OP_Origen,
                             'OP_RifGrupo':OP_RifGrupo,
                           });
+                        }
+                      
+                      if(Cod=="32" && Es_Descripcion =="Por Aprobar"){
+                        self.nominasPorAprobar.push({
+                          'BANK_ID':BANK_ID,
+                          'BANK_NOMBRE':BANK_NOMBRE,
+                          'Cod':Cod,
+                          'Es_Descripcion':Es_Descripcion,
+                          'Nombre':Nombre,
+                          'OP_Beneficiario':OP_Beneficiario,
+                          'OP_CodClienteGrupo':OP_CodClienteGrupo,
+                          'OP_CodeTran':OP_CodeTran,
+                          'OP_Concepto':OP_Concepto,
+                          'OP_DATA':OP_DATA,
+                          'OP_DATE':OP_DATE,
+                          'OP_Destino':OP_Destino,
+                          'OP_ID':OP_ID,
+                          'OP_IdBeneficiario':OP_IdBeneficiario,
+                          'OP_IdServicio':OP_IdServicio,
+                          'OP_Interface':OP_Interface,
+                          'OP_Mail':OP_Mail,
+                          'OP_Monto':OP_Monto,
+                          'OP_OlbId':OP_OlbId,
+                          'OP_Origen':OP_Origen,
+                          'OP_RifGrupo':OP_RifGrupo,
+                        });
                       }
+
+                      if(Cod=="32" && Es_Descripcion =="Rechazado"){
+                        self.nominasRechazado.push({
+                          'BANK_ID':BANK_ID,
+                          'BANK_NOMBRE':BANK_NOMBRE,
+                          'Cod':Cod,
+                          'Es_Descripcion':Es_Descripcion,
+                          'Nombre':Nombre,
+                          'OP_Beneficiario':OP_Beneficiario,
+                          'OP_CodClienteGrupo':OP_CodClienteGrupo,
+                          'OP_CodeTran':OP_CodeTran,
+                          'OP_Concepto':OP_Concepto,
+                          'OP_DATA':OP_DATA,
+                          'OP_DATE':OP_DATE,
+                          'OP_Destino':OP_Destino,
+                          'OP_ID':OP_ID,
+                          'OP_IdBeneficiario':OP_IdBeneficiario,
+                          'OP_IdServicio':OP_IdServicio,
+                          'OP_Interface':OP_Interface,
+                          'OP_Mail':OP_Mail,
+                          'OP_Monto':OP_Monto,
+                          'OP_OlbId':OP_OlbId,
+                          'OP_Origen':OP_Origen,
+                          'OP_RifGrupo':OP_RifGrupo,
+                        });
+                      }
+
+                      if(Cod=="32" && Es_Descripcion =="Procesado"){
+                        self.nominasProcesado.push({
+                          'BANK_ID':BANK_ID,
+                          'BANK_NOMBRE':BANK_NOMBRE,
+                          'Cod':Cod,
+                          'Es_Descripcion':Es_Descripcion,
+                          'Nombre':Nombre,
+                          'OP_Beneficiario':OP_Beneficiario,
+                          'OP_CodClienteGrupo':OP_CodClienteGrupo,
+                          'OP_CodeTran':OP_CodeTran,
+                          'OP_Concepto':OP_Concepto,
+                          'OP_DATA':OP_DATA,
+                          'OP_DATE':OP_DATE,
+                          'OP_Destino':OP_Destino,
+                          'OP_ID':OP_ID,
+                          'OP_IdBeneficiario':OP_IdBeneficiario,
+                          'OP_IdServicio':OP_IdServicio,
+                          'OP_Interface':OP_Interface,
+                          'OP_Mail':OP_Mail,
+                          'OP_Monto':OP_Monto,
+                          'OP_OlbId':OP_OlbId,
+                          'OP_Origen':OP_Origen,
+                          'OP_RifGrupo':OP_RifGrupo,
+                        });
+                      }
+
+                      if(Cod=="64" && Es_Descripcion =="Por Aprobar"){
+                        self.proveedoresPorAprobar.push({
+                          'BANK_ID':BANK_ID,
+                          'BANK_NOMBRE':BANK_NOMBRE,
+                          'Cod':Cod,
+                          'Es_Descripcion':Es_Descripcion,
+                          'Nombre':Nombre,
+                          'OP_Beneficiario':OP_Beneficiario,
+                          'OP_CodClienteGrupo':OP_CodClienteGrupo,
+                          'OP_CodeTran':OP_CodeTran,
+                          'OP_Concepto':OP_Concepto,
+                          'OP_DATA':OP_DATA,
+                          'OP_DATE':OP_DATE,
+                          'OP_Destino':OP_Destino,
+                          'OP_ID':OP_ID,
+                          'OP_IdBeneficiario':OP_IdBeneficiario,
+                          'OP_IdServicio':OP_IdServicio,
+                          'OP_Interface':OP_Interface,
+                          'OP_Mail':OP_Mail,
+                          'OP_Monto':OP_Monto,
+                          'OP_OlbId':OP_OlbId,
+                          'OP_Origen':OP_Origen,
+                          'OP_RifGrupo':OP_RifGrupo,
+                        });
+                      }
+
+                      if(Cod=="64" && Es_Descripcion =="Rechazado"){
+                        self.proveedoresRechazado.push({
+                          'BANK_ID':BANK_ID,
+                          'BANK_NOMBRE':BANK_NOMBRE,
+                          'Cod':Cod,
+                          'Es_Descripcion':Es_Descripcion,
+                          'Nombre':Nombre,
+                          'OP_Beneficiario':OP_Beneficiario,
+                          'OP_CodClienteGrupo':OP_CodClienteGrupo,
+                          'OP_CodeTran':OP_CodeTran,
+                          'OP_Concepto':OP_Concepto,
+                          'OP_DATA':OP_DATA,
+                          'OP_DATE':OP_DATE,
+                          'OP_Destino':OP_Destino,
+                          'OP_ID':OP_ID,
+                          'OP_IdBeneficiario':OP_IdBeneficiario,
+                          'OP_IdServicio':OP_IdServicio,
+                          'OP_Interface':OP_Interface,
+                          'OP_Mail':OP_Mail,
+                          'OP_Monto':OP_Monto,
+                          'OP_OlbId':OP_OlbId,
+                          'OP_Origen':OP_Origen,
+                          'OP_RifGrupo':OP_RifGrupo,
+                        });
+                      }
+
+                      if(Cod=="64" && Es_Descripcion =="Procesado"){
+                        self.proveedoresProcesado.push({
+                          'BANK_ID':BANK_ID,
+                          'BANK_NOMBRE':BANK_NOMBRE,
+                          'Cod':Cod,
+                          'Es_Descripcion':Es_Descripcion,
+                          'Nombre':Nombre,
+                          'OP_Beneficiario':OP_Beneficiario,
+                          'OP_CodClienteGrupo':OP_CodClienteGrupo,
+                          'OP_CodeTran':OP_CodeTran,
+                          'OP_Concepto':OP_Concepto,
+                          'OP_DATA':OP_DATA,
+                          'OP_DATE':OP_DATE,
+                          'OP_Destino':OP_Destino,
+                          'OP_ID':OP_ID,
+                          'OP_IdBeneficiario':OP_IdBeneficiario,
+                          'OP_IdServicio':OP_IdServicio,
+                          'OP_Interface':OP_Interface,
+                          'OP_Mail':OP_Mail,
+                          'OP_Monto':OP_Monto,
+                          'OP_OlbId':OP_OlbId,
+                          'OP_Origen':OP_Origen,
+                          'OP_RifGrupo':OP_RifGrupo,
+                        });
+                      }
+
                         console.log('Monto:', OP_Monto); 
                        });
                    }catch(Error){
@@ -206,6 +373,36 @@ export class AprobacionRechazoConsultaPage {
     } catch (error) {
       console.log("Error try 2")
     }
+  }
+
+  loadPorAprobarNomina(){
+    this.nominas = this.nominasPorAprobar;
+    this.EstadoLote = "Por Aprobar";
+  }
+
+  loadProcesadosNomina(){
+    this.nominas = this.nominasProcesado;
+    this.EstadoLote = "Procesado";
+  }
+
+  loadRechazadosNomina(){
+    this.nominas = this.nominasRechazado;
+    this.EstadoLote = "Rechazado";
+  }
+
+  loadPorAprobarProveedores(){
+    this.proveedores = this.proveedoresPorAprobar;
+    this.EstadoLote = "Por Aprobar";
+  }
+
+  loadProcesadosProveedores(){
+    this.proveedores = this.proveedoresProcesado;
+    this.EstadoLote = "Procesado";
+  }
+
+  loadRechazadosProveedores(){
+    this.proveedores = this.proveedoresRechazado;
+    this.EstadoLote = "Rechazado";
   }
 
   loadTransferencias(){
@@ -245,7 +442,6 @@ export class AprobacionRechazoConsultaPage {
   }
 
   loadDetalle(item){
-    console.log("DETALLE TDC: ", item); 
 
     console.log("Esto esta en usersession.cuentas",this.cuentas);
     var listvalores:any[]=[];
@@ -358,11 +554,104 @@ export class AprobacionRechazoConsultaPage {
                                           var search_array = JSON.parse(str);
                                           console.log("Firmas Restantes: ",search_array)
                                           self2.firmasFaltantes = search_array.p['soap:Envelope']['0']['soap:Body']['0'].FirmasVerResponse['0'].FirmasVerResult['0'];
-                                          self2.navCtrl.push(AprobacionRechazoConsultaDetallePage,{
-                                            'itemPassed':item,
-                                            'firmasFaltantes': self2.firmasFaltantes,
-                                            'cantidadFirmas': self2.cantidadFirmas,
-                                          })
+                                          if(item.Cod=="64"){
+                                            var listvalores:any[]=[];
+                                            try {
+                                              //Ahora se procede a traer el menú dinámico:
+                                             var headers = new HttpHeaders();
+                                             headers.append('Content-Type', 'text/xml');
+                                             var httpOptions = {
+                                                 headers: new HttpHeaders({
+                                                   'Content-Type':  'text/xml'
+                                               })
+                                             };
+                                        
+                                             //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+                                             //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+                                             var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                                               <soap:Body>
+                                                 <PagoNomina xmlns="http://tempuri.org/">
+                                                   <Rif>`+self2.userSession.AF_Rif+`</Rif>
+                                                   <op>`+item.OP_CodeTran+`</op>
+                                                 </PagoNomina>
+                                               </soap:Body>
+                                             </soap:Envelope>`
+                                        
+                                           console.log(postData);
+                                           //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+                                              self2.httpClient.post("http://"+self2.userSession.serverIPApp+"/WsMovil.asmx?op=PagoNomina",postData,httpOptions )
+                                             .subscribe(data => {
+                                              // console.log('Data: '+data['_body']); 
+                                              }, error => {
+                                                     //Hacemos el parse tal cual como antes:
+                                                     console.log('Error: '+JSON.stringify(error));
+                                                     var str = JSON.stringify(error);
+                                                     console.log("stingified: ", str);
+                                                     var search_array = JSON.parse(str);
+                                                     console.log("result: ", search_array.error.text);
+                                                     var parser = new DOMParser();
+                                                     var doc = parser.parseFromString(search_array.error.text, "application/xml");
+                                                     console.log(doc);
+                                                     var el = doc.createElement("p");
+                                                     el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+                                                     var tmp = doc.createElement("div");
+                                                     tmp.appendChild(el);
+                                                     console.log(tmp.innerHTML);
+                                                     var parseString = xml2js.parseString;
+                                                     var xml = tmp.innerHTML;
+                                                    // var texto:string = "";
+                                                     var self = self2;
+                                                     parseString(xml, self, function (err, result) {
+                                                         try{
+                                                               console.dir(result);
+                                                               var str = JSON.stringify(result);
+                                                               console.log("stringified: ", result);
+                                                               var search_array = JSON.parse(str);
+                                                               console.log("Campos Nomina", search_array);
+                                                               var OP_CodeTran    : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].OP_CodeTran['0']
+                                                               var FechaValor     : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].FechaValor['0']
+                                                               var HoraValor      : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].HoraValor['0']
+                                                               var NombreArchivo  : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].NombreArchivo['0']
+                                                               var EstadoLote     : string = self2.EstadoLote;
+                                                               var TotalRegistros : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].TotalRegistros['0']
+                                                               var Monto          : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].Monto['0']
+                                                               var TipoCarga      : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].TipoCarga['0']
+                                                               var MotivoPago     : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].MotivoPago['0']
+                                                               var CuentaDebitar  : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].CuentaDebitar['0'];
+                                                               console.log("Mando esto al Detalle: ", OP_CodeTran    +" " + FechaValor     +" " + HoraValor      +" " + NombreArchivo  +" " + EstadoLote     +" " + TotalRegistros +" " + Monto          +" " + TipoCarga      +" " + MotivoPago     +" " + CuentaDebitar  )
+                                                               self2.navCtrl.push(AprobacionRechazoConsultaDetallePage,{
+                                                                  'itemPassed':item,
+                                                                  'firmasFaltantes': self2.firmasFaltantes,
+                                                                  'cantidadFirmas': self2.cantidadFirmas,
+                                                                  'OP_CodeTran':OP_CodeTran,
+                                                                  'FechaValor':FechaValor,
+                                                                  'HoraValor':HoraValor,
+                                                                  'NombreArchivo':NombreArchivo,
+                                                                  'EstadoLote':EstadoLote,
+                                                                  'TotalRegistros':TotalRegistros,
+                                                                  'Monto':Monto,
+                                                                  'TipoCarga':TipoCarga,
+                                                                  'MotivoPago':MotivoPago,
+                                                                  'CuentaDebitar':CuentaDebitar,
+                                                                });
+                                                         }catch(Error){
+                                                            console.log("Error try 1")
+                                                            //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                                                            //self.presentToast();
+                                                           }
+                                                         });
+                                              });
+                                            } catch (error) {
+                                              console.log("Error try 2")
+                                            }
+                                          } else {
+                                            self2.navCtrl.push(AprobacionRechazoConsultaDetallePage,{
+                                              'itemPassed':item,
+                                              'firmasFaltantes': self2.firmasFaltantes,
+                                              'cantidadFirmas': self2.cantidadFirmas,
+                                            });
+                                          }
+
                                         }catch(Error){
                                        console.log("Error try 1")
                                        //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
