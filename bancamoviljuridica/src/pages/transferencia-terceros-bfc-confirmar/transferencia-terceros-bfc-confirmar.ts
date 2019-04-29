@@ -145,7 +145,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
          <OP_Destino>`+this.cuentaCreditoFull+`</OP_Destino>
          <OP_Mail>`+this.email+`</OP_Mail>
          <OP_Beneficiario>`+this.nombre+`</OP_Beneficiario>
-         <OP_IdBeneficiario>`+this.userSession.AF_Rif+`</OP_IdBeneficiario>
+         <OP_IdBeneficiario>`+this.ciType+this.ciNo+`</OP_IdBeneficiario>
          <OP_Concepto>`+this.conceptoValue+`</OP_Concepto>
          <OP_CodeTran>0</OP_CodeTran>
          <OP_IdServicio>0</OP_IdServicio>
@@ -284,7 +284,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
            <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
            <Rif>`+this.userSession.AF_Rif+`</Rif>
            <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
-           <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
+           <CedulaBeneficiario>`+this.ciType+this.ciNo+`</CedulaBeneficiario>
            <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
            <montoIBs>`+this.montoValue+`</montoIBs>
            <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>

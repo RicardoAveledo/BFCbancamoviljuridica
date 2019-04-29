@@ -151,7 +151,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
          <OP_Destino>`+this.cuentaCreditoFull+`</OP_Destino>
          <OP_Mail>`+this.email+`</OP_Mail>
          <OP_Beneficiario>`+this.nombre+`</OP_Beneficiario>
-         <OP_IdBeneficiario>`+this.userSession.AF_Rif+`</OP_IdBeneficiario>
+         <OP_IdBeneficiario>`+this.ciType+this.ciNo+`</OP_IdBeneficiario>
          <OP_Concepto>`+this.conceptoValue+`</OP_Concepto>
          <OP_CodeTran>0</OP_CodeTran>
          <OP_IdServicio>0</OP_IdServicio>
@@ -302,7 +302,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
            <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
            <Beneficiario>`+this.nombre+`</Beneficiario>
            <Rif2>`+this.userSession.AF_Rif+`</Rif2>
-           <CedulaBeneficiario>`+this.ciNo+`</CedulaBeneficiario>
+           <CedulaBeneficiario>`+this.ciType+this.ciNo+`</CedulaBeneficiario>
            <codigo220>220</codigo220>
            <SCodBco>`+this.bankCod+`</SCodBco>
            <Ip>10.60.102.133</Ip>

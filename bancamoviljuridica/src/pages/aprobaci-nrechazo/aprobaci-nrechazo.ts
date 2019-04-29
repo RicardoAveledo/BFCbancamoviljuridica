@@ -4,6 +4,13 @@ import { UserSessionProvider } from '../../providers/user-session/user-session';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../transferencia-mismo-titular-otros-bancos-recibo/transferencia-mismo-titular-otros-bancos-recibo';
+import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
+import { TransferenciasTercerosBfcReciboPage } from '../transferencias-terceros-bfc-recibo/transferencias-terceros-bfc-recibo';
+import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
+import { PagoTdcMismoTitularBfcReciboPage } from '../pago-tdc-mismo-titular-bfc-recibo/pago-tdc-mismo-titular-bfc-recibo';
+import { PagoTdcMismoTitularOtrosBancosReciboPage } from '../pago-tdc-mismo-titular-otros-bancos-recibo/pago-tdc-mismo-titular-otros-bancos-recibo';
+import { PagoTdcTercerosBfcReciboPage } from '../pago-tdc-terceros-bfc-recibo/pago-tdc-terceros-bfc-recibo';
+import { PagoTdcTercerosOtrosBancosReciboPage } from '../pago-tdc-terceros-otros-bancos-recibo/pago-tdc-terceros-otros-bancos-recibo';
 
 @Component({
   selector: 'page-aprobaci-nrechazo',
@@ -66,6 +73,7 @@ export class AprobaciNRechazoPage {
   public fecha:string;
   public fechaToSend:string;
   public referencia:string;
+  public noCuenta:string;
 
   constructor(public httpClient: HttpClient, private alertCtrl: AlertController, public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
       this.item = navParams.get('itemPassed');
@@ -244,9 +252,34 @@ export class AprobaciNRechazoPage {
                       console.log("Número de firmas: ", search_array);
                       var count:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].FirmasUpdateResponse['0'].FirmasUpdateResult['0'];
                       if(count == "0"){
+                        
+                        //Transferencias
                         if(self.Cod=="19"){
                          self.makeTheTransferMTOB();
                         } 
+                        if(self.Cod=="16"){
+                         self.makeTheTransferMTBFC();
+                        } 
+                        if(self.Cod=="17"){
+                         self.makeTheTransferTBFC();
+                        } 
+                        if(self.Cod=="20"){
+                         self.makeTheTransferTOB();
+                        } 
+
+                        //TDC
+                        if(self.Cod=="27"){
+                          self.makeTheTDCPaymentMTOB();
+                         } 
+                         if(self.Cod=="24"){
+                          self.makeTheTDCPaymentMTBFC();
+                         } 
+                         if(self.Cod=="25"){
+                          self.makeTheTDCPaymentTBFC();
+                         } 
+                         if(self.Cod=="28"){
+                          self.makeTheTDCPaymentTOB();
+                         } 
                         //Acá hacer todos los IF con todos los makeTheTransfer a cada transaccion
                       } else {
                         if(self.Cod=="19"){
@@ -255,7 +288,7 @@ export class AprobaciNRechazoPage {
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
                             "cuentaCreditoFull":self.cuentaCredito,
-                            "nombre":self.Nombre,
+                            "nombre":self.OP_Beneficiario,
                             "ciNo":self.OP_IdBeneficiario,
                             "ciType":"",
                             "montoValue":self.montoValue,
@@ -268,6 +301,124 @@ export class AprobaciNRechazoPage {
                             "checkFirmas":"false",
                           });
                         } 
+                        if(self.Cod=="16"){
+                          self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "montoValue":self.montoValue,
+                            "fecha":self.fecha,
+                            "referencia":self.referencia,
+                            "checkFirmas":"false",
+                          });
+                        } 
+                        if(self.Cod=="17"){
+                          self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"false", 
+                          }); 
+                        } 
+                        if(self.Cod=="20"){
+                          self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"false",
+                          });
+                        } 
+                        if (self.Cod=="24"){
+                          self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "montoValue":self.montoValue,
+                            "fecha":self.fecha,
+                            "referencia":self.referencia,
+                            "checkFirmas":"false",
+                          });
+                        }
+                        if (self.Cod=="27"){
+                          self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"false",
+                          });
+                        }
+                        if (self.Cod=="25"){
+                        self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                          "cuentaDebito":self.cuentaDebito,
+                          "cuentaCredito":self.cuentaCredito,
+                          "cuentaDebitoFull":self.cuentaDebito,
+                          "cuentaCreditoFull":self.cuentaCredito,
+                          "nombre":self.OP_Beneficiario,
+                          "ciNo":self.OP_IdBeneficiario,
+                          "ciType":"",
+                          "montoValue":self.montoValue,
+                          "motivo":self.MotivoPago,
+                          "conceptoValue":self.OP_Concepto,
+                          "email":self.OP_Mail,
+                          "sdisponible":"",
+                          "fechaToSend":self.fechaToSend,
+                          "referencia":self.referencia,
+                          "checkFirmas":"false", 
+                        });
+                      }
+                      if (self.Cod=="28"){
+                          self.navCtrl.push(PagoTdcTercerosOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"false",
+                          });
+                        }
                         //Acá hacer todos los IF con todos los push a cada transaccion
                       }
                  }catch(Error){
@@ -338,7 +489,7 @@ export class AprobaciNRechazoPage {
          <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
          <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
          <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
-         <Beneficiario>`+this.Nombre+`</Beneficiario>
+         <Beneficiario>`+this.OP_Beneficiario+`</Beneficiario>
          <Rif2>`+this.userSession.AF_Rif+`</Rif2>
          <CedulaBeneficiario>`+this.OP_IdBeneficiario+`</CedulaBeneficiario>
          <codigo220>220</codigo220>
@@ -387,7 +538,7 @@ export class AprobaciNRechazoPage {
                         "cuentaCredito":self.cuentaCredito,
                         "cuentaDebitoFull":self.cuentaDebito,
                         "cuentaCreditoFull":self.cuentaCredito,
-                        "nombre":self.Nombre,
+                        "nombre":self.OP_Beneficiario,
                         "ciNo":self.OP_IdBeneficiario,
                         "ciType":"",
                         "montoValue":self.montoValue,
@@ -411,8 +562,825 @@ export class AprobaciNRechazoPage {
     }
 }
 
+makeTheTransferMTBFC(){
+  console.log("Esto esta en usersession.cuentos",this.cuentaCredito+" - "+this.cuentaDebito);
+  var listvalores:any[]=[];
+  try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+     <TransferenciaBFCMismoTitular xmlns="http://tempuri.org/">
+       <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+       <Rif>`+this.userSession.AF_Rif+`</Rif>
+       <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+       <CedulaBeneficiario>`+this.userSession.AF_Cedula+`</CedulaBeneficiario>
+       <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
+       <montoIBs>`+this.montoValue+`</montoIBs>
+       <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
+       <montoIbs>`+this.montoValue+`</montoIbs>
+       <Ip>100.60.102.133</Ip>
+       <Motivo></Motivo>
+     </TransferenciaBFCMismoTitular>
+   </soap:Body>
+ </soap:Envelope>`
+ 
+ console.log(postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+    this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMovil.asmx?op=TransferenciaBFCMismoTitular",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                    console.dir(result);
+                    var str = JSON.stringify(result);
+                    console.log("stringified: ", result);
+                    var search_array = JSON.parse(str);
+                    console.log("TRANSFERENCIA HECHA: ",search_array);
+                    self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCMismoTitularResponse['0'].TransferenciaBFCMismoTitularResult['0'].intrfdsjv['0'].SReferencia['0']
+                    console.log("REF: ",self.referencia);
+                    //search_array.
+                    self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "montoValue":self.montoValue,
+                      "fecha":self.fecha,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas,
+                    });
+
+                }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
+
+makeTheTransferTBFC(){
+  var listvalores:any[]=[];
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDay();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();      try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+     <TransferenciaBFCTerceros xmlns="http://tempuri.org/">
+       <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+       <Rif>`+this.userSession.AF_Rif+`</Rif>
+       <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+       <CedulaBeneficiario>`+this.OP_IdBeneficiario+`</CedulaBeneficiario>
+       <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
+       <montoIBs>`+this.montoValue+`</montoIBs>
+       <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
+       <montoIbs>`+this.montoValue+`</montoIbs>
+       <Ip>10.60.102.133</Ip>
+       <Motivo>`+this.MotivoPago+`</Motivo>
+     </TransferenciaBFCTerceros>
+   </soap:Body>
+ </soap:Envelope>`
+ console.log(postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+    this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMovil.asmx?op=TransferenciaBFCTerceros",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                     console.dir(result);
+                     var str = JSON.stringify(result);
+                     console.log("stringified: ", result);
+                     var search_array = JSON.parse(str);
+                     console.log("Transferencia hecha: ",search_array);
+                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCTercerosResponse['0'].TransferenciaBFCTercerosResult['0'].intrfdsjv['0'].SReferencia['0'];
+                     console.log("REF: ",self.referencia);
+                     self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "cuentaDebitoFull":self.cuentaDebito,
+                      "cuentaCreditoFull":self.cuentaCredito,
+                      "nombre":self.OP_Beneficiario,
+                      "ciNo":self.OP_IdBeneficiario,
+                      "ciType":"",
+                      "montoValue":self.montoValue,
+                      "motivo":self.MotivoPago,
+                      "conceptoValue":self.OP_Concepto,
+                      "email":self.OP_Mail,
+                      "sdisponible":"",
+                      "fechaToSend":self.fechaToSend,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas, 
+                    });
+                 }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
+
+makeTheTransferTOB(){
+  var listvalores:any[]=[];
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDay();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();      try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <TransferenciaOtrosBancosTerceros xmlns="http://tempuri.org/">
+              <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+              <Rif>`+this.userSession.AF_Rif+`</Rif>
+              <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
+              <montoIbs>`+this.montoValue+`</montoIbs>
+              <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+              <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
+              <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
+              <Beneficiario>`+this.OP_Beneficiario+`</Beneficiario>
+              <Rif2>`+this.userSession.AF_Rif+`</Rif2>
+              <CedulaBeneficiario>`+this.OP_IdBeneficiario+`</CedulaBeneficiario>
+              <codigo220>220</codigo220>
+              <SCodBco>`+this.BANK_ID+`</SCodBco>
+              <Ip>10.60.102.133</Ip>
+              <Motivo>`+this.MotivoPago+`</Motivo>
+          </TransferenciaOtrosBancosTerceros>
+        </soap:Body>
+      </soap:Envelope>`
+
+ console.log("TRANSFERENCIAS TERCEROS OTROS BANCOS SENDING THIS: ",postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMovil.asmx?op=TransferenciaOtrosBancosTerceros",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                     console.dir(result);
+                     var str = JSON.stringify(result);
+                     console.log("stringified: ", result);
+                     var search_array = JSON.parse(str);
+                     console.log("Transferencia hecha: ",search_array);
+                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaOtrosBancosTercerosResponse['0'].TransferenciaOtrosBancosTercerosResult['0'].inextdsjv['0'].SReferencia['0']
+                     console.log("REF: ",self.referencia);
+                     self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "cuentaDebitoFull":self.cuentaDebito,
+                      "cuentaCreditoFull":self.cuentaCredito,
+                      "nombre":self.OP_Beneficiario,
+                      "ciNo":self.OP_IdBeneficiario,
+                      "ciType":"",
+                      "montoValue":self.montoValue,
+                      "motivo":self.MotivoPago,
+                      "conceptoValue":self.OP_Concepto,
+                      "email":self.OP_Mail,
+                      "sdisponible":"",
+                      "bankName":self.BANK_NOMBRE,
+                      "fechaToSend":self.fechaToSend,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas,
+                    });
+                 }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
+
+makeTheTDCPaymentMTBFC(){
+  console.log("Esto esta en usersession.cuentos",this.cuentaCredito+" - "+this.cuentaDebito);
+  var listvalores:any[]=[];
+  try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+
+   
+   if (this.cuentaCredito.substr(0,1)=="4"){
+    this.noCuenta = "4630000019";
+   }else if (this.cuentaCredito.substr(0,1)=="5"){
+    this.noCuenta = "4630000175";
+   }
+
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+     <PagoTarjetaCreditoMismoTitularBFC xmlns="http://tempuri.org/">
+       <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+       <Rif>`+this.userSession.AF_Rif+`</Rif>
+       <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+       <Rif_Afi>`+this.userSession.AF_Rif+`</Rif_Afi>
+       <CtaAcreditar>`+this.noCuenta+`</CtaAcreditar>
+       <Monto>`+this.montoValue+`</Monto>
+       <Instrumento>`+this.cuentaCredito+`</Instrumento>
+       <Ip>10.40.102.40</Ip>
+       <Motivo></Motivo>
+     </PagoTarjetaCreditoMismoTitularBFC>
+   </soap:Body>
+ </soap:Envelope>`
+ 
+ console.log(postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+    this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoMismoTitularBFC",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                    console.dir(result);
+                    var str = JSON.stringify(result);
+                    console.log("stringified: ", result);
+                    var search_array = JSON.parse(str);
+                    console.log("PAGO HECHO: ",search_array);
+                    self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoMismoTitularBFCResponse['0'].PagoTarjetaCreditoMismoTitularBFCResult['0'].intrfdsjv['0'].SCodAutoriza['0']
+                    console.log("REF: ",self.referencia);
+                    ////search_array.
+                    self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "montoValue":self.montoValue,
+                      "fecha":self.fecha,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas,
+                    });
+
+                }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
+
+makeTheTDCPaymentMTOB(){
+  var listvalores:any[]=[];
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDay();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();      try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+     <PagoTarjetaCreditoOtrosBancosMismoTitular xmlns="http://tempuri.org/">
+       <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+       <Rif>`+this.userSession.AF_Rif+`</Rif>
+       <Monto>`+this.montoValue+`</Monto>
+       <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+       <CO_Nombres>`+this.userSession.CO_NOMBRES+`</CO_Nombres>
+       <codtarjetaAcreditar>`+this.cuentaCredito+`</codtarjetaAcreditar>
+       <Beneficiario>`+this.Nombre+`</Beneficiario>
+       <Rif2>`+this.userSession.AF_Rif+`</Rif2>
+       <CedulaBeneficiario>`+this.OP_IdBeneficiario+`</CedulaBeneficiario>
+       <SCodBco>`+this.BANK_ID+`</SCodBco>
+       <Ip>10.60.102.133</Ip>
+       <Motivo>`+this.MotivoPago+`</Motivo>
+     </PagoTarjetaCreditoOtrosBancosMismoTitular>
+   </soap:Body>
+ </soap:Envelope>`
+
+ console.log("TRANSFERENCIAS MISMO TITULAR OTROS BANCOS SENDING THIS: ",postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoOtrosBancosMismoTitular",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                     console.dir(result);
+                     var str = JSON.stringify(result);
+                     console.log("stringified: ", result);
+                     var search_array = JSON.parse(str);
+                     console.log("TDC hecha: ",search_array);
+                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResponse['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0']
+                     console.log("REF: ",self.referencia);
+                     self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "cuentaDebitoFull":self.cuentaDebito,
+                      "cuentaCreditoFull":self.cuentaCredito,
+                      "nombre":self.OP_Beneficiario,
+                      "ciNo":self.OP_IdBeneficiario,
+                      "ciType":"",
+                      "montoValue":self.montoValue,
+                      "motivo":self.MotivoPago,
+                      "conceptoValue":self.OP_Concepto,
+                      "email":self.OP_Mail,
+                      "sdisponible":"",
+                      "bankName":self.BANK_NOMBRE,
+                      "fechaToSend":self.fechaToSend,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas,
+                    });
+                 }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
+
+makeTheTDCPaymentTBFC(){
+  var listvalores:any[]=[];
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDay();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();      try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+   var noCuenta:string="";
+   console.log("CUENTA: ",this.cuentaCredito.substr(0,1));
+   if (this.cuentaCredito.substr(0,1)=="4"){
+    noCuenta = "4630000019";
+   }else if (this.cuentaCredito.substr(0,1)=="5"){
+    noCuenta = "4630000175";
+   }
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+     <PagoTarjetaCreditoTercerosBFC xmlns="http://tempuri.org/">
+       <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+       <Rif>`+this.userSession.AF_Rif+`</Rif>
+       <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+       <CedulaBeneficiario>`+this.OP_IdBeneficiario+`</CedulaBeneficiario>
+       <CtaAcreditar>`+noCuenta+`</CtaAcreditar>
+       <Monto>`+this.montoValue+`</Monto>
+       <Instrumento>`+this.cuentaCredito+`</Instrumento>
+       <Ip>10.60.102.133</Ip>
+       <Motivo>`+this.MotivoPago+`</Motivo>
+     </PagoTarjetaCreditoTercerosBFC>
+   </soap:Body>
+ </soap:Envelope>`
+ console.log(postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+    this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoTercerosBFC",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                     console.dir(result);
+                     var str = JSON.stringify(result);
+                     console.log("stringified: ", result);
+                     var search_array = JSON.parse(str);
+                     console.log("Pago TDC hecho: ",search_array);
+                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoTercerosBFCResult['0'].intrfdsjv['0'].SReferencia['0'];
+                     console.log("REF: ",self.referencia);
+                     self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "cuentaDebitoFull":self.cuentaDebito,
+                      "cuentaCreditoFull":self.cuentaCredito,
+                      "nombre":self.OP_Beneficiario,
+                      "ciNo":self.OP_IdBeneficiario,
+                      "ciType":"",
+                      "montoValue":self.montoValue,
+                      "motivo":self.MotivoPago,
+                      "conceptoValue":self.OP_Concepto,
+                      "email":self.OP_Mail,
+                      "sdisponible":"",
+                      "fechaToSend":self.fechaToSend,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas, 
+                    });
+                 }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
+
+makeTheTDCPaymentTOB(){
+  var listvalores:any[]=[];
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDay();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();      try {
+    //Ahora se procede a traer el menú dinámico:
+   var headers = new HttpHeaders();
+   headers.append('Content-Type', 'text/xml');
+   var httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'text/xml'
+     })
+   };
+
+   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+     <PagoTarjetaCreditoOtrosBancosTerceros xmlns="http://tempuri.org/">
+        <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+        <Rif>`+this.userSession.AF_Rif+`</Rif>
+        <Monto>`+this.montoValue+`</Monto>
+        <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+        <CO_Nombres>`+this.userSession.CO_NOMBRES+`</CO_Nombres>
+        <codtarjetaAcreditar>`+this.cuentaCredito+`</codtarjetaAcreditar>
+        <Beneficiario>`+this.OP_Beneficiario+`</Beneficiario>
+        <Rif2>`+this.userSession.AF_Rif+`</Rif2>
+        <CedulaBeneficiario>`+this.OP_IdBeneficiario+`</CedulaBeneficiario>
+        <SCodBco>`+this.BANK_ID+`</SCodBco>
+        <Ip>10.60.102.133</Ip>
+        <Motivo>`+this.MotivoPago+`</Motivo>
+     </PagoTarjetaCreditoOtrosBancosTerceros>
+   </soap:Body>
+ </soap:Envelope>`
+
+ console.log("TRANSFERENCIAS TERCEROS OTROS BANCOS SENDING THIS: ",postData);
+ //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asmx?op=PagoTarjetaCreditoOtrosBancosTerceros",postData,httpOptions )
+   .subscribe(data => {
+    // console.log('Data: '+data['_body']); 
+    }, error => {
+           //Hacemos el parse tal cual como antes:
+           console.log('Error: '+JSON.stringify(error));
+           var str = JSON.stringify(error);
+           console.log("stingified: ", str);
+           var search_array = JSON.parse(str);
+           console.log("result: ", search_array.error.text);
+           var parser = new DOMParser();
+           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+           console.log(doc);
+           var el = doc.createElement("p");
+           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+           var tmp = doc.createElement("div");
+           tmp.appendChild(el);
+           console.log(tmp.innerHTML);
+           var parseString = xml2js.parseString;
+           var xml = tmp.innerHTML;
+          // var texto:string = "";
+           var self = this;
+           parseString(xml, self, function (err, result) {
+               try{
+                     console.dir(result);
+                     var str = JSON.stringify(result);
+                     console.log("stringified: ", result);
+                     var search_array = JSON.parse(str);
+                     console.log("Transferencia hecha: ",search_array);
+                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoOtrosBancosTercerosResponse['0'].PagoTarjetaCreditoOtrosBancosTercerosResult['0'].inextdsjv['0'].SReferencia['0']
+                     console.log("REF: ",self.referencia);
+                     self.navCtrl.push(PagoTdcTercerosOtrosBancosReciboPage,{
+                      "cuentaDebito":self.cuentaDebito,
+                      "cuentaCredito":self.cuentaCredito,
+                      "cuentaDebitoFull":self.cuentaDebito,
+                      "cuentaCreditoFull":self.cuentaCredito,
+                      "nombre":self.OP_Beneficiario,
+                      "ciNo":self.OP_IdBeneficiario,
+                      "ciType":"",
+                      "montoValue":self.montoValue,
+                      "motivo":self.MotivoPago,
+                      "conceptoValue":self.OP_Concepto,
+                      "email":self.OP_Mail,
+                      "sdisponible":"",
+                      "bankName":self.BANK_NOMBRE,
+                      "fechaToSend":self.fechaToSend,
+                      "referencia":self.referencia,
+                      "checkFirmas":self.checkFirmas,
+                    });
+                 }catch(Error){
+                  console.log("Error try 1")
+                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                  //self.presentToast();
+                 }
+               });
+    });
+  } catch (error) {
+    console.log("Error try 2")
+  }
+}
   ionViewDidLoad() {
     console.log('ionViewDidLoad AprobacionRechazoConsultaDetallePage');
   }
-
 }
