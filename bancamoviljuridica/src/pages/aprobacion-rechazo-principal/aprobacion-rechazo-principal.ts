@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AprobacionRechazoConsultaPage } from '../aprobacion-rechazo-consulta/aprobacion-rechazo-consulta';
+import { AprobacionRechazoListaPrincipalPage } from '../aprobacion-rechazo-lista-principal/aprobacion-rechazo-lista-principal';
 
 /**
  * Generated class for the AprobacionRechazoPrincipalPage page.
@@ -23,7 +24,7 @@ export class AprobacionRechazoPrincipalPage {
     console.log('ionViewDidLoad AprobacionRechazoPrincipalPage');
   }
   goToAutorizacion(params){
-
+    this.navCtrl.push(AprobacionRechazoListaPrincipalPage);
   }
   goToConsulta(params){
     this.navCtrl.push(AprobacionRechazoConsultaPage);

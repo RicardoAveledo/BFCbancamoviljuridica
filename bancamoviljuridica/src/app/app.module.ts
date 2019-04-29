@@ -55,6 +55,7 @@ import { PagoTdcTercerosOtrosBancosReciboPage } from '../pages/pago-tdc-terceros
 import { AprobacionRechazoConsultaPage } from '../pages/aprobacion-rechazo-consulta/aprobacion-rechazo-consulta';
 import { AprobacionRechazoConsultaDetallePage } from '../pages/aprobacion-rechazo-consulta-detalle/aprobacion-rechazo-consulta-detalle';
 import { DetallePrestamoPage } from '../pages/detalle-prestamo/detalle-prestamo';
+import { AprobacionRechazoListaPrincipalPage } from '../pages/aprobacion-rechazo-lista-principal/aprobacion-rechazo-lista-principal';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { DetallePrestamoPage } from '../pages/detalle-prestamo/detalle-prestamo'
     LoginPage,
     AprobaciNRechazoPage,
     AprobacionRechazoConsultaDetallePage,
+    AprobacionRechazoListaPrincipalPage,
     DetalleDeLaCuentaPage,
     DetalleDeTarjetaPage,
     TransferenciasMismoTitularBFCPage,
@@ -130,6 +132,7 @@ import { DetallePrestamoPage } from '../pages/detalle-prestamo/detalle-prestamo'
     AprobaciNRechazoPage,
     AprobacionRechazoConsultaPage,
     AprobacionRechazoConsultaDetallePage,
+    AprobacionRechazoListaPrincipalPage,
     DetalleDeLaCuentaPage,
     DetalleDeTarjetaPage,
     TransferenciasMismoTitularBFCPage,
