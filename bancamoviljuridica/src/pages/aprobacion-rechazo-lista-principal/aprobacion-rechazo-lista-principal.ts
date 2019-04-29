@@ -8,7 +8,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
-import { AprobacionRechazoConsultaDetallePage } from '../aprobacion-rechazo-consulta-detalle/aprobacion-rechazo-consulta-detalle';
+import { AprobaciNRechazoPage } from '../aprobaci-nrechazo/aprobaci-nrechazo';
 
 /**
  * Generated class for the AprobacionRechazoListaPrincipalPage page.
@@ -621,7 +621,7 @@ export class AprobacionRechazoListaPrincipalPage {
                                                                var MotivoPago     : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].MotivoPago['0']
                                                                var CuentaDebitar  : string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoNominaResponse['0'].PagoNominaResult['0']['diffgr:diffgram']['0'].DocumentElement['0'].Table_x0020_10['0'].CuentaDebitar['0'];
                                                                console.log("Mando esto al Detalle: ", OP_CodeTran    +" " + FechaValor     +" " + HoraValor      +" " + NombreArchivo  +" " + EstadoLote     +" " + TotalRegistros +" " + Monto          +" " + TipoCarga      +" " + MotivoPago     +" " + CuentaDebitar  )
-                                                               self2.navCtrl.push(AprobacionRechazoConsultaDetallePage,{
+                                                               self2.navCtrl.push(AprobaciNRechazoPage,{
                                                                   'itemPassed':item,
                                                                   'firmasFaltantes': self2.firmasFaltantes,
                                                                   'cantidadFirmas': self2.cantidadFirmas,
@@ -647,7 +647,7 @@ export class AprobacionRechazoListaPrincipalPage {
                                               console.log("Error try 2")
                                             }
                                           } else {
-                                            self2.navCtrl.push(AprobacionRechazoConsultaDetallePage,{
+                                            self2.navCtrl.push(AprobaciNRechazoPage,{
                                               'itemPassed':item,
                                               'firmasFaltantes': self2.firmasFaltantes,
                                               'cantidadFirmas': self2.cantidadFirmas,
