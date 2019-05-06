@@ -11,6 +11,7 @@ import { PagoTdcMismoTitularBfcReciboPage } from '../pago-tdc-mismo-titular-bfc-
 import { PagoTdcMismoTitularOtrosBancosReciboPage } from '../pago-tdc-mismo-titular-otros-bancos-recibo/pago-tdc-mismo-titular-otros-bancos-recibo';
 import { PagoTdcTercerosBfcReciboPage } from '../pago-tdc-terceros-bfc-recibo/pago-tdc-terceros-bfc-recibo';
 import { PagoTdcTercerosOtrosBancosReciboPage } from '../pago-tdc-terceros-otros-bancos-recibo/pago-tdc-terceros-otros-bancos-recibo';
+import { AprobarRechazarNominaTokenPage } from '../aprobar-rechazar-nomina-token/aprobar-rechazar-nomina-token';
 
 @Component({
   selector: 'page-aprobaci-nrechazo',
@@ -1380,6 +1381,33 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
     console.log("Error try 2")
   }
 }
+
+
+goTokenNomina(){
+  console.log("Estado: ", this.estado);
+  this.navCtrl.push(AprobarRechazarNominaTokenPage,{
+    "EstadoLote":this.EstadoLote,
+    "OP_CodeTran":this.OP_CodeTran,
+    "OP_ID":this.OP_ID,
+    "NombreArchivo":this.NombreArchivo,
+    "TipoCarga":this.TipoCarga,
+    "usuarioProceso":this.usuarioProceso,
+    "correoUsuario":this.correoUsuario,
+    "CuentaDebitar":this.CuentaDebitar,
+    "TotalRegistros":this.TotalRegistros,
+    "Monto":this.Monto,
+    "MotivoPago":this.MotivoPago,
+    "fechaEfectiva":this.fechaEfectiva,
+    "horaEfectiva":this.horaEfectiva,
+    "estado":this.estado,
+  })
+}
+
+goTokenProveedores(){
+  
+}
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AprobacionRechazoConsultaDetallePage');
   }

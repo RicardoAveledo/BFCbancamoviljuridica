@@ -1,0 +1,114 @@
+<ion-header>
+        <ion-navbar no-padding hideBackButton="true">
+            <ion-grid no-padding no-border style="width:auto;height:70px;">
+              <ion-row no-padding >
+                <ion-col class="topleft">
+                  <img src="assets/img/regresar.PNG" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+                </ion-col>
+                <ion-col class="topleft">
+                  <img src="assets/img/headerLogo1.PNG" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+                </ion-col>
+                <ion-col class="topright">
+                  <img src="assets/img/headerLogo2.PNG" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+                </ion-col>
+                <ion-col class="topright">
+                    <div *ngIf="Cod == 32">
+                        <img src="assets/img/continuar.PNG" float-right style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goTokenNomina()">
+                    </div>
+                    <div *ngIf="Cod == 64">
+                        <img src="assets/img/continuar.PNG" float-right style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goTokenProveedores()">
+                    </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-navbar>
+      </ion-header>
+      
+      <ion-content id="page11">
+          <div id="mainContainer">
+              <img src="assets/img/ARTransferenciaMismoTitularBFC.PNG" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+
+<div>
+        <form id="transferenciaMismoTitularBFCRecibo-form9"> 
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Estado del Lote
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{EstadoLote}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Número del Lote
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{OP_CodeTran}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Nombre del Lote
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{NombreArchivo}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Tipo de Carga
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{TipoCarga}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Usuario que Procesó
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{usuarioProceso}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Correo
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{correoUsuario}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Cuenta Origen
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{CuentaDebitar}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Total Registros
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{TotalRegistros}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Cantidad de Rechazos
+                </ion-label>
+                <ion-input text-right type="text" placeholder=""></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Monto Total
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{Monto}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Motivo del Pago
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{MotivoPago}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Fecha valor Efectiva
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{fechaEfectiva}}"></ion-input>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Hora valor Efectiva
+                </ion-label>
+                <ion-input text-right type="text" placeholder="{{horaEfectiva}}"></ion-input>
+              </ion-item>
+        </form>
+      </div>
+      </div>
+      </ion-content>

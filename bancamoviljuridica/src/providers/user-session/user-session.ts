@@ -71,11 +71,16 @@ export class UserSessionProvider {
 //public serverIPApp:string = "10.60.102.178/IBBFCEMovil/app";      //57306 
 //public serverIPWS:string = "10.60.102.178/IBBFCEMovils/ws";        //2898
 //public serverIPApp:string = "10.60.63.58:8445/IBBFCEMovil/app";
-//public serverIPWS:string = "10.60.63.58:8445/IBBFCEMovil/ws";  
-public serverIPApp:string = "localhost:57306";
-public serverIPWS:string = "localhost:2898";  
-//public serverIPApp:string = "10.60.102.100/IBBFCE";
-//public serverIPWS:string = "10.60.102.100/WSFCIBJuridicoIBS";  
+//public serverIPApp:string = "10.60.63.58:8467";  
+//public serverIPWS:string = "10.60.63.58:8477";  
+//public serverIPApp:string = "localhost:57306";
+//public serverIPWS:string = "localhost:2898";  
+//public serverIPApp:string = "10.60.63.58:8445/IBBFCE";
+//public serverIPWS:string = "10.60.63.58:8445/WSFCIBJuridicoIBS";  
+//public serverIPApp:string = "201.248.81.244:8445/IBBFCE";
+//public serverIPWS:string = "201.248.81.244:8445/WSFCIBJuridicoIBS";  
+public serverIPApp:string = "10.60.102.100/IBBFCE";
+public serverIPWS:string = "10.60.102.100/WSFCIBJuridicoIBS";  
 //public serverIPApp:string = "10.60.102.91/IBBFCE";
 //public serverIPWS:string = "10.60.102.91/WSFCIBJuridicoIBS";  
 

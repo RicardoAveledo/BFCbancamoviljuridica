@@ -56,6 +56,10 @@ import { AprobacionRechazoConsultaPage } from '../pages/aprobacion-rechazo-consu
 import { AprobacionRechazoConsultaDetallePage } from '../pages/aprobacion-rechazo-consulta-detalle/aprobacion-rechazo-consulta-detalle';
 import { DetallePrestamoPage } from '../pages/detalle-prestamo/detalle-prestamo';
 import { AprobacionRechazoListaPrincipalPage } from '../pages/aprobacion-rechazo-lista-principal/aprobacion-rechazo-lista-principal';
+import { AprobarRechazarNominaReciboPage } from '../pages/aprobar-rechazar-nomina-recibo/aprobar-rechazar-nomina-recibo';
+import { AprobarRechazarNominaTokenPage } from '../pages/aprobar-rechazar-nomina-token/aprobar-rechazar-nomina-token';
+import { AprobarRechazarProveedoresReciboPage } from '../pages/aprobar-rechazar-proveedores-recibo/aprobar-rechazar-proveedores-recibo';
+import { AprobarRechazarProveedoresTokenPage } from '../pages/aprobar-rechazar-proveedores-token/aprobar-rechazar-proveedores-token';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,10 @@ import { AprobacionRechazoListaPrincipalPage } from '../pages/aprobacion-rechazo
     TransferenciaMismoTitularOtrosBancosReciboPage,
     TransferenciaTercerosBfcConfirmarPage,
     TransferenciasTercerosBfcReciboPage,
+    AprobarRechazarNominaReciboPage,
+    AprobarRechazarNominaTokenPage,
+    AprobarRechazarProveedoresReciboPage,
+    AprobarRechazarProveedoresTokenPage,
     TransferenciasTercerosDetallePage,
     TransferenciaTercerosOtrosBancosPage,
     TransferenciaTercerosOtrosBancosDetallePage,
@@ -133,6 +141,10 @@ import { AprobacionRechazoListaPrincipalPage } from '../pages/aprobacion-rechazo
     AprobacionRechazoConsultaPage,
     AprobacionRechazoConsultaDetallePage,
     AprobacionRechazoListaPrincipalPage,
+    AprobarRechazarNominaReciboPage,
+    AprobarRechazarNominaTokenPage,
+    AprobarRechazarProveedoresReciboPage,
+    AprobarRechazarProveedoresTokenPage,
     DetalleDeLaCuentaPage,
     DetalleDeTarjetaPage,
     TransferenciasMismoTitularBFCPage,
