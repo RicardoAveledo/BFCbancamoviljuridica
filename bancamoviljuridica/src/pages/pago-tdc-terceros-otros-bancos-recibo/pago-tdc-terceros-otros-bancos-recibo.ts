@@ -41,6 +41,7 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
   public referencia:string;
   public bankName:string;
   public checkFirmas:string;
+  public checkRechazo:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -61,6 +62,7 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
     this.bankName = navParams.get("bankName"); 
     this.referencia = navParams.get("referencia");
     this.checkFirmas = navParams.get("checkFirmas");
+    this.checkRechazo = navParams.get("checkRechazo");
     console.log("Trajo esto: ", this.cuentaDebito+ " - "+
     this.cuentaCredito + " - "+
     this.cuentaDebitoFull + " - "+

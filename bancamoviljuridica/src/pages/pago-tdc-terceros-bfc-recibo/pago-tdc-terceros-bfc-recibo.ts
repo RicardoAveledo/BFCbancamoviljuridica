@@ -40,6 +40,7 @@ export class PagoTdcTercerosBfcReciboPage {
   public fechaToSend:string;
   public referencia:string;
   public checkFirmas:string;
+  public checkRechazo:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -59,6 +60,7 @@ export class PagoTdcTercerosBfcReciboPage {
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.referencia = navParams.get("referencia"); 
     this.checkFirmas = navParams.get("checkFirmas"); 
+    this.checkRechazo = navParams.get("checkRechazo"); 
   }
 
   ionViewDidLoad() {

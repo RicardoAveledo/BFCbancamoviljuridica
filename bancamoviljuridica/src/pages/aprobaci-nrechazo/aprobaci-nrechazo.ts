@@ -1240,7 +1240,8 @@ makeTheTDCPaymentTBFC(){
                       "sdisponible":"",
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas, 
+                      "checkFirmas":self.checkFirmas,
+                      //"checkRechazo":'rechazado', 
                     });
                  }catch(Error){
                   console.log("Error try 1")
@@ -1369,6 +1370,7 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
                       "checkFirmas":self.checkFirmas,
+                      //"checkRechazo":'rechazado',
                     });
                  }catch(Error){
                   console.log("Error try 1")

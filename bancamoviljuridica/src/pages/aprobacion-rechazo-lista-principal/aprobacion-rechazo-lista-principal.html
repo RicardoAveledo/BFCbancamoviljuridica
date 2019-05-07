@@ -50,6 +50,7 @@
 </ion-item>
 
 <div *ngIf='transferenciasSelected'>
+    <br>
       <strong>
         Transferencias
       </strong>
@@ -63,7 +64,6 @@
             </ion-col>
         </ion-row>
       </ion-grid>
-
       <div *ngFor="let item of transferencias">
       <ion-grid>
           <ion-row (click)="loadDetalle(item)">
@@ -80,6 +80,7 @@
 
 
 <div *ngIf='pagoTDCSelected'>
+  <br>
     <strong>
       Pagos TDC
     </strong>
@@ -108,21 +109,7 @@
 </div>
 
 <div *ngIf='nominaSelected'>
-    <ion-item id="transferenciasMismoTitularBFC-select5"> 
-        <ion-label><strong>Estatus</strong></ion-label>
-          <ion-select name="">
-                <ion-option [selected]=false (ionSelect)="loadPorAprobarNomina()">
-                    Por Aprobar
-                </ion-option>
-                <ion-option [selected]=false (ionSelect)="loadProcesadosNomina()">
-                    Procesado
-                </ion-option>
-                <ion-option [selected]=false (ionSelect)="loadRechazadosNomina()">
-                    Rechazado
-                </ion-option>
-          </ion-select>
-      </ion-item>
-      <br>
+    <br>
     <strong>
       Nómina
     </strong>
@@ -158,23 +145,9 @@
 
 
 <div *ngIf='proveedoresSelected'>
-  <ion-item id="transferenciasMismoTitularBFC-select5"> 
-      <ion-label><strong>Estatus</strong></ion-label>
-        <ion-select name="">
-              <ion-option [selected]=false (ionSelect)="loadPorAprobarProveedores()">
-                  Por Aprobar
-              </ion-option>
-              <ion-option [selected]=false (ionSelect)="loadProcesadosProveedores()">
-                  Procesado
-              </ion-option>
-              <ion-option [selected]=false (ionSelect)="loadRechazadosProveedores()">
-                  Rechazado
-              </ion-option>
-        </ion-select>
-    </ion-item>
-    <br>
+  <br>
   <strong>
-    Nómina
+    Proveedores
   </strong>
   <ion-grid>
     <ion-row>

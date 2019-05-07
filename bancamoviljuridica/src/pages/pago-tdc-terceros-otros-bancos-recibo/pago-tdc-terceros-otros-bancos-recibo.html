@@ -24,7 +24,7 @@
   <img src="assets/img/HeaderTDCTercerosOtrosBancos.PNG" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
   
-  <div *ngIf="checkFirmas=='true'">
+  <div *ngIf="(checkFirmas=='true') && (checkRechazo!='rechazo')">
       <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
         <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
           <ion-icon name="checkmark" item-left></ion-icon>
@@ -33,11 +33,19 @@
       </ion-list>
       </div>
     
-      <div *ngIf="checkFirmas!='true'">
+      <div *ngIf="(checkFirmas!='true') && (checkRechazo!='rechazo')">
           <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
             <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
               Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
             </ion-item>
+          </ion-list>
+      </div>
+      
+      <div *ngIf="checkRechazo=='rechazo'">
+          <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+            <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+              Operación Rechazada
+           </ion-item>
           </ion-list>
       </div>
 

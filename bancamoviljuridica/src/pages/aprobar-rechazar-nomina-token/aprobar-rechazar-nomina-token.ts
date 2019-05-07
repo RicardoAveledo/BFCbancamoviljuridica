@@ -75,6 +75,7 @@ export class AprobarRechazarNominaTokenPage {
   public referencia:string;
   public noCuenta:string;
   public CodigoOTP:string;
+  public CodigoOTPCheck:string;
 
   constructor(public httpClient: HttpClient, private alertCtrl: AlertController, public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
       this.EstadoLote = navParams.get("EstadoLote");
@@ -158,6 +159,14 @@ export class AprobarRechazarNominaTokenPage {
     this.navCtrl.pop();
   }
 
+  showAlert(mensaje: string) {
+    const alert = this.alertCtrl.create({
+      title: 'BFC',
+      subTitle: mensaje ,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
   confirm(){
     let alert = this.alertCtrl.create({
@@ -167,7 +176,11 @@ export class AprobarRechazarNominaTokenPage {
         {
           text: 'Si',
           handler: () => {
-            this.checkFirmas();
+            if(this.CodigoOTP == this.CodigoOTPCheck){
+              this.checkFirmas();
+            } else {
+              this.showAlert("Código OTP incorrecto")
+            }
           }
         },
         {
@@ -190,7 +203,11 @@ export class AprobarRechazarNominaTokenPage {
         {
           text: 'Si',
           handler: () => {
-
+            if(this.CodigoOTP == this.CodigoOTPCheck){
+              this.rechazarTransaccion();
+            } else {
+              this.showAlert("Código OTP incorrecto")
+            }
           }
         },
         {
@@ -205,6 +222,93 @@ export class AprobarRechazarNominaTokenPage {
     alert.present();
   }
 
+  rechazarTransaccion(){
+    var listvalores:any[]=[];
+    try {
+      //Ahora se procede a traer el menú dinámico:
+     var headers = new HttpHeaders();
+     headers.append('Content-Type', 'text/xml');
+     var httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type':  'text/xml'
+       })
+     };
+
+     //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+     //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+     var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Body>
+       <FirmasRechazar xmlns="http://tempuri.org/">
+         <OP_Id>`+this.OP_ID+`</OP_Id>
+         <Id>`+this.userSession.AF_Id+`</Id>
+       </FirmasRechazar>
+     </soap:Body>
+   </soap:Envelope>`
+
+   console.log(postData);
+   //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+      this.userSession.httpClient.post("http://"+this.userSession.serverIPApp+"/WsMovil.asmx?op=FirmasRechazar",postData,httpOptions )
+     .subscribe(data => {
+      // console.log('Data: '+data['_body']); 
+      }, error => {
+             //Hacemos el parse tal cual como antes:
+             console.log('Error: '+JSON.stringify(error));
+             var str = JSON.stringify(error);
+             console.log("stingified: ", str);
+             var search_array = JSON.parse(str);
+             console.log("result: ", search_array.error.text);
+             var parser = new DOMParser();
+             var doc = parser.parseFromString(search_array.error.text, "application/xml");
+             console.log(doc);
+             var el = doc.createElement("p");
+             el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+             var tmp = doc.createElement("div");
+             tmp.appendChild(el);
+             console.log(tmp.innerHTML);
+             var parseString = xml2js.parseString;
+             var xml = tmp.innerHTML;
+            // var texto:string = "";
+             var self = this;
+             parseString(xml, self, function (err, result) {
+                 try{
+                      console.dir(result);
+                      var str = JSON.stringify(result);
+                      console.log("stringified: ", result);
+                      var search_array = JSON.parse(str);
+                      console.log("Operacion Rechazada: ", search_array);
+                      var checkOP:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].FirmasRechazarResponse['0'].FirmasRechazarResult['0'];
+                      if (checkOP == '1060'){
+                          self.showAlert("A ocurrido un error, intente más tarde");
+                      } else {
+                        self.navCtrl.push(AprobarRechazarNominaReciboPage,{
+                          "EstadoLote":self.EstadoLote,
+                          "OP_CodeTran":self.OP_CodeTran,
+                          "OP_ID":self.OP_ID,
+                          "NombreArchivo":self.NombreArchivo,
+                          "TipoCarga":self.TipoCarga,
+                          "usuarioProceso":self.usuarioProceso,
+                          "correoUsuario":self.correoUsuario,
+                          "CuentaDebitar":self.CuentaDebitar,
+                          "TotalRegistros":self.TotalRegistros,
+                          "Monto":self.Monto,
+                          "MotivoPago":self.MotivoPago,
+                          "fechaEfectiva":self.fechaEfectiva,
+                          "horaEfectiva":self.horaEfectiva,
+                          "estado":self.estado,
+                          "checkFirmas":'rechazada',
+                         })
+                      }
+                 }catch(Error){
+                    console.log("Error try 1")
+                    //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                    //self.presentToast();
+                   }
+                 });
+      });
+    } catch (error) {
+      console.log("Error try 2")
+    }
+  }
 
   checkFirmas(){
     var listvalores:any[]=[];
@@ -264,6 +368,8 @@ export class AprobarRechazarNominaTokenPage {
                       if(count == "0"){
                         self.makePayment();
                         //Acá hacer todos los IF con todos los makeTheTransfer a cada transaccion
+                      } else if (count == "1060"){
+                        self.showAlert("A ocurrido un error, intente más tarde");
                       } else {
                         self.navCtrl.push(AprobarRechazarNominaReciboPage,{
                           "EstadoLote":self.EstadoLote,
@@ -280,6 +386,7 @@ export class AprobarRechazarNominaTokenPage {
                           "fechaEfectiva":self.fechaEfectiva,
                           "horaEfectiva":self.horaEfectiva,
                           "estado":self.estado,
+                          "checkFirmas":'false',
                          })
                         //Acá hacer todos los IF con todos los push a cada transaccion
                       }
@@ -364,9 +471,10 @@ export class AprobarRechazarNominaTokenPage {
                             "TotalRegistros":self.TotalRegistros,
                             "Monto":self.Monto,
                             "MotivoPago":self.MotivoPago,
-                            "fechaEfectiva":self.fechaEfectiva,
+                            "fechaEfeSctiva":self.fechaEfectiva,
                             "horaEfectiva":self.horaEfectiva,
                             "estado":self.estado,
+                            "checkFirmas":'true',
                            })
                          }
                      }catch(Error){

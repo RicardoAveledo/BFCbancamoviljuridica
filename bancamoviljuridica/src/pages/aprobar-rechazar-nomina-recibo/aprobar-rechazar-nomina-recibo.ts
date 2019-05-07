@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserSessionProvider } from '../../providers/user-session/user-session';
 import xml2js from 'xml2js';
+import { WelcomePage } from '../welcome/welcome';
+import { AprobaciNRechazoPage } from '../aprobaci-nrechazo/aprobaci-nrechazo';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 /**
  * Generated class for the AprobarRechazarNominaReciboPage page.
  *
@@ -73,6 +76,7 @@ export class AprobarRechazarNominaReciboPage {
   public referencia:string;
   public noCuenta:string;
   public CodigoOTP:string;
+  public checkFirmas:string;
 
   constructor(public httpClient: HttpClient, private alertCtrl: AlertController, public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
       this.EstadoLote = navParams.get("EstadoLote");
@@ -89,8 +93,24 @@ export class AprobarRechazarNominaReciboPage {
       this.fechaEfectiva = navParams.get("fechaEfectiva");
       this.horaEfectiva = navParams.get("horaEfectiva");
       this.estado = navParams.get("estado");
+      this.checkFirmas = navParams.get("checkFirmas");
   }
-  
+
+  goBack(){
+    this.navCtrl.pop();
+  }
+
+  goToWelcome(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(WelcomePage);
+  }
+
+ 
+  goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AprobarRechazarNominaReciboPage');
   }

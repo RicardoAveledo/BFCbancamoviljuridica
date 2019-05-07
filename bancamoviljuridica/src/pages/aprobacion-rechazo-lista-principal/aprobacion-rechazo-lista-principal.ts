@@ -431,6 +431,7 @@ export class AprobacionRechazoListaPrincipalPage {
       this.pagoTDCSelected=false;
       this.transferenciasSelected=false;
       this.proveedoresSelected=false;
+      this.loadPorAprobarNomina();
     }
   }
   
@@ -440,6 +441,7 @@ export class AprobacionRechazoListaPrincipalPage {
       this.pagoTDCSelected=false;
       this.nominaSelected=false;
       this.transferenciasSelected=false;
+      this.loadPorAprobarProveedores();
     }
   }
 
