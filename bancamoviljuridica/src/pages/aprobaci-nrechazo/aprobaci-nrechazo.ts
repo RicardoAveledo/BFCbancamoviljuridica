@@ -12,6 +12,7 @@ import { PagoTdcMismoTitularOtrosBancosReciboPage } from '../pago-tdc-mismo-titu
 import { PagoTdcTercerosBfcReciboPage } from '../pago-tdc-terceros-bfc-recibo/pago-tdc-terceros-bfc-recibo';
 import { PagoTdcTercerosOtrosBancosReciboPage } from '../pago-tdc-terceros-otros-bancos-recibo/pago-tdc-terceros-otros-bancos-recibo';
 import { AprobarRechazarNominaTokenPage } from '../aprobar-rechazar-nomina-token/aprobar-rechazar-nomina-token';
+import { AprobarRechazarProveedoresTokenPage } from '../aprobar-rechazar-proveedores-token/aprobar-rechazar-proveedores-token';
 
 @Component({
   selector: 'page-aprobaci-nrechazo',
@@ -1673,7 +1674,23 @@ goTokenNomina(){
 }
 
 goTokenProveedores(){
-  
+  console.log("Estado: ", this.estado);
+  this.navCtrl.push(AprobarRechazarProveedoresTokenPage,{
+    "EstadoLote":this.EstadoLote,
+    "OP_CodeTran":this.OP_CodeTran,
+    "OP_ID":this.OP_ID,
+    "NombreArchivo":this.NombreArchivo,
+    "TipoCarga":this.TipoCarga,
+    "usuarioProceso":this.usuarioProceso,
+    "correoUsuario":this.correoUsuario,
+    "CuentaDebitar":this.CuentaDebitar,
+    "TotalRegistros":this.TotalRegistros,
+    "Monto":this.Monto,
+    "MotivoPago":this.MotivoPago,
+    "fechaEfectiva":this.fechaEfectiva,
+    "horaEfectiva":this.horaEfectiva,
+    "estado":this.estado,
+  })
 }
 
 
