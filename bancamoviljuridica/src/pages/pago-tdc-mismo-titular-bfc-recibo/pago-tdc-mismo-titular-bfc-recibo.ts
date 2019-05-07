@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
 import { TransferenciasPage } from '../transferencias/transferencias';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
 /**
  * Generated class for the PagoTdcMismoTitularBfcReciboPage page.
@@ -23,6 +24,8 @@ export class PagoTdcMismoTitularBfcReciboPage {
   public referencia:string;
   public montoValue:number;
   public checkFirmas:string;
+  public estado:string;
+  public checkAprobaciones:string;
   
     constructor(public navCtrl: NavController, public navParams: NavParams) {
       this.cuentaDebito = navParams.get('cuentaDebito');
@@ -31,6 +34,8 @@ export class PagoTdcMismoTitularBfcReciboPage {
       this.fecha = navParams.get('fecha');
       this.referencia = navParams.get('referencia');
       this.checkFirmas = navParams.get('checkFirmas');
+      this.estado = navParams.get("estado");
+      this.checkAprobaciones = navParams.get("checkAprobaciones");
     }
     
     goToTDC(params){
@@ -42,7 +47,10 @@ export class PagoTdcMismoTitularBfcReciboPage {
       this.navCtrl.setRoot(WelcomePage);
   
     }
-
+goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagoTdcMismoTitularBfcReciboPage');
   }

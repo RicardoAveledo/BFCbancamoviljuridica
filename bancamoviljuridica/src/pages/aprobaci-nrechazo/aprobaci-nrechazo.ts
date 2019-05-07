@@ -182,7 +182,7 @@ export class AprobaciNRechazoPage {
         {
           text: 'Si',
           handler: () => {
-
+            this.rejectOperaciones();
           }
         },
         {
@@ -196,6 +196,241 @@ export class AprobaciNRechazoPage {
     });
     alert.present();
   }
+
+  showAlert(mensaje: string) {
+    const alert = this.alertCtrl.create({
+      title: 'BFC',
+      subTitle: mensaje ,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  rejectOperaciones(){
+    var listvalores:any[]=[];
+    try {
+      //Ahora se procede a traer el menú dinámico:
+     var headers = new HttpHeaders();
+     headers.append('Content-Type', 'text/xml');
+     var httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type':  'text/xml'
+       })
+     };
+
+     //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+     //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+     var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Body>
+       <FirmasRechazar xmlns="http://tempuri.org/">
+         <OP_Id>`+this.OP_ID+`</OP_Id>
+         <Id>`+this.userSession.AF_Id+`</Id>
+       </FirmasRechazar>
+     </soap:Body>
+   </soap:Envelope>`
+
+   console.log(postData);
+   //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+      this.userSession.httpClient.post("http://"+this.userSession.serverIPApp+"/WsMovil.asmx?op=FirmasRechazar",postData,httpOptions )
+     .subscribe(data => {
+      // console.log('Data: '+data['_body']); 
+      }, error => {
+             //Hacemos el parse tal cual como antes:
+             console.log('Error: '+JSON.stringify(error));
+             var str = JSON.stringify(error);
+             console.log("stingified: ", str);
+             var search_array = JSON.parse(str);
+             console.log("result: ", search_array.error.text);
+             var parser = new DOMParser();
+             var doc = parser.parseFromString(search_array.error.text, "application/xml");
+             console.log(doc);
+             var el = doc.createElement("p");
+             el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+             var tmp = doc.createElement("div");
+             tmp.appendChild(el);
+             console.log(tmp.innerHTML);
+             var parseString = xml2js.parseString;
+             var xml = tmp.innerHTML;
+            // var texto:string = "";
+             var self = this;
+             parseString(xml, self, function (err, result) {
+                 try{
+                      console.dir(result);
+                      var str = JSON.stringify(result);
+                      console.log("stringified: ", result);
+                      var search_array = JSON.parse(str);
+                      console.log("Número de firmas: ", search_array);
+
+                      var checkOP:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].FirmasRechazarResponse['0'].FirmasRechazarResult['0'];
+                      if (checkOP == '1060'){
+                          self.showAlert("A ocurrido un error, intente más tarde");
+                      } else {
+                        if(self.Cod=="19"){
+                          self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          });
+                        } 
+                        if(self.Cod=="16"){
+                          self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "montoValue":self.montoValue,
+                            "fecha":self.fecha,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          });
+                        } 
+                        if(self.Cod=="17"){
+                          self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado", 
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          }); 
+                        } 
+                        if(self.Cod=="20"){
+                          self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          });
+                        } 
+                        if (self.Cod=="24"){
+                          self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "montoValue":self.montoValue,
+                            "fecha":self.fecha,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          });
+                        }
+                        if (self.Cod=="27"){
+                          self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          });
+                        }
+                        if (self.Cod=="25"){
+                        self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                          "cuentaDebito":self.cuentaDebito,
+                          "cuentaCredito":self.cuentaCredito,
+                          "cuentaDebitoFull":self.cuentaDebito,
+                          "cuentaCreditoFull":self.cuentaCredito,
+                          "nombre":self.OP_Beneficiario,
+                          "ciNo":self.OP_IdBeneficiario,
+                          "ciType":"",
+                          "montoValue":self.montoValue,
+                          "motivo":self.MotivoPago,
+                          "conceptoValue":self.OP_Concepto,
+                          "email":self.OP_Mail,
+                          "sdisponible":"",
+                          "fechaToSend":self.fechaToSend,
+                          "referencia":self.referencia,
+                          "checkFirmas":"rechazado", 
+                          "checkAprobaciones":"true",
+                          "estado":self.estado,
+                        });
+                      }
+                      if (self.Cod=="28"){
+                          self.navCtrl.push(PagoTdcTercerosOtrosBancosReciboPage,{
+                            "cuentaDebito":self.cuentaDebito,
+                            "cuentaCredito":self.cuentaCredito,
+                            "cuentaDebitoFull":self.cuentaDebito,
+                            "cuentaCreditoFull":self.cuentaCredito,
+                            "nombre":self.OP_Beneficiario,
+                            "ciNo":self.OP_IdBeneficiario,
+                            "ciType":"",
+                            "montoValue":self.montoValue,
+                            "motivo":self.MotivoPago,
+                            "conceptoValue":self.OP_Concepto,
+                            "email":self.OP_Mail,
+                            "sdisponible":"",
+                            "bankName":self.BANK_NOMBRE,
+                            "fechaToSend":self.fechaToSend,
+                            "referencia":self.referencia,
+                            "checkFirmas":"rechazado",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
+                          });
+                        }
+                      }
+                 }catch(Error){
+                    console.log("Error try 1")
+                    //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                    //self.presentToast();
+                   }
+                 });
+      });
+    } catch (error) {
+      console.log("Error try 2")
+    }
+  }
+
 
   checkFirmas(){
     var listvalores:any[]=[];
@@ -300,6 +535,8 @@ export class AprobaciNRechazoPage {
                             "fechaToSend":self.fechaToSend,
                             "referencia":self.referencia,
                             "checkFirmas":"false",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           });
                         } 
                         if(self.Cod=="16"){
@@ -310,6 +547,8 @@ export class AprobaciNRechazoPage {
                             "fecha":self.fecha,
                             "referencia":self.referencia,
                             "checkFirmas":"false",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           });
                         } 
                         if(self.Cod=="17"){
@@ -329,6 +568,8 @@ export class AprobaciNRechazoPage {
                             "fechaToSend":self.fechaToSend,
                             "referencia":self.referencia,
                             "checkFirmas":"false", 
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           }); 
                         } 
                         if(self.Cod=="20"){
@@ -349,6 +590,8 @@ export class AprobaciNRechazoPage {
                             "fechaToSend":self.fechaToSend,
                             "referencia":self.referencia,
                             "checkFirmas":"false",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           });
                         } 
                         if (self.Cod=="24"){
@@ -359,6 +602,8 @@ export class AprobaciNRechazoPage {
                             "fecha":self.fecha,
                             "referencia":self.referencia,
                             "checkFirmas":"false",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           });
                         }
                         if (self.Cod=="27"){
@@ -379,6 +624,8 @@ export class AprobaciNRechazoPage {
                             "fechaToSend":self.fechaToSend,
                             "referencia":self.referencia,
                             "checkFirmas":"false",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           });
                         }
                         if (self.Cod=="25"){
@@ -398,6 +645,8 @@ export class AprobaciNRechazoPage {
                           "fechaToSend":self.fechaToSend,
                           "referencia":self.referencia,
                           "checkFirmas":"false", 
+                          "checkAprobaciones":"true",
+                          "estado":self.estado,
                         });
                       }
                       if (self.Cod=="28"){
@@ -418,6 +667,8 @@ export class AprobaciNRechazoPage {
                             "fechaToSend":self.fechaToSend,
                             "referencia":self.referencia,
                             "checkFirmas":"false",
+                            "checkAprobaciones":"true",
+                            "estado":self.estado,
                           });
                         }
                         //Acá hacer todos los IF con todos los push a cada transaccion
@@ -550,6 +801,8 @@ export class AprobaciNRechazoPage {
                         "fechaToSend":self.fechaToSend,
                         "referencia":self.referencia,
                         "checkFirmas":"true",
+                        "checkAprobaciones":"true",
+                        "estado":self.estado,
                       });
                    }catch(Error){
                     console.log("Error try 1")
@@ -635,7 +888,9 @@ makeTheTransferMTBFC(){
                       "montoValue":self.montoValue,
                       "fecha":self.fecha,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas,
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                     });
 
                 }catch(Error){
@@ -760,7 +1015,9 @@ makeTheTransferTBFC(){
                       "sdisponible":"",
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas, 
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                     });
                  }catch(Error){
                   console.log("Error try 1")
@@ -890,7 +1147,9 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMo
                       "bankName":self.BANK_NOMBRE,
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas,
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                     });
                  }catch(Error){
                   console.log("Error try 1")
@@ -982,7 +1241,9 @@ makeTheTDCPaymentMTBFC(){
                       "montoValue":self.montoValue,
                       "fecha":self.fecha,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas,
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                     });
 
                 }catch(Error){
@@ -1111,7 +1372,9 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
                       "bankName":self.BANK_NOMBRE,
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas,
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                     });
                  }catch(Error){
                   console.log("Error try 1")
@@ -1240,7 +1503,9 @@ makeTheTDCPaymentTBFC(){
                       "sdisponible":"",
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas,
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                       //"checkRechazo":'rechazado', 
                     });
                  }catch(Error){
@@ -1369,7 +1634,9 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
                       "bankName":self.BANK_NOMBRE,
                       "fechaToSend":self.fechaToSend,
                       "referencia":self.referencia,
-                      "checkFirmas":self.checkFirmas,
+                      "checkFirmas":"true",
+                      "checkAprobaciones":"true",
+                      "estado":self.estado,
                       //"checkRechazo":'rechazado',
                     });
                  }catch(Error){

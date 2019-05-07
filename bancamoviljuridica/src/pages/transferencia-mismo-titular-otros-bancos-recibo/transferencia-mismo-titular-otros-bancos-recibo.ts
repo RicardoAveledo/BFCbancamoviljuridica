@@ -7,6 +7,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { WelcomePage } from '../welcome/welcome';
 import { TransferenciasPage } from '../transferencias/transferencias';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 /**
  * Generated class for the TransferenciaMismoTitularOtrosBancosReciboPage page.
  *
@@ -38,6 +39,9 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
   public referencia:string;
   public bankName:string;
   public checkFirmas:string;
+  public estado:string;
+  public checkAprobaciones:string;
+
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -58,6 +62,8 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
     this.bankName = navParams.get("bankName"); 
     this.referencia = navParams.get("referencia"); 
     this.checkFirmas = navParams.get("checkFirmas"); 
+    this.estado = navParams.get("estado"); 
+    this.checkAprobaciones = navParams.get("checkAprobaciones"); 
   }
 
   ionViewDidLoad() {
@@ -73,6 +79,11 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
   goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciasPage);
+  }
+
+  goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
   }
 
 }

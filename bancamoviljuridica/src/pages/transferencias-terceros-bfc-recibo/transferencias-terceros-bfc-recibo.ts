@@ -8,6 +8,8 @@ import xml2js from 'xml2js';
 import { WelcomePage } from '../welcome/welcome';
 import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/transferencia-terceros-bfc';
 import { TransferenciasPage } from '../transferencias/transferencias';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
+
 
 /**
  * Generated class for the TransferenciasTercerosBfcReciboPage page.
@@ -39,7 +41,9 @@ export class TransferenciasTercerosBfcReciboPage {
   public fechaToSend:string;
   public referencia:string;
   public checkFirmas:string;
-
+  public estado:string;
+  public checkAprobaciones:string;
+  
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
@@ -58,12 +62,17 @@ export class TransferenciasTercerosBfcReciboPage {
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.referencia = navParams.get("referencia"); 
     this.checkFirmas = navParams.get("checkFirmas"); 
+    this.estado = navParams.get("estado");
+    this.checkAprobaciones = navParams.get("checkAprobaciones");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciasTercerosBfcReciboPage');
   }
-
+  goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
   goToWelcome(params){
     if (!params) params = {};
     this.navCtrl.setRoot(WelcomePage);

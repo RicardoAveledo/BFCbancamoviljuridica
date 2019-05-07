@@ -9,6 +9,7 @@ import { WelcomePage } from '../welcome/welcome';
 import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/transferencia-terceros-bfc';
 import { TransferenciasPage } from '../transferencias/transferencias';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
 /**
  * Generated class for the PagoTdcTercerosBfcReciboPage page.
@@ -41,6 +42,8 @@ export class PagoTdcTercerosBfcReciboPage {
   public referencia:string;
   public checkFirmas:string;
   public checkRechazo:string;
+  public estado:string;
+  public checkAprobaciones:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -61,6 +64,8 @@ export class PagoTdcTercerosBfcReciboPage {
     this.referencia = navParams.get("referencia"); 
     this.checkFirmas = navParams.get("checkFirmas"); 
     this.checkRechazo = navParams.get("checkRechazo"); 
+    this.estado = navParams.get("estado");
+    this.checkAprobaciones = navParams.get("checkAprobaciones");
   }
 
   ionViewDidLoad() {
@@ -71,7 +76,10 @@ export class PagoTdcTercerosBfcReciboPage {
     if (!params) params = {};
     this.navCtrl.setRoot(WelcomePage);
   }
-
+goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
 
   goToTransferencias(params){
     if (!params) params = {};

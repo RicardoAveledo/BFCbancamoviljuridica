@@ -8,6 +8,7 @@ import xml2js from 'xml2js';
 import { WelcomePage } from '../welcome/welcome';
 import { TransferenciasPage } from '../transferencias/transferencias';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
 /**
  * Generated class for the PagoTdcMismoTitularOtrosBancosReciboPage page.
@@ -40,6 +41,8 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
   public referencia:string;
   public bankName:string;
   public checkFirmas:string;
+  public estado:string;
+  public checkAprobaciones:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -59,7 +62,9 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
     this.fechaToSend = navParams.get("fechaToSend"); 
     this.bankName = navParams.get("bankName"); 
     this.referencia = navParams.get("referencia"); 
-    this.checkFirmas = navParams.get("checkFirmas"); 
+    this.checkFirmas = navParams.get("checkFirmas");
+    this.estado = navParams.get("estado"); 
+    this.checkAprobaciones = navParams.get("checkAprobaciones");
   }
 
   ionViewDidLoad() {
@@ -71,7 +76,10 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
     this.navCtrl.setRoot(WelcomePage);
   }
 
- 
+ goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
   goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.setRoot(OperacionesDeTDCPage);

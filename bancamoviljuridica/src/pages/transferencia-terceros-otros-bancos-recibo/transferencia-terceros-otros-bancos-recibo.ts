@@ -7,6 +7,7 @@ import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
 
 @Component({
@@ -33,6 +34,8 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
   public referencia:string;
   public bankName:string;
   public checkFirmas:string;
+  public estado:string;
+  public checkAprobaciones:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -53,6 +56,8 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
     this.bankName = navParams.get("bankName"); 
     this.referencia = navParams.get("referencia");
     this.checkFirmas = navParams.get("checkFirmas");
+    this.estado = navParams.get("estado");
+    this.checkAprobaciones = navParams.get("checkAprobaciones");
     console.log("Trajo esto: ", this.cuentaDebito+ " - "+
     this.cuentaCredito + " - "+
     this.cuentaDebitoFull + " - "+
@@ -74,7 +79,10 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciaMismoTitularOtrosBancosReciboPage');
   }
-
+goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
   goToWelcome(params){
     if (!params) params = {};
     this.navCtrl.setRoot(WelcomePage);

@@ -8,6 +8,7 @@ import { ToastController } from 'ionic-angular';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
 /**
  * Generated class for the PagoTdcTercerosOtrosBancosReciboPage page.
@@ -42,6 +43,8 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
   public bankName:string;
   public checkFirmas:string;
   public checkRechazo:string;
+  public estado:string;
+  public checkAprobaciones:string;
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -63,6 +66,8 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
     this.referencia = navParams.get("referencia");
     this.checkFirmas = navParams.get("checkFirmas");
     this.checkRechazo = navParams.get("checkRechazo");
+    this.estado = navParams.get("estado");
+    this.checkAprobaciones = navParams.get("checkAprobaciones");
     console.log("Trajo esto: ", this.cuentaDebito+ " - "+
     this.cuentaCredito + " - "+
     this.cuentaDebitoFull + " - "+
@@ -84,7 +89,10 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciaMismoTitularOtrosBancosReciboPage');
   }
-
+goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
   goToWelcome(params){
     if (!params) params = {};
     this.navCtrl.setRoot(WelcomePage);

@@ -12,6 +12,8 @@ import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-de
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
 import { WelcomePage } from '../welcome/welcome';
+import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
+
 
 @Component({
   selector: 'page-transferencia-mismo-titular-bfcrecibo',
@@ -24,6 +26,8 @@ public fecha:string;
 public referencia:string;
 public montoValue:number;
 public checkFirmas:string;
+public estado:string; 
+public checkAprobaciones:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.cuentaDebito = navParams.get('cuentaDebito');
@@ -32,8 +36,14 @@ public checkFirmas:string;
     this.fecha = navParams.get('fecha');
     this.referencia = navParams.get('referencia');
     this.checkFirmas = navParams.get('checkFirmas');
+    this.estado = navParams.get("estado");  
+    this.checkAprobaciones = navParams.get("checkAprobaciones");
+
   }
-  
+  goToAprobacionRechazo(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+  }
   goToTransferencias(params){
     if (!params) params = {};
     this.navCtrl.setRoot(TransferenciasPage);
