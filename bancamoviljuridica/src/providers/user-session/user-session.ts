@@ -75,12 +75,12 @@ export class UserSessionProvider {
 //public serverIPWS:string = "10.60.63.58:8477";  
 //public serverIPApp:string = "localhost:57306";
 //public serverIPWS:string = "localhost:2898";  
-//public serverIPApp:string = "10.60.63.58:8445/IBBFCE";
-//public serverIPWS:string = "10.60.63.58:8445/WSFCIBJuridicoIBS";  
+public serverIPApp:string = "201.248.81.244:8455/IBBFCE";
+public serverIPWS:string = "201.248.81.244:8455/WSFCIBJuridicoIBS";  
 //public serverIPApp:string = "201.248.81.244:8445/IBBFCE";
 //public serverIPWS:string = "201.248.81.244:8445/WSFCIBJuridicoIBS";  
-public serverIPApp:string = "10.60.102.100/IBBFCE";
-public serverIPWS:string = "10.60.102.100/WSFCIBJuridicoIBS";  
+//public serverIPApp:string = "10.60.102.100/IBBFCE";
+//public serverIPWS:string = "10.60.102.100/WSFCIBJuridicoIBS";  
 //public serverIPApp:string = "10.60.102.91/IBBFCE";
 //public serverIPWS:string = "10.60.102.91/WSFCIBJuridicoIBS";  
 
