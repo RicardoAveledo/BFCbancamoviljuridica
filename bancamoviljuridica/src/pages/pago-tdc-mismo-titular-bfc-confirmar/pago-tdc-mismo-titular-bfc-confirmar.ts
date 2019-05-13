@@ -290,7 +290,12 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
          <Instrumento>`+this.cuentaCreditoFull+`</Instrumento>
          <Ip>10.40.102.40</Ip>
          <Motivo></Motivo>
-       </PagoTarjetaCreditoMismoTitularBFC>
+         <TipoTarj></TipoTarj>
+         <concepto></concepto>
+         <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+         <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
+         <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+      </PagoTarjetaCreditoMismoTitularBFC>
      </soap:Body>
    </soap:Envelope>`
    

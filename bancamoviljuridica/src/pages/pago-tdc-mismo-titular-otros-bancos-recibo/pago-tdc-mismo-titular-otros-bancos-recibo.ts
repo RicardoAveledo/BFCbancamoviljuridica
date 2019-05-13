@@ -80,9 +80,18 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
     if (!params) params = {};
     this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
   }
-  goToTransferencias(params){
+  goToOperacionesTDC(params){
     if (!params) params = {};
     this.navCtrl.setRoot(OperacionesDeTDCPage);
+  }
+
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+   htmlToImage.toPng(document.getElementById('recibo'))
+        .then(function (dataUrl) {
+          download(dataUrl, 'my-node.png');
+   });
   }
 
 }

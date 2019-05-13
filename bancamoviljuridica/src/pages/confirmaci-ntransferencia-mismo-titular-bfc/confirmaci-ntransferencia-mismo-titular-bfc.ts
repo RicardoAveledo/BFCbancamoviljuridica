@@ -276,11 +276,14 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
          <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
          <CedulaBeneficiario>`+this.userSession.AF_Cedula+`</CedulaBeneficiario>
          <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
-         <montoIBs>`+this.montoValue+`</montoIBs>
          <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
          <montoIbs>`+this.montoValue+`</montoIbs>
          <Ip>100.60.102.133</Ip>
          <Motivo></Motivo>
+         <TipoTarj></TipoTarj>
+         <concepto></concepto>
+         <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+         <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
        </TransferenciaBFCMismoTitular>
      </soap:Body>
    </soap:Envelope>`

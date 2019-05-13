@@ -10,7 +10,9 @@ import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/tran
 import { TransferenciasPage } from '../transferencias/transferencias';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
-
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 /**
  * Generated class for the PagoTdcTercerosBfcReciboPage page.
  *
@@ -45,7 +47,9 @@ export class PagoTdcTercerosBfcReciboPage {
   public estado:string;
   public checkAprobaciones:string;
 
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
+  constructor(public navCtrl: NavController, private file: File, 
+    private fileOpener: FileOpener, 
+    private socialSharing: SocialSharing, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
     this.cuentaDebito = navParams.get("cuentaDebito");
@@ -81,9 +85,25 @@ goToAprobacionRechazo(params){
     this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
   }
 
-  goToTransferencias(params){
+  goToOperacionesTDC(params){
     if (!params) params = {};
     this.navCtrl.setRoot(OperacionesDeTDCPage);
+  }
+  
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+    htmlToImage.toPng(document.getElementById('recibo'))
+        .then(function (dataUrl) {
+          download(dataUrl, 'recibo.png');
+   });
+  //    .then(function (dataUrl) {
+  //        download(dataUrl, 'recibo33.png');
+  // });
+   this.shareImg();
+  }
+
+  shareImg() { 
   }
 
 }

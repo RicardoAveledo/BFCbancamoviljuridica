@@ -16,6 +16,9 @@ import {Md5} from 'ts-md5/dist/md5';
 import xml2js from 'xml2js';
 import { UserSessionProvider } from '../../providers/user-session/user-session';
 import * as shajs from 'sha.js';
+import htmlToImage from 'html-to-image';
+import { saveAs } from 'filesaver';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'page-login',
@@ -29,7 +32,7 @@ export class LoginPage {
   contra:string;
   contra1:string|Int32Array;
   rafaga:string='Ingrese nombre de usuario y contraseña'; 
-  constructor(public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
+  constructor(public socialSharing:SocialSharing, public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
     private toastCtrl: ToastController, public LoginProvider: LoginProvider,public httpClient: HttpClient) {
     this.menu.enable(false,'menu');
   }
@@ -263,6 +266,7 @@ export class LoginPage {
                                        self2.userSession.AF_FecConst= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_FecConst']['0'];
                                        self2.userSession.AF_FechaPassword= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_FechaPassword']['0'];
                                        self2.userSession.CO_Email= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['CO_Email']['0'];
+                                       self2.userSession.AF_NombreUsuario= search_array['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].Table['0']['AF_NombreUsuario']['0'];
  
                                     /* public AF_Id:string = "";
                                        public AF_IdPrincipal:string = "";
@@ -436,54 +440,30 @@ export class LoginPage {
         console.log("Error try 2")
       }
 
-
-
     }
 
-   /* parseXML(data)
-        {
-           return new Promise(resolve =>
-           {
-              var k,
-                  arr    = [],
-                  parser = new xml2js.Parser(
-                  {
-                     trim: true,
-                     explicitArray: true
-                  });
-     
-              parser.parseString(data, function (err, result)
-              {
-                 console.log(JSON.stringify(err));
-                 var obj = result.comics;
-                 for(k in obj.publication)
-                 {
-                    var item = obj.publication[k];
-                    arr.push({
-                       id           : item.id[0],
-                       title        : item.title[0],
-                       publisher : item.publisher[0],
-                       genre        : item.genre[0]
-                    });
-                 }
-     
-                 resolve(arr);
-              });
-           });
-        }*/
-}
 
-/*
-POST /WsAfiliados.asmx HTTP/1.1
-Host: "+this.userSession.serverIP+"
-Content-Type: text/xml; charset=utf-8
-Content-Length: length
-SOAPAction: "http://tempuri.org/AfiliadosGetByNombre"
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <AfiliadosGetByNombre xmlns="http://tempuri.org/">
-      <sAF_NombreUsuario>string</sAF_NombreUsuario>
-    </AfiliadosGetByNombre>
-  </soap:Body>
-</soap:Envelope>*/
+    //import htmlToImage from 'html-to-image';
+    //import { saveAs } from 'filesaver';
+    generateImage(){
+      var htmlToImage = require('html-to-image');
+      var download = require("downloadjs");
+     htmlToImage.toPng(document.getElementById('page4'))
+          .then(function (dataUrl) {
+            download(dataUrl, 'my-node.png');
+     });/*
+     this.socialSharing.canShareViaEmail().then(() => {
+      // Sharing via email is possible
+      }).catch(() => {
+        // Sharing via email is not possible
+      });
+      
+      // Share via email
+      this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then(() => {
+        // Success!
+      }).catch(() => {
+        // Error!
+      });*/
+    }
+    
+}

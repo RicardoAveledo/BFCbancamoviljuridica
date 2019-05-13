@@ -749,6 +749,10 @@ export class AprobaciNRechazoPage {
          <SCodBco>`+this.BANK_ID+`</SCodBco>
          <Ip>10.60.102.133</Ip>
          <Motivo>`+this.OP_Concepto+`</Motivo>
+         <TipoTarj></TipoTarj>
+         <concepto></concepto>
+         <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+         <AF_NombreUsuario>`+this.userSession.CO_NOMBRES+`</AF_NombreUsuario>
        </TransferenciaOtrosBancosMismoTitular>
      </soap:Body>
    </soap:Envelope>`
@@ -835,16 +839,19 @@ makeTheTransferMTBFC(){
    var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
      <TransferenciaBFCMismoTitular xmlns="http://tempuri.org/">
-       <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
-       <Rif>`+this.userSession.AF_Rif+`</Rif>
-       <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
-       <CedulaBeneficiario>`+this.userSession.AF_Cedula+`</CedulaBeneficiario>
-       <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
-       <montoIBs>`+this.montoValue+`</montoIBs>
-       <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
-       <montoIbs>`+this.montoValue+`</montoIbs>
-       <Ip>100.60.102.133</Ip>
-       <Motivo></Motivo>
+        <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
+        <Rif>`+this.userSession.AF_Rif+`</Rif>
+        <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
+        <CedulaBeneficiario>`+this.userSession.AF_Cedula+`</CedulaBeneficiario>
+        <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
+        <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
+        <montoIbs>`+this.montoValue+`</montoIbs>
+        <Ip>100.60.102.133</Ip>
+        <Motivo></Motivo>
+        <TipoTarj></TipoTarj>
+        <concepto></concepto>
+        <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+        <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
      </TransferenciaBFCMismoTitular>
    </soap:Body>
  </soap:Envelope>`
@@ -962,9 +969,15 @@ makeTheTransferTBFC(){
        <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
        <montoIBs>`+this.montoValue+`</montoIBs>
        <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
-       <montoIbs>`+this.montoValue+`</montoIbs>
+       <montoIBs>`+this.montoValue+`</montoIBs>
        <Ip>10.60.102.133</Ip>
        <Motivo>`+this.MotivoPago+`</Motivo>
+       <TipoTarj></TipoTarj>
+       <concepto></concepto>
+       <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+       <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+       <Beneficiario>`+this.userSession.AF_NombreUsuario+`</Beneficiario>
+       <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
      </TransferenciaBFCTerceros>
    </soap:Body>
  </soap:Envelope>`
@@ -1095,6 +1108,10 @@ makeTheTransferTOB(){
               <SCodBco>`+this.BANK_ID+`</SCodBco>
               <Ip>10.60.102.133</Ip>
               <Motivo>`+this.MotivoPago+`</Motivo>
+              <TipoTarj></TipoTarj>
+              <concepto></concepto>
+              <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+              <AF_NombreUsuario>`+this.userSession.CO_NOMBRES+`</AF_NombreUsuario>
           </TransferenciaOtrosBancosTerceros>
         </soap:Body>
       </soap:Envelope>`
@@ -1198,6 +1215,11 @@ makeTheTDCPaymentMTBFC(){
        <Instrumento>`+this.cuentaCredito+`</Instrumento>
        <Ip>10.40.102.40</Ip>
        <Motivo></Motivo>
+       <TipoTarj></TipoTarj>
+       <concepto></concepto>
+       <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+       <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
+       <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
      </PagoTarjetaCreditoMismoTitularBFC>
    </soap:Body>
  </soap:Envelope>`
@@ -1320,6 +1342,11 @@ makeTheTDCPaymentMTOB(){
        <SCodBco>`+this.BANK_ID+`</SCodBco>
        <Ip>10.60.102.133</Ip>
        <Motivo>`+this.MotivoPago+`</Motivo>
+       <TipoTarj></TipoTarj>
+       <concepto></concepto>
+       <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+       <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+       <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
      </PagoTarjetaCreditoOtrosBancosMismoTitular>
    </soap:Body>
  </soap:Envelope>`
@@ -1453,6 +1480,10 @@ makeTheTDCPaymentTBFC(){
        <Instrumento>`+this.cuentaCredito+`</Instrumento>
        <Ip>10.60.102.133</Ip>
        <Motivo>`+this.MotivoPago+`</Motivo>
+       <concepto></concepto>
+       <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+       <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+       <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
      </PagoTarjetaCreditoTercerosBFC>
    </soap:Body>
  </soap:Envelope>`
@@ -1582,6 +1613,10 @@ makeTheTDCPaymentTOB(){
         <SCodBco>`+this.BANK_ID+`</SCodBco>
         <Ip>10.60.102.133</Ip>
         <Motivo>`+this.MotivoPago+`</Motivo>
+        <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
+        <concepto></concepto>
+        <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+        <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
      </PagoTarjetaCreditoOtrosBancosTerceros>
    </soap:Body>
  </soap:Envelope>`

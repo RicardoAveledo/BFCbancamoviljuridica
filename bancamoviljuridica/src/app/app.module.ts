@@ -60,6 +60,9 @@ import { AprobarRechazarNominaReciboPage } from '../pages/aprobar-rechazar-nomin
 import { AprobarRechazarNominaTokenPage } from '../pages/aprobar-rechazar-nomina-token/aprobar-rechazar-nomina-token';
 import { AprobarRechazarProveedoresReciboPage } from '../pages/aprobar-rechazar-proveedores-recibo/aprobar-rechazar-proveedores-recibo';
 import { AprobarRechazarProveedoresTokenPage } from '../pages/aprobar-rechazar-proveedores-token/aprobar-rechazar-proveedores-token';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [
@@ -188,6 +191,9 @@ import { AprobarRechazarProveedoresTokenPage } from '../pages/aprobar-rechazar-p
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    FileOpener,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginProvider,
     HttpClientModule,

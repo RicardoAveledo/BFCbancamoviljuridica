@@ -283,14 +283,20 @@ export class TransferenciaTercerosBfcConfirmarPage {
          <TransferenciaBFCTerceros xmlns="http://tempuri.org/">
            <CodCliente>`+this.userSession.AF_Codcliente+`</CodCliente>
            <Rif>`+this.userSession.AF_Rif+`</Rif>
-           <CtaDebitar>`+this.cuentaDebitoFull+`</CtaDebitar>
+           <CtaDebitar>`+this.cuentaDebito+`</CtaDebitar>
            <CedulaBeneficiario>`+this.ciType+this.ciNo+`</CedulaBeneficiario>
-           <CtaAcreditar>`+this.cuentaCreditoFull+`</CtaAcreditar>
+           <CtaAcreditar>`+this.cuentaCredito+`</CtaAcreditar>
            <montoIBs>`+this.montoValue+`</montoIBs>
            <date>`+this.yearStr+`-`+this.monthStr+`-`+this.dayStr+`T`+this.hoursStr+`:`+this.minutesStr+`:00.000-00:00</date>
-           <montoIbs>`+this.montoValue+`</montoIbs>
+           <montoIBs>`+this.montoValue+`</montoIBs>
            <Ip>10.60.102.133</Ip>
            <Motivo>`+this.motivo+`</Motivo>
+           <TipoTarj></TipoTarj>
+           <concepto></concepto>
+           <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+           <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+           <Beneficiario>`+this.userSession.AF_NombreUsuario+`</Beneficiario>
+           <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
          </TransferenciaBFCTerceros>
        </soap:Body>
      </soap:Envelope>`

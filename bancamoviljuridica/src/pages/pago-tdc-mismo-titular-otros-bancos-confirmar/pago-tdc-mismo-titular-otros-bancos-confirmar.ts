@@ -306,6 +306,11 @@ export class PagoTdcMismoTitularOtrosBancosConfirmarPage {
            <SCodBco>`+this.bankCod+`</SCodBco>
            <Ip>10.60.102.133</Ip>
            <Motivo>`+this.motivo+`</Motivo>
+           <TipoTarj></TipoTarj>
+           <concepto></concepto>
+           <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+           <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+           <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
          </PagoTarjetaCreditoOtrosBancosMismoTitular>
        </soap:Body>
      </soap:Envelope>`

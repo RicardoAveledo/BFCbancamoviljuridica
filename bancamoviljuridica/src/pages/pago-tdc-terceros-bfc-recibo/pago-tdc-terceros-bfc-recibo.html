@@ -22,6 +22,7 @@
 
 <ion-content id="page11">
     <div id="mainContainer">
+        <div id="recibo">
   <img src="assets/img/HeaderTDCTercerosBFC.PNG" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
   
@@ -326,13 +327,14 @@
       <ion-input text-right type="text" placeholder="{{fechaToSend}}"></ion-input>
     </ion-item>
   </form>
+    </div>
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
-  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;">
+  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;" on-click="generateImage()">
     <ion-icon name="share-alt"></ion-icon>
     Compartir
   </button>
   <div *ngIf="checkAprobaciones != 'true'">
-  <button id="transferenciaMismoTitularBFCRecibo-button7" ion-button clear color="positive" block small style="font-weight:600;" on-click="goToTransferencias()">
+  <button id="transferenciaMismoTitularBFCRecibo-button7" ion-button clear color="positive" block small style="font-weight:600;" on-click="goToOperacionesTDC()">
     <ion-icon name="git-compare"></ion-icon>
     Realizar otra operación
   </button>

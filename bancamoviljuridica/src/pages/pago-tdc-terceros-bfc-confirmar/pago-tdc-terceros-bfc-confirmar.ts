@@ -298,6 +298,10 @@ export class PagoTdcTercerosBfcConfirmarPage {
            <Instrumento>`+this.cuentaCreditoFull+`</Instrumento>
            <Ip>10.60.102.133</Ip>
            <Motivo>`+this.motivo+`</Motivo>
+           <concepto></concepto>
+           <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+           <AF_NombreUsuario>`+this.userSession.AF_NombreUsuario+`</AF_NombreUsuario>
+           <AfiliadoCO_Nombres>`+this.userSession.CO_NOMBRES+`</AfiliadoCO_Nombres>
          </PagoTarjetaCreditoTercerosBFC>
        </soap:Body>
      </soap:Envelope>`

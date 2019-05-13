@@ -45,8 +45,9 @@ export class MyApp {
   public validarTDC:boolean=true;
   public validarAPR:boolean=true;
 
-  constructor(public userSession:UserSessionProvider, public events:Events, platform: Platform, 
+  constructor(public platform: Platform, public userSession:UserSessionProvider, public events:Events, 
     statusBar: StatusBar, splashScreen: SplashScreen, private toastCtrl: ToastController) {
+    this.handleSplashScreen()
     events.subscribe('session:created', (validador) => {
       this.validarPC = this.userSession.validarPC;
       this.validarTR = this.userSession.validarTR;
@@ -61,6 +62,25 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  // hide #splash-screen when app is ready
+  async handleSplashScreen(): Promise<void> {
+    try {
+      // wait for App to finish loading
+      await this.platform.ready()
+    } catch (error) {
+      console.error('Platform initialization bug')
+    }
+    
+    // Any operation that shoud be performed BEFORE showing user UI,
+    // in a real App that may be cookie based authentication check e.g.
+    // await this.authProvider.authenticate(...)
+    
+    // fade out and remove the #splash-screen
+    const splash = document.getElementById('splash-screen')
+    splash.style.opacity = '0'
+    setTimeout(() => { splash.remove() }, 300)
   }
 
   presentToast() {

@@ -55,4 +55,12 @@ goToAprobacionRechazo(params){
     console.log('ionViewDidLoad PagoTdcMismoTitularBfcReciboPage');
   }
 
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+   htmlToImage.toPng(document.getElementById('recibo'))
+        .then(function (dataUrl) {
+          download(dataUrl, 'my-node.png');
+   });
+  }
 }

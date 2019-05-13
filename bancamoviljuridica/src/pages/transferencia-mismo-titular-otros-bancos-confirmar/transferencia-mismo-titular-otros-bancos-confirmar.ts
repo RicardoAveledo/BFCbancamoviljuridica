@@ -307,6 +307,10 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
            <SCodBco>`+this.bankCod+`</SCodBco>
            <Ip>10.60.102.133</Ip>
            <Motivo>`+this.motivo+`</Motivo>
+           <TipoTarj></TipoTarj>
+           <concepto></concepto>
+           <AF_Id>`+this.userSession.AF_Id+`</AF_Id>
+           <AF_NombreUsuario>`+this.userSession.CO_NOMBRES+`</AF_NombreUsuario>
          </TransferenciaOtrosBancosMismoTitular>
        </soap:Body>
      </soap:Envelope>`

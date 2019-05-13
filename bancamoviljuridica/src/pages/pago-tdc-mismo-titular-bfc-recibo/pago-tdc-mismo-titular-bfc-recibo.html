@@ -19,7 +19,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content id="page11">
-    <div id="mainContainer">
+    <div id="mainContainer"> 
+  <div id="recibo">
   <img src="assets/img/HeaderTDCmismoTitularBFC.PNG" style="display:block;margin-top:10px;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
   
@@ -295,8 +296,9 @@
       <ion-input text-right type="text" placeholder="{{fecha}}"></ion-input>
     </ion-item>
   </form>
+</div>
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
-  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;">
+  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;" on-click="generateImage()">
     <ion-icon name="share-alt"></ion-icon>
     Compartir
   </button>
