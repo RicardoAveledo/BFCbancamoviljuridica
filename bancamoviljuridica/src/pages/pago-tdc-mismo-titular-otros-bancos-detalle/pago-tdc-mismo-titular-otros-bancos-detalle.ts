@@ -18,7 +18,10 @@ import { PagoTdcMismoTitularOtrosBancosConfirmarPage } from '../pago-tdc-mismo-t
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcMismoTitularOtrosBancosDetallePage',
+  segment: 'PagoTdcMismoTitularOtrosBancosDetallePage'
+})
 @Component({
   selector: 'page-pago-tdc-mismo-titular-otros-bancos-detalle',
   templateUrl: 'pago-tdc-mismo-titular-otros-bancos-detalle.html',
@@ -185,7 +188,7 @@ export class PagoTdcMismoTitularOtrosBancosDetallePage {
                                   console.log("MODELO: ", search_array);
                                   var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
                                   if(+montoMax >= +self.montoValue){
-                                    self.navCtrl.push(PagoTdcMismoTitularOtrosBancosConfirmarPage,{
+                                    self.navCtrl.push('PagoTdcMismoTitularOtrosBancosConfirmarPage',{
                                       "cuentaDebito":self.cuentaDebito,
                                       "cuentaCredito":self.cuentaCredito,
                                       "cuentaDebitoFull":self.cuentaDebitoFull,

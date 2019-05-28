@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
 import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
 import { UserSessionProvider } from '../../providers/user-session/user-session';
@@ -8,6 +8,10 @@ import xml2js from 'xml2js';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DetallePrestamoPage } from '../detalle-prestamo/detalle-prestamo';
 
+@IonicPage({
+  name: 'PosiciNConsolidadaPage',
+  segment: 'PosiciNConsolidadaPage'
+})
 @Component({
   selector: 'page-posici-nconsolidada',
   templateUrl: 'posici-nconsolidada.html'
@@ -28,14 +32,14 @@ export class PosiciNConsolidadaPage {
 
 
   goToDetalleDeLaCuenta(item:any[]){
-    this.navCtrl.push(DetalleDeLaCuentaPage,{
+    this.navCtrl.push('DetalleDeLaCuentaPage',{
       "cuentaselected":item, 
       "posicion":item[5],
     });
   }
 
   goToDetalleDeTarjeta(item:any[]){
-    this.navCtrl.push(DetalleDeTarjetaPage,{
+    this.navCtrl.push('DetalleDeTarjetaPage',{
       "cuentaselected":item,
       "posicion":item[5],
     });
@@ -103,7 +107,7 @@ export class PosiciNConsolidadaPage {
                        var montoOriginal:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SMtoOriginal['0'];
                        var fechaProximo:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].SFechaProxPago['0'];
                        var tasa:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ConsultaPrestamosResponse['0'].ConsultaPrestamosResult['0'].consuldsjv['0'].STasa['0'];
-                       self.navCtrl.push(DetallePrestamoPage,{
+                       self.navCtrl.push('DetallePrestamoPage',{
                         "cuentaselected":item,
                         "saldoTotal":saldoTotal,
                         "montoCuota":montoCuota,

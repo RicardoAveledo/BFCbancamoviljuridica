@@ -11,7 +11,7 @@ import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/';
 
 
 /**
@@ -21,7 +21,10 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcTercerosOtrosBancosReciboPage',
+  segment: 'PagoTdcTercerosOtrosBancosReciboPage'
+})
 @Component({
   selector: 'page-pago-tdc-terceros-otros-bancos-recibo',
   templateUrl: 'pago-tdc-terceros-otros-bancos-recibo.html',
@@ -52,7 +55,7 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
 
   constructor(public platform: Platform, private file: File, 
     private fileOpener: FileOpener, 
-    private socialSharing: SocialSharing,
+    public socialSharing: SocialSharing,
     public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, 
     private toastCtrl: ToastController, public userSession:UserSessionProvider) {
@@ -98,17 +101,17 @@ export class PagoTdcTercerosOtrosBancosReciboPage {
   }
 goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 
  
   goToTDC(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(OperacionesDeTDCPage);
+    this.navCtrl.setRoot('OperacionesDeTDCPage');
   }
   
   
@@ -118,42 +121,18 @@ goToAprobacionRechazo(params){
   generateImage(){
     var htmlToImage = require('html-to-image');
     var download = require("downloadjs");
-    htmlToImage.toPng(document.getElementById('recibo'))
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
         .then(function (dataUrl) {
-          download(dataUrl, 'recibo.png');
-   });
-   this.shareImg();
-  }
+          download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
 
-  shareImg() { 
-    let imageName = "recibo.jpg";
-    const ROOT_DIRECTORY = 'file:///sdcard//';
-    const downloadFolderName = 'tempDownloadFolder';
-    
-    //Create a folder in memory location
-    this.file.createDir(ROOT_DIRECTORY, downloadFolderName, true)
-      .then((entries) => {
- 
-        //Copy our asset/img/FreakyJolly.jpg to folder we created
-        this.file.copyFile(this.file.applicationDirectory + "www/assets/imgs/", imageName, ROOT_DIRECTORY + downloadFolderName + '//', imageName)
-          .then((entries) => {
- 
-            //Common sharing event will open all available application to share
-            this.socialSharing.share("Message","Subject", ROOT_DIRECTORY + downloadFolderName + "/" + imageName, imageName)
-              .then((entries) => {
-                console.log('success ' + JSON.stringify(entries));
-              })
-              .catch((error) => {
-                alert('error ' + JSON.stringify(error));
-              });
-          })
-          .catch((error) => {
-            alert('error ' + JSON.stringify(error));
-          });
-      })
-      .catch((error) => {
-        alert('error ' + JSON.stringify(error));
-      });
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
+   });
   }
 
 }

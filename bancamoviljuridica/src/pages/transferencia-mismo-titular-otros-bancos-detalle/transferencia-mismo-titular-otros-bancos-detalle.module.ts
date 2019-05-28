@@ -9,5 +9,8 @@ import { TransferenciaMismoTitularOtrosBancosDetallePage } from './transferencia
   imports: [
     IonicPageModule.forChild(TransferenciaMismoTitularOtrosBancosDetallePage),
   ],
+  exports: [
+    TransferenciaMismoTitularOtrosBancosDetallePage
+  ]
 })
 export class TransferenciaMismoTitularOtrosBancosDetallePageModule {}

@@ -10,6 +10,7 @@ import { TransferenciasPage } from '../transferencias/transferencias';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
+import { SocialSharing } from '@ionic-native/social-sharing/';
 /**
  * Generated class for the PagoTdcMismoTitularOtrosBancosReciboPage page.
  *
@@ -17,7 +18,10 @@ import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcMismoTitularOtrosBancosReciboPage',
+  segment: 'PagoTdcMismoTitularOtrosBancosReciboPage'
+})
 @Component({
   selector: 'page-pago-tdc-mismo-titular-otros-bancos-recibo',
   templateUrl: 'pago-tdc-mismo-titular-otros-bancos-recibo.html',
@@ -44,7 +48,7 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
   public estado:string;
   public checkAprobaciones:string;
 
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
+  constructor(public socialSharing:SocialSharing, public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
     this.cuentaDebito = navParams.get("cuentaDebito");
@@ -73,24 +77,32 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
 
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 
  goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
   goToOperacionesTDC(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(OperacionesDeTDCPage);
+    this.navCtrl.setRoot('OperacionesDeTDCPage');
   }
 
   generateImage(){
     var htmlToImage = require('html-to-image');
     var download = require("downloadjs");
-   htmlToImage.toPng(document.getElementById('recibo'))
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
         .then(function (dataUrl) {
           download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
+
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
    });
   }
 

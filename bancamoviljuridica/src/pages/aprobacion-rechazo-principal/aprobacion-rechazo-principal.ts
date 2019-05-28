@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AprobacionRechazoConsultaPage } from '../aprobacion-rechazo-consulta/aprobacion-rechazo-consulta';
 import { AprobacionRechazoListaPrincipalPage } from '../aprobacion-rechazo-lista-principal/aprobacion-rechazo-lista-principal';
 
 /**
@@ -10,7 +9,10 @@ import { AprobacionRechazoListaPrincipalPage } from '../aprobacion-rechazo-lista
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'AprobacionRechazoPrincipalPage',
+  segment: 'AprobacionRechazoPrincipalPage'
+})
 @Component({
   selector: 'page-aprobacion-rechazo-principal',
   templateUrl: 'aprobacion-rechazo-principal.html',
@@ -24,10 +26,10 @@ export class AprobacionRechazoPrincipalPage {
     console.log('ionViewDidLoad AprobacionRechazoPrincipalPage');
   }
   goToAutorizacion(params){
-    this.navCtrl.push(AprobacionRechazoListaPrincipalPage);
+    this.navCtrl.push('AprobacionRechazoListaPrincipalPage');
   }
   goToConsulta(params){
-    this.navCtrl.push(AprobacionRechazoConsultaPage);
+    this.navCtrl.push('AprobacionRechazoConsultaPage');
   }
 
 }

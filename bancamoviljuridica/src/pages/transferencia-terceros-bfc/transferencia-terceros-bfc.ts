@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
@@ -12,6 +12,10 @@ import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
 
+@IonicPage({
+  name: 'TransferenciaTercerosBFCPage',
+  segment: 'TransferenciaTercerosBFCPage'
+})
 @Component({
   selector: 'page-transferencia-terceros-bfc',
   templateUrl: 'transferencia-terceros-bfc.html'
@@ -170,7 +174,7 @@ export class TransferenciaTercerosBFCPage {
                        //self.events.publish('session:created', true);
 
                        //Navegamos
-                       //self.navCtrl.setRoot(WelcomePage);
+                       //self.navCtrl.setRoot('WelcomePage');
                    }catch(Error){
                     console.log("Error try 1")
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
@@ -190,16 +194,16 @@ export class TransferenciaTercerosBFCPage {
   }
   goToTransferenciasTercerosDetalle(favoritoSelected:any[]){
     console.log("GoToTransferenciasTerceroDetalle",favoritoSelected);
-    this.navCtrl.push(TransferenciasTercerosDetallePage,{
+    this.navCtrl.push('TransferenciasTercerosDetallePage',{
       "favoritoSelected":favoritoSelected,
     });
   }
   goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosPage');
   }
   goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage');
   }
 }

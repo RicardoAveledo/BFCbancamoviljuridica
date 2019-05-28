@@ -9,5 +9,8 @@ import { TransferenciaTercerosOtrosBancosConfirmarPage } from './transferencia-t
   imports: [
     IonicPageModule.forChild(TransferenciaTercerosOtrosBancosConfirmarPage),
   ],
+  exports: [
+    TransferenciaTercerosOtrosBancosConfirmarPage
+  ]
 })
 export class TransferenciaTercerosOtrosBancosConfirmarPageModule {}

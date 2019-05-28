@@ -9,5 +9,8 @@ import { TdcTercerosBfcPage } from './tdc-terceros-bfc';
   imports: [
     IonicPageModule.forChild(TdcTercerosBfcPage),
   ],
+  exports: [
+    TdcTercerosBfcPage
+  ]
 })
 export class TdcTercerosBfcPageModule {}

@@ -8,6 +8,8 @@ import xml2js from 'xml2js';
 import { WelcomePage } from '../welcome/welcome';
 import { TransferenciasPage } from '../transferencias/transferencias';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
+import { SocialSharing } from '@ionic-native/social-sharing/';
+
 /**
  * Generated class for the TransferenciaMismoTitularOtrosBancosReciboPage page.
  *
@@ -15,7 +17,10 @@ import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TransferenciaMismoTitularOtrosBancosReciboPage',
+  segment: 'TransferenciaMismoTitularOtrosBancosReciboPage'
+})
 @Component({
   selector: 'page-transferencia-mismo-titular-otros-bancos-recibo',
   templateUrl: 'transferencia-mismo-titular-otros-bancos-recibo.html',
@@ -43,7 +48,7 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
   public checkAprobaciones:string;
 
 
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
+  constructor(public socialSharing:SocialSharing, public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
     this.cuentaDebito = navParams.get("cuentaDebito");
@@ -66,24 +71,41 @@ export class TransferenciaMismoTitularOtrosBancosReciboPage {
     this.checkAprobaciones = navParams.get("checkAprobaciones"); 
   }
 
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
+        .then(function (dataUrl) {
+          download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
+
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
+   });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciaMismoTitularOtrosBancosReciboPage');
   }
 
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 
  
   goToTransferencias(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(TransferenciasPage);
+    this.navCtrl.setRoot('TransferenciasPage');
   }
 
   goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
 
 }

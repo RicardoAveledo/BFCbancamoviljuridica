@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Toast, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, Toast, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
@@ -17,7 +17,10 @@ import { PagoTdcMismoTitularBfcConfirmarPage } from '../pago-tdc-mismo-titular-b
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
- 
+@IonicPage({
+  name: 'PagoTdcMismoTitularBfcPage',
+  segment: 'PagoTdcMismoTitularBfcPage'
+})
 @Component({
   selector: 'page-pago-tdc-mismo-titular-bfc',
   templateUrl: 'pago-tdc-mismo-titular-bfc.html',
@@ -200,7 +203,7 @@ export class PagoTdcMismoTitularBfcPage {
   
 
 
-  //Método que utiliza el boton de Continuar
+  //Método que utiliza el boton de continuar
   goToTDCMismoTitularBFCConfirmar(params){
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
     {
@@ -271,7 +274,7 @@ export class PagoTdcMismoTitularBfcPage {
                                 console.log("MODELO: ", search_array);
                                 var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
                                 if(+montoMax >= self.montoValue){
-                                  self.navCtrl.push(PagoTdcMismoTitularBfcConfirmarPage,{
+                                  self.navCtrl.push('PagoTdcMismoTitularBfcConfirmarPage',{
                                     "cuentaDebito":self.cuentaDebito,
                                     "cuentaCredito":self.cuentaCredito,
                                     "cuentaDebitoFull":self.cuentaDebitoFull,

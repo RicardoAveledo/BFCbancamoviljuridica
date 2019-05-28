@@ -9,5 +9,8 @@ import { PagoTdcTercerosBfcConfirmarPage } from './pago-tdc-terceros-bfc-confirm
   imports: [
     IonicPageModule.forChild(PagoTdcTercerosBfcConfirmarPage),
   ],
+  exports: [
+    PagoTdcTercerosBfcConfirmarPage
+  ]
 })
 export class PagoTdcTercerosBfcConfirmarPageModule {}

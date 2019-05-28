@@ -9,5 +9,8 @@ import { AprobarRechazarProveedoresTokenPage } from './aprobar-rechazar-proveedo
   imports: [
     IonicPageModule.forChild(AprobarRechazarProveedoresTokenPage),
   ],
+  exports: [
+    AprobarRechazarProveedoresTokenPage
+  ]
 })
 export class AprobarRechazarProveedoresTokenPageModule {}

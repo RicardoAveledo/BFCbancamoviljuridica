@@ -9,5 +9,8 @@ import { AprobarRechazarProveedoresReciboPage } from './aprobar-rechazar-proveed
   imports: [
     IonicPageModule.forChild(AprobarRechazarProveedoresReciboPage),
   ],
+  exports: [
+    AprobarRechazarProveedoresReciboPage
+  ]
 })
 export class AprobarRechazarProveedoresReciboPageModule {}

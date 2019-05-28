@@ -1,9 +1,8 @@
 <ion-menu [content]="mainContent">
   <ion-content id="side-menu21">
-    <img src="assets/img/headerMenu.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <img src="assets/img/headermenu.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     <ion-list id="menu-list1">
         <div *ngIf=validarPC>
-          <div *ngIf=posicionConsolidada>
               <ion-item color="none" menuClose="" on-click="goToPosiciNConsolidada()" id="menu-list-item17">
                   <table style="width:100%">
                       <tr>
@@ -12,21 +11,10 @@
                       </tr>
                   </table>
               </ion-item> 
-          </div>
-          <div *ngIf=!posicionConsolidada>
-              <ion-item color="none" menuClose="" on-click="goToPosiciNConsolidada()" id="menu-list-item17">
-                  <table style="width:100%">
-                      <tr>
-                         <td float-left style="padding: 0 10px;"><img src="assets/img/detallePCHeader.png" style="display:block;width:auto;height:auto;"/>
-                      </tr>
-                  </table>
-              </ion-item> 
-          </div>
         </div>
   
     
           <div *ngIf=validarTR>
-              <div *ngIf=transferencias>
                 <ion-item color="none" menuClose="" on-click="goToTransferencias()" id="menu-list-item18">
                     <table style="width:100%">
                         <tr>
@@ -35,20 +23,9 @@
                         </tr>
                     </table>            
                 </ion-item>
-              </div>
-              <div *ngIf=!transferencias>
-                  <ion-item color="none" menuClose="" on-click="goToTransferencias()" id="menu-list-item17">
-                      <table style="width:100%">
-                          <tr>
-                             <td float-left style="padding: 0 10px;"><img src="assets/img/detalleTransferenciasHeader.png" style="display:block;width:auto;height:auto;"/>
-                          </tr>
-                      </table>
-                  </ion-item> 
-              </div>
           </div>
     
           <div *ngIf=validarTDC>
-              <div *ngIf=tdc>
                 <ion-item color="none" menuClose="" on-click="goToOperacionesDeTDC()" id="menu-list-item19">
                     <table style="width:100%">
                         <tr>
@@ -57,20 +34,9 @@
                         </tr>
                     </table> 
                 </ion-item>
-              </div>
-              <div *ngIf=!tdc>
-                  <ion-item color="none" menuClose="" on-click="goToOperacionesDeTDC()" id="menu-list-item17">
-                      <table style="width:100%">
-                          <tr>
-                             <td float-left style="padding: 0 10px;"><img src="assets/img/detalleTDCHeader.png" style="display:block;width:auto;height:auto;"/>
-                          </tr>
-                      </table>
-                  </ion-item> 
-              </div>
           </div>
     
           <div *ngIf=validarAPR>
-              <div *ngIf=ar>
                 <ion-item color="none" menuClose="" on-click="goToAprobaciNRechazo()" id="menu-list-item20">
                     <table style="width:100%">
                         <tr>
@@ -79,16 +45,6 @@
                         </tr>
                     </table> 
                 </ion-item>
-              </div>
-              <div *ngIf=!ar>
-                  <ion-item color="none" menuClose="" on-click="goToAprobaciNRechazo()" id="menu-list-item17">
-                      <table style="width:100%">
-                          <tr>
-                             <td float-left style="padding: 0 10px;"><img src="assets/img/detalleARHeader.png" style="display:block;width:auto;height:auto;"/>
-                          </tr>
-                      </table>
-                  </ion-item> 
-              </div> 
           </div>
 
     

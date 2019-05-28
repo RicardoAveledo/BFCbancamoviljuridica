@@ -8,7 +8,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TdcTercerosBfcPage',
+  segment: 'TdcTercerosBfcPage'
+})
 @Component({
   selector: 'page-tdc-terceros-bfc',
   templateUrl: 'tdc-terceros-bfc.html',

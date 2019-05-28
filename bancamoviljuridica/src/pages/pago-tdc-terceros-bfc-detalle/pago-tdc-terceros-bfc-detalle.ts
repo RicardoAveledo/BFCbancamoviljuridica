@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Toast, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, Toast, NavParams } from 'ionic-angular';
 import { TransferenciaTercerosOtrosBancosPage } from '../transferencia-terceros-otros-bancos/transferencia-terceros-otros-bancos';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -19,7 +19,10 @@ import { PagoTdcTercerosBfcConfirmarPage } from '../pago-tdc-terceros-bfc-confir
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
- 
+@IonicPage({
+  name: 'PagoTdcTercerosBfcDetallePage',
+  segment: 'PagoTdcTercerosBfcDetallePage'
+})
 @Component({
   selector: 'page-pago-tdc-terceros-bfc-detalle',
   templateUrl: 'pago-tdc-terceros-bfc-detalle.html',
@@ -100,12 +103,12 @@ export class PagoTdcTercerosBfcDetallePage {
 
   goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosPage');
   }
 
   goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage');
   }
 
   goToPagoTDCTercerosBFCConfirmar(){
@@ -188,7 +191,7 @@ export class PagoTdcTercerosBfcDetallePage {
                               console.log("MODELO: ", search_array);
                               var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
                               if(+montoMax >= +self.montoValue){
-                                self.navCtrl.push(PagoTdcTercerosBfcConfirmarPage,{
+                                self.navCtrl.push('PagoTdcTercerosBfcConfirmarPage',{
                                   "cuentaDebito":self.cuentaDebito,
                                   "cuentaCredito":self.cuentaCredito,
                                   "cuentaDebitoFull":self.cuentaDebitoFull,

@@ -9,5 +9,8 @@ import { PagoTdcMismoTitularBfcConfirmarPage } from './pago-tdc-mismo-titular-bf
   imports: [
     IonicPageModule.forChild(PagoTdcMismoTitularBfcConfirmarPage),
   ],
+  exports: [
+    PagoTdcMismoTitularBfcConfirmarPage
+  ]
 })
 export class PagoTdcMismoTitularBfcConfirmarPageModule {}

@@ -14,6 +14,10 @@ import { PagoTdcTercerosOtrosBancosReciboPage } from '../pago-tdc-terceros-otros
 import { AprobarRechazarNominaTokenPage } from '../aprobar-rechazar-nomina-token/aprobar-rechazar-nomina-token';
 import { AprobarRechazarProveedoresTokenPage } from '../aprobar-rechazar-proveedores-token/aprobar-rechazar-proveedores-token';
 
+@IonicPage({
+  name: 'AprobaciNRechazoPage',
+  segment: 'AprobaciNRechazoPage'
+})
 @Component({
   selector: 'page-aprobaci-nrechazo',
   templateUrl: 'aprobaci-nrechazo.html'
@@ -267,7 +271,7 @@ export class AprobaciNRechazoPage {
                           self.showAlert("A ocurrido un error, intente más tarde");
                       } else {
                         if(self.Cod=="19"){
-                          self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                          self.navCtrl.push('TransferenciaMismoTitularOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -288,7 +292,7 @@ export class AprobaciNRechazoPage {
                           });
                         } 
                         if(self.Cod=="16"){
-                          self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                          self.navCtrl.push('TransferenciaMismoTitularBFCReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "montoValue":self.montoValue,
@@ -300,7 +304,7 @@ export class AprobaciNRechazoPage {
                           });
                         } 
                         if(self.Cod=="17"){
-                          self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                          self.navCtrl.push('TransferenciasTercerosBfcReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -321,7 +325,7 @@ export class AprobaciNRechazoPage {
                           }); 
                         } 
                         if(self.Cod=="20"){
-                          self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
+                          self.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -343,7 +347,7 @@ export class AprobaciNRechazoPage {
                           });
                         } 
                         if (self.Cod=="24"){
-                          self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                          self.navCtrl.push('PagoTdcMismoTitularBfcReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "montoValue":self.montoValue,
@@ -355,7 +359,7 @@ export class AprobaciNRechazoPage {
                           });
                         }
                         if (self.Cod=="27"){
-                          self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                          self.navCtrl.push('PagoTdcMismoTitularOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -377,7 +381,7 @@ export class AprobaciNRechazoPage {
                           });
                         }
                         if (self.Cod=="25"){
-                        self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                        self.navCtrl.push('PagoTdcTercerosBfcReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebito,
@@ -398,7 +402,7 @@ export class AprobaciNRechazoPage {
                         });
                       }
                       if (self.Cod=="28"){
-                          self.navCtrl.push(PagoTdcTercerosOtrosBancosReciboPage,{
+                          self.navCtrl.push('PagoTdcTercerosOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -520,7 +524,7 @@ export class AprobaciNRechazoPage {
                         //Acá hacer todos los IF con todos los makeTheTransfer a cada transaccion
                       } else {
                         if(self.Cod=="19"){
-                          self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                          self.navCtrl.push('TransferenciaMismoTitularOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -541,7 +545,7 @@ export class AprobaciNRechazoPage {
                           });
                         } 
                         if(self.Cod=="16"){
-                          self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                          self.navCtrl.push('TransferenciaMismoTitularBFCReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "montoValue":self.montoValue,
@@ -553,7 +557,7 @@ export class AprobaciNRechazoPage {
                           });
                         } 
                         if(self.Cod=="17"){
-                          self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                          self.navCtrl.push('TransferenciasTercerosBfcReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -574,7 +578,7 @@ export class AprobaciNRechazoPage {
                           }); 
                         } 
                         if(self.Cod=="20"){
-                          self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
+                          self.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -596,7 +600,7 @@ export class AprobaciNRechazoPage {
                           });
                         } 
                         if (self.Cod=="24"){
-                          self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                          self.navCtrl.push('PagoTdcMismoTitularBfcReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "montoValue":self.montoValue,
@@ -608,7 +612,7 @@ export class AprobaciNRechazoPage {
                           });
                         }
                         if (self.Cod=="27"){
-                          self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                          self.navCtrl.push('PagoTdcMismoTitularOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -630,7 +634,7 @@ export class AprobaciNRechazoPage {
                           });
                         }
                         if (self.Cod=="25"){
-                        self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                        self.navCtrl.push('PagoTdcTercerosBfcReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebito,
@@ -651,7 +655,7 @@ export class AprobaciNRechazoPage {
                         });
                       }
                       if (self.Cod=="28"){
-                          self.navCtrl.push(PagoTdcTercerosOtrosBancosReciboPage,{
+                          self.navCtrl.push('PagoTdcTercerosOtrosBancosReciboPage',{
                             "cuentaDebito":self.cuentaDebito,
                             "cuentaCredito":self.cuentaCredito,
                             "cuentaDebitoFull":self.cuentaDebito,
@@ -790,7 +794,7 @@ export class AprobaciNRechazoPage {
                        console.log("Transferencia hecha: ",search_array);
                        self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaOtrosBancosMismoTitularResponse['0'].TransferenciaOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0'];
                        console.log("REF: ",self.referencia);
-                       self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                       self.navCtrl.push('TransferenciaMismoTitularOtrosBancosReciboPage',{
                         "cuentaDebito":self.cuentaDebito,
                         "cuentaCredito":self.cuentaCredito,
                         "cuentaDebitoFull":self.cuentaDebito,
@@ -890,7 +894,7 @@ makeTheTransferMTBFC(){
                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCMismoTitularResponse['0'].TransferenciaBFCMismoTitularResult['0'].intrfdsjv['0'].SReferencia['0']
                     console.log("REF: ",self.referencia);
                     //search_array.
-                    self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                    self.navCtrl.push('TransferenciaMismoTitularBFCReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "montoValue":self.montoValue,
@@ -1014,7 +1018,7 @@ makeTheTransferTBFC(){
                      console.log("Transferencia hecha: ",search_array);
                      self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCTercerosResponse['0'].TransferenciaBFCTercerosResult['0'].intrfdsjv['0'].SReferencia['0'];
                      console.log("REF: ",self.referencia);
-                     self.navCtrl.push(TransferenciasTercerosBfcReciboPage,{
+                     self.navCtrl.push('TransferenciasTercerosBfcReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "cuentaDebitoFull":self.cuentaDebito,
@@ -1149,7 +1153,7 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMo
                      console.log("Transferencia hecha: ",search_array);
                      self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaOtrosBancosTercerosResponse['0'].TransferenciaOtrosBancosTercerosResult['0'].inextdsjv['0'].SReferencia['0']
                      console.log("REF: ",self.referencia);
-                     self.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage,{
+                     self.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "cuentaDebitoFull":self.cuentaDebito,
@@ -1258,7 +1262,7 @@ makeTheTDCPaymentMTBFC(){
                     self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoMismoTitularBFCResponse['0'].PagoTarjetaCreditoMismoTitularBFCResult['0'].intrfdsjv['0'].SCodAutoriza['0']
                     console.log("REF: ",self.referencia);
                     ////search_array.
-                    self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                    self.navCtrl.push('PagoTdcMismoTitularBfcReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "montoValue":self.montoValue,
@@ -1384,7 +1388,7 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
                      console.log("TDC hecha: ",search_array);
                      self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResponse['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0']
                      console.log("REF: ",self.referencia);
-                     self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                     self.navCtrl.push('PagoTdcMismoTitularOtrosBancosReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "cuentaDebitoFull":self.cuentaDebito,
@@ -1520,7 +1524,7 @@ makeTheTDCPaymentTBFC(){
                      console.log("Pago TDC hecho: ",search_array);
                      self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoTercerosBFCResponse['0'].PagoTarjetaCreditoTercerosBFCResult['0'].intrfdsjv['0'].SReferencia['0'];
                      console.log("REF: ",self.referencia);
-                     self.navCtrl.push(PagoTdcTercerosBfcReciboPage,{
+                     self.navCtrl.push('PagoTdcTercerosBfcReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "cuentaDebitoFull":self.cuentaDebito,
@@ -1654,7 +1658,7 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
                      console.log("Transferencia hecha: ",search_array);
                      self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoOtrosBancosTercerosResponse['0'].PagoTarjetaCreditoOtrosBancosTercerosResult['0'].inextdsjv['0'].SReferencia['0']
                      console.log("REF: ",self.referencia);
-                     self.navCtrl.push(PagoTdcTercerosOtrosBancosReciboPage,{
+                     self.navCtrl.push('PagoTdcTercerosOtrosBancosReciboPage',{
                       "cuentaDebito":self.cuentaDebito,
                       "cuentaCredito":self.cuentaCredito,
                       "cuentaDebitoFull":self.cuentaDebito,
@@ -1690,7 +1694,7 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsPagoTDCMovil.asm
 
 goTokenNomina(){
   console.log("Estado: ", this.estado);
-  this.navCtrl.push(AprobarRechazarNominaTokenPage,{
+  this.navCtrl.push('AprobarRechazarNominaTokenPage',{
     "EstadoLote":this.EstadoLote,
     "OP_CodeTran":this.OP_CodeTran,
     "OP_ID":this.OP_ID,
@@ -1710,7 +1714,7 @@ goTokenNomina(){
 
 goTokenProveedores(){
   console.log("Estado: ", this.estado);
-  this.navCtrl.push(AprobarRechazarProveedoresTokenPage,{
+  this.navCtrl.push('AprobarRechazarProveedoresTokenPage',{
     "EstadoLote":this.EstadoLote,
     "OP_CodeTran":this.OP_CodeTran,
     "OP_ID":this.OP_ID,

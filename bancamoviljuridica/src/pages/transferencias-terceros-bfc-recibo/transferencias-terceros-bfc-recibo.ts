@@ -9,7 +9,7 @@ import { WelcomePage } from '../welcome/welcome';
 import { TransferenciaTercerosBFCPage } from '../transferencia-terceros-bfc/transferencia-terceros-bfc';
 import { TransferenciasPage } from '../transferencias/transferencias';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
-
+import { SocialSharing } from '@ionic-native/social-sharing/';
 
 /**
  * Generated class for the TransferenciasTercerosBfcReciboPage page.
@@ -18,7 +18,10 @@ import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TransferenciasTercerosBfcReciboPage',
+  segment: 'TransferenciasTercerosBfcReciboPage'
+})
 @Component({
   selector: 'page-transferencias-terceros-bfc-recibo',
   templateUrl: 'transferencias-terceros-bfc-recibo.html',
@@ -44,7 +47,7 @@ export class TransferenciasTercerosBfcReciboPage {
   public estado:string;
   public checkAprobaciones:string;
   
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
+  constructor(public socialSharing:SocialSharing,public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
     this.cuentaDebito = navParams.get("cuentaDebito");
@@ -66,26 +69,43 @@ export class TransferenciasTercerosBfcReciboPage {
     this.checkAprobaciones = navParams.get("checkAprobaciones");
   }
 
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
+        .then(function (dataUrl) {
+          download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
+
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
+   });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciasTercerosBfcReciboPage');
   }
   goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 
   goToTransferenciaTercerosBFC(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosBFCPage);
+    this.navCtrl.push('TransferenciaTercerosBFCPage');
   }
 
   goToTransferencias(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(TransferenciasPage);
+    this.navCtrl.setRoot('TransferenciasPage');
   }
 
 }

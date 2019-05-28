@@ -17,7 +17,10 @@ import { TransferenciaMismoTitularOtrosBancosConfirmarPage } from '../transferen
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TransferenciaMismoTitularOtrosBancosDetallePage',
+  segment: 'TransferenciaMismoTitularOtrosBancosDetallePage'
+})
 @Component({
   selector: 'page-transferencia-mismo-titular-otros-bancos-detalle',
   templateUrl: 'transferencia-mismo-titular-otros-bancos-detalle.html',
@@ -184,7 +187,7 @@ export class TransferenciaMismoTitularOtrosBancosDetallePage {
                                   console.log("MODELO: ", search_array);
                                   var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
                                   if(+montoMax >= +self.montoValue){
-                                    self.navCtrl.push(TransferenciaMismoTitularOtrosBancosConfirmarPage,{
+                                    self.navCtrl.push('TransferenciaMismoTitularOtrosBancosConfirmarPage',{
                                       "cuentaDebito":self.cuentaDebito,
                                       "cuentaCredito":self.cuentaCredito,
                                       "cuentaDebitoFull":self.cuentaDebitoFull,

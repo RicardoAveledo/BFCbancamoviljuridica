@@ -13,7 +13,10 @@ import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'AprobarRechazarProveedoresReciboPage',
+  segment: 'AprobarRechazarProveedoresReciboPage'
+})
 @Component({
   selector: 'page-aprobar-rechazar-Proveedores-recibo',
   templateUrl: 'aprobar-rechazar-Proveedores-recibo.html',
@@ -102,13 +105,13 @@ export class AprobarRechazarProveedoresReciboPage {
 
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 
  
   goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
 
   ionViewDidLoad() {

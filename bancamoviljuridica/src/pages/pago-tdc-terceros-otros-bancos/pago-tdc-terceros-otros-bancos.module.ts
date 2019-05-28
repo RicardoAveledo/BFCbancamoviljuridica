@@ -9,5 +9,8 @@ import { PagoTdcTercerosOtrosBancosPage } from './pago-tdc-terceros-otros-bancos
   imports: [
     IonicPageModule.forChild(PagoTdcTercerosOtrosBancosPage),
   ],
+  exports: [
+    PagoTdcTercerosOtrosBancosPage
+  ]
 })
 export class PagoTdcTercerosOtrosBancosPageModule {}

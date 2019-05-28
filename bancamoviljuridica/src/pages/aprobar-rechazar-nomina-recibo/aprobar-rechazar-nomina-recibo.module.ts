@@ -9,5 +9,8 @@ import { AprobarRechazarNominaReciboPage } from './aprobar-rechazar-nomina-recib
   imports: [
     IonicPageModule.forChild(AprobarRechazarNominaReciboPage),
   ],
+  exports: [
+    AprobarRechazarNominaReciboPage
+  ]
 })
 export class AprobarRechazarNominaReciboPageModule {}

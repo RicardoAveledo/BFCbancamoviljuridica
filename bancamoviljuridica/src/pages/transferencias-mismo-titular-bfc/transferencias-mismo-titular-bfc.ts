@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Toast, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, Toast, NavParams } from 'ionic-angular';
 import { ConfirmaciNTransferenciaMismoTitularBFCPage } from '../confirmaci-ntransferencia-mismo-titular-bfc/confirmaci-ntransferencia-mismo-titular-bfc';
 import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
@@ -21,6 +21,11 @@ import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
 import { IfObservable } from 'rxjs/observable/IfObservable';
 
+
+@IonicPage({
+  name: 'TransferenciasMismoTitularBFCPage',
+  segment: 'TransferenciasMismoTitularBFCPage'
+})
 @Component({
   selector: 'page-transferencias-mismo-titular-bfc',
   templateUrl: 'transferencias-mismo-titular-bfc.html'
@@ -110,7 +115,7 @@ export class TransferenciasMismoTitularBFCPage {
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
   {
     if (!params) params = {};
-    this.navCtrl.push(TransferenciasMismoTitularBFCPage);
+    this.navCtrl.push('TransferenciasMismoTitularBFCPage');
 
 
   } else{
@@ -122,7 +127,7 @@ export class TransferenciasMismoTitularBFCPage {
 }
   }
 
-  //Método que utiliza el boton de Continuar
+  //Método que utiliza el boton de continuar
   goToConfirmaciNTransferenciaMismoTitularBFC(params){
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
     {
@@ -193,7 +198,7 @@ export class TransferenciasMismoTitularBFCPage {
                                 console.log("MODELO: ", search_array);
                                 var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
                                 if(+montoMax >= self.montoValue){
-                                  self.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage,{
+                                  self.navCtrl.push('ConfirmaciNTransferenciaMismoTitularBFCPage',{
                                     "cuentaDebito":self.cuentaDebito,
                                     "cuentaCredito":self.cuentaCredito,
                                     "cuentaDebitoFull":self.cuentaDebitoFull,
@@ -249,43 +254,43 @@ export class TransferenciasMismoTitularBFCPage {
 
   goToTransferenciaMismoTitularBFCRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaMismoTitularBFCReciboPage);
+    this.navCtrl.push('TransferenciaMismoTitularBFCReciboPage');
   }
   goToPosiciNConsolidada(params){
     if (!params) params = {};
-    this.navCtrl.push(PosiciNConsolidadaPage);
+    this.navCtrl.push('PosiciNConsolidadaPage');
   }
   goToDetalleDeLaCuenta(params){
     if (!params) params = {};
-    this.navCtrl.push(DetalleDeLaCuentaPage);
+    this.navCtrl.push('DetalleDeLaCuentaPage');
   }
   goToDetalleDeTarjeta(params){
     if (!params) params = {};
-    this.navCtrl.push(DetalleDeTarjetaPage);
+    this.navCtrl.push('DetalleDeTarjetaPage');
   }
   goToTransferencias(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciasPage);
+    this.navCtrl.push('TransferenciasPage');
   }
   goToTransferenciaMismoTitularOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaMismoTitularOtrosBancosPage);
+    this.navCtrl.push('TransferenciaMismoTitularOtrosBancosPage');
   }
   goToTransferenciaTercerosBFC(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosBFCPage);
+    this.navCtrl.push('TransferenciaTercerosBFCPage');
   }
   goToTransferenciasTercerosDetalle(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciasTercerosDetallePage);
+    this.navCtrl.push('TransferenciasTercerosDetallePage');
   }
   goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosPage');
   }
   goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage');
   }
 }
 

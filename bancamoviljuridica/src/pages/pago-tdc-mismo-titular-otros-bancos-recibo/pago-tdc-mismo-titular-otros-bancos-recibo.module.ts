@@ -9,5 +9,8 @@ import { PagoTdcMismoTitularOtrosBancosReciboPage } from './pago-tdc-mismo-titul
   imports: [
     IonicPageModule.forChild(PagoTdcMismoTitularOtrosBancosReciboPage),
   ],
+  exports: [
+    PagoTdcMismoTitularOtrosBancosReciboPage
+  ]
 })
 export class PagoTdcMismoTitularOtrosBancosReciboPageModule {}

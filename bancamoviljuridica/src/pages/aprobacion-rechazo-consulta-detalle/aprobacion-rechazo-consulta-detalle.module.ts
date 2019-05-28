@@ -9,5 +9,8 @@ import { AprobacionRechazoConsultaDetallePage } from './aprobacion-rechazo-consu
   imports: [
     IonicPageModule.forChild(AprobacionRechazoConsultaDetallePage),
   ],
+  exports: [
+    AprobacionRechazoConsultaDetallePage
+  ]
 })
 export class AprobacionRechazoConsultaDetallePageModule {}

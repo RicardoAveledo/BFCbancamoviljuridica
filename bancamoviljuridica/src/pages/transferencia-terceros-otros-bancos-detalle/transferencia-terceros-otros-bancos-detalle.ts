@@ -17,7 +17,10 @@ import { TransferenciaTercerosOtrosBancosConfirmarPage } from '../transferencia-
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TransferenciaTercerosOtrosBancosDetallePage',
+  segment: 'TransferenciaTercerosOtrosBancosDetallePage'
+})
 @Component({
   selector: 'page-transferencia-terceros-otros-bancos-detalle',
   templateUrl: 'transferencia-terceros-otros-bancos-detalle.html',
@@ -196,7 +199,7 @@ export class TransferenciaTercerosOtrosBancosDetallePage {
                                 self.sdisponible+
                                 self.bankName+
                                 self.bankCod);
-                                self.navCtrl.push(TransferenciaTercerosOtrosBancosConfirmarPage,{
+                                self.navCtrl.push('TransferenciaTercerosOtrosBancosConfirmarPage',{
                                   "cuentaDebito":self.cuentaDebito,
                                   "cuentaCredito":self.cuentaCredito,
                                   "cuentaDebitoFull":self.cuentaDebitoFull,

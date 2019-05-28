@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, NavParams, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams, DateTime } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { UserSessionProvider } from '../../providers/user-session/user-session';
 import { ToastController } from 'ionic-angular';
@@ -12,7 +12,10 @@ import { PagoTdcMismoTitularBfcReciboPage } from '../pago-tdc-mismo-titular-bfc-
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+@IonicPage({
+  name: 'PagoTdcMismoTitularBfcConfirmarPage',
+  segment: 'PagoTdcMismoTitularBfcConfirmarPage'
+})
 @Component({
   selector: 'page-pago-tdc-mismo-titular-bfc-confirmar',
   templateUrl: 'pago-tdc-mismo-titular-bfc-confirmar.html',
@@ -92,7 +95,7 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Confirmar',
+      title: 'confirmar',
       message: '',
       buttons: [
         {
@@ -104,7 +107,7 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'confirmar',
           handler: () => {
             this.confirmacion = true;
             this.validarModel();
@@ -223,7 +226,7 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
                        if(self.checkFirmas=='true'){
                           self.makeTheTransfer();
                        } else {
-                        self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                        self.navCtrl.push('PagoTdcMismoTitularBfcReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "montoValue":self.montoValue,
@@ -333,7 +336,7 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
                       self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoMismoTitularBFCResponse['0'].PagoTarjetaCreditoMismoTitularBFCResult['0'].intrfdsjv['0'].SCodAutoriza['0']
                       console.log("REF: ",self.referencia);
                       ////search_array.
-                      self.navCtrl.push(PagoTdcMismoTitularBfcReciboPage,{
+                      self.navCtrl.push('PagoTdcMismoTitularBfcReciboPage',{
                         "cuentaDebito":self.cuentaDebito,
                         "cuentaCredito":self.cuentaCredito,
                         "montoValue":self.montoValue,

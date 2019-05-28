@@ -9,5 +9,8 @@ import { TransferenciaTercerosBfcConfirmarPage } from './transferencia-terceros-
   imports: [
     IonicPageModule.forChild(TransferenciaTercerosBfcConfirmarPage),
   ],
+  exports: [
+    TransferenciaTercerosBfcConfirmarPage
+  ]
 })
 export class TransferenciaTercerosBfcConfirmarPageModule {}

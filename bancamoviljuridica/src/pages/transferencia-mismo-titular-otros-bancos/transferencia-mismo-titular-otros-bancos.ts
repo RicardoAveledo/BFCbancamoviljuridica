@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TransferenciasTercerosDetallePage } from '../transferencias-terceros-detalle/transferencias-terceros-detalle';
 import { TransferenciaTercerosOtrosBancosReciboPage } from '../transferencia-terceros-otros-bancos-recibo/transferencia-terceros-otros-bancos-recibo';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -12,6 +12,10 @@ import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
 import { TransferenciaMismoTitularOtrosBancosDetallePage } from '../transferencia-mismo-titular-otros-bancos-detalle/transferencia-mismo-titular-otros-bancos-detalle';
 
+@IonicPage({
+  name: 'TransferenciaMismoTitularOtrosBancosPage',
+  segment: 'TransferenciaMismoTitularOtrosBancosPage'
+})
 @Component({
   selector: 'page-transferencia-mismo-titular-otros-bancos',
   templateUrl: 'transferencia-mismo-titular-otros-bancos.html'
@@ -169,7 +173,7 @@ export class TransferenciaMismoTitularOtrosBancosPage {
                        //self.events.publish('session:created', true);
 
                        //Navegamos
-                       //self.navCtrl.setRoot(WelcomePage);
+                       //self.navCtrl.setRoot('WelcomePage');
                    }catch(Error){
                     console.log("Error try 1")
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
@@ -242,7 +246,7 @@ export class TransferenciaMismoTitularOtrosBancosPage {
                        var search_array = JSON.parse(str);
                        var bankName:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].BankNameGetResponse['0'].BankNameGetResult['0']
                        console.log("Código de banco: ", search_array);
-                       self.navCtrl.push(TransferenciaMismoTitularOtrosBancosDetallePage,{
+                       self.navCtrl.push('TransferenciaMismoTitularOtrosBancosDetallePage',{
                         "favoritoSelected":item,
                         "bankName":bankName,
                         "bankCod":self.bankCod,
@@ -262,6 +266,6 @@ export class TransferenciaMismoTitularOtrosBancosPage {
   }
   goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage');
   }
 }

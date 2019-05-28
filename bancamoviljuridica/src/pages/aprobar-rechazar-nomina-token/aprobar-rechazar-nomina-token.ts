@@ -12,7 +12,10 @@ import { AprobarRechazarNominaReciboPage } from '../aprobar-rechazar-nomina-reci
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'AprobarRechazarNominaTokenPage',
+  segment: 'AprobarRechazarNominaTokenPage'
+})
 @Component({
   selector: 'page-aprobar-rechazar-nomina-token',
   templateUrl: 'aprobar-rechazar-nomina-token.html',
@@ -280,7 +283,7 @@ export class AprobarRechazarNominaTokenPage {
                       if (checkOP == '1060'){
                           self.showAlert("A ocurrido un error, intente más tarde");
                       } else {
-                        self.navCtrl.push(AprobarRechazarNominaReciboPage,{
+                        self.navCtrl.push('AprobarRechazarNominaReciboPage',{
                           "EstadoLote":self.EstadoLote,
                           "OP_CodeTran":self.OP_CodeTran,
                           "OP_ID":self.OP_ID,
@@ -371,7 +374,7 @@ export class AprobarRechazarNominaTokenPage {
                       } else if (count == "1060"){
                         self.showAlert("A ocurrido un error, intente más tarde");
                       } else {
-                        self.navCtrl.push(AprobarRechazarNominaReciboPage,{
+                        self.navCtrl.push('AprobarRechazarNominaReciboPage',{
                           "EstadoLote":self.EstadoLote,
                           "OP_CodeTran":self.OP_CodeTran,
                           "OP_ID":self.OP_ID,
@@ -459,7 +462,7 @@ export class AprobarRechazarNominaTokenPage {
                          console.log("Respuesta Pago Nomina",search_array)
                          var check:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].RealizarPagoNominaResponse['0'].RealizarPagoNominaResult['0'];
                          if(check == "0"){
-                           self.navCtrl.push(AprobarRechazarNominaReciboPage,{
+                           self.navCtrl.push('AprobarRechazarNominaReciboPage',{
                             "EstadoLote":self.EstadoLote,
                             "OP_CodeTran":self.OP_CodeTran,
                             "OP_ID":self.OP_ID,

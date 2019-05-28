@@ -9,5 +9,8 @@ import { TdcMismoTitularBfcPage } from './tdc-mismo-titular-bfc';
   imports: [
     IonicPageModule.forChild(TdcMismoTitularBfcPage),
   ],
+  exports: [
+    TdcMismoTitularBfcPage
+  ]
 })
 export class TdcMismoTitularBfcPageModule {}

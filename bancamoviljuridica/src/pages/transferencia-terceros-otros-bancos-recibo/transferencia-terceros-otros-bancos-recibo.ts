@@ -8,8 +8,12 @@ import { ToastController } from 'ionic-angular';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
+import { SocialSharing } from '@ionic-native/social-sharing/';
 
-
+@IonicPage({
+  name: 'TransferenciaTercerosOtrosBancosReciboPage',
+  segment: 'TransferenciaTercerosOtrosBancosReciboPage'
+})
 @Component({
   selector: 'page-transferencia-terceros-otros-bancos-recibo',
   templateUrl: 'transferencia-terceros-otros-bancos-recibo.html'
@@ -37,7 +41,7 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
   public estado:string;
   public checkAprobaciones:string;
 
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
+  constructor(public socialSharing:SocialSharing, public navCtrl: NavController, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
     this.cuentaDebito = navParams.get("cuentaDebito");
@@ -76,21 +80,38 @@ export class TransferenciaTercerosOtrosBancosReciboPage {
     );
   }
 
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
+        .then(function (dataUrl) {
+          download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
+
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
+   });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferenciaMismoTitularOtrosBancosReciboPage');
   }
 goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 
  
   goToTransferencias(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(TransferenciasPage);
+    this.navCtrl.setRoot('TransferenciasPage');
   }
 }

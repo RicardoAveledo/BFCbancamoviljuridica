@@ -17,7 +17,10 @@ import { TransferenciaMismoTitularOtrosBancosReciboPage } from '../transferencia
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TransferenciaMismoTitularOtrosBancosConfirmarPage',
+  segment: 'TransferenciaMismoTitularOtrosBancosConfirmarPage'
+})
 @Component({
   selector: 'page-transferencia-mismo-titular-otros-bancos-confirmar',
   templateUrl: 'transferencia-mismo-titular-otros-bancos-confirmar.html',
@@ -94,7 +97,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Confirmar',
+      title: 'confirmar',
       message: '',
       buttons: [
         {
@@ -106,7 +109,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'confirmar',
           handler: () => {
             this.confirmacion = true;
             this.validarModel();
@@ -204,7 +207,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
                        if(self.checkFirmas=='true'){
                           self.makeTheTransfer();
                        } else {
-                        self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                        self.navCtrl.push('TransferenciaMismoTitularOtrosBancosReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebitoFull,
@@ -348,7 +351,7 @@ export class TransferenciaMismoTitularOtrosBancosConfirmarPage {
                          console.log("Transferencia hecha: ",search_array);
                          self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaOtrosBancosMismoTitularResponse['0'].TransferenciaOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0'];
                          console.log("REF: ",self.referencia);
-                         self.navCtrl.push(TransferenciaMismoTitularOtrosBancosReciboPage,{
+                         self.navCtrl.push('TransferenciaMismoTitularOtrosBancosReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebitoFull,

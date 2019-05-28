@@ -9,5 +9,8 @@ import { AprobarRechazarNominaTokenPage } from './aprobar-rechazar-nomina-token'
   imports: [
     IonicPageModule.forChild(AprobarRechazarNominaTokenPage),
   ],
+  exports: [
+    AprobarRechazarNominaTokenPage
+  ]
 })
 export class AprobarRechazarNominaTokenPageModule {}

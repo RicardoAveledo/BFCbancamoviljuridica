@@ -8,7 +8,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'ConsultaAutorizacionRechazoPage',
+  segment: 'ConsultaAutorizacionRechazoPage'
+})
 @Component({
   selector: 'page-consulta-autorizacion-rechazo',
   templateUrl: 'consulta-autorizacion-rechazo.html',

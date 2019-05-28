@@ -13,7 +13,10 @@ import { stringify } from '@angular/core/src/util';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TdcMismoTitularBfcPage',
+  segment: 'TdcMismoTitularBfcPage'
+})
 @Component({
   selector: 'page-tdc-mismo-titular-bfc',
   templateUrl: 'tdc-mismo-titular-bfc.html',
@@ -150,7 +153,7 @@ export class TdcMismoTitularBfcPage {
                        //self.events.publish('session:created', true);
 
                        //Navegamos
-                       //self.navCtrl.setRoot(WelcomePage);
+                       //self.navCtrl.setRoot('WelcomePage');
                    }catch(Error){
                     console.log("Error try 1")
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"

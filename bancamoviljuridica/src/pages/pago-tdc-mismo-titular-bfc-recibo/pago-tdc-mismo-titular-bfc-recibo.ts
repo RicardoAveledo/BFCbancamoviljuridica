@@ -5,6 +5,7 @@ import { TransferenciasPage } from '../transferencias/transferencias';
 import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 
+import { SocialSharing } from '@ionic-native/social-sharing/';
 /**
  * Generated class for the PagoTdcMismoTitularBfcReciboPage page.
  *
@@ -12,7 +13,10 @@ import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcMismoTitularBfcReciboPage',
+  segment: 'PagoTdcMismoTitularBfcReciboPage'
+})
 @Component({
   selector: 'page-pago-tdc-mismo-titular-bfc-recibo',
   templateUrl: 'pago-tdc-mismo-titular-bfc-recibo.html',
@@ -27,7 +31,7 @@ export class PagoTdcMismoTitularBfcReciboPage {
   public estado:string;
   public checkAprobaciones:string;
   
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public socialSharing:SocialSharing, public navCtrl: NavController, public navParams: NavParams) {
       this.cuentaDebito = navParams.get('cuentaDebito');
       this.cuentaCredito = navParams.get('cuentaCredito');
       this.montoValue = navParams.get('montoValue');
@@ -40,16 +44,16 @@ export class PagoTdcMismoTitularBfcReciboPage {
     
     goToTDC(params){
       if (!params) params = {};
-      this.navCtrl.setRoot(OperacionesDeTDCPage);
+      this.navCtrl.setRoot('OperacionesDeTDCPage');
     }
     goToWelcome(params){
       if (!params) params = {};
-      this.navCtrl.setRoot(WelcomePage);
+      this.navCtrl.setRoot('WelcomePage');
   
     }
 goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagoTdcMismoTitularBfcReciboPage');
@@ -58,9 +62,17 @@ goToAprobacionRechazo(params){
   generateImage(){
     var htmlToImage = require('html-to-image');
     var download = require("downloadjs");
-   htmlToImage.toPng(document.getElementById('recibo'))
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
         .then(function (dataUrl) {
           download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
+
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
    });
   }
 }

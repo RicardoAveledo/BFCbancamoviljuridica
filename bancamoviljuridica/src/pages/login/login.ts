@@ -5,7 +5,6 @@ import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolida
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
 import { DetalleDeTarjetaPage } from '../detalle-de-tarjeta/detalle-de-tarjeta';
 import { WelcomePage } from '../welcome/welcome';
-import { LoginProvider } from '../../providers/login/login';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +17,6 @@ import { UserSessionProvider } from '../../providers/user-session/user-session';
 import * as shajs from 'sha.js';
 import htmlToImage from 'html-to-image';
 import { saveAs } from 'filesaver';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'page-login',
@@ -32,8 +30,8 @@ export class LoginPage {
   contra:string;
   contra1:string|Int32Array;
   rafaga:string='Ingrese nombre de usuario y contraseña'; 
-  constructor(public socialSharing:SocialSharing, public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
-    private toastCtrl: ToastController, public LoginProvider: LoginProvider,public httpClient: HttpClient) {
+  constructor(public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
+    private toastCtrl: ToastController,public httpClient: HttpClient) {
     this.menu.enable(false,'menu');
   }
 
@@ -400,7 +398,7 @@ export class LoginPage {
                                                            self2.events.publish('session:created', true);
                    
                                                            //Navegamos
-                                                           self2.navCtrl.setRoot(WelcomePage);
+                                                           self2.navCtrl.setRoot('WelcomePage');
                                                        }catch(Error){
                                                          self2.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                                                          self2.presentToast();
@@ -445,13 +443,9 @@ export class LoginPage {
 
     //import htmlToImage from 'html-to-image';
     //import { saveAs } from 'filesaver';
-    generateImage(){
-      var htmlToImage = require('html-to-image');
-      var download = require("downloadjs");
-     htmlToImage.toPng(document.getElementById('page4'))
-          .then(function (dataUrl) {
-            download(dataUrl, 'my-node.png');
-     });/*
+  
+
+     /*
      this.socialSharing.canShareViaEmail().then(() => {
       // Sharing via email is possible
       }).catch(() => {
@@ -464,6 +458,5 @@ export class LoginPage {
       }).catch(() => {
         // Error!
       });*/
-    }
     
 }

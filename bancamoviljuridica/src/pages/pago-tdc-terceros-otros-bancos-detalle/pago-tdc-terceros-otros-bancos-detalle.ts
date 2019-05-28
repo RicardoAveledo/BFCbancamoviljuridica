@@ -18,8 +18,10 @@ import { PagoTdcTercerosOtrosBancosConfirmarPage } from '../pago-tdc-terceros-ot
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcTercerosOtrosBancosDetallePage',
+  segment: 'PagoTdcTercerosOtrosBancosDetallePage'
+})
 @Component({
   selector: 'page-pago-tdc-terceros-otros-bancos-detalle',
   templateUrl: 'pago-tdc-terceros-otros-bancos-detalle.html',
@@ -198,7 +200,7 @@ export class PagoTdcTercerosOtrosBancosDetallePage {
                                 self.sdisponible+
                                 self.bankName+
                                 self.bankCod);
-                                self.navCtrl.push(PagoTdcTercerosOtrosBancosConfirmarPage,{
+                                self.navCtrl.push('PagoTdcTercerosOtrosBancosConfirmarPage',{
                                   "cuentaDebito":self.cuentaDebito,
                                   "cuentaCredito":self.cuentaCredito,
                                   "cuentaDebitoFull":self.cuentaDebitoFull,

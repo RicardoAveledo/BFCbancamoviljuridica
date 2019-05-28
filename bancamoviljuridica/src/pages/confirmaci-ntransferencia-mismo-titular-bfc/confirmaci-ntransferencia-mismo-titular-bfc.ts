@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, NavParams, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams, DateTime } from 'ionic-angular';
 import { TransferenciaMismoTitularBFCReciboPage } from '../transferencia-mismo-titular-bfcrecibo/transferencia-mismo-titular-bfcrecibo';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
@@ -17,6 +17,10 @@ import { ToastController } from 'ionic-angular';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 
+@IonicPage({
+  name: 'ConfirmaciNTransferenciaMismoTitularBFCPage',
+  segment: 'ConfirmaciNTransferenciaMismoTitularBFCPage'
+})
 @Component({
   selector: 'page-confirmaci-ntransferencia-mismo-titular-bfc',
   templateUrl: 'confirmaci-ntransferencia-mismo-titular-bfc.html'
@@ -89,7 +93,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Confirmar',
+      title: 'confirmar',
       message: '',
       buttons: [
         {
@@ -101,7 +105,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'confirmar',
           handler: () => {
             this.confirmacion = true;
             this.validarModel();
@@ -220,7 +224,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
                        if(self.checkFirmas=='true'){
                           self.makeTheTransfer();
                        } else {
-                        self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                        self.navCtrl.push('TransferenciaMismoTitularBFCReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "montoValue":self.montoValue,
@@ -322,7 +326,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
                       self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].TransferenciaBFCMismoTitularResponse['0'].TransferenciaBFCMismoTitularResult['0'].intrfdsjv['0'].SReferencia['0']
                       console.log("REF: ",self.referencia);
                       //search_array.
-                      self.navCtrl.push(TransferenciaMismoTitularBFCReciboPage,{
+                      self.navCtrl.push('TransferenciaMismoTitularBFCReciboPage',{
                         "cuentaDebito":self.cuentaDebito,
                         "cuentaCredito":self.cuentaCredito,
                         "montoValue":self.montoValue,
@@ -360,37 +364,37 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
 
   goToTransferenciasMismoTitularBFC(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciasMismoTitularBFCPage);
+    this.navCtrl.push('TransferenciasMismoTitularBFCPage');
   }
   goToPosiciNConsolidada(params){
     if (!params) params = {};
-    this.navCtrl.push(PosiciNConsolidadaPage);
+    this.navCtrl.push('PosiciNConsolidadaPage');
   }goToDetalleDeLaCuenta(params){
     if (!params) params = {};
-    this.navCtrl.push(DetalleDeLaCuentaPage);
+    this.navCtrl.push('DetalleDeLaCuentaPage');
   }goToDetalleDeTarjeta(params){
     if (!params) params = {};
-    this.navCtrl.push(DetalleDeTarjetaPage);
+    this.navCtrl.push('DetalleDeTarjetaPage');
   }goToTransferencias(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciasPage);
+    this.navCtrl.push('TransferenciasPage');
   }goToConfirmaciNTransferenciaMismoTitularBFC(params){
     if (!params) params = {};
-    this.navCtrl.push(ConfirmaciNTransferenciaMismoTitularBFCPage);
+    this.navCtrl.push('ConfirmaciNTransferenciaMismoTitularBFCPage');
   }goToTransferenciaMismoTitularOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaMismoTitularOtrosBancosPage);
+    this.navCtrl.push('TransferenciaMismoTitularOtrosBancosPage');
   }goToTransferenciaTercerosBFC(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosBFCPage);
+    this.navCtrl.push('TransferenciaTercerosBFCPage');
   }goToTransferenciasTercerosDetalle(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciasTercerosDetallePage);
+    this.navCtrl.push('TransferenciasTercerosDetallePage');
   }goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosPage');
   }goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage');
   }
 }

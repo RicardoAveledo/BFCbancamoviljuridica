@@ -3,13 +3,13 @@
       <ion-grid no-padding no-border style="width:auto;height:70px;">
         <ion-row no-padding >
           <ion-col class="topleft">
-            <img src="assets/img/regresar.PNG" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+            <img src="assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
           </ion-col>
           <ion-col class="topleft">
-            <img src="assets/img/headerLogo1.PNG" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            <img src="assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
           </ion-col>
           <ion-col class="topright">
-            <img src="assets/img/headerLogo2.PNG" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            <img src="assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
           </ion-col>
           <ion-col class="topright">
  
@@ -21,7 +21,7 @@
 
 <ion-content id="page6">
     <div id="mainContainer">
-  <img src="assets/img/detalleHeader.PNG" style="display:block;width:100%;height:auto;margin-top:10px;margin-left:auto;margin-right:auto;" />
+  <img src="assets/img/detalleheader.png" style="display:block;width:100%;height:auto;margin-top:10px;margin-left:auto;margin-right:auto;" />
   <form id="detalleDeLaCuenta-form2">
     <ion-item id="detalleDeLaCuenta-select1">
       <ion-label>Cuenta: </ion-label> 
@@ -139,34 +139,46 @@
                 <ion-row>
                   <ion-col>
                       <ion-avatar item-left>
-                          <img src="assets/img/kLOhOKoRXisEOjdzXoxp_redArrow.PNG" />
+                          <img src="assets/img/klohokorxiseojdzxoxp_redarrow.png" style="margin-top:5px;margin-left:5px;margin-bottom:5px;width:auto;height:30px" />
                       </ion-avatar>
                   </ion-col>
                   <ion-col>
-                      <h5>{{item[0]}}</h5>
+                      <h6>{{item[0]}}</h6>
                   </ion-col>
                   <ion-col>
-                      <h5>{{item[1]}}</h5>
+                      <h6>Bs.</h6>
+                  </ion-col>
+                  <ion-col>
+                      <h6> </h6>
+                  </ion-col>
+                  <ion-col>
+                      <h6>{{item[1]}}</h6>
                   </ion-col>
                 </ion-row>
               </ion-grid>
             </div>
             <div *ngIf=item[2]>
-                <ion-grid>
-                    <ion-row>
-                      <ion-col>
-                          <ion-avatar item-left>
-                              <img src="assets/img/0XwJNcKWSyqYlLDAJcmW_greenArrow.PNG" />
-                          </ion-avatar>
-                      </ion-col>
-                      <ion-col>
-                          <h5>{{item[0]}}</h5>
-                      </ion-col>
-                      <ion-col>
-                          <h5>{{item[1]}}</h5>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                      <ion-avatar item-left>
+                          <img src="assets/img/0xwjnckwsyqylldajcmw_greenarrow.png" style="margin-top:5px;margin-left:5px;margin-bottom:5px;width:auto;height:30px" />
+                      </ion-avatar>
+                  </ion-col>
+                  <ion-col>
+                      <h6>{{item[0]}}</h6>
+                  </ion-col>
+                  <ion-col>
+                      <h6>Bs.</h6>
+                  </ion-col>
+                  <ion-col>
+                      <h6> </h6>
+                  </ion-col>
+                  <ion-col>
+                      <h6>{{item[1]}}</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>  
             </div>
           </ion-item>
     </div>

@@ -9,5 +9,8 @@ import { ConsultaAutorizacionRechazoPage } from './consulta-autorizacion-rechazo
   imports: [
     IonicPageModule.forChild(ConsultaAutorizacionRechazoPage),
   ],
+  exports: [
+    ConsultaAutorizacionRechazoPage
+  ]
 })
 export class ConsultaAutorizacionRechazoPageModule {}

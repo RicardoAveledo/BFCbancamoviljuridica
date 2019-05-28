@@ -19,7 +19,10 @@ import { PagoTdcTercerosBfcDetallePage } from '../pago-tdc-terceros-bfc-detalle/
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcTercerosBfcPage',
+  segment: 'PagoTdcTercerosBfcPage'
+})
 @Component({
   selector: 'page-pago-tdc-terceros-bfc',
   templateUrl: 'pago-tdc-terceros-bfc.html',
@@ -178,7 +181,7 @@ export class PagoTdcTercerosBfcPage {
                        //self.events.publish('session:created', true);
 
                        //Navegamos
-                       //self.navCtrl.setRoot(WelcomePage);
+                       //self.navCtrl.setRoot('WelcomePage');
                    }catch(Error){
                     console.log("Error try 1")
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
@@ -198,16 +201,16 @@ export class PagoTdcTercerosBfcPage {
   }
   goToTDCTercerosBFCDetalle(favoritoSelected:any[]){
     console.log("GoToTransferenciasTerceroDetalle",favoritoSelected);
-    this.navCtrl.push(PagoTdcTercerosBfcDetallePage,{
+    this.navCtrl.push('PagoTdcTercerosBfcDetallePage',{
       "favoritoSelected":favoritoSelected,
     });
   }
   goToTransferenciaTercerosOtrosBancos(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosPage');
   }
   goToTransferenciaTercerosOtrosBancosRecibo(params){
     if (!params) params = {};
-    this.navCtrl.push(TransferenciaTercerosOtrosBancosReciboPage);
+    this.navCtrl.push('TransferenciaTercerosOtrosBancosReciboPage');
   }
 }

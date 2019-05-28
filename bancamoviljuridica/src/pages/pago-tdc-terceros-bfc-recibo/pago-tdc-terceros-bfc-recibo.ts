@@ -12,7 +12,7 @@ import { OperacionesDeTDCPage } from '../operaciones-de-tdc/operaciones-de-tdc';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/';
 /**
  * Generated class for the PagoTdcTercerosBfcReciboPage page.
  *
@@ -20,7 +20,10 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcTercerosBfcReciboPage',
+  segment: 'PagoTdcTercerosBfcReciboPage'
+})
 @Component({
   selector: 'page-pago-tdc-terceros-bfc-recibo',
   templateUrl: 'pago-tdc-terceros-bfc-recibo.html',
@@ -49,7 +52,7 @@ export class PagoTdcTercerosBfcReciboPage {
 
   constructor(public navCtrl: NavController, private file: File, 
     private fileOpener: FileOpener, 
-    private socialSharing: SocialSharing, public httpClient: HttpClient, private viewCtrl: ViewController,
+    public socialSharing: SocialSharing, public httpClient: HttpClient, private viewCtrl: ViewController,
     public navParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController,
     public userSession:UserSessionProvider) {
     this.cuentaDebito = navParams.get("cuentaDebito");
@@ -78,32 +81,33 @@ export class PagoTdcTercerosBfcReciboPage {
 
   goToWelcome(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot('WelcomePage');
   }
 goToAprobacionRechazo(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AprobacionRechazoPrincipalPage);
+    this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
   }
 
   goToOperacionesTDC(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(OperacionesDeTDCPage);
+    this.navCtrl.setRoot('OperacionesDeTDCPage');
   }
   
   generateImage(){
     var htmlToImage = require('html-to-image');
     var download = require("downloadjs");
-    htmlToImage.toPng(document.getElementById('recibo'))
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
         .then(function (dataUrl) {
-          download(dataUrl, 'recibo.png');
-   });
-  //    .then(function (dataUrl) {
-  //        download(dataUrl, 'recibo33.png');
-  // });
-   this.shareImg();
-  }
+          download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
 
-  shareImg() { 
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
+   });
   }
 
 }

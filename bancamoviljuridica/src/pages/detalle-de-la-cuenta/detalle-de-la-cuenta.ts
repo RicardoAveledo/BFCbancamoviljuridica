@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, DateTime, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, DateTime, NavParams } from 'ionic-angular';
 import { UserSessionProvider } from '../../providers/user-session/user-session';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import xml2js from 'xml2js';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { stringify } from '@angular/core/src/util';
 
+@IonicPage({
+  name: 'DetalleDeLaCuentaPage',
+  segment: 'DetalleDeLaCuentaPage'
+})
 @Component({
   selector: 'page-detalle-de-la-cuenta',
   templateUrl: 'detalle-de-la-cuenta.html'
@@ -256,7 +260,7 @@ export class DetalleDeLaCuentaPage {
                        //self.events.publish('session:created', true);
 
                        //Navegamos
-                       //self.navCtrl.setRoot(WelcomePage);
+                       //self.navCtrl.setRoot('WelcomePage');
                   }catch(Error){ 
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                     //self.presentToast();
@@ -399,7 +403,7 @@ export class DetalleDeLaCuentaPage {
                        //self.events.publish('session:created', true);
 
                        //Navegamos
-                       //self.navCtrl.setRoot(WelcomePage);
+                       //self.navCtrl.setRoot('WelcomePage');
                   }catch(Error){ 
                     //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                     //self.presentToast();
@@ -566,7 +570,7 @@ export class DetalleDeLaCuentaPage {
                              //self.events.publish('session:created', true);
       
                              //Navegamos
-                             //self.navCtrl.setRoot(WelcomePage);
+                             //self.navCtrl.setRoot('WelcomePage');
                         }catch(Error){ 
                           //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                           //self.presentToast();

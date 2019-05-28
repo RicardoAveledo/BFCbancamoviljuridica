@@ -9,5 +9,8 @@ import { TransferenciasTercerosBfcReciboPage } from './transferencias-terceros-b
   imports: [
     IonicPageModule.forChild(TransferenciasTercerosBfcReciboPage),
   ],
+  exports: [
+    TransferenciasTercerosBfcReciboPage
+  ]
 })
 export class TransferenciasTercerosBfcReciboPageModule {}

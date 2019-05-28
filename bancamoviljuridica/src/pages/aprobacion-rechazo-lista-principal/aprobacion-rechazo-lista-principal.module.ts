@@ -9,5 +9,8 @@ import { AprobacionRechazoListaPrincipalPage } from './aprobacion-rechazo-lista-
   imports: [
     IonicPageModule.forChild(AprobacionRechazoListaPrincipalPage),
   ],
+  exports: [
+    AprobacionRechazoListaPrincipalPage
+  ]
 })
 export class AprobacionRechazoListaPrincipalPageModule {}

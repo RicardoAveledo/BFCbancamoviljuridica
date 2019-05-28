@@ -11,7 +11,10 @@ import xml2js from 'xml2js';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'DetallePrestamoPage',
+  segment: 'DetallePrestamoPage'
+})
 @Component({
   selector: 'page-detalle-prestamo',
   templateUrl: 'detalle-prestamo.html',

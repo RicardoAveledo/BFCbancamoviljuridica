@@ -12,7 +12,10 @@ import { AprobarRechazarProveedoresReciboPage } from '../aprobar-rechazar-provee
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'AprobarRechazarProveedoresTokenPage',
+  segment: 'AprobarRechazarProveedoresTokenPage'
+})
 @Component({
   selector: 'page-aprobar-rechazar-proveedores-token',
   templateUrl: 'aprobar-rechazar-proveedores-token.html',
@@ -281,7 +284,7 @@ export class AprobarRechazarProveedoresTokenPage {
                       if (checkOP == '1060'){
                           self.showAlert("A ocurrido un error, intente más tarde");
                       } else {
-                        self.navCtrl.push(AprobarRechazarProveedoresReciboPage,{
+                        self.navCtrl.push('AprobarRechazarProveedoresReciboPage',{
                           "EstadoLote":self.EstadoLote,
                           "OP_CodeTran":self.OP_CodeTran,
                           "OP_ID":self.OP_ID,
@@ -372,7 +375,7 @@ export class AprobarRechazarProveedoresTokenPage {
                       } else if (count == "1060"){
                         self.showAlert("A ocurrido un error, intente más tarde");
                       } else {
-                        self.navCtrl.push(AprobarRechazarProveedoresReciboPage,{
+                        self.navCtrl.push('AprobarRechazarProveedoresReciboPage',{
                           "EstadoLote":self.EstadoLote,
                           "OP_CodeTran":self.OP_CodeTran,
                           "OP_ID":self.OP_ID,
@@ -460,7 +463,7 @@ export class AprobarRechazarProveedoresTokenPage {
                          console.log("Respuesta Pago Proveedores",search_array)
                          var check:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].RealizarPagoProveedoresResponse['0'].RealizarPagoProveedoresResult['0'];
                          if(check == "0"){
-                           self.navCtrl.push(AprobarRechazarProveedoresReciboPage,{
+                           self.navCtrl.push('AprobarRechazarProveedoresReciboPage',{
                             "EstadoLote":self.EstadoLote,
                             "OP_CodeTran":self.OP_CodeTran,
                             "OP_ID":self.OP_ID,

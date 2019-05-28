@@ -9,7 +9,9 @@ import { UserSessionProvider } from '../../providers/user-session/user-session';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'AprobacionRechazoConsultaDetallePage',
+  segment: 'AprobacionRechazoConsultaDetallePage'})
 @Component({
   selector: 'page-aprobacion-rechazo-consulta-detalle',
   templateUrl: 'aprobacion-rechazo-consulta-detalle.html',

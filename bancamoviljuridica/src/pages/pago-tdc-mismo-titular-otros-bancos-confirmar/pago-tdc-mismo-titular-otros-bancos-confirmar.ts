@@ -18,7 +18,10 @@ import { PagoTdcMismoTitularOtrosBancosReciboPage } from '../pago-tdc-mismo-titu
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'PagoTdcMismoTitularOtrosBancosConfirmarPage',
+  segment: 'PagoTdcMismoTitularOtrosBancosConfirmarPage'
+})
 @Component({
   selector: 'page-pago-tdc-mismo-titular-otros-bancos-confirmar',
   templateUrl: 'pago-tdc-mismo-titular-otros-bancos-confirmar.html',
@@ -95,7 +98,7 @@ export class PagoTdcMismoTitularOtrosBancosConfirmarPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Confirmar',
+      title: 'confirmar',
       message: '',
       buttons: [
         {
@@ -107,7 +110,7 @@ export class PagoTdcMismoTitularOtrosBancosConfirmarPage {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'confirmar',
           handler: () => {
             this.confirmacion = true;
             this.validarModel();
@@ -205,7 +208,7 @@ export class PagoTdcMismoTitularOtrosBancosConfirmarPage {
                        if(self.checkFirmas=='true'){
                           self.makeTheTransfer();
                        } else {
-                        self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                        self.navCtrl.push('PagoTdcMismoTitularOtrosBancosReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebitoFull,
@@ -348,7 +351,7 @@ export class PagoTdcMismoTitularOtrosBancosConfirmarPage {
                          console.log("TDC hecha: ",search_array);
                          self.referencia = search_array.p['soap:Envelope']['0']['soap:Body']['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResponse['0'].PagoTarjetaCreditoOtrosBancosMismoTitularResult['0'].inextdsjv['0'].SReferencia['0']
                          console.log("REF: ",self.referencia);
-                         self.navCtrl.push(PagoTdcMismoTitularOtrosBancosReciboPage,{
+                         self.navCtrl.push('PagoTdcMismoTitularOtrosBancosReciboPage',{
                           "cuentaDebito":self.cuentaDebito,
                           "cuentaCredito":self.cuentaCredito,
                           "cuentaDebitoFull":self.cuentaDebitoFull,
