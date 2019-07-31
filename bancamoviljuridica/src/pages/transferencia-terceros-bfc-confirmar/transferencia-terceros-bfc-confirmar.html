@@ -21,115 +21,68 @@
 <ion-content id="page14">
     <div id="mainContainer">
   <img src="assets/img/transferenciastercerosbfcheader.png" style="display:block;margin-top:10px;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-  <div id="transferenciasTercerosDetalle-markdown31" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Cuenta Débito
-      </strong>
-    </p>
-  </div>
-  
-  <ion-list id="transferenciasTercerosDetalle-list13">
-      <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-          {{cuentaDebito}}
-      </ion-item-divider>
-    </ion-list> 
-
-  <ion-item-divider color="light" id="transferenciasMismoTitularBFC-list-item-divider2">
-    Saldo disponible BsS: {{sdisponible}} 
-  </ion-item-divider>
-  
-  <div id="transferenciasTercerosDetalle-markdown32" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Cuenta Crédito
-      </strong>
-    </p>
-  </div>
-  <ion-list id="transferenciasTercerosDetalle-list11">
-    <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider7">
-      {{cuentaCredito}}
-    </ion-item-divider>
-  </ion-list>
-  <div id="transferenciasTercerosDetalle-markdown33" class="show-list-numbers-and-dots"></div>
-  <div id="transferenciasTercerosDetalle-markdown34" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Beneficiario
-      </strong>
-    </p>
-  </div>
-  <ion-list id="transferenciasTercerosDetalle-list12">
-    <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider8">
-      {{nombre}}
-    </ion-item-divider>
-  </ion-list>
-  <div id="transferenciasTercerosDetalle-markdown35" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        C.I / RIF
-      </strong>
-    </p>
-  </div>
-  <form id="transferenciasTercerosDetalle-form14">
-    <ion-list id="transferenciasTercerosDetalle-list13">
-        <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-            {{ciType}} {{ciNo}}
-        </ion-item-divider>
-      </ion-list> 
-  </form>
-  <div id="transferenciasTercerosDetalle-markdown36" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Correo Electrónico
-      </strong>
-    </p>
-  </div>
-  <ion-list id="transferenciasTercerosDetalle-list13">
-    <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-      {{email}}
-    </ion-item-divider>
-  </ion-list>
-  <div id="transferenciasTercerosDetalle-markdown37" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Monto
-      </strong>
-    </p>
-  </div>
-  <form id="transferenciasTercerosDetalle-form15">
-      <ion-list id="transferenciasTercerosDetalle-list13">
-          <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-              BsS: {{montoValue}}
-          </ion-item-divider>
-        </ion-list> 
-
-    <div id="transferenciasTercerosDetalle-markdown38" class="show-list-numbers-and-dots">
+  <div id="confirmaciNTransferenciaMismoTitularBFC-markdown21" class="show-list-numbers-and-dots">
       <p style="color:#000000;">
         <strong>
-          Motivo
+          Revisa y autoriza
         </strong>
       </p>
     </div>
-    <ion-list id="transferenciasTercerosDetalle-list13">
-        <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-            {{motivo}}
-        </ion-item-divider>
-      </ion-list> 
-  </form>
-  <div id="transferenciasTercerosDetalle-markdown39" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Concepto 
-      </strong>
-    </p>
-  </div>
-  <form id="transferenciasTercerosDetalle-form16">
-      <ion-list id="transferenciasTercerosDetalle-list13">
-          <ion-item-divider color="light" id="transferenciasTercerosDetalle-list-item-divider9">
-            {{conceptoValue}}
-          </ion-item-divider>
-        </ion-list>
-  </form>
+  <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+      <ion-label>
+        Cuenta Origen
+      </ion-label>
+      <ion-input text-right type="text" placeholder="{{cuentaDebito}}"></ion-input>
+    </ion-item> 
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+      <ion-label>
+        Cuenta Destino
+      </ion-label>
+      <ion-input text-right type="text" placeholder="{{cuentaCredito}}" ></ion-input>
+    </ion-item>
+
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Beneficiario
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{nombre}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Cédula
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{ciType}}{{ciNo}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Correo
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{email}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Motivo
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{motivo}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Concepto
+        </ion-label>
+        <ion-input text-right type="text" placeholder="{{conceptoValue}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+      <ion-label>
+        Monto
+      </ion-label>
+      <ion-input  text-right type="text" placeholder="{{montoValue|number:'1.2-2'}}"></ion-input>
+    </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+      <ion-label>
+        Fecha
+      </ion-label>
+      <ion-input text-right type="text" placeholder="{{fechaToSend}}"></ion-input>
+    </ion-item>
+ 
   </div>
 </ion-content>

@@ -137,8 +137,9 @@ export class TransferenciaMismoTitularOtrosBancosPage {
                           var TipoFavoritoID:any = element.TipoFavoritoID['0'];
                           var TipoTarjetaCredito:any = element.TipoTarjetaCredito['0'];
                           var dCompDate:any = element.dCompDate['0'];
+                          var lastNumbersAccount:any = NumeroInstrumento.substr(-4);
                           var itemsToAdd:any[]=[AF_ID,BANK_ID,Beneficiario,CedulaRif,Descripcion,Email,NumeroInstrumento,
-                            TipoDescripcion,TipoFavoritoID,TipoTarjetaCredito,dCompDate];
+                            TipoDescripcion,TipoFavoritoID,TipoTarjetaCredito,dCompDate,lastNumbersAccount];
                           self.listFavoritos.push(itemsToAdd);
                           self.listFavoritosAux.push(itemsToAdd);
                           counter=counter+1;

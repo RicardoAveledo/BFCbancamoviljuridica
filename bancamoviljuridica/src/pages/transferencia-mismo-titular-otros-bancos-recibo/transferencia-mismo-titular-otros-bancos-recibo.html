@@ -277,19 +277,19 @@
       <ion-label>
         Cuenta Origen
       </ion-label>
-      <ion-input text-right type="text" value="{{cuentaDebito}}"></ion-input>
+      <ion-input text-right type="text" placeholder="{{cuentaDebito}}"></ion-input>
     </ion-item> 
     <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
       <ion-label>
         Cuenta Destino
       </ion-label>
-      <ion-input text-right type="text" value="{{cuentaCredito}}" ></ion-input>
+      <ion-input text-right type="text" placeholder="{{cuentaCredito}}" ></ion-input>
     </ion-item>
     <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
         <ion-label>
           Banco
         </ion-label>
-        <ion-input text-right type="text" value="{{bankName}}" ></ion-input>
+        <ion-input text-right type="text" placeholder="{{bankName}}" ></ion-input>
       </ion-item>
     <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
         <ion-label>
@@ -334,7 +334,8 @@
       <ion-input text-right type="text" placeholder="{{fechaToSend}}"></ion-input>
     </ion-item>
   </form>
-      </div>
+</div>
+
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
   <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;"on-click="generateImage()">
     <ion-icon name="share-alt"></ion-icon>
