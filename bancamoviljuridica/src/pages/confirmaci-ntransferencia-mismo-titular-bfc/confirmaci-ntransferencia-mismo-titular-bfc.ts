@@ -68,7 +68,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
     } else {
       this.minutesStr =  ""+this.minutes;
     }
-    this.day= new Date().getDay();
+    this.day= new Date().getDate();
     if (this.day<10){
       this.dayStr =  "0"+this.day;
     } else {
@@ -93,7 +93,7 @@ export class ConfirmaciNTransferenciaMismoTitularBFCPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'confirmar',
+      title: 'Confirmar',
       message: '',
       buttons: [
         {

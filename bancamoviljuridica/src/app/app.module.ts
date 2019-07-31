@@ -12,6 +12,9 @@ import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/';
 
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -20,6 +23,10 @@ import { SocialSharing } from '@ionic-native/social-sharing/';
   imports: [
     BrowserModule,
     HttpClientModule,
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Regresar',
       iconMode: 'ios',
@@ -40,6 +47,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/';
     SplashScreen,
     File,
     FileOpener,
+    FingerprintAIO,
     SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClientModule,

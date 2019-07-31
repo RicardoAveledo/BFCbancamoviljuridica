@@ -8,15 +8,15 @@
     <h5 ion-text color="toolbar_color">
         Usuario:
     </h5>
-        <ion-input class="inputitem" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="text" [(ngModel)]="nombre" formControlName= "nameUser"></ion-input>
+        <ion-input class="inputitem" (ionBlur)="checkBlur()" (ionFocus)="checkFocus()" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="text" [(ngModel)]="nombre" formControlName= "nameUser"></ion-input>
     <h5 ion-text color="toolbar_color">
         Contraseña:
     </h5>
-        <ion-input class="inputitem" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="password"  [(ngModel)]="contra" formControlName= "password"></ion-input>
+        <ion-input class="inputitem" (ionBlur)="checkBlur()" (ionFocus)="checkFocus()" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="password"  [(ngModel)]="contra" formControlName= "password"></ion-input>
     </form>
     </form>
     <div *ngIf="contra!=null">
-        <button class="inputlogin" id="login-button1" ion-button color="buttons" block style="border-radius:10px 10px 10px 10px;max-width: 100px;margin-left: auto;margin-right: auto;" on-click="goToWelcome()">
+        <button class="inputlogin" id="login-button1" ion-button color="buttons" block style="border-radius:10px 10px 10px 10px;max-width: 100px;margin-left: auto;margin-right: auto;" on-click="presentConfirm()">
             Entrar
         </button>
     </div>
@@ -28,37 +28,34 @@
   </ion-content>
 
 
-  
- <!-- <ion-footer no-border>
-      <ion-grid>
-          <ion-row>
-          <ion-col>
-                <img src="assets/img/informacion.png" style="margin-left:auto;margin-right:auto;width:auto;height:90px" outline class="btn" id="next-button" default  />
-          </ion-col>
-          <ion-col>
-              <img src="assets/img/escribenos.png" style="margin-left:auto;margin-right:auto;width:auto;height:90px" outline class="btn" id="next-button" default  />
-          </ion-col>
-        </ion-row>
-        </ion-grid>
-        <div style="background-color:rgb(7, 50, 144);">
-          <ion-grid>
-            <ion-row>
-              <ion-col align-self-center style="text-align: center">
-                 <font size="1" ion-text color="light">BFC Banco Fondo Común C.A Banco Universal RIF J000723060</font>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col align-self-right col-8 style="text-align: center">
-                  <font size="1" ion-text color="light" >Todos los derechos reservados 2019</font>
-              </ion-col>
-              <ion-col align-self-right>
-                  <font size="1" ion-text color="light" style="text-align: left">Ver. 1.0000</font>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          
-          
-          
-          
-        </div>
-  </ion-footer>-->
+  <div *ngIf="checkFooter">
+          <ion-footer no-border>
+            <!--<ion-grid>
+                <ion-row>
+                <ion-col>
+                      <img src="assets/img/informacion.png" style="margin-left:auto;margin-right:auto;width:auto;height:90px" outline class="btn" id="next-button" default  />
+                </ion-col>
+                <ion-col>
+                    <img src="assets/img/escribenos.png" style="margin-left:auto;margin-right:auto;width:auto;height:90px" outline class="btn" id="next-button" default  />
+                </ion-col>
+              </ion-row>
+              </ion-grid>-->
+              <div  style="background-color:rgb(7, 50, 144);">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col align-self-center style="text-align: center">
+                      <font size="1" ion-text color="light">BFC Banco Fondo Común C.A Banco Universal RIF J000723060</font>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col align-self-right col-8 style="text-align: center">
+                        <font size="1" ion-text color="light" >Todos los derechos reservados 2019</font>
+                    </ion-col>
+                    <ion-col align-self-right>
+                        <font size="1" ion-text color="light" style="text-align: left">Ver. 1.0000</font>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+        </ion-footer>
+  </div>

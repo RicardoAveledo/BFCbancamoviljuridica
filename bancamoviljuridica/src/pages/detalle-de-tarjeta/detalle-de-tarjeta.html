@@ -28,12 +28,12 @@
             <div *ngFor="let item of userSession.tdc">
                   <div *ngIf="item[0] == cuentaselected[0]"> 
                     <ion-option (ionSelect)="middlewareMethodAccounts(item)" [selected]=true>
-                      {{item[0]}}
+                      {{item[6]}}
                     </ion-option>
                   </div>
                   <div *ngIf="item[0] != cuentaselected[0]"> 
                     <ion-option (ionSelect)="middlewareMethodAccounts(item)" [selected]=false>
-                      {{item[0]}}
+                      {{item[6]}}
                     </ion-option>
                   </div>
             </div>

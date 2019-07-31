@@ -65,7 +65,7 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
    } else {
      this.minutesStr =  ""+this.minutes;
    }
-   this.day= new Date().getDay();
+   this.day= new Date().getDate();
    if (this.day<10){
      this.dayStr =  "0"+this.day;
    } else {
@@ -95,7 +95,7 @@ export class PagoTdcMismoTitularBfcConfirmarPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'confirmar',
+      title: 'Confirmar',
       message: '',
       buttons: [
         {

@@ -25,28 +25,6 @@
       <div>
             <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
 
-<div *ngIf="checkFirmas=='true'">
-<ion-list id="transferenciaMismoTitularBFCRecibo-list7">
-<ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
-  <ion-icon name="checkmark" item-left></ion-icon>
-  Operación Realizada
-</ion-item>
-</ion-list>
-</div>
-<div *ngIf="checkFirmas=='rechazada'">
-    <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
-      <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
-        Operación rechazada          
-      </ion-item>
-    </ion-list>
-</div>
-<div *ngIf="checkFirmas=='false'">
-  <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
-    <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
-      Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
-    </ion-item>
-  </ion-list>
-</div>
 
 <div *ngIf="checkFirmas=='rechazada'">
 <h4><strong>Autorizaciones:</strong></h4>
@@ -257,7 +235,30 @@
 </div>
 </div>
 
-
+<div id="recibo"> 
+  <div *ngIf="checkFirmas=='true'">
+  <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+  <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+    <ion-icon name="checkmark" item-left></ion-icon>
+    Operación Realizada
+  </ion-item>
+  </ion-list>
+  </div>
+  <div *ngIf="checkFirmas=='rechazada'">
+      <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+        <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+          Operación rechazada          
+        </ion-item>
+      </ion-list>
+  </div>
+  <div *ngIf="checkFirmas=='false'">
+    <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+      <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+        Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
+      </ion-item>
+    </ion-list>
+  </div>
+  
     <form id="transferenciaMismoTitularBFCRecibo-form9"> 
         <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
             <ion-label>
@@ -307,12 +308,14 @@
             </ion-label>
             <ion-input text-right type="text" placeholder="{{TotalRegistros}}"></ion-input>
           </ion-item>
-          <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+          
+          <!--<ion-item id="transferenciaMismoTitularBFCRecibo-input8">
             <ion-label>
                 Cantidad de Rechazos
             </ion-label>
             <ion-input text-right type="text" placeholder=""></ion-input>
-          </ion-item>
+          </ion-item>-->
+          
           <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
             <ion-label>
                 Monto Total
@@ -339,8 +342,9 @@
           </ion-item>
     </form>
   </div>
+</div>
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
-<button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;">
+<button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;" on-click="generateImage()">
 <ion-icon name="share-alt"></ion-icon>
 Compartir
 </button>

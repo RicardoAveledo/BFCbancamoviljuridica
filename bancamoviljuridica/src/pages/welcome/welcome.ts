@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserSessionProvider } from '../../providers/user-session/user-session';
 
 /**
  * Generated class for the WelcomePage page.
@@ -18,7 +19,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
+    this.userSession.reloadAccountData();
   }
 
   ionViewDidLoad() {

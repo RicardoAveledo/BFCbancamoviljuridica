@@ -704,7 +704,7 @@ export class AprobaciNRechazoPage {
     } else {
       this.minutesStr =  ""+this.minutes;
     }
-    this.day= new Date().getDay();
+    this.day= new Date().getDate();
     if (this.day<10){
       this.dayStr =  "0"+this.day;
     } else {
@@ -931,7 +931,7 @@ makeTheTransferTBFC(){
   } else {
     this.minutesStr =  ""+this.minutes;
   }
-  this.day= new Date().getDay();
+  this.day= new Date().getDate();
   if (this.day<10){
     this.dayStr =  "0"+this.day;
   } else {
@@ -1063,7 +1063,7 @@ makeTheTransferTOB(){
   } else {
     this.minutesStr =  ""+this.minutes;
   }
-  this.day= new Date().getDay();
+  this.day= new Date().getDate();
   if (this.day<10){
     this.dayStr =  "0"+this.day;
   } else {
@@ -1299,7 +1299,7 @@ makeTheTDCPaymentMTOB(){
   } else {
     this.minutesStr =  ""+this.minutes;
   }
-  this.day= new Date().getDay();
+  this.day= new Date().getDate();
   if (this.day<10){
     this.dayStr =  "0"+this.day;
   } else {
@@ -1434,7 +1434,7 @@ makeTheTDCPaymentTBFC(){
   } else {
     this.minutesStr =  ""+this.minutes;
   }
-  this.day= new Date().getDay();
+  this.day= new Date().getDate();
   if (this.day<10){
     this.dayStr =  "0"+this.day;
   } else {
@@ -1570,7 +1570,7 @@ makeTheTDCPaymentTOB(){
   } else {
     this.minutesStr =  ""+this.minutes;
   }
-  this.day= new Date().getDay();
+  this.day= new Date().getDate();
   if (this.day<10){
     this.dayStr =  "0"+this.day;
   } else {

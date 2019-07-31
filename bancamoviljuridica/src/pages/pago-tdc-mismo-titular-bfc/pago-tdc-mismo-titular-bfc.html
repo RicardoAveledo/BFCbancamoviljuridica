@@ -86,31 +86,33 @@
   <ion-list radio-group [(ngModel)]="relationship">
       <ion-item>
         <ion-label>Saldo Actual {{saldoActual}}</ion-label>
-        <ion-radio value="saldo" (onclick)="cargarSaldoActual()"></ion-radio>
+        <ion-radio value="saldo" (ionSelect)="cargarSaldoActual()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>Pago Mínimo {{pagoMinimo}}</ion-label>
-        <ion-radio value="pago" (onclick)="cargarPagoMinimo()"></ion-radio>
+        <ion-radio value="pago" (ionSelect)="cargarPagoMinimo()"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Otro Monto</ion-label>
-        <ion-radio value="otro" (onclick)="enableMonto()"></ion-radio>
+        <ion-label>Otro Monto:</ion-label>
+        <ion-radio value="otro" (ionSelect)="cargarOtroMonto()"></ion-radio>
       </ion-item>
     </ion-list>
 
     <form [formGroup]="montoForm" novalidate>
         <div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer5"></div>
-        <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
-          <p style="color:#000000;">
-            <strong>
-              Monto Bs.  
-            </strong>
-          </p>
+        <div *ngIf="otroMontoCheck">
+              <div id="transferenciasMismoTitularBFC-markdown20" class="show-list-numbers-and-dots">
+                <p style="color:#000000;">
+                  <strong>
+                    Monto Bs.  
+                  </strong>
+                </p>
+              </div>
+              <ion-item id="transferenciasMismoTitularBFC-input3">
+                <ion-label></ion-label>
+                <ion-input text-right type="number" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
+              </ion-item>
         </div>
-        <ion-item id="transferenciasMismoTitularBFC-input3">
-          <ion-label></ion-label>
-          <ion-input text-right type="number" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
-        </ion-item>
       </form>
 </div>
   </ion-content>

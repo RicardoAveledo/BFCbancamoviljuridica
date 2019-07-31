@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Toast, GESTURE_REFRESHER, MenuController } from 'ionic-angular';
+import { NavController, Toast, GESTURE_REFRESHER, MenuController, AlertController } from 'ionic-angular';
 import { ToastController, Events } from 'ionic-angular';
 import { PosiciNConsolidadaPage } from '../posici-nconsolidada/posici-nconsolidada';
 import { DetalleDeLaCuentaPage } from '../detalle-de-la-cuenta/detalle-de-la-cuenta';
@@ -17,6 +17,8 @@ import { UserSessionProvider } from '../../providers/user-session/user-session';
 import * as shajs from 'sha.js';
 import htmlToImage from 'html-to-image';
 import { saveAs } from 'filesaver';
+import { Storage } from '@ionic/storage';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 @Component({
   selector: 'page-login',
@@ -29,12 +31,54 @@ export class LoginPage {
   nombre:string;
   contra:string;
   contra1:string|Int32Array;
+  public checkFooter:boolean =true;
+  public checkFinger:boolean =false;
   rafaga:string='Ingrese nombre de usuario y contraseña'; 
-  constructor(public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
-    private toastCtrl: ToastController,public httpClient: HttpClient) {
+  constructor(private faio: FingerprintAIO, public storage:Storage, public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
+    private toastCtrl: ToastController,public httpClient: HttpClient, private alertCtrl: AlertController) {
     this.menu.enable(false,'menu');
-  }
+    this.checkFingerPrint();
+    //const availableFinger = this.checkFingerPrint();
+    }
+  
+  checkFingerPrint(){
+    //const availableFinger = await this.faio.isAvailable()
+    //console.log("finger",availableFinger);
+    this.faio.isAvailable()
+      .then(result => {
+    //if(availableFinger === "OK"){
+      this.checkFinger = true;
+      this.storage.get('biometry').then((val) => {
+        if(val=='saved'){
+          this.storage.get('bioname').then((val) => {
+            this.nombre = val;
+            this.storage.get('biopass').then((val) => {
+              this.contra = val;
+              this.faio.show({
+                clientId: 'Fingerprint-Demo', //Android: Used for encryption. iOS: used for dialogue if no `localizedReason` is given.
+                clientSecret: 'o7aoOMYUbyxaD23oFAnJ', //Necessary for Android encrpytion of keys. Use random secret key.
+                localizedReason: 'Please authenticate', //Only for iOS
+                disableBackup: true
+              })
+              .then((result: any) => {
+                  //Fingerprint/Face was successfully verified
+                this.sendPostRequest();
+              })
+              .catch((error: any) => {
+                this.rafaga = 'Error al validar la huella, ingrese los datos'
+                this.nombre='';
+                this.contra='';
+                this.storage.clear();
+                this.presentToast()
+              });
+            });
+          });
+        } else {
 
+        }
+      });
+    });
+  }
 /* sendPostRequest() {
     var headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -59,10 +103,17 @@ export class LoginPage {
     });
   }*/
 
-  
+  checkBlur(){
+    this.checkFooter = true;
+  }
+
+  checkFocus(){
+    this.checkFooter = false;
+  }
 
 //Mensaje al usuario al no introducir su nombre o contraseña
   presentToast() {
+    this.storage.clear();
     let toast = this.toastCtrl.create({
       //message: 'Por favor, introduzca su nombre de usuario y clave para continuar',
       message:this.rafaga,
@@ -75,8 +126,84 @@ export class LoginPage {
     toast.present();
   }
 
-  goToWelcome(params){
-    if (!params) params = {};
+
+
+  presentSaveFingerPrint() {
+    if(this.checkFinger){
+      let alert = this.alertCtrl.create({
+        title: '¿Desea activar la autenticación biométrica?',
+        message: '',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+              this.navCtrl.setRoot('WelcomePage');
+            }
+          },
+          {
+            text: 'Si',
+            handler: () => {
+              this.faio.show({
+                clientId: 'Fingerprint-Demo', //Android: Used for encryption. iOS: used for dialogue if no `localizedReason` is given.
+                clientSecret: 'o7aoOMYUbyxaD23oFAnJ', //Necessary for Android encrpytion of keys. Use random secret key.
+                localizedReason: 'Please authenticate', //Only for iOS
+                disableBackup: true
+              })
+              .then((result: any) => {
+                  //Fingerprint/Face was successfully verified
+                  this.storage.set('bioname',this.nombre);
+                  this.storage.set('biopass',this.contra);
+                  this.storage.set('biometry','saved');
+                  this.navCtrl.setRoot('WelcomePage');
+                  console.log('biometry accepted and saved');
+              })
+              .catch((error: any) => {
+                this.rafaga = 'Error al validar la huella'
+                this.presentToast()
+              });
+            }
+          }
+        ]
+      });
+      alert.present();     
+    } else {
+      this.goToWelcome();
+    }
+  }
+
+  presentConfirm() {
+    this.storage.get('terms'+this.nombre).then((val) => {
+      if(val=='accepted'){
+        this.goToWelcome();
+      } else {
+        let alert = this.alertCtrl.create({
+          title: 'Términos y Condiciones de uso',
+          message: this.userSession.TOC,
+          buttons: [
+            {
+              text: 'Cancelar',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Aceptar',
+              handler: () => {
+                this.goToWelcome();
+    
+                console.log('Comfirmar clicked');
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
+    });
+  }
+
+  goToWelcome(){
       if (this.credentialsForm.valid) //QUITARLE EL ! A LA VALIDACIÓN PARA QUE SIRVA
       {
         this.sendPostRequest();
@@ -397,8 +524,22 @@ export class LoginPage {
                                                            //las variables del menú haciendo un llamado Events (Ver documentación Menú Dinámico)
                                                            self2.events.publish('session:created', true);
                    
+                                                           self2.storage.set('terms'+self2.nombre, 'accepted');
+                                                           
+                                                           if(self2.checkFinger){
+                                                            self2.storage.get('biometry').then((val) => {
+                                                              if(val=='saved'){
+                                                                self2.navCtrl.setRoot('WelcomePage');
+                                                              } else {
+                                                               self2.presentSaveFingerPrint();
+                                                              }
+                                                             });
+                                                           } else {
+                                                            self2.navCtrl.setRoot('WelcomePage');
+                                                           }
+                                                           
+
                                                            //Navegamos
-                                                           self2.navCtrl.setRoot('WelcomePage');
                                                        }catch(Error){
                                                          self2.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
                                                          self2.presentToast();

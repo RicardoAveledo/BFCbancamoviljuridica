@@ -45,11 +45,13 @@ export class PagoTdcMismoTitularBfcPage {
   public fechaPago:string;
   public cuentaCreditoFull:string;
   public montoValue:number;
-  public montoValueCargar:number;
+  public montoPass:number;
+  public montoValueCargar:string;
   public sdisponible:number;
   public saldoActual:number=0.0;
   public pagoMinimo:number=0.0;
   public montoEnable:boolean=false; 
+  public otroMontoCheck:boolean=false; 
 
   constructor(public navCtrl: NavController,public userSession:UserSessionProvider, public formBuilder: FormBuilder, 
   private toastCtrl: ToastController, private alertCtrl: AlertController, public navParams: NavParams,
@@ -61,25 +63,10 @@ export class PagoTdcMismoTitularBfcPage {
     this.tdc = userSession.tdc;
   }
 
-  loadMonto(){
-    this.montoValue = this.montoValueCargar;
-    console.log("Monto: ", this.montoValue)
-  }
-
   enableMonto(){
     this.montoEnable =  !this.montoEnable;
   }
   public auxAmmount:number;
-
-  cargarSaldoActual(){
-    this.montoValue = this.saldoActual;
-    console.log("Saldo Actual Cargado");
-  }
-
-  cargarPagoMinimo(){
-    this.montoValue = this.pagoMinimo;
-    console.log("Pago Mínimo Cargado");
-  }
 
   changeValueCredit(value: any)
   {
@@ -90,6 +77,8 @@ export class PagoTdcMismoTitularBfcPage {
   {
     this.cuentaDebito=value
   }
+
+
 
   loadSaldoCred(item:any[]){
     this.cuentaCreditoFull = item[0];
@@ -202,18 +191,60 @@ export class PagoTdcMismoTitularBfcPage {
   });
   
 
+  cargarSaldoActual(){
+    this.montoValueCargar = ""+this.saldoActual;
+    console.log("Saldo Actual Cargado", this.montoPass +" - "+ this.montoValueCargar);
+    this.otroMontoCheck = false;
+  }
+
+  cargarPagoMinimo(){
+    this.montoValueCargar = ""+this.pagoMinimo;
+    console.log("Pago Mínimo Cargado", this.montoPass +" - "+ this.montoValueCargar);
+    this.otroMontoCheck = false;
+  }
+
+  cargarOtroMonto(){
+    this.montoValueCargar = ""+this.montoValue;
+    console.log("Cargar otro monto", this.montoPass +" - "+ this.montoValueCargar);
+    this.otroMontoCheck = true;
+  }
 
   //Método que utiliza el boton de continuar
   goToTDCMismoTitularBFCConfirmar(params){
-    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
+    if(this.otroMontoCheck){
+      this.montoPass = +this.montoValue;
+      this.montoValueCargar= ""+this.montoPass;
+    } else {
+      console.log("Verificador>",this.montoValueCargar+" "+this.montoValueCargar.includes(".")&&this.montoValueCargar.includes(","))
+      if(this.montoValueCargar.includes(".")&&this.montoValueCargar.includes(",")){
+        console.log("montoValueCargar 1> ", this.montoValueCargar)
+        this.montoValueCargar = this.montoValueCargar.split('.').join("");
+        console.log("montoValueCargar 2> ", this.montoValueCargar)
+        this.montoValueCargar = this.montoValueCargar.split(',').join(".");
+        console.log("montoValueCargar 3> ", this.montoValueCargar)
+        this.montoPass = +this.montoValueCargar;
+      }else{
+        if(this.montoValueCargar.includes(",")){
+          this.montoValueCargar = this.montoValueCargar.split(',').join(".");
+          console.log("montoValueCargar 3> ", this.montoValueCargar)
+        }
+        this.montoPass =+this.montoValueCargar;
+      }
+    }
+    console.log("Monto> ", this.montoPass +" a"+ this.montoPass==null + " b" )
+    if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoPass>0)
     {
       if (!params) params = {};
-      if (+this.sdisponible<+this.montoValue){
+      if (+this.sdisponible<+this.montoPass){
         this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
-        console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
+        this.montoPass = 0;
+        this.montoValueCargar= "";
+        console.log(this.sdisponible+" < "+this.montoPass+ " - " + (+this.sdisponible<+this.montoPass))
       }else 
-      if(this.montoValue==null){
+      if(this.montoPass==null || this.montoPass==0){
         this.showAlert('El monto no puede ser cero');
+        this.montoPass = 0;
+        this.montoValueCargar= "";
       } else {
         if(this.cuentaCreditoFull==this.cuentaDebitoFull){
           this.showAlert('No puede transferir a la misma cuenta');
@@ -273,18 +304,18 @@ export class PagoTdcMismoTitularBfcPage {
                                 var search_array = JSON.parse(str);
                                 console.log("MODELO: ", search_array);
                                 var montoMax:string = search_array.p['soap:Envelope']['0']['soap:Body']['0'].ModelosGetResponse['0'].ModelosGetResult['0'].Modelo['0'].CT_MontoMax['0'];
-                                if(+montoMax >= self.montoValue){
+                                if(+montoMax >= self.montoPass){
                                   self.navCtrl.push('PagoTdcMismoTitularBfcConfirmarPage',{
                                     "cuentaDebito":self.cuentaDebito,
                                     "cuentaCredito":self.cuentaCredito,
                                     "cuentaDebitoFull":self.cuentaDebitoFull,
                                     "cuentaCreditoFull":self.cuentaCreditoFull,
-                                    "montoValue":self.montoValue
+                                    "montoValue":self.montoPass
                                   });
                                 }else{
                                   self.showAlert('El modelo no permite un monto tan alto.');
                                 }
-                                console.log(self.sdisponible+" < "+self.montoValue+ " - " + (+self.sdisponible<+self.montoValue))
+                                console.log(montoMax+" < "+self.montoPass+ " - " + (+montoMax<+self.montoPass))
                                 
                          }catch(Error){
                           console.log("Error try 1")
@@ -315,17 +346,19 @@ export class PagoTdcMismoTitularBfcPage {
       }
 
       else {
-        if (this.montoForm.invalid)
+        if (this.montoPass==0)
         {
-          this.showAlert('Debe colocar un monto');
+          this.showAlert('El monto no puede ser cero');
+          this.montoPass = 0;
+          this.montoValueCargar= "";
         }
       }
 
     }
   }
 
-
   }
+
 
  
 }

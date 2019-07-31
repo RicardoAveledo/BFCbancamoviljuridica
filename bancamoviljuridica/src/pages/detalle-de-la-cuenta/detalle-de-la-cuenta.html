@@ -29,12 +29,12 @@
             <div *ngFor="let item of cuentas">
                   <div *ngIf="item[0] == cuentaselected[0]"> 
                     <ion-option (ionSelect)="middlewareMethodAccounts(item)" [selected]=true>
-                      {{item[0]}}
+                      {{item[6]}}
                     </ion-option>
                   </div>
                   <div *ngIf="item[0] != cuentaselected[0]"> 
                     <ion-option (ionSelect)="middlewareMethodAccounts(item)" [selected]=false>
-                      {{item[0]}}
+                      {{item[6]}}
                     </ion-option>
                   </div>
             </div>
@@ -139,20 +139,16 @@
                 <ion-row>
                   <ion-col>
                       <ion-avatar item-left>
-                          <img src="assets/img/klohokorxiseojdzxoxp_redarrow.png" style="margin-top:5px;margin-left:5px;margin-bottom:5px;width:auto;height:30px" />
+                          <img src="assets/img/klohokorxiseojdzxoxp_redarrow.png" style="margin-left:5px;width:auto;height:30px;" />
                       </ion-avatar>
                   </ion-col>
-                  <ion-col>
+                  <ion-col col-6>
+                    <div style="white-space:normal;">
                       <h6>{{item[0]}}</h6>
+                      </div>
                   </ion-col>
                   <ion-col>
-                      <h6>Bs.</h6>
-                  </ion-col>
-                  <ion-col>
-                      <h6> </h6>
-                  </ion-col>
-                  <ion-col>
-                      <h6>{{item[1]}}</h6>
+                      <h6>Bs. {{item[1]}}</h6>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -165,21 +161,17 @@
                           <img src="assets/img/0xwjnckwsyqylldajcmw_greenarrow.png" style="margin-top:5px;margin-left:5px;margin-bottom:5px;width:auto;height:30px" />
                       </ion-avatar>
                   </ion-col>
-                  <ion-col>
-                      <h6>{{item[0]}}</h6>
-                  </ion-col>
-                  <ion-col>
-                      <h6>Bs.</h6>
-                  </ion-col>
-                  <ion-col>
-                      <h6> </h6>
-                  </ion-col>
-                  <ion-col>
-                      <h6>{{item[1]}}</h6>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>  
-            </div>
+                  <ion-col col-6>
+                      <div style="white-space:normal;">
+                        <h6>{{item[0]}}</h6>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <h6>Bs. {{item[1]}}</h6>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
           </ion-item>
     </div>
     <div *ngIf="listvalores.length==0">

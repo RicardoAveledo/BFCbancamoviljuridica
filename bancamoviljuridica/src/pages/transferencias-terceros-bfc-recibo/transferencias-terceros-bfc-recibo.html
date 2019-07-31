@@ -20,34 +20,9 @@
 </ion-header>
 <ion-content id="page11">
     <div id="mainContainer">
-      <div id="recibo">
   <img src="assets/img/transferenciastercerosbfcheader.png" style="display:block;margin-top:10px;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
   
-  <div *ngIf="checkFirmas=='true'">
-      <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
-        <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
-          <ion-icon name="checkmark" item-left></ion-icon>
-          Operación Realizada
-        </ion-item>
-      </ion-list>
-      </div>
-    
-      <div *ngIf="checkFirmas=='false'">
-          <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
-            <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
-              Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
-            </ion-item>
-          </ion-list>
-      </div>
-
-      <div *ngIf="checkFirmas=='rechazado'">
-          <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
-            <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
-                Operación Rechazada
-            </ion-item>
-          </ion-list>
-      </div>
 
       <div *ngIf="(checkFirmas=='rechazado')&&(checkAprobaciones == 'true')">
           <h4><strong>Autorizaciones:</strong></h4>
@@ -258,6 +233,32 @@
             </div>
         </div>
 
+<div id="recibo">
+  <div *ngIf="checkFirmas=='true'">
+      <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+        <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+          <ion-icon name="checkmark" item-left></ion-icon>
+          Operación Realizada
+        </ion-item>
+      </ion-list>
+      </div>
+    
+      <div *ngIf="checkFirmas=='false'">
+          <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+            <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+              Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
+            </ion-item>
+          </ion-list>
+      </div>  
+
+      <div *ngIf="checkFirmas=='rechazado'">
+        <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+          <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+              Operación Rechazada
+          </ion-item>
+        </ion-list>
+      </div>      
+
   <form id="transferenciaMismoTitularBFCRecibo-form9">
 
     <div *ngIf="checkFirmas=='true'">
@@ -327,7 +328,7 @@
   </form>
       </div>
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
-  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;">
+  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;" on-click="generateImage()">
     <ion-icon name="share-alt"></ion-icon>
     Compartir
   </button>

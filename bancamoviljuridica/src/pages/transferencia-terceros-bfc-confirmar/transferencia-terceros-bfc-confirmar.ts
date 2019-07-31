@@ -86,12 +86,44 @@ export class TransferenciaTercerosBfcConfirmarPage {
                     +"-"+this.sdisponible
                     +"-"+this.fecha
        );
-
+       this.hours= new Date().getHours();
+       if (this.hours<10){
+         this.hoursStr =  "0"+this.hours;
+       } else {
+         this.hoursStr =  ""+this.hours;
+       }
+       this.minutes= new Date().getMinutes();
+       if (this.minutes<10){
+         this.minutesStr =  "0"+this.minutes;
+       } else {
+         this.minutesStr =  ""+this.minutes;
+       }
+       this.day= new Date().getDate();
+       if (this.day<10){
+         this.dayStr =  "0"+this.day;
+       } else {
+         this.dayStr =  ""+this.day;
+       }
+       this.month = new Date().getMonth()+1; 
+       if (this.month<10){
+         this.monthStr =  "0"+this.month;
+       } else {
+         this.monthStr =  ""+this.month;
+       }
+       this.year = new Date().getFullYear();
+       if (this.year<10){
+         this.yearStr =  "0"+this.year;
+       } else {
+         this.yearStr =  ""+this.year;
+       }
+       this.yearprint = this.year.toString().substr(-2);
+       this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+       this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();
   }
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'confirmar',
+      title: 'Confirmar',
       message: '',
       buttons: [
         {
@@ -249,7 +281,7 @@ export class TransferenciaTercerosBfcConfirmarPage {
       } else {
         this.minutesStr =  ""+this.minutes;
       }
-      this.day= new Date().getDay();
+      this.day= new Date().getDate();
       if (this.day<10){
         this.dayStr =  "0"+this.day;
       } else {

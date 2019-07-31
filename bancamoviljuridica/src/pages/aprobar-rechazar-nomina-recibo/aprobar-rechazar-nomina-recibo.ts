@@ -6,6 +6,8 @@ import xml2js from 'xml2js';
 import { WelcomePage } from '../welcome/welcome';
 import { AprobaciNRechazoPage } from '../aprobaci-nrechazo/aprobaci-nrechazo';
 import { AprobacionRechazoPrincipalPage } from '../aprobacion-rechazo-principal/aprobacion-rechazo-principal';
+import { SocialSharing } from '@ionic-native/social-sharing/';
+
 /**
  * Generated class for the AprobarRechazarNominaReciboPage page.
  *
@@ -81,7 +83,7 @@ export class AprobarRechazarNominaReciboPage {
   public CodigoOTP:string;
   public checkFirmas:string;
 
-  constructor(public httpClient: HttpClient, private alertCtrl: AlertController, public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public socialSharing:SocialSharing, public httpClient: HttpClient, private alertCtrl: AlertController, public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
       this.EstadoLote = navParams.get("EstadoLote");
       this.OP_CodeTran = navParams.get("OP_CodeTran");
       this.OP_ID = navParams.get("OP_ID");
@@ -116,6 +118,23 @@ export class AprobarRechazarNominaReciboPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AprobarRechazarNominaReciboPage');
+  }
+
+  generateImage(){
+    var htmlToImage = require('html-to-image');
+    var download = require("downloadjs");
+    var self = this;
+   htmlToImage.toPng(document.getElementById('recibo'), self)
+        .then(function (dataUrl) {
+          download(dataUrl, 'my-node.png');
+         
+          self.socialSharing.share("", "", dataUrl, "").then(() => {
+
+    }).catch(() => {
+      //Hacer la descarga de la imagen y el share de whatsapp aca
+      console.log('Error sharing', 'error');
+    });
+   });
   }
 
 }

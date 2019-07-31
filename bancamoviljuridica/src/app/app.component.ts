@@ -157,6 +157,8 @@ export class MyApp {
     this.userSession.validarPC =false;
     this.userSession.validarTDC=false;
     this.userSession.validarTR =false;
+    this.userSession.cuentas = [];
+    this.userSession.tdc = [];
     this.validarPC  = true;
     this.validarTR  = true;
     this.validarTDC = true;
