@@ -167,8 +167,10 @@ public serverIPWS:string = "prueba2.bfc.com.ve:8455/WSFCIBJuridicoIBS";
                           var NroCuentaMasked2:string = SNroCuenta.substr(-4);
                           var NroCuentaMasked1:string = SNroCuenta.substr(0,4);
                           var NroCuentaMasked:string = NroCuentaMasked1+"************"+NroCuentaMasked2;
+                          var lastFourDigits:string = "..."+NroCuentaMasked2;
                           var tipoCuenta:string = element.STipocuenta['0'];
                           var SCodMoneda:string = element.SCodMoneda['0']; 
+                          var SDescipcionproducto:string = element.SDescipcionproducto['0']; 
                           console.log("SCodMoneda: ", SCodMoneda);
                           if(tipoCuenta=="TDC" && SCodMoneda=="VES"){
                             //if(SCodMoneda=="VES"){
@@ -181,21 +183,21 @@ public serverIPWS:string = "prueba2.bfc.com.ve:8455/WSFCIBJuridicoIBS";
                               var year:string = SFechaPagoAntes.substr(-4);
                               var fechapago:string= day+"-"+month+"-"+year;
                               var SPagoMinimo:string = element.SPagoMinimo['0']
-                              var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,fechapago,SPagoMinimo];  
+                              var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,fechapago,SPagoMinimo,SDescipcionproducto,lastFourDigits];  
                             //}
                             }else if(SCodMoneda=="VES" && (tipoCuenta=="NOW" || tipoCuenta=="DDA")) {
                            //   if(SCodMoneda=="VES"){
                             console.log("Tipo cuentas",contcuentas);
                             var itemPosicion = contcuentas;
                             contcuentas = contcuentas + 1;
-                            var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
+                            var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,SDescipcionproducto,lastFourDigits];
                             //  }  
                           }  else if(SCodMoneda=="VES" && tipoCuenta=="LNS") {
                             //   if(SCodMoneda=="VES"){
                              console.log("Tipo prestamo",contprestamos);
                              var itemPosicion = contprestamos;
                              contprestamos = contprestamos + 1;
-                             var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked];
+                             var itemLista = [SNroCuenta,SBloqueado,SContable,SDiferido,SDisponible,itemPosicion,NroCuentaMasked,SDescipcionproducto,lastFourDigits];
                              //  }  
                            }                   
                           //procesar cuentas para enmascararlas

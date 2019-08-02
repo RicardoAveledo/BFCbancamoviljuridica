@@ -43,9 +43,24 @@
             <h5>{{item[4]}}</h5>
         </ion-item>
     </div>
-    <ion-item-divider color="light" id="transferenciaTercerosBFC-list-item-divider3">
-      Registrados: {{cont}}
-    </ion-item-divider>
+    <ion-grid no-padding class="tdcbar">
+        <ion-row >
+          <ion-col style="margin-left: 5px;">
+            <p float-left style="color:rgb(255, 255, 255);">
+                <strong>
+                  
+                </strong>
+            </p>
+          </ion-col> 
+          <ion-col style="margin-right: 5px;">
+            <p float-right style="color:rgb(255, 255, 255);">
+                <strong>
+                    Registrados: {{cont}}
+                </strong>
+            </p>
+          </ion-col> 
+        </ion-row>
+      </ion-grid> 
   </ion-list>
 </div>
 <div *ngIf="cont==0">

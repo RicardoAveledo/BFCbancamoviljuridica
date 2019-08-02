@@ -27,7 +27,10 @@ export class PosiciNConsolidadaPage {
     this.userSession.reloadAccountData();
     this.cuentas = userSession.cuentas;
     this.tdc = userSession.tdc;
-    this.prestamos = userSession.prestamos;
+    this.prestamos = userSession.prestamos; 
+    console.log("Cuentas: ", this.cuentas.length);
+    console.log("TDC: ", this.tdc.length);
+    console.log("Prestamo: ", this.prestamos.length);
   }
 
 
