@@ -724,7 +724,8 @@ export class AprobaciNRechazoPage {
     }
     this.yearprint = this.year.toString().substr(-2);
     this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
-    this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();      try {
+    this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();     
+    try {
       //Ahora se procede a traer el menú dinámico:
      var headers = new HttpHeaders();
      headers.append('Content-Type', 'text/xml');
@@ -826,6 +827,39 @@ export class AprobaciNRechazoPage {
 }
 
 makeTheTransferMTBFC(){
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDate();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString(); 
   console.log("Esto esta en usersession.cuentos",this.cuentaCredito+" - "+this.cuentaDebito);
   var listvalores:any[]=[];
   try {
@@ -1186,6 +1220,39 @@ this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsTransferenciasMo
 }
 
 makeTheTDCPaymentMTBFC(){
+  this.hours= new Date().getHours();
+  if (this.hours<10){
+    this.hoursStr =  "0"+this.hours;
+  } else {
+    this.hoursStr =  ""+this.hours;
+  }
+  this.minutes= new Date().getMinutes();
+  if (this.minutes<10){
+    this.minutesStr =  "0"+this.minutes;
+  } else {
+    this.minutesStr =  ""+this.minutes;
+  }
+  this.day= new Date().getDate();
+  if (this.day<10){
+    this.dayStr =  "0"+this.day;
+  } else {
+    this.dayStr =  ""+this.day;
+  }
+  this.month = new Date().getMonth()+1; 
+  if (this.month<10){
+    this.monthStr =  "0"+this.month;
+  } else {
+    this.monthStr =  ""+this.month;
+  }
+  this.year = new Date().getFullYear();
+  if (this.year<10){
+    this.yearStr =  "0"+this.year;
+  } else {
+    this.yearStr =  ""+this.year;
+  }
+  this.yearprint = this.year.toString().substr(-2);
+  this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
+  this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString(); 
   console.log("Esto esta en usersession.cuentos",this.cuentaCredito+" - "+this.cuentaDebito);
   var listvalores:any[]=[];
   try {

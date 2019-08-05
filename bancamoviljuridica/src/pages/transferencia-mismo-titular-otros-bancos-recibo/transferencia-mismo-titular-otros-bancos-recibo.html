@@ -337,23 +337,30 @@
 </div>
 
   <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
-  <button id="transferenciaMismoTitularBFCRecibo-button6" ion-button clear color="positive" block small style="font-weight:600;"on-click="generateImage()">
-    <ion-icon name="share-alt"></ion-icon>
-    Compartir
-  </button>
 
-  <div *ngIf="checkAprobaciones != 'true'">
-    <button id="transferenciaMismoTitularBFCRecibo-button7" ion-button clear color="positive" block small style="font-weight:600;" on-click="goToTransferencias()">
-      <ion-icon name="git-compare"></ion-icon>
-      Realizar otra operación
-    </button>
-  </div>
-  <div *ngIf="checkAprobaciones == 'true'">
-    <button id="transferenciaMismoTitularBFCRecibo-button7" ion-button clear color="positive" block small style="font-weight:600;" on-click="goToAprobacionRechazo()">
-      <ion-icon name="git-compare"></ion-icon>
-      Realizar otra operación
-    </button>
-  </div>
+  <div>
+      <ion-grid style="width:100%;height:100%;grid-auto-rows: 1fr;" id="transferencias-list6">
+        <ion-row align-items-left>
+          <ion-col padding color="none" on-click="generateImage()" id="transferencias-list-item32" align-items-center>
+                  <ion-avatar padding-top>
+                      <img src="assets/img/compartir.png" style="width: 100px; height: 100px;" />
+                  </ion-avatar>
+          </ion-col>
+          <ion-col padding color="none"  id="transferencias-list-item33">     
+              <div *ngIf="checkAprobaciones != 'true'">
+                <ion-avatar padding-top>
+                  <img on-click="goToTransferencias()"  src="assets/img/nuevaop.png" style="width: 100px; height: 100px;" />
+                </ion-avatar> 
+              </div>
+              <div *ngIf="checkAprobaciones == 'true'">
+                <ion-avatar padding-top>
+                  <img on-click="goToAprobacionRechazo()" src="assets/img/nuevaop.png" style="width: 100px; height: 100px;" />
+                </ion-avatar>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
   </div>
 </ion-content>

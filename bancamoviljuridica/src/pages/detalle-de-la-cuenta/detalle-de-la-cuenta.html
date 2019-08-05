@@ -131,7 +131,28 @@
       </div>
     </ion-select>
   </ion-item>
-    
+  
+  <div>
+      <ion-grid no-padding class="cuentasbar">
+      <ion-row >
+        <ion-col style="margin-left: 5px;">
+          <p float-left style="color:rgb(255, 255, 255);">
+              <strong>
+                Descripción
+              </strong>
+          </p>
+        </ion-col> 
+        <ion-col style="margin-right: 5px;">
+          <p float-right style="color:rgb(255, 255, 255);">
+              <strong>
+                  Monto
+              </strong>
+          </p>
+        </ion-col> 
+      </ion-row>
+    </ion-grid>
+  </div>
+
     <div *ngFor="let item of listvalores"> 
         <ion-item color="none" id="detalleDeLaCuenta-list-item22">
             <div *ngIf=!item[2]>
@@ -139,8 +160,8 @@
                 <ion-row>
                   <ion-col>
                       <ion-avatar item-left>
-                          <img src="assets/img/klohokorxiseojdzxoxp_redarrow.png" style="margin-left:5px;width:auto;height:30px;" />
-                      </ion-avatar>
+                          <img src="assets/img/klohokorxiseojdzxoxp_redarrow.png" style="width:24px;height:24px;"/>
+                      </ion-avatar>    
                   </ion-col>
                   <ion-col col-6>
                     <div style="white-space:normal;">
@@ -158,9 +179,9 @@
                 <ion-row>
                   <ion-col>
                       <ion-avatar item-left>
-                          <img src="assets/img/0xwjnckwsyqylldajcmw_greenarrow.png" style="margin-top:5px;margin-left:5px;margin-bottom:5px;width:auto;height:30px" />
-                      </ion-avatar>
-                  </ion-col>
+                              <img src="assets/img/0xwjnckwsyqylldajcmw_greenarrow.png" style="width:24px;height:24px;" />
+                          </ion-avatar>             
+                    </ion-col>
                   <ion-col col-6>
                       <div style="white-space:normal;">
                         <h6>{{item[0]}}</h6>
