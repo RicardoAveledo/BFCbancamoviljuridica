@@ -3,20 +3,20 @@
       <ion-grid no-padding no-border style="width:auto;height:70px;">
         <ion-row no-padding >
           <ion-col class="topleft">
-            <img src="assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+            <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
           </ion-col>
           <ion-col class="topleft">
-            <img src="assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
           </ion-col>
           <ion-col class="topright">
-            <img src="assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
           </ion-col>
           <ion-col class="topright">
               <div *ngIf="Cod == 32">
-                  <img src="assets/img/continuar.png" float-right style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goTokenNomina()">
+                  <img src="./assets/img/continuar.png" float-right style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goTokenNomina()">
               </div>
               <div *ngIf="Cod == 64">
-                  <img src="assets/img/continuar.png" float-right style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goTokenProveedores()">
+                  <img src="./assets/img/continuar.png" float-right style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goTokenProveedores()">
               </div>
           </ion-col>
         </ion-row>
@@ -29,150 +29,150 @@
 
     <!-- 16 Mismo Titular BFC -->
     <div *ngIf="Cod == 16">
-        <img src="assets/img/artransferenciamismotitularbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="./assets/img/artransferenciamismotitularbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
   <!-- 17 Terceros BFC -->
     <div *ngIf="Cod == 17">
-        <img src="assets/img/artransferenciatercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="./assets/img/artransferenciatercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
   <!-- 19 Mismo Titular Otros Bancos -->
     <div *ngIf="Cod == 19">
-        <img src="assets/img/artransferenciamismotitularotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="./assets/img/artransferenciamismotitularotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
   <!-- 20 Terceros Otros Bancos -->
     <div *ngIf="Cod == 20">
-        <img src="assets/img/artransferenciatercerosotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="./assets/img/artransferenciatercerosotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
     <div *ngIf="Cod == 24">
-        <img src="assets/img/artdcmismotitularbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="./assets/img/artdcmismotitularbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
     <div *ngIf="Cod == 25">
-        <img src="assets/img/artdctercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="./assets/img/artdctercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
     <div *ngIf="Cod == 27">
-          <img src="assets/img/artdcmismotitularotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+          <img src="./assets/img/artdcmismotitularotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
   
     <div *ngIf="Cod == 28">
-          <img src="assets/img/artdctercerosotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+          <img src="./assets/img/artdctercerosotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
 
     <!-- 32 para Nómina -->
     <div *ngIf="Cod == 32">
-      <img src="assets/img/pagonominaheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+      <img src="./assets/img/pagonominaheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
 
     <!-- 64 para Proveedores -->
     <div *ngIf="Cod == 64">
-      <img src="assets/img/pagoproveedoresheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+      <img src="./assets/img/pagoproveedoresheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </div>
 
     <h4><strong>Autorizaciones Pendientes:</strong></h4>
     <div style="display: table; margin: 0 auto;">
         <div *ngIf="estado=='3/0'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/space.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/3.png"  style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='3/1'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/space.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/3.png"  style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='3/2'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/space.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/3.png"  style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='3/3'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/space.png"  style="width:20px;height:auto;" />
-            <img src="assets/img/3.png"  style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='2/0'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='2/1'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" />  
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />  
         </div>
         <div *ngIf="estado=='2/2'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />
-            <img src="assets/img/space.png" style="width:20px;height:auto;" />
-            <img src="assets/img/2.png"  style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='1/0'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" /> 
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" /> 
         </div>
         <div *ngIf="estado=='1/1'">
-            <img src="assets/img/1.png" style="width:20px;height:auto;" />  
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />  
         </div>
         <strong></strong>
               <div *ngIf="estado=='3/0'">
-                  <img src="assets/img/grayball.png" style="width:20px;height:auto;" />
-                  <img src="assets/img/grayline.png" style="width:20px;height:auto;" />
-                  <img src="assets/img/grayball.png"  style="width:20px;height:auto;" />
-                  <img src="assets/img/grayline.png"  style="width:20px;height:auto;" />
-                  <img src="assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                  <img src="./assets/img/grayball.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayline.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
               </div>
               <div *ngIf="estado=='3/1'">
-                <img src="assets/img/greenball.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png" style="width:20px;height:auto;" />
-                <img src="assets/img/grayball.png"  style="width:20px;height:auto;" />
-                <img src="assets/img/grayline.png"  style="width:20px;height:auto;" />
-                <img src="assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
               </div>
               <div *ngIf="estado=='3/2'">
-                <img src="assets/img/greenball.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenball.png"  style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png"  style="width:20px;height:auto;" />
-                <img src="assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
               </div>
               <div *ngIf="estado=='3/3'">
-                <img src="assets/img/greenball.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenball.png"  style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png"  style="width:20px;height:auto;" />
-                <img src="assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
               </div>
               <div *ngIf="estado=='2/0'">
-                  <img src="assets/img/grayball.png" style="width:20px;height:auto;" />
-                  <img src="assets/img/grayline.png" style="width:20px;height:auto;" />
-                  <img src="assets/img/grayball.png"  style="width:20px;height:auto;" />  
+                  <img src="./assets/img/grayball.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayline.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />  
               </div>
               <div *ngIf="estado=='2/1'">
-                <img src="assets/img/greenball.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png" style="width:20px;height:auto;" />
-                <img src="assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
               </div>
               <div *ngIf="estado=='2/2'">
-                <img src="assets/img/greenball.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenline.png" style="width:20px;height:auto;" />
-                <img src="assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
               </div>
               <div *ngIf="estado=='1/0'">
-                <img src="assets/img/grayball.png" style="width:20px;height:auto;" />  
+                <img src="./assets/img/grayball.png" style="width:20px;height:auto;" />  
               </div>
               <div *ngIf="estado=='1/1'">
-                <img src="assets/img/greenball.png" style="width:20px;height:auto;" />  
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />  
               </div>
 </div>
 
@@ -716,10 +716,10 @@
           <ion-grid>
             <ion-row>
             <ion-col>
-                  <img src="assets/img/aprobar.png" style="margin-left:auto;margin-right:auto;width:auto;height:50px" outline class="btn" id="next-button" default on-click="confirm()"/>
+                  <img src="./assets/img/aprobar.png" style="margin-left:auto;margin-right:auto;width:auto;height:50px" outline class="btn" id="next-button" default on-click="confirm()"/>
             </ion-col>
             <ion-col>
-                <img src="assets/img/rechazar.png" style="margin-left:auto;margin-right:auto;width:auto;height:50px" outline class="btn" id="next-button" default on-click="reject()"/>
+                <img src="./assets/img/rechazar.png" style="margin-left:auto;margin-right:auto;width:auto;height:50px" outline class="btn" id="next-button" default on-click="reject()"/>
             </ion-col>
           </ion-row>
           </ion-grid>
