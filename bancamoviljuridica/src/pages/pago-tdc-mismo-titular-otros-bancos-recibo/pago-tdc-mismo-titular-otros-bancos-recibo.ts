@@ -115,7 +115,10 @@ export class PagoTdcMismoTitularOtrosBancosReciboPage {
     this.fecha = this.day.toString()+"/"+this.month.toString()+"/"+this.yearprint;
     this.fechaToSend = this.day.toString()+"/"+this.month.toString()+"/"+this.year.toString();
   }
-
+  goToTDC(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot('OperacionesDeTDCPage');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TDCMISMOTITULAROTROS');
   }

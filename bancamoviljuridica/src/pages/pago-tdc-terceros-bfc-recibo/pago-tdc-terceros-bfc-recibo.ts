@@ -129,6 +129,11 @@ export class PagoTdcTercerosBfcReciboPage {
     if (!params) params = {};
     this.navCtrl.setRoot('WelcomePage');
   }
+  
+  goToTDC(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot('OperacionesDeTDCPage');
+  }
 goToAprobacionRechazo(params){
     if (!params) params = {};
     this.navCtrl.setRoot('AprobacionRechazoPrincipalPage');
