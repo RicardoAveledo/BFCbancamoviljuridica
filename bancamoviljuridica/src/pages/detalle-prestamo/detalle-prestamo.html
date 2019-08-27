@@ -1,0 +1,131 @@
+<ion-header>
+    <ion-navbar no-padding hideBackButton="true">
+        <ion-grid no-padding no-border style="width:auto;height:70px;">
+          <ion-row no-padding >
+            <ion-col class="topleft">
+              <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+            </ion-col>
+            <ion-col class="topleft">
+              <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            </ion-col>
+            <ion-col class="topright">
+              <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+            </ion-col>
+            <ion-col class="topright">
+   
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content id="page6">
+      <div id="mainContainer">
+      <img src="./assets/img/detalleheaderprestamo.png" style="display:block;width:100%;height:auto;margin-top:10px;margin-left:auto;margin-right:auto;" />
+    <form id="detalleDeLaCuenta-form2">
+      <ion-item id="detalleDeLaCuenta-select1">
+        <ion-label>Préstamo: </ion-label> 
+            <ion-select name="accounts" >
+              <div *ngFor="let item of prestamos">
+                    <div *ngIf="item[0] == cuentaselected[0]"> 
+                      <ion-option (ionSelect)="reloadPrestamo(item[0])" [selected]=true>
+                        {{item[0]}}
+                      </ion-option>
+                    </div>
+                    <div *ngIf="item[0] != cuentaselected[0]"> 
+                      <ion-option (ionSelect)="reloadPrestamo(item[0])" [selected]=false>
+                        {{item[0]}}
+                      </ion-option>
+                    </div>
+              </div>
+            </ion-select>
+      </ion-item>
+    </form>
+    
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+            <div id="detalleDeLaCuenta-markdown5" class="show-list-numbers-and-dots">
+                <p style="color:#000000;font-size:12px;">
+                  <strong>
+                    Saldo Total
+                  </strong>
+                </p>
+                <p style="color:#000000;font-size:12px;">
+                  {{saldoTotal}} BsS
+                </p>
+              </div>
+        </ion-col>
+        <ion-col>
+            <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+                <p style="color:#000000;font-size:12px;">
+                  <strong>
+                    Monto Original
+                  </strong>
+                </p>
+                <p style="color:#000000;font-size:12px;">
+                    {{montoOriginal}} BsS
+                </p>
+              </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col>
+              <div id="detalleDeLaCuenta-markdown7" class="show-list-numbers-and-dots">
+                  <p style="color:#000000;font-size:12px;">
+                    <strong>
+                      Monto Próxima Cuota
+                    </strong>
+                  </p>
+                  <p style="color:#000000;font-size:12px;">
+                      {{montoCuota}} BsS
+                  </p>
+                </div>
+          </ion-col>
+        <ion-col>
+            <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+                <p style="color:#000000;font-size:12px;">
+                  <strong>
+                    Fecha Próximo Pago
+                  </strong>
+                </p>
+                <p style="color:#000000;font-size:12px;">
+                    {{fechaProximo}}
+                </p>
+              </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+            <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+                <p style="color:#000000;font-size:12px;">
+                  <strong>
+                    Fecha Vencimiento
+                  </strong>
+                </p>
+                <p style="color:#000000;font-size:12px;">
+                    {{fechaVencimiento}}
+                </p>
+              </div>
+          </ion-col>
+        <ion-col>
+            <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+              <p style="color:#000000;font-size:12px;">
+                <strong>
+                  Tasa
+                </strong>
+              </p>
+              <p style="color:#000000;font-size:12px;">
+                  {{tasa}}
+              </p>
+            </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid> 
+</div>
+  </ion-content>
+  

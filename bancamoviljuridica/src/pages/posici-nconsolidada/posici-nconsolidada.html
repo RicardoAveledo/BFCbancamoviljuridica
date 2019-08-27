@@ -1,71 +1,170 @@
 <ion-header>
-    <ion-navbar no-padding color = "toolbar_color" hideBackButton="true">
-        <ion-grid no-padding>
-          <ion-row no-padding>
-            <ion-col no-padding>
-                <button ion-button menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                  </button>
-            </ion-col>
-            <ion-col>
-              <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
-            </ion-col>
-            <ion-col no-padding>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding no-border>
+          <ion-col class="topleft" no-border>
+            <img menuToggle src="./assets/img/menuprincipal.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default>
+          </ion-col>
+          <ion-col class="topleft" no-border>
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright" no-border>
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
 
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-    </ion-navbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
 </ion-header>
 <ion-content padding id="page1">
-  <div id="posiciNConsolidada-markdown1" class="show-list-numbers-and-dots">
-    <p style="color:#1D23B6;font-size:18px;">
+    <div id="mainContainer">
+  <div id="posiciNConsolidada-markdown1" class="cuentasbar">
+    <p style="
+    text-align: center;color:rgb(255, 255, 255);font-size:18px;">
       <strong>
-        ¡Hola Jesús La Roche!
+        {{CO_NOMBRES}}
       </strong>
     </p>
   </div>
-  <div id="posiciNConsolidada-markdown2" class="show-list-numbers-and-dots">
-    <p style="color:#1D23B6;">
-      <strong>
-        Cuentas en Bolívares
-      </strong>
-    </p>
-  </div>
+  
+<div *ngIf="userSession.cuentas.length>0"> 
+  <div id="posiciNConsolidada-markdown2" >
+      <ion-grid no-padding class="cuentasbar">
+          <ion-row >
+            <ion-col style="margin-left: 5px;">
+              <p float-left style="color:rgb(255, 255, 255);">
+                  <strong>
+                    Cuentas en Bolívares
+                  </strong>
+              </p>
+            </ion-col> 
+            <ion-col style="margin-right: 5px;">
+              <p float-right style="color:rgb(255, 255, 255);">
+                  <strong>
+                      Saldo Disponible
+                  </strong>
+              </p>
+            </ion-col> 
+          </ion-row>
+        </ion-grid>
   <ion-list id="posiciNConsolidada-list3">
-    <ion-item color="none" on-click="goToDetalleDeLaCuenta()" id="posiciNConsolidada-list-item13">
-      <ion-avatar item-left>
-        <img src="assets/img/S7XSL7lR7GT4h6M56uYZ_moneyIcon.PNG" />
-      </ion-avatar>
-      <h2>
-        Cuenta Corriente ...3210
-      </h2>
-    </ion-item>
-    <ion-item color="none" on-click="goToDetalleDeLaCuenta()" id="posiciNConsolidada-list-item14">
-      <ion-avatar item-left>
-        <img src="assets/img/S7XSL7lR7GT4h6M56uYZ_moneyIcon.PNG" />
-      </ion-avatar>
-      <h2>
-        Cuenta de Ahorros...3211
-      </h2>
-    </ion-item>
-  </ion-list>
+      <div *ngFor="let item of userSession.cuentas"> 
+            <ion-item color="none" id="detalleDeLaCuenta-list-item22" on-click="goToDetalleDeLaCuenta(item)">
+                <ion-grid no-padding >
+                    <ion-row >
+                      <ion-col style="margin-left: 5px;" >
+                        <p float-left >
+                            {{item[7]}}
+                        </p>
+                      </ion-col> 
+                      <ion-col style="margin-right: 5px;">
+                        <p float-right >
+                            {{item[8]}}
+                        </p>
+                      </ion-col> 
+                      <ion-col style="margin-right: 5px;">
+                        <p float-right >
+                            Bs. {{item[4]}}
+                        </p>
+                      </ion-col> 
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>
+      </div>
+  </ion-list> 
+</div>
+</div>
+
+<div *ngIf="userSession.tdc.length>0">
   <div class="spacer" style="width:300px;height:23px;" id="posiciNConsolidada-spacer2"></div>
-  <div id="posiciNConsolidada-markdown3" class="show-list-numbers-and-dots">
-    <p style="color:#1D23B6;">
-      <strong>
-        Tarjetas de crédito
-      </strong>
-    </p>
-  </div>
+  <div id="posiciNConsolidada-markdown3" class="tdcbar">
+      <ion-grid no-padding class="tdcbar">
+          <ion-row >
+            <ion-col style="margin-left: 5px;">
+              <p float-left style="color:rgb(255, 255, 255);">
+                  <strong>
+                    Tarjetas de crédito
+                  </strong>
+              </p>
+            </ion-col> 
+            <ion-col style="margin-right: 5px;">
+              <p float-right style="color:rgb(255, 255, 255);">
+                  <strong>
+                      Saldo Total
+                  </strong>
+              </p>
+            </ion-col> 
+          </ion-row>
+        </ion-grid>
+        <ion-list id="posiciNConsolidada-list3">
+            <div *ngFor="let item of userSession.tdc"> 
+                  <ion-item color="none" id="detalleDeLaCuenta-list-item22" on-click="goToDetalleDeTarjeta(item)">
+                      <ion-grid no-padding >
+                          <ion-row >
+                            <ion-col style="margin-left: 5px;" >
+                              <p float-left >
+                                  {{item[9]}}
+                              </p>
+                            </ion-col> 
+                            <ion-col style="margin-right: 5px;">
+                              <p float-right >
+                                  {{item[10]}}
+                              </p>
+                            </ion-col> 
+                            <ion-col style="margin-right: 5px;">
+                              <p float-right >
+                                  Bs. {{item[4]}}
+                              </p>
+                            </ion-col> 
+                          </ion-row>
+                        </ion-grid>
+                  </ion-item>
+            </div>
+        </ion-list>
+</div>
+</div>
+
+  <div *ngIf="userSession.prestamos.length>0">
+  <div class="spacer" style="width:300px;height:23px;" id="posiciNConsolidada-spacer2"></div>
+  <div id="posiciNConsolidada-markdown3" class="prestamosbar">
+      <ion-grid no-padding class="prestamosbar">
+          <ion-row >
+            <ion-col style="margin-left: 5px;">
+              <p float-left style="color:rgb(255, 255, 255);">
+                  <strong>
+                    Préstamos
+                  </strong>
+              </p>
+            </ion-col> 
+            <ion-col style="margin-right: 5px;">
+              <p float-right style="color:rgb(255, 255, 255);">
+                  <strong>
+                      
+                  </strong>
+              </p>
+            </ion-col> 
+          </ion-row>
+        </ion-grid>
   <ion-list id="posiciNConsolidada-list4">
-    <ion-item color="none" on-click="goToDetalleDeTarjeta()" id="posiciNConsolidada-list-item15">
-      <ion-avatar item-left>
-        <img src="assets/img/jOQsQ00FS26CD8W2pfjj_cardIcon.PNG" />
-      </ion-avatar>
-      <h2>
-        Mastercard ...3456
-      </h2>
-    </ion-item>
+      <div *ngFor="let item of userSession.prestamos"> 
+          <ion-item color="none" on-click="goToPrestamos(item)" id="posiciNConsolidada-list-item15">
+              <ion-grid no-padding >
+                  <ion-row >
+                    <ion-col style="margin-left: 5px;" >
+                      <p float-left >
+                          {{item[0]}}
+                      </p>
+                    </ion-col> 
+                  </ion-row>
+                </ion-grid>
+          </ion-item> 
+      </div> 
   </ion-list>
+
+</div>
+  </div>
+
+</div>
 </ion-content>

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding >
+          <ion-col class="topleft">
+            <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+          </ion-col>
+          <ion-col class="topleft">
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+ 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="page13">
+    <div id="mainContainer">
+  <img src="./assets/img/headertdctercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <div class="spacer" style="width:320px;height:12px;" id="transferenciasMismoTitularBFC-spacer3"></div>
+
+<div *ngIf="cont>0">
+  <form id="transferenciaTercerosBFC-form10">
+      <ion-searchbar placeholder="Escriba Nombre o Apellido"  [(ngModel)]="searchTerm" (ionInput)="searchFavoritos()" [ngModelOptions]="{standalone: true}"></ion-searchbar>
+    </form>
+  <div id="transferenciaTercerosBFC-markdown24" style="text-align:center;" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      <strong>
+        Registrados
+      </strong>
+    </p>
+  </div>
+  <div class="spacer" style="width:320px;height:11px;" id="transferenciaTercerosBFC-spacer12"></div>
+  <ion-list id="transferenciaTercerosBFC-list9">
+    <div *ngFor="let item of listFavoritosAux">
+        <ion-item color="none" on-click="goToTDCTercerosBFCDetalle(item)" id="transferenciaTercerosBFC-list-item46">
+            <h5>{{item[2]}} ...{{item[11]}}</h5>
+            <h5>{{item[4]}}</h5>
+        </ion-item>
+    </div>
+    <ion-grid no-padding class="tdcbar">
+        <ion-row >
+          <ion-col style="margin-left: 5px;">
+            <p float-left style="color:rgb(255, 255, 255);">
+                <strong>
+                  
+                </strong>
+            </p>
+          </ion-col> 
+          <ion-col style="margin-right: 5px;">
+            <p float-right style="color:rgb(255, 255, 255);">
+                <strong>
+                    Registrados: {{cont}}
+                </strong>
+            </p>
+          </ion-col> 
+        </ion-row>
+      </ion-grid> 
+  </ion-list>
+</div>
+<div *ngIf="cont==0">
+  <h4>No posee favoritos registrados</h4>
+</div>
+</div>
+</ion-content>

@@ -1,129 +1,203 @@
 <ion-header>
-    <ion-navbar no-padding color = "toolbar_color" hideBackButton="true">
-        <ion-grid no-padding>
-          <ion-row no-padding>
-            <ion-col no-padding>
-              <button ion-button class="btn" outline id="back-button" color="light" default on-click="goBack()">
-                Regresar
-              </button>
-            </ion-col>
-            <ion-col>
-              <img src="assets/img/headerLogo.PNG" style="width:143px;height:45px;margin-left:auto;margin-right:auto;" />
-            </ion-col>
-            <ion-col no-padding>
-
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-    </ion-navbar>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding >
+          <ion-col class="topleft">
+            <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+          </ion-col>
+          <ion-col class="topleft">
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+ 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
 </ion-header>
-<ion-content id="page7">
-  <img src="assets/img/juFSIh9SS9SrOqx9Zyg9_detalleHeader.PNG" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-  <form id="detalleDeTarjeta-form4">
-    <ion-item id="detalleDeTarjeta-select3">
-      <ion-label></ion-label>
-      <ion-select name="Cuenta Corriente ...3210">
-        <ion-option>
-          Cuenta Corriente ...3210
-        </ion-option>
-        <ion-option>
-          Cuenta de Ahorros...3211
-        </ion-option>
-      </ion-select>
+<ion-content id="page6">
+    <div id="mainContainer">
+  <img src="./assets/img/detalletarjetaheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <form id="detalleDeLaCuenta-form2">
+    <ion-item id="detalleDeLaCuenta-select1">
+      <ion-label>Tarjeta de crédito: </ion-label> 
+          <ion-select name="accounts" >
+            <div *ngFor="let item of userSession.tdc">
+                  <div *ngIf="item[0] == cuentaselected[0]"> 
+                    <ion-option (ionSelect)="middlewareMethodAccounts(item)" [selected]=true>
+                      {{item[6]}}
+                    </ion-option>
+                  </div>
+                  <div *ngIf="item[0] != cuentaselected[0]"> 
+                    <ion-option (ionSelect)="middlewareMethodAccounts(item)" [selected]=false>
+                      {{item[6]}}
+                    </ion-option>
+                  </div>
+            </div>
+          </ion-select>
     </ion-item>
   </form>
-  <div id="detalleDeTarjeta-markdown11" class="show-list-numbers-and-dots">
-    <p style="color:#000000;font-size:12px;">
-      <strong>
-        Saldo Actual
-      </strong>
-    </p>
-    <p style="color:#000000;font-size:12px;">
-      0 BsS
-    </p>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <div id="detalleDeLaCuenta-markdown5" class="show-list-numbers-and-dots">
+              <p style="color:#000000;font-size:12px;">
+                <strong>
+                Saldo Actual
+                </strong>
+              </p>
+              <p style="color:#000000;font-size:12px;">
+                {{SDisponible}} BsS
+              </p>
+            </div>
+      </ion-col>
+      <ion-col>
+          <div id="detalleDeLaCuenta-markdown7" class="show-list-numbers-and-dots">
+              <p style="color:#000000;font-size:12px;">
+                <strong>
+                  Crédito Disponible
+                </strong>
+              </p>
+              <p style="color:#000000;font-size:12px;">
+                  {{CDisponible}} BsS
+              </p>
+            </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+              <p style="color:#000000;font-size:12px;">
+                <strong>
+                  Pago mínimo
+                </strong>
+              </p>
+              <p style="color:#000000;font-size:12px;">
+                  {{PMinimo}} BsS
+              </p>
+            </div>
+      </ion-col>
+      <ion-col>
+          <div id="detalleDeLaCuenta-markdown9" class="show-list-numbers-and-dots">
+            <p style="color:#000000;font-size:12px;">
+              <strong>
+                Fecha de pago:
+              </strong>
+            </p>
+            <p style="color:#000000;font-size:12px;">
+                {{FPago}}
+            </p>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+  <form id="detalleDeLaCuenta-form3">
+
+  <ion-item>
+    <ion-label>
+      Seleccionar
+    </ion-label>
+    <ion-select name="ListOfMonths" >
+      <div *ngFor="let item of listmeses"> 
+          <div *ngIf="checkFirstTime">
+            <div *ngIf="item[1] == 0">
+              <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=true>
+                  <h5>{{item[0]}}</h5>
+              </ion-option>  
+            </div>
+            <div *ngIf="item[1] != 0">
+                <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=false>
+                    <h5>{{item[0]}}</h5>
+                </ion-option>  
+              </div>
+          </div>  
+          <div *ngIf="!checkFirstTime">
+            <div *ngIf="sortingListDates[0] == item[0]">
+                <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=true>
+                    <h5>{{item[0]}}</h5>
+                </ion-option> 
+            </div>
+            <div *ngIf="sortingListDates[0] != item[0]">
+                <ion-option (ionSelect)="middlewareMethodDates(item)" [selected]=false>
+                    <h5>{{item[0]}}</h5>
+                </ion-option> 
+            </div>
+          </div>  
+      </div>
+    </ion-select>
+  </ion-item>
+
+  <div>
+      <ion-grid no-padding class="cuentasbar">
+      <ion-row >
+        <ion-col style="margin-left: 5px;">
+          <p float-left style="color:rgb(255, 255, 255);">
+              <strong>
+                Descripción
+              </strong>
+          </p>
+        </ion-col> 
+        <ion-col style="margin-right: 5px;">
+          <p float-right style="color:rgb(255, 255, 255);">
+              <strong>
+                  Monto
+              </strong>
+          </p>
+        </ion-col> 
+      </ion-row>
+    </ion-grid>
   </div>
-  <div id="detalleDeTarjeta-markdown12" class="show-list-numbers-and-dots"></div>
-  <div id="detalleDeTarjeta-markdown13" class="show-list-numbers-and-dots">
-    <p style="color:#000000;font-size:12px;">
-      <strong>
-        Crédito Disponible
-      </strong>
-    </p>
-    <p style="color:#000000;font-size:12px;">
-      0 BsS
-    </p>
-  </div>
-  <div id="detalleDeTarjeta-markdown14" class="show-list-numbers-and-dots">
-    <p style="color:#000000;font-size:12px;">
-      <strong>
-        Pago Mínimo
-      </strong>
-    </p>
-    <p style="color:#000000;font-size:12px;">
-      0 BsS
-    </p>
-  </div>
-  <div id="detalleDeTarjeta-markdown16" class="show-list-numbers-and-dots">
-    <p style="color:#000000;font-size:12px;">
-      <strong>
-        Pague Antes de:
-      </strong>
-    </p>
-    <p style="color:#000000;font-size:12px;">
-      -
-    </p>
-  </div>
-  <div id="detalleDeTarjeta-markdown15" class="show-list-numbers-and-dots"></div>
-  <form id="detalleDeTarjeta-form5">
-    <ion-item id="detalleDeTarjeta-select4">
-      <ion-label>
-        Seleccionar
-      </ion-label>
-      <ion-select name="Cuenta Corriente ...3210">
-        <ion-option>
-          Últimos 20 movimientos
-        </ion-option>
-        <ion-option>
-          Diciembre 2018
-        </ion-option>
-        <ion-option>
-          Noviembre 2018
-        </ion-option>
-        <ion-option>
-          Octubre 2018
-        </ion-option>
-        <ion-option>
-          Septiembre 2018
-        </ion-option>
-        <ion-option>
-          Agosto 2018
-        </ion-option>
-        <ion-option>
-          Julio 2018
-        </ion-option>
-        <ion-option>
-          Junio 2018
-        </ion-option>
-        <ion-option>
-          Mayo 2018
-        </ion-option>
-        <ion-option>
-          Abril 2018
-        </ion-option>
-        <ion-option>
-          Marzo 2018
-        </ion-option>
-        <ion-option>
-          Febrero 2018
-        </ion-option>
-      </ion-select>
-    </ion-item>
+
+    <div *ngFor="let item of listvalores"> 
+        <ion-item color="none" id="detalleDeLaCuenta-list-item22">
+            <div *ngIf=!item[2]>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                      <ion-avatar item-left>
+                          <img src="./assets/img/redarrowdown.png" style="width:24px;height:24px;"/>
+                      </ion-avatar>
+                  </ion-col>
+                  <ion-col>
+                      <h5>{{item[0]}}</h5>
+                  </ion-col>
+                  <ion-col>
+                      <h5>{{item[1]}}</h5>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+            <div *ngIf=item[2]>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col>
+                          <ion-avatar item-left>
+                              <img src="./assets/img/bluearrowup.png" style="width:24px;height:24px;"/>
+                          </ion-avatar>
+                      </ion-col>
+                      <ion-col>
+                          <h5>{{item[0]}}</h5>
+                      </ion-col>
+                      <ion-col>
+                          <h5>{{item[1]}}</h5>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </div>
+          </ion-item>
+    </div>
+    <div *ngIf="listvalores.length==0">
+      <h3>
+        No existen movimientos en esta cuenta
+      </h3>
+    </div>
+
+
   </form>
-  <div id="detalleDeTarjeta-markdown17" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      <strong>
-        Sin movimientos en la tarjeta
-      </strong>
-    </p>
   </div>
 </ion-content>
+
