@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding >
+          <ion-col class="topleft">
+            <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+          </ion-col>
+          <ion-col class="topleft">
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/confirmar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-right id="next-button" default on-click="presentConfirm()"/>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+</ion-header>
+  <ion-content id="page14">
+      <div id="mainContainer">
+    <img src="./assets/img/headertdctercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    
+    <div id="confirmaciNTransferenciaMismoTitularBFC-markdown21" class="show-list-numbers-and-dots">
+        <p style="color:#000000;">
+          <strong>
+            Revisa y autoriza
+          </strong>
+        </p>
+      </div>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+        <ion-label>
+          Cuenta Origen
+        </ion-label>
+        <ion-label>
+          {{cuentaDebito}}
+        </ion-label>
+       </ion-item> 
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+        <ion-label>
+          Cuenta Destino
+        </ion-label>
+        <ion-label>
+          {{cuentaCredito}}
+        </ion-label>
+       </ion-item>
+  
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+          <ion-label>
+            Beneficiario
+          </ion-label>
+          <ion-label>
+            {{nombre}}
+          </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+          <ion-label>
+            Cédula
+          </ion-label>
+          <ion-label>
+            {{ciType}}{{ciNo}}
+          </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+          <ion-label>
+            Correo
+          </ion-label>
+          <ion-label>
+            {{email}}
+          </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+          <ion-label>
+            Motivo
+          </ion-label>
+          <ion-label>
+            {{motivo}}
+          </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+          <ion-label>
+            Concepto
+          </ion-label>
+          <ion-label>
+            {{conceptoValue}}
+          </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+        <ion-label>
+          Monto
+        </ion-label>
+        <ion-label>
+          {{montoValue|number:'1.2-2'}}
+        </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Fecha
+        </ion-label>
+        <ion-label>
+          {{fechaToSend}}
+        </ion-label>
+       </ion-item>
+      
+    </div>
+  </ion-content>

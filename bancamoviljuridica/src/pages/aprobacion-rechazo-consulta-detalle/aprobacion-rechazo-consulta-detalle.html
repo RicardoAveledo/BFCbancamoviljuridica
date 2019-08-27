@@ -1,0 +1,868 @@
+<ion-header>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding >
+          <ion-col class="topleft">
+            <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+          </ion-col>
+          <ion-col class="topleft">
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="page11">
+    <div id="mainContainer">
+
+    <!-- 16 Mismo Titular BFC -->
+    <div *ngIf="Cod == 16">
+        <img src="./assets/img/artransferenciamismotitularbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 17 Terceros BFC -->
+    <div *ngIf="Cod == 17">
+        <img src="./assets/img/artransferenciatercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 19 Mismo Titular Otros Bancos -->
+    <div *ngIf="Cod == 19">
+        <img src="./assets/img/artransferenciamismotitularotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 20 Terceros Otros Bancos -->
+    <div *ngIf="Cod == 20">
+        <img src="./assets/img/artransferenciatercerosotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 24 Mismo Titular BFC -->  
+    <div *ngIf="Cod == 24">
+        <img src="./assets/img/artdcmismotitularbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 25 Terceros BFC --> 
+    <div *ngIf="Cod == 25">
+        <img src="./assets/img/artdctercerosbfc.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 27 Mismo Titular Otros Bancos --> 
+    <div *ngIf="Cod == 27">
+          <img src="./assets/img/artdcmismotitularotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+  
+  <!-- 28 Mismo Titular Otros Bancos --> 
+    <div *ngIf="Cod == 28">
+          <img src="./assets/img/artdctercerosotrosbancos.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+
+    <!-- 32 para Nómina -->
+    <div *ngIf="Cod == 32">
+      <img src="./assets/img/pagonominaheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+
+    <!-- 64 para Proveedores -->
+    <div *ngIf="Cod == 64">
+      <img src="./assets/img/pagoproveedoresheader.png" style="margin-top:10px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+
+    <h4><strong>Autorizaciones Pendientes:</strong></h4>
+    <div style="display: table; margin: 0 auto;">
+        <div *ngIf="estado=='3/0'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='3/1'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='3/2'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='3/3'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+            <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='2/0'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='2/1'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" />  
+        </div>
+        <div *ngIf="estado=='2/2'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+            <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='1/0'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" /> 
+        </div>
+        <div *ngIf="estado=='1/1'">
+            <img src="./assets/img/1.png" style="width:20px;height:auto;" />  
+        </div>
+        <strong></strong>
+              <div *ngIf="estado=='3/0'">
+                  <img src="./assets/img/grayball.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayline.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/1'">
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/2'">
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/3'">
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/0'">
+                  <img src="./assets/img/grayball.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayline.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />  
+              </div>
+              <div *ngIf="estado=='2/1'">
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/2'">
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='1/0'">
+                <img src="./assets/img/grayball.png" style="width:20px;height:auto;" />  
+              </div>
+              <div *ngIf="estado=='1/1'">
+                <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />  
+              </div>
+</div>
+
+
+<div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
+
+<!-- Esta vista sera la unica empleada para todas las consulta detalle de Aprobacion rechazo -->
+<!-- Los NGIF Habilitan cada consulta segun el parametro pasado desde la pantalla principal  -->
+<!-- Mismo Titular BFC 24 -->
+<!-- Terceros BFC 25 -->
+<!-- Mismo Titular Otro Banco 27 -->
+<!-- Terceros Otros Bancos 28 --> 
+<!-- 16 Mismo Titular BFC -->
+<div *ngIf="Cod == 16">
+    <form id="transferenciaMismoTitularBFCRecibo-form9">  
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+        <ion-label>
+            Cuenta Débito
+        </ion-label>
+        <ion-label>
+          {{cuentaDebito}}
+        </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+        <ion-label>
+            Cuenta Crédito
+        </ion-label>
+        <ion-label>
+          {{cuentaCredito}}
+        </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+        <ion-label>
+          Monto
+        </ion-label>
+        <ion-label>
+          {{montoValue|number:'1.2-2'}}
+        </ion-label>
+       </ion-item>
+    </form>
+  </div>
+
+<!-- 17 Terceros BFC -->
+  <div *ngIf="Cod == 17">
+      <form id="transferenciaMismoTitularBFCRecibo-form9">  
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+              <ion-label>
+                Cuenta Débito
+              </ion-label>
+              <ion-label>
+                {{cuentaDebito}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Cuenta Crédito
+              </ion-label>
+              <ion-label>
+                {{cuentaCredito}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Beneficiario
+              </ion-label>
+              <ion-label>
+                {{OP_Beneficiario}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Identificación del Beneficiario
+              </ion-label>
+              <ion-label>
+                {{OP_IdBeneficiario}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+              <ion-label>
+                Monto
+              </ion-label>
+              <ion-label>
+                {{montoValue|number:'1.2-2'}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+              <ion-label>
+                Concepto
+              </ion-label>
+              <ion-label>
+                {{OP_Concepto}}
+              </ion-label>
+            </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+              <ion-label>
+                Email
+              </ion-label>
+              <ion-label>
+                {{OP_Mail}}
+              </ion-label>
+             </ion-item>
+      </form>
+    </div>
+
+<!-- 19 Mismo Titular Otros Bancos -->
+    <div *ngIf="Cod == 19">
+        <form id="transferenciaMismoTitularBFCRecibo-form9">  
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                  Cuenta Débito
+                </ion-label>
+                <ion-label>
+                  {{cuentaDebito}}
+                </ion-label>
+              </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                <ion-label>
+                  Cuenta Crédito
+                </ion-label>
+                <ion-label>
+                  {{cuentaCredito}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Banco
+                  </ion-label>
+                  <ion-label>
+                    {{BANK_NOMBRE}}
+                  </ion-label>
+                 </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                <ion-label>
+                  Beneficiario
+                </ion-label>
+                <ion-label>
+                  {{OP_Beneficiario}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                <ion-label>
+                  Identificación del Beneficiario
+                </ion-label>
+                <ion-label>
+                  {{OP_IdBeneficiario}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                <ion-label>
+                  Monto
+                </ion-label>
+                <ion-label>
+                  {{montoValue|number:'1.2-2'}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                <ion-label>
+                  Concepto
+                </ion-label>
+                <ion-label>
+                  {{OP_Concepto}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                <ion-label>
+                  Email
+                </ion-label>
+                <ion-label>
+                  {{OP_Mail}}
+                </ion-label>
+               </ion-item>
+        </form>
+      </div>
+
+<!-- 20 Terceros Otros Bancos -->
+      <div *ngIf="Cod == 20">
+          <form id="transferenciaMismoTitularBFCRecibo-form9">  
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                    Cuenta Débito
+                  </ion-label>
+                  <ion-label>
+                    {{cuentaDebito}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Cuenta Crédito
+                  </ion-label>
+                  <ion-label>
+                    {{cuentaCredito}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                    <ion-label>
+                      Banco
+                    </ion-label>
+                    <ion-label>
+                      {{BANK_NOMBRE}}
+                    </ion-label>
+                   </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Beneficiario
+                  </ion-label>
+                  <ion-label>
+                    {{OP_Beneficiario}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Identificación del Beneficiario
+                  </ion-label>
+                  <ion-label>
+                    {{OP_IdBeneficiario}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                  <ion-label>
+                    Monto
+                  </ion-label>
+                  <ion-label>
+                    {{montoValue|number:'1.2-2'}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                  <ion-label>
+                    Concepto
+                  </ion-label>
+                  <ion-label>
+                    {{OP_Concepto}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                  <ion-label>
+                    Email
+                  </ion-label>
+                  <ion-label>
+                    {{OP_Mail}}
+                  </ion-label>
+                 </ion-item>
+          </form>
+        </div>
+
+<div *ngIf="Cod == 24">
+    <form id="transferenciaMismoTitularBFCRecibo-form9">  
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+        <ion-label>
+            Cuenta Débito
+        </ion-label>
+        <ion-label>
+          {{cuentaDebito}}
+        </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+        <ion-label>
+          Tarjeta a Pagar
+        </ion-label>
+        <ion-label>
+          {{cuentaCredito}}
+        </ion-label>
+       </ion-item>
+      <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+        <ion-label>
+          Monto
+        </ion-label>
+        <ion-label>
+          {{montoValue|number:'1.2-2'}}
+        </ion-label>
+       </ion-item>
+    </form>
+  </div>
+
+  <div *ngIf="Cod == 25">
+      <form id="transferenciaMismoTitularBFCRecibo-form9"> 
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+              <ion-label>
+                  Cuenta Débito
+              </ion-label>
+              <ion-label>
+                {{cuentaDebito}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Tarjeta a pagar
+              </ion-label>
+              <ion-label>
+                {{cuentaCredito}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Beneficiario
+              </ion-label>
+              <ion-label>
+                {{OP_Beneficiario}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+              <ion-label>
+                Identificación del Beneficiario
+              </ion-label>
+              <ion-label>
+                {{OP_IdBeneficiario}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+              <ion-label>
+                Monto
+              </ion-label>
+              <ion-label>
+                {{montoValue|number:'1.2-2'}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+              <ion-label>
+                Concepto
+              </ion-label>
+              <ion-label>
+                {{OP_Concepto}}
+              </ion-label>
+             </ion-item>
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+              <ion-label>
+                Email
+              </ion-label>
+              <ion-label>
+                {{OP_Mail}}
+              </ion-label>
+             </ion-item>
+      </form>
+    </div>
+
+    <div *ngIf="Cod == 27">
+        <form id="transferenciaMismoTitularBFCRecibo-form9"> 
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+            <ion-label>
+                Cuenta Débito
+            </ion-label>
+            <ion-label>
+              {{cuentaDebito}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+            <ion-label>
+              Tarjeta a pagar
+            </ion-label>
+            <ion-label>
+              {{cuentaCredito}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+            <ion-label>
+              Banco
+            </ion-label>
+            <ion-label>
+              {{BANK_NOMBRE}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+            <ion-label>
+              Beneficiario
+            </ion-label>
+            <ion-label>
+              {{OP_Beneficiario}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+            <ion-label>
+              Identificación del Beneficiario
+            </ion-label>
+            <ion-label>
+              {{OP_IdBeneficiario}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+            <ion-label>
+              Monto
+            </ion-label>
+            <ion-label>
+              {{montoValue|number:'1.2-2'}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+            <ion-label>
+              Concepto
+            </ion-label>
+            <ion-label>
+              {{OP_Concepto}}
+            </ion-label>
+           </ion-item>
+          <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+            <ion-label>
+              Email
+            </ion-label>
+            <ion-label>
+              {{OP_Mail}}
+            </ion-label>
+           </ion-item>
+        </form>
+      </div>
+
+      <div *ngIf="Cod == 28">
+          <form id="transferenciaMismoTitularBFCRecibo-form9"> 
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Cuenta Débito
+                  </ion-label>
+                  <ion-label>
+                    {{cuentaDebito}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Tarjeta a pagar
+                  </ion-label>
+                  <ion-label>
+                    {{cuentaCredito}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Banco
+                  </ion-label>
+                  <ion-label>
+                    {{BANK_NOMBRE}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Beneficiario
+                  </ion-label>
+                  <ion-label>
+                    {{OP_Beneficiario}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+                  <ion-label>
+                    Identificación del Beneficiario
+                  </ion-label>
+                  <ion-label>
+                    {{OP_IdBeneficiario}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                  <ion-label>
+                    Monto
+                  </ion-label>
+                  <ion-label>
+                    {{montoValue|number:'1.2-2'}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                  <ion-label>
+                    Concepto
+                  </ion-label>
+                  <ion-label>
+                    {{OP_Concepto}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+                  <ion-label>
+                    Email
+                  </ion-label>
+                  <ion-label>
+                    {{OP_Mail}}
+                  </ion-label>
+                 </ion-item>
+          </form>
+        </div>
+
+        <div *ngIf="Cod == 32">
+          <form id="transferenciaMismoTitularBFCRecibo-form9"> 
+            <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Estado del Lote
+                </ion-label>
+                <ion-label>
+                  {{EstadoLote}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Número del Lote
+                </ion-label>
+                <ion-label>
+                  {{OP_CodeTran}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Nombre del Lote
+                </ion-label>
+                <ion-label>
+                  {{NombreArchivo}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Tipo de Carga
+                </ion-label>
+                <ion-label>
+                  {{TipoCarga}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Usuario que Procesó
+                </ion-label>
+                <ion-label>
+                  {{usuarioProceso}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Correo
+                </ion-label>
+                <ion-label>
+                  {{correoUsuario}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Cuenta Origen
+                </ion-label>
+                <ion-label>
+                  {{CuentaDebitar}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Total Registros
+                </ion-label>
+                <ion-label>
+                  {{TotalRegistros}}
+                </ion-label>
+               </ion-item>
+              
+              <!--<ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Cantidad de Rechazos
+                </ion-label>
+                <ion-input text-right type="text" placeholder=""></ion-input>
+              </ion-item>-->
+              
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Monto Total
+                </ion-label>
+                <ion-label>
+                  {{Monto}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Motivo del Pago
+                </ion-label>
+                <ion-label>
+                  {{MotivoPago}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Fecha valor Efectiva
+                </ion-label>
+                <ion-label>
+                  {{fechaEfectiva}}
+                </ion-label>
+               </ion-item>
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                <ion-label>
+                    Hora valor Efectiva
+                </ion-label>
+                <ion-label>
+                  {{horaEfectiva}}
+                </ion-label>
+               </ion-item>
+        </form>
+        </div>
+
+        <div *ngIf="Cod == 64">
+          <form id="transferenciaMismoTitularBFCRecibo-form9"> 
+              <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Estado del Lote
+                  </ion-label>
+                  <ion-label>
+                    {{EstadoLote}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Número del Lote
+                  </ion-label>
+                  <ion-label>
+                    {{OP_CodeTran}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Nombre del Lote
+                  </ion-label>
+                  <ion-label>
+                    {{NombreArchivo}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Tipo de Carga
+                  </ion-label>
+                  <ion-label>
+                    {{TipoCarga}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Usuario que Procesó
+                  </ion-label>
+                  <ion-label>
+                    {{usuarioProceso}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Correo
+                  </ion-label>
+                  <ion-label>
+                    {{correoUsuario}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Cuenta Origen
+                  </ion-label>
+                  <ion-label>
+                    {{CuentaDebitar}}
+                  </ion-label>
+                </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Total Registros
+                  </ion-label>
+                  <ion-label>
+                    {{TotalRegistros}}
+                  </ion-label>
+                 </ion-item>
+                
+                <!--<ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Cantidad de Rechazos
+                  </ion-label>
+                  <ion-input text-right type="text" placeholder=""></ion-input>
+                </ion-item>-->
+
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Monto Total
+                  </ion-label>
+                  <ion-label>
+                    {{Monto}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Motivo del Pago
+                  </ion-label>
+                  <ion-label>
+                    {{MotivoPago}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Fecha valor Efectiva
+                  </ion-label>
+                  <ion-label>
+                    {{fechaEfectiva}}
+                  </ion-label>
+                 </ion-item>
+                <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+                  <ion-label>
+                      Hora valor Efectiva
+                  </ion-label>
+                  <ion-label>
+                    {{horaEfectiva}}
+                  </ion-label>
+                 </ion-item>
+          </form>
+        </div>
+
+
+
+  </div>
+  </ion-content>

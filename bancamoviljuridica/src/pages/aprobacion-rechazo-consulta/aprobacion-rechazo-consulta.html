@@ -1,0 +1,187 @@
+<ion-header>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding >
+          <ion-col class="topleft">
+            <img src="./assets/img/regresar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default  on-click="goBack()">
+          </ion-col>
+          <ion-col class="topleft">
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+</ion-header>
+<ion-content id="page13">
+<div id="mainContainer">
+    <img src="./assets/img/headeraprobacionrechazoconsulta.png" style="margin-top:10px;max-width:400px;display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+<div id="transferenciaTercerosBFC-markdown24" style="text-align:left;" class="show-list-numbers-and-dots">
+  <p style="color:#000000;">
+    <strong>
+      Nota: 
+    </strong>
+    Se mostrarán las últimas 20 operaciones
+  </p>
+  <p style="color:#000000;">
+  </p>
+</div> 
+<ion-item id="transferenciasMismoTitularBFC-select5"> 
+  <ion-label><strong>Tipo de operación</strong></ion-label>
+    <ion-select name="">
+          <ion-option [selected]=false (ionSelect)="loadTransferencias()">
+              Transferencias
+          </ion-option>
+          <ion-option [selected]=false (ionSelect)="loadPagoTDC()">
+              Pagos TDC
+          </ion-option>
+          <ion-option [selected]=false (ionSelect)="loadNomina()">
+              Nómina
+          </ion-option>
+          <ion-option [selected]=false (ionSelect)="loadProveedores()">
+              Proveedores
+          </ion-option>
+    </ion-select>
+</ion-item>
+
+<div *ngIf='transferenciasSelected'>
+    <br>
+      <strong>
+        Transferencias
+      </strong>
+      <ion-grid>
+        <ion-row>
+            <ion-col align-items-end>
+              <strong>Tipo</strong>
+            </ion-col>
+            <ion-col align-items-end>
+              <strong>Monto</strong>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div *ngFor="let item of transferencias">
+      <ion-grid>
+          <ion-row (click)="loadDetalle(item)">
+              <ion-col align-items-end>
+                  {{item.Nombre}}
+              </ion-col>
+              <ion-col align-items-end>
+                  {{item.OP_Monto}}
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+</div>
+
+
+<div *ngIf='pagoTDCSelected'>
+  <br>
+    <strong>
+      Pagos TDC
+    </strong>
+    <ion-grid>
+      <ion-row>
+          <ion-col align-items-end>
+            <strong>Tipo</strong>
+          </ion-col>
+          <ion-col align-items-end>
+            <strong>Monto</strong>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngFor="let item of pagosTDC">
+    <ion-grid>
+        <ion-row (click)="loadDetalle(item)">
+            <ion-col align-items-end>
+                {{item.Nombre}}
+            </ion-col>
+            <ion-col align-items-end>
+                {{item.OP_Monto}}
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+</div>
+
+<div *ngIf='nominaSelected'>
+    <br>
+    <strong>
+      Nómina
+    </strong>
+    <ion-grid>
+      <ion-row>
+          <ion-col align-items-end>
+            <strong>Fecha/Hora</strong>
+          </ion-col>
+          <ion-col align-items-end>
+            <strong>Monto</strong>
+          </ion-col>
+          <ion-col align-items-end>
+            <strong>Registros</strong>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngFor="let item of nominas">
+    <ion-grid>
+        <ion-row (click)="loadDetalle(item)">
+            <ion-col align-items-end>
+                {{item.OP_DATE}}
+            </ion-col>
+            <ion-col align-items-end>
+                {{item.OP_Monto}}
+            </ion-col>
+            <ion-col align-items-end>
+                {{item.OP_Monto}}
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+</div>
+
+
+<div *ngIf='proveedoresSelected'>
+  <br>
+  <strong>
+    Proveedores
+  </strong>
+  <ion-grid>
+    <ion-row>
+        <ion-col align-items-end>
+          <strong>Fecha/Hora</strong>
+        </ion-col>
+        <ion-col align-items-end>
+          <strong>Monto</strong>
+        </ion-col>
+        <ion-col align-items-end>
+          <strong>Registros</strong>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngFor="let item of proveedores">
+  <ion-grid>
+      <ion-row (click)="loadDetalle(item)">
+          <ion-col align-items-end>
+              {{item.OP_DATE}}
+          </ion-col>
+          <ion-col align-items-end>
+              {{item.OP_Monto}}
+          </ion-col>
+          <ion-col align-items-end>
+              {{item.OP_Monto}}
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>
+
+
+
+
+</div>
+</ion-content>

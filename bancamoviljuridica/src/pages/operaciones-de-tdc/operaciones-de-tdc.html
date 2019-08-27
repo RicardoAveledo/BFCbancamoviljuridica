@@ -1,11 +1,51 @@
 <ion-header>
-    <ion-navbar color = "toolbar_color">
-        <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>
-            <img src="assets/img/headerLogo.PNG" style="display:block;width:auto;height:45px;margin-left:auto;margin-right:auto;" />
-        </ion-title>
-      </ion-navbar>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding no-border>
+          <ion-col class="topleft" no-border>
+            <img menuToggle src="./assets/img/menuprincipal.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-left id="next-button" default>
+          </ion-col>
+          <ion-col class="topleft" no-border>
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright" no-border>
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
 </ion-header>
-<ion-content padding id="page3"></ion-content>
+    <ion-content id="page2">
+        <div id="mainContainer">
+      <img src="./assets/img/detalletdcheader.png" style="display:block;width:100%;height:auto;margin-top:10px;margin-left:auto;margin-right:auto;" />
+      <ion-grid style="width:100%;height:100%;grid-auto-rows: 1fr;" id="transferencias-list6">
+        <ion-row align-items-left>
+          <ion-col padding color="none" on-click="goToTDCMismoTitularBFC()" id="transferencias-list-item32" align-items-center>
+                  <ion-avatar padding-top>
+                    <img padding-top src="./assets/img/mtbfc.png" />
+                  </ion-avatar>
+          </ion-col>
+          <ion-col padding color="none" on-click="goToTDCMismoTitularOtrosBancos()" id="transferencias-list-item33">
+                  <ion-avatar padding-top>
+                    <img padding-top src="./assets/img/mtob.png" />
+                  </ion-avatar>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-left>
+            <ion-col padding color="none" on-click="goToTDCTercerosBFC()" id="transferencias-list-item32" align-items-center>
+                    <ion-avatar padding-top>
+                        <img padding-top src="./assets/img/tbfc.png" />
+                      </ion-avatar>
+            </ion-col>
+            <ion-col padding color="none" on-click="goToTDCTercerosOtrosBancos()" id="transferencias-list-item33">
+                    <ion-avatar padding-top>
+                        <img padding-top src="./assets/img/tob.png"  />
+                      </ion-avatar>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+      </div>
+    </ion-content>

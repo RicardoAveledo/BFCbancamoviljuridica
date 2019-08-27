@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserSessionProvider } from '../../providers/user-session/user-session';
 
 /**
  * Generated class for the WelcomePage page.
@@ -8,14 +9,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'WelcomePage',
+  segment: 'WelcomePage'
+})
 @Component({
   selector: 'page-welcome',
   templateUrl: 'welcome.html',
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public userSession:UserSessionProvider, public navCtrl: NavController, public navParams: NavParams) {
+    this.userSession.reloadAccountData();
   }
 
   ionViewDidLoad() {

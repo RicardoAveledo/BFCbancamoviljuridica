@@ -1,0 +1,379 @@
+<ion-header>
+  <ion-navbar no-padding hideBackButton="true">
+      <ion-grid no-padding no-border style="width:auto;height:70px;">
+        <ion-row no-padding >
+          <ion-col class="topleft">
+            
+          </ion-col>
+          <ion-col class="topleft">
+            <img src="./assets/img/headerlogo1.png" float-right style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/headerlogo2.png" float-left style="width:auto;height:70px;margin-left:auto;margin-right:auto;" />
+          </ion-col>
+          <ion-col class="topright">
+            <img src="./assets/img/finalizar.png" style="margin-top:10px;margin-left:5px;margin-bottom:10px;width:auto;height:45px" outline class="btn" float-right id="next-button" default on-click="goToWelcome()"/>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-navbar>
+</ion-header>
+<ion-content id="page11">
+    <div id="mainContainer">
+  <img src="./assets/img/transferenciastercerosbfcheader.png" style="display:block;margin-top:10px;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <div class="spacer" style="width:320px;height:16px;" id="transferenciaMismoTitularBFCRecibo-spacer8"></div>
+  
+
+      <div *ngIf="(checkFirmas=='rechazado')&&(checkAprobaciones == 'true')">
+          <h4><strong>Autorizaciones:</strong></h4>
+          <div style="display: table; margin: 0 auto;">
+              <div *ngIf="estado=='3/0'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/1'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/2'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/3'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/0'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/1'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />  
+              </div>
+              <div *ngIf="estado=='2/2'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='1/0'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='1/1'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />  
+              </div>
+              <strong></strong>
+                    <div *ngIf="estado=='3/0'">
+                        <img src="./assets/img/redball.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayline.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='3/1'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/redline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/redball.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='3/2'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/redline.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/redball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='3/3'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='2/0'">
+                        <img src="./assets/img/redball.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/redline.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />  
+                    </div>
+                    <div *ngIf="estado=='2/1'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/redline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/redball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='2/2'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='1/0'">
+                      <img src="./assets/img/redball.png" style="width:20px;height:auto;" />  
+                    </div>
+                    <div *ngIf="estado=='1/1'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />  
+                    </div>
+            </div>
+        </div>
+        <div *ngIf="(checkFirmas!='rechazado')&&(checkAprobaciones == 'true')">
+          <h4><strong>Autorizaciones:</strong></h4>
+          <div style="display: table; margin: 0 auto;">
+              <div *ngIf="estado=='3/0'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/1'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/2'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='3/3'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png"  style="width:20px;height:auto;" />
+                  <img src="./assets/img/3.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/0'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='2/1'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" />  
+              </div>
+              <div *ngIf="estado=='2/2'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/space.png" style="width:20px;height:auto;" />
+                  <img src="./assets/img/2.png"  style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='1/0'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" /> 
+              </div>
+              <div *ngIf="estado=='1/1'">
+                  <img src="./assets/img/1.png" style="width:20px;height:auto;" />  
+              </div>
+              <strong></strong>
+                    <div *ngIf="estado=='3/0'">
+                        <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayline.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='3/1'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/grayline.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='3/2'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='3/3'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png"  style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='2/0'">
+                        <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                        <img src="./assets/img/grayball.png"  style="width:20px;height:auto;" />  
+                    </div>
+                    <div *ngIf="estado=='2/1'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='2/2'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenline.png" style="width:20px;height:auto;" />
+                      <img src="./assets/img/greenball.png"  style="width:20px;height:auto;" /> 
+                    </div>
+                    <div *ngIf="estado=='1/0'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />  
+                    </div>
+                    <div *ngIf="estado=='1/1'">
+                      <img src="./assets/img/greenball.png" style="width:20px;height:auto;" />  
+                    </div>
+            </div>
+        </div>
+
+<div id="recibo">
+  <div *ngIf="checkFirmas=='true'">
+      <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+        <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+          <ion-icon name="checkmark" item-left></ion-icon>
+          Operación Realizada
+        </ion-item>
+      </ion-list>
+      </div>
+    
+      <div *ngIf="checkFirmas=='false'">
+          <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+            <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+              Su operación se registró en el Sistema, a la espera de las autorizaciones requeridas
+            </ion-item>
+          </ion-list>
+      </div>  
+
+      <div *ngIf="checkFirmas=='rechazado'">
+        <ion-list id="transferenciaMismoTitularBFCRecibo-list7">
+          <ion-item color="none" id="transferenciaMismoTitularBFCRecibo-list-item36">
+              Operación Rechazada
+          </ion-item>
+        </ion-list>
+      </div>      
+
+  <form id="transferenciaMismoTitularBFCRecibo-form9">
+
+    <div *ngIf="checkFirmas=='true'">
+        <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+          <ion-label>
+            Número de Referencia
+          </ion-label>
+          <ion-label>
+            {{referencia}}
+          </ion-label>
+         </ion-item>
+    </div>
+
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input8">
+      <ion-label>
+        Cuenta Origen
+      </ion-label>
+      <ion-label>
+        {{cuentaDebito}}
+      </ion-label>
+     </ion-item> 
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input9">
+      <ion-label>
+        Cuenta Destino
+      </ion-label>
+      <ion-label>
+        {{cuentaCredito}}
+      </ion-label>
+     </ion-item>
+
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Beneficiario
+        </ion-label>
+        <ion-label>
+          {{nombre}}
+        </ion-label>
+     </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Cédula
+        </ion-label>
+        <ion-label>
+          {{ciType}}{{ciNo}}
+        </ion-label>
+     </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Correo
+        </ion-label>
+        <ion-label>
+          {{email}}
+        </ion-label>
+     </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Motivo
+        </ion-label>
+        <ion-label>
+          {{motivo}}
+        </ion-label>
+     </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+        <ion-label>
+          Concepto
+        </ion-label>
+        <ion-label>
+          {{conceptoValue}}
+        </ion-label>
+     </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input10">
+      <ion-label>
+        Monto
+      </ion-label>
+      <ion-label>
+        {{montoValue|number:'1.2-2'}}
+      </ion-label>
+     </ion-item>
+    <ion-item id="transferenciaMismoTitularBFCRecibo-input11">
+      <ion-label>
+        Fecha
+      </ion-label>
+      <ion-label>
+        {{fechaToSend}}
+      </ion-label>
+     </ion-item>
+  </form>
+      </div>
+  <div class="spacer" style="width:320px;height:7px;" id="transferenciaMismoTitularBFCRecibo-spacer9"></div>
+
+  
+  <div>
+      <ion-grid style="width:100%;height:100%;grid-auto-rows: 1fr;" id="transferencias-list6">
+        <ion-row align-items-left>
+          <ion-col padding color="none" on-click="generateImage()" id="transferencias-list-item32" align-items-center>
+                  <ion-avatar padding-top>
+                      <img src="./assets/img/compartir.png" style="width: 100px; height: 100px;" />
+                  </ion-avatar>
+          </ion-col>
+          <ion-col padding color="none"  id="transferencias-list-item33">     
+              <div *ngIf="checkAprobaciones != 'true'">
+                <ion-avatar padding-top>
+                  <img on-click="goToTransferencias()"  src="./assets/img/nuevaop.png" style="width: 100px; height: 100px;" />
+                </ion-avatar> 
+              </div>
+              <div *ngIf="checkAprobaciones == 'true'">
+                <ion-avatar padding-top>
+                  <img on-click="goToAprobacionRechazo()" src="./assets/img/nuevaop.png" style="width: 100px; height: 100px;" />
+                </ion-avatar>
+              </div>
+          </ion-col>
+          </ion-row>
+      </ion-grid>
+    </div>
+
+
+  </div>
+</ion-content>
