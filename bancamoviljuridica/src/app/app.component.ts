@@ -5,7 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { UserSessionProvider } from '../providers/user-session/user-session';
 import { Events } from 'ionic-angular';
-
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import xml2js from 'xml2js';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class MyApp {
   public validarAPR:boolean=true;
 
   constructor(public platform: Platform, public userSession:UserSessionProvider, public events:Events, 
-    statusBar: StatusBar, splashScreen: SplashScreen, private toastCtrl: ToastController) {
+    statusBar: StatusBar, splashScreen: SplashScreen, private toastCtrl: ToastController, public httpClient: HttpClient) {
+      this.httpClient = httpClient;
     this.handleSplashScreen()
     events.subscribe('session:created', (validador) => {
       this.validarPC = this.userSession.validarPC;
@@ -163,9 +165,42 @@ export class MyApp {
     this.validarTR  = true;
     this.validarTDC = true;
     this.validarAPR = true;
-    this.events.publish('session:created', true);
-    if (!params) params = {};
-    this.navCtrl.setRoot(LoginPage);
+    this.events.publish('session:created', true); 
+    var listvalores:any[]=[];
+      try {
+        //Ahora se procede a traer el menú dinámico:
+       var headers = new HttpHeaders();
+       headers.append('Content-Type', 'text/xml');
+       var httpOptions = {
+           headers: new HttpHeaders({
+             'Content-Type':  'text/xml'
+         })
+       };
+  
+       //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+       //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+       var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+       <soap:Body>
+         <CerrarSession xmlns="http://tempuri.org/">
+           <sesion>`+this.userSession.sessionId+`</sesion>
+         </CerrarSession>
+       </soap:Body>
+     </soap:Envelope>`
+  
+     console.log(postData);
+     //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+        this.httpClient.post("http://"+this.userSession.serverIPApp+"/WsMovil.asmx?op=CerrarSession",postData,httpOptions )
+       .subscribe(data => {
+        // console.log('Data: '+data['_body']); 
+        }, error => {
+
+        });
+      } catch (error) {
+        console.log("Error try 2")
+      } 
+      
+      this.navCtrl.setRoot(LoginPage);   
+
   }goToWelcome(params){
     if (!params) params = {};
     this.navCtrl.setRoot('WelcomePage');

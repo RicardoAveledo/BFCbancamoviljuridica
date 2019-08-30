@@ -535,7 +535,138 @@ export class LoginPage {
                                                               }
                                                              });
                                                            } else {
-                                                            self2.navCtrl.setRoot('WelcomePage');
+//CAMBIOS MANEJO DE SESION--------------------------------------------------------------------------
+                                                            var listvalores:any[]=[];
+                                                            try {
+                                                              //Ahora se procede a traer el menú dinámico:
+                                                             var headers = new HttpHeaders();
+                                                             headers.append('Content-Type', 'text/xml');
+                                                             var httpOptions = {
+                                                                 headers: new HttpHeaders({
+                                                                   'Content-Type':  'text/xml'
+                                                               })
+                                                             };
+                                                        
+                                                             //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+                                                             //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+                                                             var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                                                             <soap:Body>
+                                                               <CreateSession xmlns="http://tempuri.org/">
+                                                                 <AF_Id>`+self2.userSession.AF_Id+`</AF_Id>
+                                                               </CreateSession>
+                                                             </soap:Body>
+                                                           </soap:Envelope>`
+                                                        
+                                                           console.log(postData);
+                                                           //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+                                                              self2.httpClient.post("http://"+self2.userSession.serverIPApp+"/WsMovil.asmx?op=CreateSession",postData,httpOptions )
+                                                             .subscribe(data => {
+                                                              // console.log('Data: '+data['_body']); 
+                                                              }, error => {
+                                                                     //Hacemos el parse tal cual como antes:
+                                                                     console.log('Error: '+JSON.stringify(error));
+                                                                     var str = JSON.stringify(error);
+                                                                     console.log("stingified: ", str);
+                                                                     var search_array = JSON.parse(str);
+                                                                     console.log("result: ", search_array.error.text);
+                                                                     var parser = new DOMParser();
+                                                                     var doc = parser.parseFromString(search_array.error.text, "application/xml");
+                                                                     console.log(doc);
+                                                                     var el = doc.createElement("p");
+                                                                     el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+                                                                     var tmp = doc.createElement("div");
+                                                                     tmp.appendChild(el);
+                                                                     console.log(tmp.innerHTML);
+                                                                     var parseString = xml2js.parseString;
+                                                                     var xml = tmp.innerHTML;
+                                                                    // var texto:string = "";
+                                                                     var self = self2;
+                                                                     parseString(xml, self, function (err, result) {
+                                                                         try{
+                                                                               console.dir(result);
+                                                                               var str = JSON.stringify(result);
+                                                                               console.log("stringified: ", result);
+                                                                               var search_array = JSON.parse(str);
+                                                                               console.log("User Session: ", search_array);
+                                                                               self2.userSession.sessionId = search_array.p['soap:Envelope']['0']['soap:Body']['0'].CreateSessionResponse['0'].CreateSessionResult['0'].Sesion['0'];
+//METODO QUE USA SESION ID-*--------------------------------------------------------------------------------------
+                                                                  var listvalores:any[]=[];
+                                                                  try {
+                                                                    //Ahora se procede a traer el menú dinámico:
+                                                                   var headers = new HttpHeaders();
+                                                                   headers.append('Content-Type', 'text/xml');
+                                                                   var httpOptions = {
+                                                                       headers: new HttpHeaders({
+                                                                         'Content-Type':  'text/xml'
+                                                                     })
+                                                                   };
+                                                                 
+                                                                   //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
+                                                                   //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
+                                                                   var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                                                                   <soap:Body>
+                                                                     <GetSession xmlns="http://tempuri.org/">
+                                                                       <sesion>`+self2.userSession.sessionId+`</sesion>
+                                                                     </GetSession>
+                                                                   </soap:Body>
+                                                                 </soap:Envelope>`
+                                                                 
+                                                                  console.log(postData);
+                                                                  //Acá hacemos la llamada al servicio que nos trae el menú dinámico según el ID del user
+                                                                    self2.httpClient.post("http://"+self2.userSession.serverIPApp+"/WsMovil.asmx?op=GetSession",postData,httpOptions )
+                                                                   .subscribe(data => {
+                                                                    // console.log('Data: '+data['_body']); 
+                                                                    }, error => {
+                                                                           //Hacemos el parse tal cual como antes:
+                                                                           console.log('Error: '+JSON.stringify(error));
+                                                                           var str = JSON.stringify(error);
+                                                                           console.log("stingified: ", str);
+                                                                           var search_array = JSON.parse(str);
+                                                                           console.log("result: ", search_array.error.text);
+                                                                           var parser = new DOMParser();
+                                                                           var doc = parser.parseFromString(search_array.error.text, "application/xml");
+                                                                           console.log(doc);
+                                                                           var el = doc.createElement("p");
+                                                                           el.appendChild(doc.getElementsByTagName("soap:Envelope").item(0));
+                                                                           var tmp = doc.createElement("div");
+                                                                           tmp.appendChild(el);
+                                                                           console.log(tmp.innerHTML);
+                                                                           var parseString = xml2js.parseString;
+                                                                           var xml = tmp.innerHTML;
+                                                                          // var texto:string = "";
+                                                                           var self = self2;
+                                                                           parseString(xml, self, function (err, result) {
+                                                                               try{
+                                                                                     console.dir(result);
+                                                                                     var str = JSON.stringify(result);
+                                                                                     console.log("stringified: ", result);
+                                                                                     var search_array = JSON.parse(str);
+                                                                                     console.log("sesion respuesta: ", search_array);
+                                                                                     self2.navCtrl.setRoot('WelcomePage');
+                                                                                 }catch(Error){
+                                                                                  console.log("Error try 1")
+                                                                                  //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                                                                                  //self.presentToast();
+                                                                                 }
+                                                                               });
+                                                                    });
+                                                                  } catch (error) {
+                                                                    console.log("Error try 2")
+                                                                  }
+//METODO QUE USA SESION ID  ----------------------------------------------------------------------------------------------------
+                                                                           }catch(Error){
+                                                                            console.log("Error try 1")
+                                                                            //self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                                                                            //self.presentToast();
+                                                                           }
+                                                                         });
+                                                              });
+                                                            } catch (error) {
+                                                              console.log("Error try 2")
+                                                            }
+
+//CAMBIOS MANEJO DE SESION--------------------------------------------------------------------------
+                                                            
                                                            }
                                                            
 

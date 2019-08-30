@@ -9,6 +9,7 @@ import xml2js from 'xml2js';
 */
 @Injectable()
 export class UserSessionProvider {
+  public sessionId:string = "";
   public validar:boolean = false;
   public validarPC:boolean = false;
   public validarTR:boolean = false;
