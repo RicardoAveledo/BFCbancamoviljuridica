@@ -77,12 +77,30 @@ export class TransferenciasTercerosDetallePage {
   }
 
   loadMotivo1(){
-    this.motivo = 'Pago de Préstamo';
+    this.motivo = 'Pago Servicios';
   }
   loadMotivo2(){
-    this.motivo = 'Ahorros';
+    this.motivo = 'Pago Acciones y/o dividendos';
   }
   loadMotivo3(){
+    this.motivo = 'Pago Entes gubernamentales';
+  }
+  loadMotivo4(){
+    this.motivo = 'Pago gastos Operativos o Administrativos';
+  }
+  loadMotivo5(){
+    this.motivo = 'Pago Honorarios Profesionales';
+  }
+  loadMotivo6(){
+    this.motivo = 'Compra Maquinaria o Equipo';
+  }
+  loadMotivo7(){
+    this.motivo = 'Pago Préstamos';
+  }
+  loadMotivo8(){
+    this.motivo = 'Pago Proveedores y Facturas';
+  }
+  loadMotivo9(){
     this.motivo = 'Otros';
   }
 
@@ -118,17 +136,30 @@ export class TransferenciasTercerosDetallePage {
     +"-"+this.sdisponible
     );
     
+    if(this.montoValue<10){
+      this.showAlert("El monto debe ser superior a 10 bs");
+    } else 
+    if(this.motivo==null){
+      this.showAlert("Debe colocar motivo")
+    } else 
+    
+    if(this.cuentaDebitoFull==null){
+          this.showAlert("Debe indicar la cuenta a debitar")
+    } else 
     if (+this.sdisponible<+this.montoValue){
       this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
       console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
     }else 
     if(this.montoValue==null){
-      this.showAlert('El monto no puede ser cero');
+      this.showAlert("Debe indicar el monto de la transferencia");
     } else {
+      
       if(this.cuentaCreditoFull==this.cuentaDebitoFull){
-        this.showAlert('No puede transferir a la misma cuenta');
-      } else {
-        var listvalores:any[]=[];
+        this.showAlert('La cuenta a debitar y la cuenta acreditar son iguales');
+    } else {  
+        
+          var listvalores:any[]=[];
+        
         try {
           //Ahora se procede a traer el menú dinámico:
          var headers = new HttpHeaders();

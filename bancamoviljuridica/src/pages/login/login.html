@@ -8,11 +8,11 @@
     <h5 ion-text color="toolbar_color">
         Usuario:
     </h5>
-        <ion-input class="inputitem" (ionBlur)="checkBlur()" (ionFocus)="checkFocus()" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="text" [(ngModel)]="nombre" formControlName= "nameUser"></ion-input>
+        <ion-input class="inputitem" (ionBlur)="checkBlur()" (ionFocus)="checkFocus()" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="text" [(ngModel)]="nombre" formControlName= "nameUser" maxlength="10"></ion-input>
     <h5 ion-text color="toolbar_color">
         Contraseña:
     </h5>
-        <ion-input class="inputitem" (ionBlur)="checkBlur()" (ionFocus)="checkFocus()" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="password"  [(ngModel)]="contra" formControlName= "password"></ion-input>
+        <ion-input class="inputitem" (ionBlur)="checkBlur()" (ionFocus)="checkFocus()" style="margin-bottom:5px;border: 1px solid #ccc!important;border-radius: 8px;max-width:300px;" type="password"  [(ngModel)]="contra" formControlName= "password" maxlength="10"></ion-input>
     </form>
     </form>
     <div *ngIf="contra!=null">

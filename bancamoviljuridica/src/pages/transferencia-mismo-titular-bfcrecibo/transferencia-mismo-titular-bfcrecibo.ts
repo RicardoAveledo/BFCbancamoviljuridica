@@ -71,7 +71,7 @@ public fecha:string;
     } else {
       this.dayStr =  ""+this.day;
     }
-    this.month = new Date().getMonth()+1; 
+    this.month = new Date().getMonth()+1;   
     if (this.month<10){
       this.monthStr =  "0"+this.month;
     } else {

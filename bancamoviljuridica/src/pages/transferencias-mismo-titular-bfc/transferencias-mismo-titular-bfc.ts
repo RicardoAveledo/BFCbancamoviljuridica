@@ -60,6 +60,18 @@ export class TransferenciasMismoTitularBFCPage {
     this.tdc = userSession.tdc;
   }
 
+  formataNumero(e: any, separador: string = '.', decimais: number = 2) {
+    let a:any = e.value.split('');
+    let ns:string = '';
+    a.forEach((c:any) => { if (!isNaN(c)) ns = ns + c; });
+    ns = parseInt(ns).toString();
+    if (ns.length < (decimais+1)) { ns = ('0'.repeat(decimais+1) + ns); ns = ns.slice((decimais+1)*-1); }
+    let ans = ns.split('');
+    let r = '';
+    for (let i=0; i < ans.length; i++) if (i == ans.length - decimais) r = r + separador + ans[i]; else r = r + ans[i];
+    e.value = r;
+  } 
+
 
   public auxAmmount:number;
 
@@ -126,22 +138,30 @@ export class TransferenciasMismoTitularBFCPage {
 
 }
   }
-
+           
   //Método que utiliza el boton de continuar
   goToConfirmaciNTransferenciaMismoTitularBFC(params){
     if (this.cuentacreditoForm.valid && this.cuentadebitoForm.valid && this.montoForm.valid)
     {
       if (!params) params = {};
+      if(this.montoValue<10){
+        this.showAlert("El monto debe ser superior a 10 bs");
+      } else 
+      
+      if(this.cuentaDebitoFull==null){
+            this.showAlert("Debe indicar la cuenta a debitar")
+      } else 
       if (+this.sdisponible<+this.montoValue){
         this.showAlert('La cuenta seleccionada no dispone de saldo suficiente');
         console.log(this.sdisponible+" < "+this.montoValue+ " - " + (+this.sdisponible<+this.montoValue))
       }else 
       if(this.montoValue==null){
-        this.showAlert('El monto no puede ser cero');
+        this.showAlert("Debe indicar el monto de la transferencia");
       } else {
+        
         if(this.cuentaCreditoFull==this.cuentaDebitoFull){
-          this.showAlert('No puede transferir a la misma cuenta');
-        } else {
+          this.showAlert('La cuenta a debitar y la cuenta acreditar son iguales');
+      } else {  
           var listvalores:any[]=[];
           try {
             //Ahora se procede a traer el menú dinámico:

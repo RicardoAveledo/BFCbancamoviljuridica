@@ -80,7 +80,7 @@
     </div>
     <ion-item id="transferenciasMismoTitularBFC-input3">
       <ion-label></ion-label>
-      <ion-input text-right type="number" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue"></ion-input>
+      <ion-input text-right type="tel" placeholder="0.00" formControlName= "monto" [(ngModel)]="montoValue" maxlength="20" (ionChange)="formataNumero($event)"></ion-input>
     </ion-item>
   </form>
   <div class="spacer" style="width:320px;height:100px;" id="transferenciasTercerosDetalle-spacer16"></div>

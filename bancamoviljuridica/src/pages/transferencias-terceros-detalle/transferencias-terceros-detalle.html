@@ -127,14 +127,32 @@
       <ion-label>
         Seleccione
       </ion-label>
-      <ion-select name="" > 
+      <ion-select name="" style="max-width: 100%; width: 100%" placeholder="Seleccione">  
         <ion-option (ionSelect)="loadMotivo1()">
-          Pago de Préstamo
+          Pago Servicios
         </ion-option>
         <ion-option (ionSelect)="loadMotivo2()">
-          Ahorro
+          Pago Acciones y/o dividendos
         </ion-option>
         <ion-option (ionSelect)="loadMotivo3()">
+          Pago Entes gubernamentales
+        </ion-option>
+        <ion-option (ionSelect)="loadMotivo4()">
+          Pago gastos Operativos o Administrativos
+        </ion-option>
+        <ion-option (ionSelect)="loadMotivo5()">
+          Pago Honorarios Profesionales
+        </ion-option>
+        <ion-option (ionSelect)="loadMotivo6()">
+          Compra Maquinaria o Equipo
+        </ion-option>
+        <ion-option (ionSelect)="loadMotivo7()">
+          Pago Préstamos
+        </ion-option>
+        <ion-option (ionSelect)="loadMotivo8()">
+          Pago Proveedores y Facturas
+        </ion-option>
+        <ion-option (ionSelect)="loadMotivo9()">
           Otros
         </ion-option>
       </ion-select>
@@ -151,7 +169,7 @@
   <form id="transferenciasTercerosDetalle-form16">
     <ion-item id="transferenciasTercerosDetalle-input15">
       <ion-label></ion-label>
-      <ion-input type="text" placeholder="" [(ngModel)]="conceptoValue" [ngModelOptions]="{standalone:true}"></ion-input>
+      <ion-input type="text" placeholder="" [(ngModel)]="conceptoValue" [ngModelOptions]="{standalone:true}" maxlength="80"></ion-input>
     </ion-item>
   </form>
   <div class="spacer" style="width:320px;height:100px;" id="transferenciasTercerosDetalle-spacer16"></div>

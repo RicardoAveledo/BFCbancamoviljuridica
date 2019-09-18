@@ -34,11 +34,17 @@ export class LoginPage {
   public checkFooter:boolean =true;
   public checkFinger:boolean =false;
   rafaga:string='Ingrese nombre de usuario y contraseña'; 
-  constructor(private faio: FingerprintAIO, public storage:Storage, public menu:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
+  constructor(private faio: FingerprintAIO, public storage:Storage, public menuCtrl:MenuController, public events:Events, public userSession: UserSessionProvider, public navCtrl: NavController,  private formBuilder: FormBuilder, 
     private toastCtrl: ToastController,public httpClient: HttpClient, private alertCtrl: AlertController) {
-    this.menu.enable(false,'menu');
+    this.menuCtrl.enable(false,'Mymenu');
     this.checkFingerPrint();
     //const availableFinger = this.checkFingerPrint();
+    }
+
+    enableAuthenticatedMenu() {
+
+      this.menuCtrl.enable(true,'Mymenu');
+
     }
   
   checkFingerPrint(){
@@ -206,6 +212,7 @@ export class LoginPage {
   goToWelcome(){
       if (this.credentialsForm.valid) //QUITARLE EL ! A LA VALIDACIÓN PARA QUE SIRVA
       {
+        this.enableAuthenticatedMenu();
         this.sendPostRequest();
       }
       else{
@@ -363,6 +370,37 @@ export class LoginPage {
                                      try{
                                        //Acá se abrió otro contexto, por lo que se crea otro bloque Try-catch
                                        console.dir(result);
+                                       
+                                       try{
+                                         //Prueba Mensaje de Sesion
+                                       self2.rafaga= result['p']['soap:Envelope']['0']['soap:Body']['0'].AfiliadosLoginResponse['0'].AfiliadosLoginResult['0']['diffgr:diffgram']['0'].NewDataSet['0'].SqlException['0'].NumeroError['0'];
+                                       console.dir(self2.rafaga);
+                                       //self.presentToast();
+
+
+                                       }
+                                      catch(Error){
+                                        if(self2.rafaga == "1014")
+                                      {
+
+                                        self2.rafaga ="Usuario Bloqueado por intentos fallidos";
+                                        self2.presentToast();
+                                      }
+                                        else if(self2.rafaga == "1001")
+                                      {
+                                        self2.rafaga ="Usuario/contraseña invalida intente de nuevo";
+                                        self2.presentToast();
+                                      }
+                                      else if(self2.rafaga == "1070")
+                                      {
+                                        self2.rafaga ="Usuario ya tiene una sesión Activa";
+                                        self2.presentToast();
+                                      }
+
+                                        
+                                      }
+                                       
+
                                        //En estas tres lineas se sigue el mismo procedimiento anterior, en el que se parsea el result
                                        //en json, en la variable search_array
                                        var str = JSON.stringify(result);
@@ -440,7 +478,7 @@ export class LoginPage {
                                          if (admin=="1"){
                                           //Si el código no explota en la línea anterior, significa que trajo el campo, por lo que se presenta
                                           //el mensaje de "El usuario no es Autorizado"
-                                          self2.rafaga ="El usuario no es Autorizado"
+                                          self2.rafaga ="Solo Usuario Autorizado de Tipo Empresa"
                                           self2.presentToast();
                                           
                                           //Se cierra el try, nunca llega al catch, por lo tanto, no hace login.
@@ -458,7 +496,7 @@ export class LoginPage {
                                                'Content-Type':  'text/xml'
                                            })
                                          };
-                   
+                                        
                                          //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
                                          //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
                                          postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -546,7 +584,7 @@ export class LoginPage {
                                                                    'Content-Type':  'text/xml'
                                                                })
                                                              };
-                                                        
+                                                      
                                                              //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
                                                              //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
                                                              var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -589,8 +627,11 @@ export class LoginPage {
                                                                                var search_array = JSON.parse(str);
                                                                                console.log("User Session: ", search_array);
                                                                                self2.userSession.sessionId = search_array.p['soap:Envelope']['0']['soap:Body']['0'].CreateSessionResponse['0'].CreateSessionResult['0'].Sesion['0'];
+       
 //METODO QUE USA SESION ID-*--------------------------------------------------------------------------------------
                                                                   var listvalores:any[]=[];
+
+                                            
                                                                   try {
                                                                     //Ahora se procede a traer el menú dinámico:
                                                                    var headers = new HttpHeaders();
@@ -600,7 +641,7 @@ export class LoginPage {
                                                                          'Content-Type':  'text/xml'
                                                                      })
                                                                    };
-                                                                 
+                                                                 try{
                                                                    //Se hace la solicitud HTTP Para traer el menú con las opciones según el usuario que acaba de iniciar sesión
                                                                    //Traeremos el id, de la ráfaga anterior (La respuesta, del login)
                                                                    var postData = `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -635,6 +676,9 @@ export class LoginPage {
                                                                            var xml = tmp.innerHTML;
                                                                           // var texto:string = "";
                                                                            var self = self2;
+
+                                                               
+
                                                                            parseString(xml, self, function (err, result) {
                                                                                try{
                                                                                      console.dir(result);
@@ -650,6 +694,13 @@ export class LoginPage {
                                                                                  }
                                                                                });
                                                                     });
+
+                                                                  }catch(Error){
+                                                                    console.log("Error try 10")
+                                                                    self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente 10"
+                                                                    self.presentToast();
+                                                                  }
+
                                                                   } catch (error) {
                                                                     console.log("Error try 2")
                                                                   }
@@ -672,7 +723,7 @@ export class LoginPage {
 
                                                            //Navegamos
                                                        }catch(Error){
-                                                         self2.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
+                                                         self2.rafaga ="Usuario/contraseña invalida intente de nuevo"
                                                          self2.presentToast();
                                                        }
                                                      });
@@ -683,8 +734,25 @@ export class LoginPage {
                                      }catch(Error){
                                        //Acá se pondrán los mensajes correspondientes a cada bloque de try-catch.
                                        //Se podrán colocar más validaciones para los diferentes mensajes.
-                                       self.rafaga ="Usuario o Contraseña incorrectos, intente nuevamente"
-                                       self.presentToast();
+                                       if(self2.rafaga == "1001")
+                                      {
+                                        self2.rafaga ="Usuario/contraseña invalida intente de nuevo"
+                                        self2.presentToast();
+                                      }
+                                          
+                                        else if(self2.rafaga == "1070")
+                                        {
+
+                                          self2.rafaga ="Usuario ya tiene una sesión Activa"
+                                          self2.presentToast();
+                                        }
+                                        else if(self2.rafaga == "1014")
+                                        {
+
+                                          self2.rafaga ="Usuario Bloqueado por intentos fallidos"
+                                          self2.presentToast();
+                                        }
+
                                      }
                                  });  
                                }catch(Error){ 
